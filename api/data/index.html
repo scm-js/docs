@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.data — scmJS documentation</title>
+<meta name="description" content="The game&#39;s own tables, as the editor decoded them: `units.dat` and its neighbours.
+`names` gives the labels, this gives the numbers — hit points, costs, build times,
+weapons, flags, the sprite and image each unit draws through.
+
+Everything is null until the tables are loaded (`load`), and stays null when the game
+data was never extracted.">
+<meta property="og:title" content="api.data — scmJS documentation">
+<meta property="og:description" content="The game&#39;s own tables, as the editor decoded them: `units.dat` and its neighbours.
+`names` gives the labels, this gives the numbers — hit points, costs, build times,
+weapons, flags, the sprite and image each unit draws through.
+
+Everything is null until the tables are loaded (`load`), and stays null when the game
+data was never extracted.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="here" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.data</h1>
+<p class="lede">DataApi</p>
+<p>The game&#39;s own tables, as the editor decoded them: <code>units.dat</code> and its neighbours.
+<code>names</code> gives the labels, this gives the numbers — hit points, costs, build times,
+weapons, flags, the sprite and image each unit draws through.</p>
+<p>Everything is null until the tables are loaded (<code>load</code>), and stays null when the game
+data was never extracted.</p>
+
+<ul class="chips"><li><a href="#ready">ready</a></li><li><a href="#load">load</a></li><li><a href="#units">units</a></li><li><a href="#weapons">weapons</a></li><li><a href="#upgrades">upgrades</a></li><li><a href="#techs">techs</a></li><li><a href="#sprites">sprites</a></li><li><a href="#flingy">flingy</a></li><li><a href="#images">images</a></li><li><a href="#race">race</a></li><li><a href="#imagepath">imagePath</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="ready">
+  <h3><a class="anchor-name" href="#ready">ready</a></h3>
+  <pre class="code"><code>ready(): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="load">
+  <h3><a class="anchor-name" href="#load">load</a></h3>
+  <pre class="code"><code>load(): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="units">
+  <h3><a class="anchor-name" href="#units">units</a></h3>
+  <pre class="code"><code>units(): <a class="t" href="/api/data/#unitsdat">UnitsDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="weapons">
+  <h3><a class="anchor-name" href="#weapons">weapons</a></h3>
+  <pre class="code"><code>weapons(): <a class="t" href="/api/data/#weaponsdat">WeaponsDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="upgrades">
+  <h3><a class="anchor-name" href="#upgrades">upgrades</a></h3>
+  <pre class="code"><code>upgrades(): <a class="t" href="/api/data/#upgradesdat">UpgradesDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="techs">
+  <h3><a class="anchor-name" href="#techs">techs</a></h3>
+  <pre class="code"><code>techs(): <a class="t" href="/api/data/#techdatadat">TechdataDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="sprites">
+  <h3><a class="anchor-name" href="#sprites">sprites</a></h3>
+  <pre class="code"><code>sprites(): <a class="t" href="/api/data/#spritesdat">SpritesDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="flingy">
+  <h3><a class="anchor-name" href="#flingy">flingy</a></h3>
+  <pre class="code"><code>flingy(): <a class="t" href="/api/data/#flingydat">FlingyDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="images">
+  <h3><a class="anchor-name" href="#images">images</a></h3>
+  <pre class="code"><code>images(): <a class="t" href="/api/data/#imagesdat">ImagesDat</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="race">
+  <h3><a class="anchor-name" href="#race">race</a></h3>
+  <pre class="code"><code>race(unitId: <span class="k">number</span>): <a class="t" href="/api/data/#race">Race</a>;</code></pre>
+  <p>Which race a unit type belongs to, from its flags.</p>
+  
+  
+</div>
+<div class="member" id="imagepath">
+  <h3><a class="anchor-name" href="#imagepath">imagePath</a></h3>
+  <pre class="code"><code>imagePath(imageId: <span class="k">number</span>): <span class="k">string</span> | <span class="k">null</span>;</code></pre>
+  <p>The GRP path an image id draws from, relative to <code>unit\</code>.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="unitsdat">
+  <h3><a class="anchor-name" href="#unitsdat">UnitsDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#unitsdat">UnitsDat</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>flingy: Uint8Array</code></th><td><p>flingy.dat index.</p></td></tr>
+<tr><th><code>subunit: Uint16Array</code></th><td><p>First subunit (turret), or NO_UNIT.</p></td></tr>
+<tr><th><code>direction: Uint8Array</code></th><td><p>Starting facing 0–31 (0 = up, 8 = right, 16 = down), or RANDOM_DIRECTION.</p></td></tr>
+<tr><th><code>shieldEnable: Uint8Array</code></th><td></td></tr>
+<tr><th><code>shieldAmount: Uint16Array</code></th><td></td></tr>
+<tr><th><code>hitPoints: Uint32Array</code></th><td><p>Fixed point: hit points × 256.</p></td></tr>
+<tr><th><code>elevation: Uint8Array</code></th><td></td></tr>
+<tr><th><code>flags: Uint32Array</code></th><td><p>UnitFlag bits.</p></td></tr>
+<tr><th><code>placementWidth: Uint16Array</code></th><td><p>StarEdit placement box, pixels. Buildings are placed on the tile grid by this box.</p></td></tr>
+<tr><th><code>placementHeight: Uint16Array</code></th><td></td></tr>
+<tr><th><code>extentLeft: Uint16Array</code></th><td><p>Collision extents from the unit&#39;s centre, pixels.</p></td></tr>
+<tr><th><code>extentUp: Uint16Array</code></th><td></td></tr>
+<tr><th><code>extentRight: Uint16Array</code></th><td></td></tr>
+<tr><th><code>extentDown: Uint16Array</code></th><td></td></tr>
+<tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>vespeneCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>buildTime: Uint16Array</code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>armor: Uint8Array</code></th><td></td></tr>
+<tr><th><code>groundWeapon: Uint8Array</code></th><td><p>weapons.dat ids, or NO_WEAPON.</p></td></tr>
+<tr><th><code>airWeapon: Uint8Array</code></th><td></td></tr>
+<tr><th><code>groupFlags: Uint8Array</code></th><td><p>Bit 0 Zerg, 1 Terran, 2 Protoss, 3 men, 4 building, 5 factory, 6 independent, 7 neutral.</p></td></tr>
+<tr><th><code>availability: Uint16Array</code></th><td><p>StarEdit availability flags; all zero for the legacy layout.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="flingydat">
+  <h3><a class="anchor-name" href="#flingydat">FlingyDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#flingydat">FlingyDat</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>sprite: Uint16Array</code></th><td><p>sprites.dat index.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="spritesdat">
+  <h3><a class="anchor-name" href="#spritesdat">SpritesDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#spritesdat">SpritesDat</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>image: Uint16Array</code></th><td><p>images.dat index.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="imagesdat">
+  <h3><a class="anchor-name" href="#imagesdat">ImagesDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#imagesdat">ImagesDat</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>grp: Uint32Array</code></th><td><p>1-based images.tbl index of the GRP path, relative to <code>unit\</code>.</p></td></tr>
+<tr><th><code>graphicTurns: Uint8Array</code></th><td><p>1 when the GRP holds 17 frames per facing set (directions 0–16, the rest mirrored).</p></td></tr>
+<tr><th><code>drawFunction: Uint8Array</code></th><td></td></tr>
+<tr><th><code>remapping: Uint8Array</code></th><td></td></tr>
+<tr><th><code>iscript: Uint32Array</code></th><td><p>iscript.bin id of the image&#39;s animation script.</p></td></tr>
+<tr><th><code>lo: Uint32Array[]</code></th><td><p>1-based images.tbl indices of the overlay position files (0 = none), in LO_KINDS order.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="weaponsdat">
+  <h3><a class="anchor-name" href="#weaponsdat">WeaponsDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#weaponsdat">WeaponsDat</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label: Uint16Array</code></th><td><p>The weapon&#39;s name: a 1-based <code>stat_txt.tbl</code> index, 0 for none.</p></td></tr>
+<tr><th><code>damage: Uint16Array</code></th><td></td></tr>
+<tr><th><code>bonus: Uint16Array</code></th><td><p>Added per upgrade level.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="race">
+  <h3><a class="anchor-name" href="#race">Race</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/data/#race">Race</a> = <span class="s">&quot;zerg&quot;</span> | <span class="s">&quot;terran&quot;</span> | <span class="s">&quot;protoss&quot;</span> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="upgradesdat">
+  <h3><a class="anchor-name" href="#upgradesdat">UpgradesDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#upgradesdat">UpgradesDat</a></code></pre>
+  <p>The columns Upgrade Settings shows as defaults: base cost and per-level factor for minerals, gas and time, plus the level cap.</p>
+  <table class="fields"><tbody><tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>mineralFactor: Uint16Array</code></th><td></td></tr>
+<tr><th><code>vespeneCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>vespeneFactor: Uint16Array</code></th><td></td></tr>
+<tr><th><code>timeCost: Uint16Array</code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>timeFactor: Uint16Array</code></th><td></td></tr>
+<tr><th><code>maxRepeats: Uint8Array</code></th><td><p>Highest level the upgrade goes to (3 for armour / weapons, 1 for the rest).</p></td></tr>
+<tr><th><code>broodWar: Uint8Array</code></th><td><p>1 for upgrades only Brood War has.</p></td></tr>
+<tr><th><code>label: Uint16Array</code></th><td><p>The upgrade&#39;s name: a 1-based <code>stat_txt.tbl</code> index, 0 for none.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techdatadat">
+  <h3><a class="anchor-name" href="#techdatadat">TechdataDat</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/data/#techdatadat">TechdataDat</a></code></pre>
+  <p>The columns Technology Settings shows as defaults.</p>
+  <table class="fields"><tbody><tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>vespeneCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>researchTime: Uint16Array</code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>energyCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>broodWar: Uint8Array</code></th><td><p>1 for abilities only Brood War has.</p></td></tr>
+<tr><th><code>label: Uint16Array</code></th><td><p>The technology&#39;s name: a 1-based <code>stat_txt.tbl</code> index, 0 for none.</p></td></tr></tbody></table>
+  
+</div>
+
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#ready">ready</a></li>
+<li><a href="#load">load</a></li>
+<li><a href="#units">units</a></li>
+<li><a href="#weapons">weapons</a></li>
+<li><a href="#upgrades">upgrades</a></li>
+<li><a href="#techs">techs</a></li>
+<li><a href="#sprites">sprites</a></li>
+<li><a href="#flingy">flingy</a></li>
+<li><a href="#images">images</a></li>
+<li><a href="#race">race</a></li>
+<li><a href="#imagepath">imagePath</a></li>
+<li><a href="#unitsdat">UnitsDat</a></li>
+<li><a href="#flingydat">FlingyDat</a></li>
+<li><a href="#spritesdat">SpritesDat</a></li>
+<li><a href="#imagesdat">ImagesDat</a></li>
+<li><a href="#weaponsdat">WeaponsDat</a></li>
+<li><a href="#race">Race</a></li>
+<li><a href="#upgradesdat">UpgradesDat</a></li>
+<li><a href="#techdatadat">TechdataDat</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

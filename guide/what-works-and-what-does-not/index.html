@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What works, and what does not — scmJS documentation</title>
+<meta name="description" content="">
+<meta property="og:title" content="What works, and what does not — scmJS documentation">
+<meta property="og:description" content="">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="here" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>What works, and what does not</h1>
+<h2 id="map-files">Map files<a class="anchor" href="#map-files" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Open and save <code>.scm</code>, <code>.scx</code>, <code>.chk</code></td>
+<td>Yes. Save writes in place where the browser allows it (Chrome, Edge, the desktop app) and downloads elsewhere; the Save dialog chooses compression (PKWARE as StarEdit, zlib, none), encryption, which archive files ride along and which editor-only sections are left out, and shows what it will write first.</td>
+</tr>
+<tr>
+<td>Preserve unmodelled sections, repeated sections and custom archive files</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>New map, with the full section set StarEdit writes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Resize and crop, with a 3×3 anchor</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Switch revision: StarCraft 1.00, Hybrid, Brood War, Remastered</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Change a map&#39;s tileset</td>
+<td>Yes, in Map Properties: the terrain is laid again with the new tileset&#39;s terrain (the doodads go with it, everything else stays), or keep the tile numbers as SCMDraft does. Clears the undo history.</td>
+</tr>
+<tr>
+<td>Open Recent</td>
+<td>Yes. In Chrome, Edge and the desktop app a recent map reopens from disk (the file handle is kept in the browser; it asks once before reading). Firefox and Safari keep the names and reopen through File ▸ Open.</td>
+</tr>
+<tr>
+<td>Open a map from the file manager</td>
+<td>Yes, in the desktop app. The installers (Windows setup, <code>.deb</code>, AppImage, macOS) register <code>.scm</code>, <code>.scx</code> and <code>.chk</code>, so a double-click, &quot;Open with&quot;, a drag onto the app&#39;s icon or a path on the command line opens the map — in the running window when one is already up. The Windows zip registers nothing (nothing is installed), but a map dragged onto <code>scmJS.exe</code> still opens. Dropping a map anywhere on the window works in every build, and in the browser.</td>
+</tr>
+<tr>
+<td>In-app updates</td>
+<td>Yes, in the desktop app. It checks GitHub at startup (a preference, on by default) and offers what it finds in a notice; Help ▸ Check for Updates… asks on demand. Nothing downloads or installs without being asked. Windows, the Linux AppImage and the <code>.deb</code> apply the update themselves; macOS can see one but not install it until the app is code-signed, so it offers the download page instead.</td>
+</tr>
+<tr>
+<td>More than one map open at once</td>
+<td>Yes. Each map opened or created goes in its own tab under the toolbar, with its own undo history, selection and view; the Window menu lists them. Copy and paste work between them. A map that is not in front does no work: switching costs one repaint, and the tilesets the open maps use stay decoded. Preferences ▸ General turns it off for StarEdit&#39;s one map at a time.</td>
+</tr>
+</tbody></table>
+<h2 id="terrain">Terrain<a class="anchor" href="#terrain" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Isometric brush</td>
+<td>Yes. Needs the map&#39;s <code>ISOM</code> section; the Repair plugin (on by default) rebuilds a stripped one.</td>
+</tr>
+<tr>
+<td>Rect, Tile and Blend brushes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Flood fill, fill map, pick tile</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Elevation and buildability overlays</td>
+<td>Yes: ground height per minitile, unbuildable tiles hatched.</td>
+</tr>
+<tr>
+<td>Water and lava animation</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Symmetry</td>
+<td>Yes. The Isometric, Rect and Tile brushes, the fills, the Fog brush, and placing units, sprites, doodads and locations all land on the images of the spot too (mirror, both axes, 180°, 90° and the diagonals on a square map). Moving and deleting are not mirrored, and neither is Blend.</td>
+</tr>
+<tr>
+<td>Replace Terrain</td>
+<td>Yes. One terrain type (or one exact tile) becomes another, over the whole map or the marked area, laid as the Rect brush lays it; one undo step.</td>
+</tr>
+<tr>
+<td>Terrain from Image</td>
+<td>Yes, as a plugin installed by default (File ▸ Import, or right-click the terrain palette / map: <em>into Area…</em> lets you drag the target first). File, paste, drop or URL; colour adjustments; key colours per terrain with an eyedropper; despeckle and island removal.</td>
+</tr>
+</tbody></table>
+<h2 id="objects">Objects<a class="anchor" href="#objects" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Doodads: catalogue, placement rules, overlays, move, delete, convert to terrain</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Units: placement checks, properties, team colours, idle animation</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Sprites: pure and unit sprites, flags, properties</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Locations: create, resize, snap, rename, elevation flags</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Fog of war, per player</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Cut, copy and paste, including between maps</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Paint: lines, rectangles, ellipses, polygons, stars, freehand, spray, text and an eraser, out of units, sprites, doodads, terrain or fog</td>
+<td>Yes, as a plugin (on by default): Tools ▸ Paint…. Outlined or filled, spaced, jittered, per-player; one undo step each.</td>
+</tr>
+<tr>
+<td>Find a map and open it</td>
+<td>Yes, as a plugin (scmscx.com, on by default): File ▸ Find on scmscx.com… searches the map archive by name, tileset, players and size, shows minimaps, and opens the map you pick.</td>
+</tr>
+<tr>
+<td>Auto-place Start Locations</td>
+<td>Yes. Tools ▸ Auto-place Start Locations puts one per player on a ring or in the corners, each moved to the nearest ground the placement checks accept, as one undo step. The Melee Wizard plugin (install it from Plugins ▸ Browse Plugins…, then Tools ▸ Melee Wizard…) does the elaborate version: click where Player 1 starts and the others land on its images under the symmetry you chose, with bases.</td>
+</tr>
+<tr>
+<td>Lock a layer</td>
+<td>Yes, in the Layers panel: a locked layer&#39;s tools stop changing the map.</td>
+</tr>
+<tr>
+<td>Lay out a base&#39;s resources: the mineral line on the three-tile ring, the geyser past its end, for every player at once</td>
+<td>Yes, as a plugin (Melee Wizard). Press on the hall spot and drag towards the minerals; presets for main, natural and third; amounts, end-patch amounts, mineral types; spots the map refuses are shown in red and left out. Also bases at every start location in one go, a blocking patch tool, mirroring the selected units, a symmetry check and a resource summary.</td>
+</tr>
+<tr>
+<td>See what a unit can walk: islands, unreachable pockets, the areas a map divides into and the chokes between them with widths, cliff seams with no ramp, ground distances between start locations</td>
+<td>Yes, as a plugin (Walkability, installed by default: View ▸ Walkability or Ctrl+Shift+W). Read from the game&#39;s own minitile flags with buildings and resources as walls, drawn over the map as an overlay that stays on while you place units and follows every edit; hover reads the ground under the pointer; Tools ▸ Walkability… is the settings and the lists.</td>
+</tr>
+</tbody></table>
+<h2 id="triggers">Triggers<a class="anchor" href="#triggers" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Classic editor: every condition and action, per-item disable</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Text editor in SCMDraft&#39;s TrigEdit syntax</td>
+<td>Yes, as a plugin (TrigEdit, installed but starting off): tick it on in Manage Plugins for Triggers ▸ Text Trigger Editor…. File ▸ Import / Export Triggers read and write the same text without it.</td>
+</tr>
+<tr>
+<td>Scripting: TypeScript that builds into triggers</td>
+<td>Yes, as a plugin (TrigScript, on by default): Triggers ▸ TrigScript…. Loops, helpers and tables to write triggers with, <code>program()</code> bodies that run in the game, checked against the map&#39;s names as you type, a simulator, and an editor beside the map. See <a href="/guide/trigscript/">TrigScript</a>.</td>
+</tr>
+<tr>
+<td>Import and export <code>.trg</code> and text triggers</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Validate triggers</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Mission briefings</td>
+<td>Yes: the classic editor, the text editor&#39;s Briefing mode, Find and Statistics. The field layout is checked against the briefings on Blizzard&#39;s own maps (Ground Zero, Spring Thaw), which put the portrait slot where the community reference does not. Transmission is the one action no Blizzard map uses.</td>
+</tr>
+<tr>
+<td>Create Unit with Properties (CUWP)</td>
+<td>Yes. Triggers ▸ Unit Properties Slots… edits the 64 slots (vitals, resources, hangar, the special states), the action picks a slot by what it sets, and Check Map flags a slot that sets nothing.</td>
+</tr>
+<tr>
+<td>EUD triggers</td>
+<td>Yes, as far as an editor without an address database goes: any raw player and unit value is accepted, the player pick has an EPD box that turns a memory address into the player value a Deaths condition or Set Deaths action needs (and shows the address a raw value reaches), Check Map points out the raw values, and the script&#39;s raw level has <code>Memory</code> / <code>SetMemory</code>.</td>
+</tr>
+</tbody></table>
+<h2 id="scenario-data">Scenario data<a class="anchor" href="#scenario-data" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Map properties, players, forces, colours (including Remastered RGB)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Unit, upgrade and technology settings, with per-player availability</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>String editor with a usage list, and unused-string cleanup</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Text encodings</td>
+<td>The encoding is guessed on open and chosen in Scenario ▸ Map Revision: UTF-8, Korean (EUC-KR / CP949), Japanese (Shift_JIS), Chinese (GBK, Big5), Cyrillic and Western Windows code pages. Written back in the same encoding on save.</td>
+</tr>
+<tr>
+<td>Interface language</td>
+<td>English and Korean, in Preferences ▸ Display; the default follows the browser. Korean covers the whole editor: menus, panels, every dialog, status messages, Check Map&#39;s findings, and the game&#39;s own vocabulary (unit, upgrade, technology, tileset and terrain names) as the editor shows it. The Korean was written by the editor&#39;s author with a dictionary, not by a native speaker, and reads like it; a review is invited (see <a href="/development/translations/">docs/development.md</a>). A map&#39;s own text, the text trigger format and the plugin API keep English names.</td>
+</tr>
+<tr>
+<td>Switch names</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Sound editor</td>
+<td>Import converts MP3, FLAC, AAC, Ogg and any WAV to PCM WAV at a chosen rate; play, remove, adopt archive files and re-encode a listed <code>.wav</code> all work. The editor reads every WAV encoding the game and the usual tools produce itself (8 to 32-bit PCM, float, A-law, µ-law, IMA and Microsoft ADPCM), so the game&#39;s own sounds play and convert; MP3, Ogg and FLAC go through the browser&#39;s decoders.</td>
+</tr>
+</tbody></table>
+<h2 id="tools">Tools<a class="anchor" href="#tools" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Check Map</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Find (units, locations, sprites, strings, triggers)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Statistics</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Export the map as a PNG, from full art down to a minimap</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Import and export strings</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Plugins (Plugins ▸ Browse Plugins… / Manage Plugins…)</td>
+<td>Yes. Search the project&#39;s published plugins and install one, or load a <code>plugin.ts</code> from any public repository or URL; it can add menu items, context-menu entries, hotkeys, dialogs, floating panels and map tools of its own, and edit the map through undo. See <a href="/plugins/">docs/plugins.md</a>.</td>
+</tr>
+<tr>
+<td>Look at and edit the file itself: every CHK section, its bytes, what each byte means</td>
+<td>Yes, as a plugin (Section Explorer: install it from Plugins ▸ Browse Plugins…, then Tools ▸ Section Explorer…). A hex editor with the sections listed, fields coloured and named, values edited as numbers, choices, flags or text; sections added, removed, renamed and reordered.</td>
+</tr>
+<tr>
+<td>Repair a protected or damaged map: missing, repeated, mis-sized or hidden sections, a stripped ISOM</td>
+<td>Yes, as a plugin (Repair, on by default: it checks every map as it opens, and Tools ▸ Repair Map… runs it by hand)</td>
+</tr>
+<tr>
+<td>Test Map</td>
+<td>Yes (Ctrl+F5). Neither StarCraft build opens a map from the outside, so Test Map writes the map into a <code>scmJS</code> folder under the game&#39;s Maps folder, where Single Player ▸ Custom Game lists it, and the desktop app starts the game as well. In Chrome and Edge the map goes into a folder you pick once (the game&#39;s Maps folder); other browsers download it.</td>
+</tr>
+<tr>
+<td>Make a whole scenario from a sentence, generate a map from a description, write triggers from one, explain triggers, name and describe the map, write a briefing, get a critique, translate the strings, or ask an assistant to make changes</td>
+<td>Yes (Tools ▸ AI, in the scmjs.dev plugin — shipped with the editor, turned on in Plugins ▸ Manage Plugins…; it runs on scmjs.dev and the first request starts a free trial — see <a href="/guide/the-ai/">The AI</a>). Every change it makes is one undo step; what the settings dialogs write is a transaction outside undo, as by hand.</td>
+</tr>
+<tr>
+<td>Keep maps on an account with numbered revisions and notes, and open them from any machine</td>
+<td>Yes (Account ▸ Save to scmjs.dev… and My Maps…, signed in — see <a href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a>)</td>
+</tr>
+</tbody></table>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#map-files">Map files</a></li>
+<li><a href="#terrain">Terrain</a></li>
+<li><a href="#objects">Objects</a></li>
+<li><a href="#triggers">Triggers</a></li>
+<li><a href="#scenario-data">Scenario data</a></li>
+<li><a href="#tools">Tools</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

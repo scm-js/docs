@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checking, testing and saving — scmJS documentation</title>
+<meta name="description" content="!Check Map on a new map: eight players and no start locations yet">
+<meta property="og:title" content="Checking, testing and saving — scmJS documentation">
+<meta property="og:description" content="!Check Map on a new map: eight players and no start locations yet">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="here" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Checking, testing and saving</h1>
+<h2 id="check-map">Check Map<a class="anchor" href="#check-map" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/check-map.webp" alt="Check Map on a new map: eight players and no start locations yet"></p>
+<p>Tools ▸ Check Map looks for what the game would refuse or silently drop: start locations
+that do not match the player table, the unit limit (1700), off-map units, a missing or
+moved Anywhere, triggers pointing at unused locations or strings past the end of the
+table, unit and player values the game does not have, AI scripts it does not ship, Play
+WAV actions with no file in the archive, switches tested but never set, and the file&#39;s
+own health — missing sections, player types where StarEdit&#39;s copy disagrees with the
+game&#39;s, the isometric record. A map with triggers is a scenario, and gets the scenario
+checks too: a human player no trigger ever gives Victory or Defeat (in a scenario nobody
+wins or loses unless a trigger says so), a missing Set Mission Objectives, and — when
+hyper triggers are present — a Wait in another preserved trigger, which stalls that
+player&#39;s whole trigger queue. Double-click an issue to go to it. The same check runs
+inside the Save dialog.</p>
+<h2 id="test-map">Test Map<a class="anchor" href="#test-map" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/test-map.webp" alt="The Test Map dialog"></p>
+<p>Tools ▸ Test Map (Ctrl+F5) hands the map to the game. Neither StarCraft build opens a map
+from the outside, so the editor writes it into a <code>scmJS</code> folder under the game&#39;s Maps
+folder, where Single Player ▸ Custom Game lists it. The desktop app finds the
+installation (or takes a folder you pick) and starts the game as well; in Chrome and
+Edge the map goes into a folder you pick once, and other browsers download it.</p>
+<h2 id="saving">Saving<a class="anchor" href="#saving" aria-label="Link to this section">#</a></h2>
+<p>Ctrl+S writes the map back where it came from. In Chrome, Edge and the desktop app the
+editor keeps a handle to the file it opened, so Save writes in place once the browser has
+asked for permission. Firefox and Safari give the editor a file&#39;s contents but no way to
+write it back, so there every save is a download, and the notice at the bottom right says
+so. Save As (Ctrl+Shift+S) and Save Copy As open the Save dialog; a copy is written
+without the open map changing its name or file.</p>
+<p><img src="/images/save.webp" alt="The Save dialog, with everything it will write listed on the right"></p>
+<p>The Save dialog is where the file&#39;s shape is decided:</p>
+<ul>
+<li><strong>Format</strong>: <code>.scx</code> (Brood War), <code>.scm</code> (original StarCraft), or a bare <code>.chk</code>, the
+scenario alone with no archive around it.</li>
+<li><strong>Compression</strong>: PKWARE is what StarEdit writes and what Blizzard&#39;s own maps are
+stored as, so every StarCraft build reads it; zlib is smaller and needs 1.16.1 or
+Remastered; none is the largest and readable by anything. A map keeps the compression
+it was opened with. StarEdit&#39;s encryption is a tick beside it.</li>
+<li><strong>Other files in the archive</strong>: the sounds and the files plugins keep there, each with
+a tick, so a copy for release can leave them out. A member the editor cannot name — a
+protected map&#39;s archive often has no file list — is kept exactly as stored, and the
+dialog says how many there are.</li>
+<li><strong>Sections</strong>: the parts of the file only an editor reads (the isometric record, the
+editor&#39;s copies of the player table and so on) can be left out to make a smaller file
+— the dialog says what each costs an editor later, and <em>Smallest that plays</em> ticks
+them all. The map in the editor is not changed.</li>
+</ul>
+<p>The options confirmed here are what Ctrl+S reuses for that map from then on.</p>
+<p><strong>Save to scmjs.dev…</strong>, under File and under Account, keeps a copy of the map on your
+scmjs.dev account as a numbered revision with a note — a backup with a history, and the
+way to reach the same map from another machine. It does not change where Ctrl+S writes.
+See <a href="/guide/your-scmjsdev-account/#keeping-maps-on-scmjsdev">Keeping maps on scmjs.dev</a>.</p>
+<h2 id="export-an-image">Export an image<a class="anchor" href="#export-an-image" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/export-image.webp" alt="The Export Image dialog"></p>
+<p>File ▸ Export ▸ Image renders the whole map to a PNG, with one dial that decides what
+the picture is: at 32 pixels per tile it is the full game art, at 8 or 16 the same
+smaller, at 4 and 2 the mean tile colours with units as minimap dots, and at 1 pixel per
+tile it is the game&#39;s minimap. Units, locations, fog and the grid are each a tick.</p>
+<p>Tools ▸ Statistics counts what the map holds — units per player, resources, doodads,
+triggers, strings — and Ctrl+F finds a unit, location, sprite, string or trigger by name.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#check-map">Check Map</a></li>
+<li><a href="#test-map">Test Map</a></li>
+<li><a href="#saving">Saving</a></li>
+<li><a href="#export-an-image">Export an image</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

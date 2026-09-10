@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.triggers — scmJS documentation</title>
+<meta name="description" content="Reading triggers, and the pure helpers that make them presentable. Writing goes
+through `document.update`.">
+<meta property="og:title" content="api.triggers — scmJS documentation">
+<meta property="og:description" content="Reading triggers, and the pure helpers that make them presentable. Writing goes
+through `document.update`.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="here" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.triggers</h1>
+<p class="lede">TriggersApi</p>
+<p>Reading triggers, and the pure helpers that make them presentable. Writing goes
+through <code>document.update</code>.</p>
+
+<ul class="chips"><li><a href="#list">list</a></li><li><a href="#briefing">briefing</a></li><li><a href="#switchnames">switchNames</a></li><li><a href="#switchusage">switchUsage</a></li><li><a href="#names">names</a></li><li><a href="#defs">defs</a></li><li><a href="#text">text</a></li><li><a href="#newtrigger">newTrigger</a></li><li><a href="#newcondition">newCondition</a></li><li><a href="#newaction">newAction</a></li><li><a href="#ispreserved">isPreserved</a></li><li><a href="#setpreserved">setPreserved</a></li><li><a href="#triggersfor">triggersFor</a></li><li><a href="#summarize">summarize</a></li><li><a href="#comment">comment</a></li><li><a href="#claim">claim</a></li><li><a href="#claims">claims</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="list">
+  <h3><a class="anchor-name" href="#list">list</a></h3>
+  <pre class="code"><code>list(): <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[];</code></pre>
+  <p>TRIG, cloned.</p>
+  
+  
+</div>
+<div class="member" id="briefing">
+  <h3><a class="anchor-name" href="#briefing">briefing</a></h3>
+  <pre class="code"><code>briefing(): <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[];</code></pre>
+  <p>MBRF, cloned.</p>
+  
+  
+</div>
+<div class="member" id="switchnames">
+  <h3><a class="anchor-name" href="#switchnames">switchNames</a></h3>
+  <pre class="code"><code>switchNames(): <span class="k">string</span>[];</code></pre>
+  <p>SWNM as names, StarEdit&#39;s <code>Switch N</code> where there is none.</p>
+  
+  
+</div>
+<div class="member" id="switchusage">
+  <h3><a class="anchor-name" href="#switchusage">switchUsage</a></h3>
+  <pre class="code"><code>switchUsage(): <span class="k">number</span>[];</code></pre>
+  <p>How many conditions and actions mention each switch.</p>
+  
+  
+</div>
+<div class="member" id="names">
+  <h3><a class="anchor-name" href="#names">names</a></h3>
+  <pre class="code"><code>names(): <a class="t" href="/api/triggers/#triggernames">TriggerNames</a>;</code></pre>
+  <p>The name context the text format resolves against: the map&#39;s locations, units, switches and strings.</p>
+  
+  
+</div>
+<div class="member" id="defs">
+  <h3><a class="anchor-name" href="#defs">defs</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> defs: <a class="t" href="/api/triggers/#triggerdefsapi">TriggerDefsApi</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="text">
+  <h3><a class="anchor-name" href="#text">text</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> text: <a class="t" href="/api/triggers/#triggertextapi">TriggerTextApi</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="newtrigger">
+  <h3><a class="anchor-name" href="#newtrigger">newTrigger</a></h3>
+  <pre class="code"><code>newTrigger(players?: <span class="k">number</span>[]): <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>;</code></pre>
+  <p>An empty trigger owned by the given player groups (All Players by default).</p>
+  
+  
+</div>
+<div class="member" id="newcondition">
+  <h3><a class="anchor-name" href="#newcondition">newCondition</a></h3>
+  <pre class="code"><code>newCondition(<span class="k">type</span>: <span class="k">number</span>): <a class="t" href="/api/types/#conditionrecord">ConditionRecord</a>;</code></pre>
+  <p>A condition of a type, with StarEdit&#39;s defaults for its arguments.</p>
+  
+  
+</div>
+<div class="member" id="newaction">
+  <h3><a class="anchor-name" href="#newaction">newAction</a></h3>
+  <pre class="code"><code>newAction(<span class="k">type</span>: <span class="k">number</span>, briefing?: <span class="k">boolean</span>): <a class="t" href="/api/types/#actionrecord">ActionRecord</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="ispreserved">
+  <h3><a class="anchor-name" href="#ispreserved">isPreserved</a></h3>
+  <pre class="code"><code>isPreserved(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="setpreserved">
+  <h3><a class="anchor-name" href="#setpreserved">setPreserved</a></h3>
+  <pre class="code"><code>setPreserved(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>, on: <span class="k">boolean</span>): <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="triggersfor">
+  <h3><a class="anchor-name" href="#triggersfor">triggersFor</a></h3>
+  <pre class="code"><code>triggersFor(list: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[], groups: <span class="k">number</span>[]): <span class="k">number</span>[];</code></pre>
+  <p>The indices of the triggers any of these player groups own.</p>
+  
+  
+</div>
+<div class="member" id="summarize">
+  <h3><a class="anchor-name" href="#summarize">summarize</a></h3>
+  <pre class="code"><code>summarize(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>, briefing?: <span class="k">boolean</span>): { players: <span class="k">string</span>; conditions: <span class="k">string</span>; actions: <span class="k">string</span>; };</code></pre>
+  <p>The three lines the trigger list shows: players, conditions, actions.</p>
+  
+  
+</div>
+<div class="member" id="comment">
+  <h3><a class="anchor-name" href="#comment">comment</a></h3>
+  <pre class="code"><code>comment(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>): <span class="k">string</span> | <span class="k">null</span>;</code></pre>
+  <p>A trigger&#39;s <code>Comment</code> action text, when it has one.</p>
+  
+  
+</div>
+<div class="member" id="claim">
+  <h3><a class="anchor-name" href="#claim">claim</a></h3>
+  <pre class="code"><code>claim(spec: <a class="t" href="/api/triggers/#triggerclaimspec">TriggerClaimSpec</a>): <a class="t" href="/api/triggers/#triggerclaimhandle">TriggerClaimHandle</a>;</code></pre>
+  <p>Tell the editor that a run of the trigger list is generated by this plugin. The
+Trigger Editor badges those rows, locks them and offers the plugin&#39;s own editor in
+place of the form; the Text Trigger Editor fences them in comments; Import Triggers
+says what a replace would remove. The claim lives until <code>remove()</code> or the plugin&#39;s
+deactivation; call <code>refresh()</code> after a rebuild so the editors ask <code>locate</code> again.</p>
+  
+  
+</div>
+<div class="member" id="claims">
+  <h3><a class="anchor-name" href="#claims">claims</a></h3>
+  <pre class="code"><code>claims(list?: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]): <a class="t" href="/api/triggers/#triggerclaimrange">TriggerClaimRange</a>[];</code></pre>
+  <p>Every plugin&#39;s claims as located in <code>list</code> (TRIG as it stands, when omitted), first
+run first — what an editor of the trigger list needs to fence or lock the generated
+runs. A claim whose <code>locate</code> finds nothing, or throws, is left out.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="argkind">
+  <h3><a class="anchor-name" href="#argkind">ArgKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/triggers/#argkind">ArgKind</a> = <span class="s">&quot;player&quot;</span> | <span class="s">&quot;unit&quot;</span> | <span class="s">&quot;location&quot;</span> | <span class="s">&quot;switch&quot;</span> | <span class="s">&quot;comparison&quot;</span> | <span class="s">&quot;switchState&quot;</span> | <span class="s">&quot;switchAction&quot;</span> | <span class="s">&quot;modifier&quot;</span> | <span class="s">&quot;unitState&quot;</span> | <span class="s">&quot;order&quot;</span> | <span class="s">&quot;alliance&quot;</span> | <span class="s">&quot;resource&quot;</span> | <span class="s">&quot;score&quot;</span> | <span class="s">&quot;aiScript&quot;</span> | <span class="s">&quot;textFlags&quot;</span> | <span class="s">&quot;text&quot;</span> | <span class="s">&quot;wav&quot;</span> | <span class="s">&quot;number&quot;</span> | <span class="s">&quot;amount&quot;</span> | <span class="s">&quot;count&quot;</span> | <span class="s">&quot;duration&quot;</span> | <span class="s">&quot;percent&quot;</span> | <span class="s">&quot;cuwp&quot;</span> | <span class="s">&quot;slot&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="conditionfield">
+  <h3><a class="anchor-name" href="#conditionfield">ConditionField</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/triggers/#conditionfield">ConditionField</a> = <span class="k">keyof</span> <a class="t" href="/api/types/#conditionrecord">ConditionRecord</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="actionfield">
+  <h3><a class="anchor-name" href="#actionfield">ActionField</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/triggers/#actionfield">ActionField</a> = <span class="k">keyof</span> <a class="t" href="/api/types/#actionrecord">ActionRecord</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="argdef">
+  <h3><a class="anchor-name" href="#argdef">ArgDef</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#argdef">ArgDef</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>kind: <a class="t" href="/api/triggers/#argkind">ArgKind</a></code></th><td></td></tr>
+<tr><th><code>field: F</code></th><td></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="conditiondef">
+  <h3><a class="anchor-name" href="#conditiondef">ConditionDef</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#conditiondef">ConditionDef</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">type</span>: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>args: <a class="t" href="/api/triggers/#argdef">ArgDef</a>&lt;<a class="t" href="/api/triggers/#conditionfield">ConditionField</a>&gt;[]</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="actiondef">
+  <h3><a class="anchor-name" href="#actiondef">ActionDef</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#actiondef">ActionDef</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">type</span>: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>args: <a class="t" href="/api/triggers/#argdef">ArgDef</a>&lt;<a class="t" href="/api/triggers/#actionfield">ActionField</a>&gt;[]</code></th><td></td></tr>
+<tr><th><code>hasTextFlags?: <span class="k">boolean</span></code></th><td><p>Text / Transmission: the <code>AlwaysDisplay</code> flag is an argument of its own.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="choice">
+  <h3><a class="anchor-name" href="#choice">Choice</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#choice">Choice</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>aliases?: <span class="k">string</span>[]</code></th><td><p>Extra spellings the text parser accepts.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggernames">
+  <h3><a class="anchor-name" href="#triggernames">TriggerNames</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggernames">TriggerNames</a></code></pre>
+  <p>How the text format names things it cannot know on its own.</p>
+  <table class="fields"><tbody><tr><th><code><span class="k">string</span>(index: <span class="k">number</span>): <span class="k">string</span> | <span class="k">null</span></code></th><td><p>Text of a string-table entry, null when unset.</p></td></tr>
+<tr><th><code>intern(text: <span class="k">string</span>): <span class="k">number</span></code></th><td><p>Index for <code>text</code> — an existing identical entry or a new one. Only called while parsing.</p></td></tr>
+<tr><th><code>location(<span class="k">number</span>: <span class="k">number</span>): <span class="k">string</span></code></th><td><p>Display name of a 1-based location number.</p></td></tr>
+<tr><th><code>locationByName(name: <span class="k">string</span>): <span class="k">number</span> | <span class="k">undefined</span></code></th><td><p>1-based number for a location name (or <code>Location N</code> / <code>Anywhere</code>), undefined when unknown.</p></td></tr>
+<tr><th><code>unit(id: <span class="k">number</span>): <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>unitByName(name: <span class="k">string</span>): <span class="k">number</span> | <span class="k">undefined</span></code></th><td></td></tr>
+<tr><th><code><span class="k">switch</span>(index: <span class="k">number</span>): <span class="k">string</span></code></th><td><p>Display name of a 0-based switch.</p></td></tr>
+<tr><th><code>switchByName(name: <span class="k">string</span>): <span class="k">number</span> | <span class="k">undefined</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="texttrigger">
+  <h3><a class="anchor-name" href="#texttrigger">TextTrigger</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#texttrigger">TextTrigger</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a></code></th><td></td></tr>
+<tr><th><code>line: <span class="k">number</span></code></th><td><p>1-based line the <code>Trigger(</code> header starts on.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerdefsapi">
+  <h3><a class="anchor-name" href="#triggerdefsapi">TriggerDefsApi</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggerdefsapi">TriggerDefsApi</a></code></pre>
+  <p>What each condition and action type takes: the argument list in the order StarEdit&#39;s
+TrigEdit shows it, each naming the record field it lives in and the kind of value it
+is (a player group, a unit id, a location, a comparison, …). Everything that displays
+or edits a trigger reads this table, the editor&#39;s own dialogs included.</p>
+  <table class="fields"><tbody><tr><th><code>conditions(): <a class="t" href="/api/triggers/#conditiondef">ConditionDef</a>[]</code></th><td></td></tr>
+<tr><th><code>condition(<span class="k">type</span>: <span class="k">number</span>): <a class="t" href="/api/triggers/#conditiondef">ConditionDef</a> | <span class="k">undefined</span></code></th><td></td></tr>
+<tr><th><code>actions(briefing?: <span class="k">boolean</span>): <a class="t" href="/api/triggers/#actiondef">ActionDef</a>[]</code></th><td></td></tr>
+<tr><th><code>action(<span class="k">type</span>: <span class="k">number</span>, briefing?: <span class="k">boolean</span>): <a class="t" href="/api/triggers/#actiondef">ActionDef</a> | <span class="k">undefined</span></code></th><td></td></tr>
+<tr><th><code>choices(kind: <a class="t" href="/api/triggers/#argkind">ArgKind</a>): <a class="t" href="/api/triggers/#choice">Choice</a>[]</code></th><td><p>The values an enumerated argument kind can take, with their labels.</p></td></tr>
+<tr><th><code>choiceLabel(kind: <a class="t" href="/api/triggers/#argkind">ArgKind</a>, value: <span class="k">number</span>): <span class="k">string</span> | <span class="k">undefined</span></code></th><td></td></tr>
+<tr><th><code>choiceValue(kind: <a class="t" href="/api/triggers/#argkind">ArgKind</a>, text: <span class="k">string</span>): <span class="k">number</span> | <span class="k">undefined</span></code></th><td><p>The value behind a label or one of its aliases, for parsing.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggertextapi">
+  <h3><a class="anchor-name" href="#triggertextapi">TriggerTextApi</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggertextapi">TriggerTextApi</a></code></pre>
+  <p>Printing and parsing the text trigger format (File ▸ Import / Export ▸ Triggers).</p>
+  <table class="fields"><tbody><tr><th><code>print(triggers: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[], options?: { briefing?: <span class="k">boolean</span>; }): <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>parse(source: <span class="k">string</span>, options?: { briefing?: <span class="k">boolean</span>; }): <a class="t" href="/api/triggers/#texttrigger">TextTrigger</a>[]</code></th><td><p>Parse text into records, resolving names against the open map (and interning the
+strings it mentions). Throws a <code>TriggerTextError</code> carrying the line on bad input.</p></td></tr>
+<tr><th><code>one(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>, options?: { briefing?: <span class="k">boolean</span>; }): <span class="k">string</span></code></th><td><p>One trigger as its <code>Trigger(…)</code> block.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerclaimrange">
+  <h3><a class="anchor-name" href="#triggerclaimrange">TriggerClaimRange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggerclaimrange">TriggerClaimRange</a></code></pre>
+  <p>One claimed run as <code>triggers.claims</code> located it.</p>
+  <table class="fields"><tbody><tr><th><code>pluginId: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td><p><code>TriggerClaimSpec.label</code>: what generated the run, as a sentence would use it.</p></td></tr>
+<tr><th><code>badge: <span class="k">string</span></code></th><td><p>The badge word the trigger list shows; the plugin&#39;s id by default.</p></td></tr>
+<tr><th><code>start: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>count: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerclaimspec">
+  <h3><a class="anchor-name" href="#triggerclaimspec">TriggerClaimSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggerclaimspec">TriggerClaimSpec</a></code></pre>
+  <p>A run of triggers a plugin generates and owns. It is found by <em>content</em>: the
+editors work on copies of the list with their own unsaved inserts and removals, so
+<code>locate</code> is asked with whatever list an editor holds and answers where the run is
+in it — by a hash of the records, say — or null when the records are not there.</p>
+  <table class="fields"><tbody><tr><th><code>label: <span class="k">string</span></code></th><td><p>What generated the run, in words, as a sentence would use it: <code>&quot;the trigger script&quot;</code>.</p></td></tr>
+<tr><th><code>badge?: <span class="k">string</span></code></th><td><p>The word on the badge the trigger list shows on each row; the plugin&#39;s id by default.</p></td></tr>
+<tr><th><code>locate(list: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]): { start: <span class="k">number</span>; count: <span class="k">number</span>; } | <span class="k">null</span></code></th><td><p>Where the run sits in <code>list</code>, or null when it is not there (edited by hand, or gone).</p></td></tr>
+<tr><th><code>describe?(index: <span class="k">number</span>, list: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]): <span class="k">string</span></code></th><td><p>A sentence about one trigger of the run (its index in <code>list</code>), shown in place of the editor&#39;s form.</p></td></tr>
+<tr><th><code>open?(index: <span class="k">number</span>, list: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]): <span class="k">void</span></code></th><td><p>Open the plugin&#39;s own editor on that trigger — the button under the sentence.</p></td></tr>
+<tr><th><code>openLabel?: <span class="k">string</span></code></th><td><p>That button&#39;s label; <code>Open &lt;plugin name&gt;</code> by default.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerclaimhandle">
+  <h3><a class="anchor-name" href="#triggerclaimhandle">TriggerClaimHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/triggers/#triggerclaimhandle">TriggerClaimHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>refresh(): <span class="k">void</span></code></th><td><p>The editors ask <code>locate</code> again (after a rebuild, or when the run moved).</p></td></tr>
+<tr><th><code>remove(): <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-trigscript"><b>TrigScript</b><span>generating a run of triggers and claiming it</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#list">list</a></li>
+<li><a href="#briefing">briefing</a></li>
+<li><a href="#switchnames">switchNames</a></li>
+<li><a href="#switchusage">switchUsage</a></li>
+<li><a href="#names">names</a></li>
+<li><a href="#defs">defs</a></li>
+<li><a href="#text">text</a></li>
+<li><a href="#newtrigger">newTrigger</a></li>
+<li><a href="#newcondition">newCondition</a></li>
+<li><a href="#newaction">newAction</a></li>
+<li><a href="#ispreserved">isPreserved</a></li>
+<li><a href="#setpreserved">setPreserved</a></li>
+<li><a href="#triggersfor">triggersFor</a></li>
+<li><a href="#summarize">summarize</a></li>
+<li><a href="#comment">comment</a></li>
+<li><a href="#claim">claim</a></li>
+<li><a href="#claims">claims</a></li>
+<li><a href="#argkind">ArgKind</a></li>
+<li><a href="#conditionfield">ConditionField</a></li>
+<li><a href="#actionfield">ActionField</a></li>
+<li><a href="#argdef">ArgDef</a></li>
+<li><a href="#conditiondef">ConditionDef</a></li>
+<li><a href="#actiondef">ActionDef</a></li>
+<li><a href="#choice">Choice</a></li>
+<li><a href="#triggernames">TriggerNames</a></li>
+<li><a href="#texttrigger">TextTrigger</a></li>
+<li><a href="#triggerdefsapi">TriggerDefsApi</a></li>
+<li><a href="#triggertextapi">TriggerTextApi</a></li>
+<li><a href="#triggerclaimrange">TriggerClaimRange</a></li>
+<li><a href="#triggerclaimspec">TriggerClaimSpec</a></li>
+<li><a href="#triggerclaimhandle">TriggerClaimHandle</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

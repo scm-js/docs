@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.query — scmJS documentation</title>
+<meta name="description" content="Reading the open map: what is under a point, what lies in a rectangle, and the
+editor&#39;s own analyses — Check Map&#39;s issues, Tools ▸ Statistics, the Ctrl+F search and
+the string usage map the String Editor is built on.
+
+Everything here is a read: nothing changes the map, and nothing throws without one
+(an empty list, or null).">
+<meta property="og:title" content="api.query — scmJS documentation">
+<meta property="og:description" content="Reading the open map: what is under a point, what lies in a rectangle, and the
+editor&#39;s own analyses — Check Map&#39;s issues, Tools ▸ Statistics, the Ctrl+F search and
+the string usage map the String Editor is built on.
+
+Everything here is a read: nothing changes the map, and nothing throws without one
+(an empty list, or null).">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="here" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.query</h1>
+<p class="lede">QueryApi</p>
+<p>Reading the open map: what is under a point, what lies in a rectangle, and the
+editor&#39;s own analyses — Check Map&#39;s issues, Tools ▸ Statistics, the Ctrl+F search and
+the string usage map the String Editor is built on.</p>
+<p>Everything here is a read: nothing changes the map, and nothing throws without one
+(an empty list, or null).</p>
+
+<ul class="chips"><li><a href="#unitat">unitAt</a></li><li><a href="#unitsin">unitsIn</a></li><li><a href="#unitsof">unitsOf</a></li><li><a href="#spriteat">spriteAt</a></li><li><a href="#spritesin">spritesIn</a></li><li><a href="#doodadat">doodadAt</a></li><li><a href="#locationat">locationAt</a></li><li><a href="#locationsin">locationsIn</a></li><li><a href="#startlocations">startLocations</a></li><li><a href="#placement">placement</a></li><li><a href="#doodadplacement">doodadPlacement</a></li><li><a href="#fogat">fogAt</a></li><li><a href="#strings">strings</a></li><li><a href="#validate">validate</a></li><li><a href="#statistics">statistics</a></li><li><a href="#find">find</a></li><li><a href="#stringusage">stringUsage</a></li><li><a href="#unusedstrings">unusedStrings</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="unitat">
+  <h3><a class="anchor-name" href="#unitat">unitAt</a></h3>
+  <pre class="code"><code>unitAt(px: <span class="k">number</span>, py: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  <p>The topmost unit whose sprite box covers a map pixel, or -1.</p>
+  
+  
+</div>
+<div class="member" id="unitsin">
+  <h3><a class="anchor-name" href="#unitsin">unitsIn</a></h3>
+  <pre class="code"><code>unitsIn(rect: <a class="t" href="/api/types/#rect">Rect</a>): <span class="k">number</span>[];</code></pre>
+  <p>Every unit whose centre lies in a tile rect.</p>
+  
+  
+</div>
+<div class="member" id="unitsof">
+  <h3><a class="anchor-name" href="#unitsof">unitsOf</a></h3>
+  <pre class="code"><code>unitsOf(owner: <span class="k">number</span>): <span class="k">number</span>[];</code></pre>
+  <p>Units owned by a player (0-based).</p>
+  
+  
+</div>
+<div class="member" id="spriteat">
+  <h3><a class="anchor-name" href="#spriteat">spriteAt</a></h3>
+  <pre class="code"><code>spriteAt(px: <span class="k">number</span>, py: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="spritesin">
+  <h3><a class="anchor-name" href="#spritesin">spritesIn</a></h3>
+  <pre class="code"><code>spritesIn(rect: <a class="t" href="/api/types/#rect">Rect</a>): <span class="k">number</span>[];</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="doodadat">
+  <h3><a class="anchor-name" href="#doodadat">doodadAt</a></h3>
+  <pre class="code"><code>doodadAt(tx: <span class="k">number</span>, ty: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  <p>The doodad covering a tile, or -1.</p>
+  
+  
+</div>
+<div class="member" id="locationat">
+  <h3><a class="anchor-name" href="#locationat">locationAt</a></h3>
+  <pre class="code"><code>locationAt(px: <span class="k">number</span>, py: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  <p>The smallest location covering a map pixel (never Anywhere), or -1.</p>
+  
+  
+</div>
+<div class="member" id="locationsin">
+  <h3><a class="anchor-name" href="#locationsin">locationsIn</a></h3>
+  <pre class="code"><code>locationsIn(rect: <a class="t" href="/api/types/#rect">Rect</a>): <span class="k">number</span>[];</code></pre>
+  <p>Locations wholly inside a tile rect (never Anywhere).</p>
+  
+  
+</div>
+<div class="member" id="startlocations">
+  <h3><a class="anchor-name" href="#startlocations">startLocations</a></h3>
+  <pre class="code"><code>startLocations(): <a class="t" href="/api/query/#startlocation">StartLocation</a>[];</code></pre>
+  <p>The map&#39;s start locations, by player.</p>
+  
+  
+</div>
+<div class="member" id="placement">
+  <h3><a class="anchor-name" href="#placement">placement</a></h3>
+  <pre class="code"><code>placement(unitId: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>): <a class="t" href="/api/query/#placementverdict">PlacementVerdict</a> | <span class="k">null</span>;</code></pre>
+  <p>Whether a unit type may be placed centred there, and what stops it; null with no map.</p>
+  
+  
+</div>
+<div class="member" id="doodadplacement">
+  <h3><a class="anchor-name" href="#doodadplacement">doodadPlacement</a></h3>
+  <pre class="code"><code>doodadPlacement(doodadId: <span class="k">number</span>, tx: <span class="k">number</span>, ty: <span class="k">number</span>): <a class="t" href="/api/query/#doodadverdict">DoodadVerdict</a> | <span class="k">null</span>;</code></pre>
+  <p>StarEdit&#39;s ground check for a doodad with its top-left tile at (tx, ty): <code>ok</code>, or the
+cells (row-major) whose ground is not what <code>DoodadInfo.required</code> asks for. It reads the
+map as it is right now — inside a <code>document.edit</code> that is the map with the transaction&#39;s
+earlier changes in — so a plugin can paint a cliff and then look for where a ramp fits.
+Null with no map or without the tileset graphics.</p>
+  
+  
+</div>
+<div class="member" id="fogat">
+  <h3><a class="anchor-name" href="#fogat">fogAt</a></h3>
+  <pre class="code"><code>fogAt(tx: <span class="k">number</span>, ty: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  <p>The MASK bits at a tile: bit n set = player n + 1 starts fogged there (every bit when the map has no MASK).</p>
+  
+  
+</div>
+<div class="member" id="strings">
+  <h3><a class="anchor-name" href="#strings">strings</a></h3>
+  <pre class="code"><code>strings(): (<span class="k">string</span> | <span class="k">null</span>)[];</code></pre>
+  <p>The string table as it stands (index 0 is nothing); empty with no map.</p>
+  
+  
+</div>
+<div class="member" id="validate">
+  <h3><a class="anchor-name" href="#validate">validate</a></h3>
+  <pre class="code"><code>validate(): <a class="t" href="/api/query/#issue">Issue</a>[];</code></pre>
+  <p>Check Map: every issue the editor knows how to spot, with a <code>target</code> to go to.</p>
+  
+  
+</div>
+<div class="member" id="statistics">
+  <h3><a class="anchor-name" href="#statistics">statistics</a></h3>
+  <pre class="code"><code>statistics(): <a class="t" href="/api/query/#mapstatistics">MapStatistics</a> | <span class="k">null</span>;</code></pre>
+  <p>Tools ▸ Statistics: tile, unit, resource and player counts. Null without a map.</p>
+  
+  
+</div>
+<div class="member" id="find">
+  <h3><a class="anchor-name" href="#find">find</a></h3>
+  <pre class="code"><code>find(options: <a class="t" href="/api/query/#findoptions">FindOptions</a>): <a class="t" href="/api/query/#findresult">FindResult</a>[];</code></pre>
+  <p>The Ctrl+F search over units, locations, sprites, strings and triggers.</p>
+  
+  
+</div>
+<div class="member" id="stringusage">
+  <h3><a class="anchor-name" href="#stringusage">stringUsage</a></h3>
+  <pre class="code"><code>stringUsage(): Map&lt;<span class="k">number</span>, <a class="t" href="/api/query/#stringusage">StringUsage</a>[]&gt;;</code></pre>
+  <p>Every record that refers to each string index.</p>
+  
+  
+</div>
+<div class="member" id="unusedstrings">
+  <h3><a class="anchor-name" href="#unusedstrings">unusedStrings</a></h3>
+  <pre class="code"><code>unusedStrings(): <span class="k">number</span>[];</code></pre>
+  <p>String slots nothing refers to.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="issuelevel">
+  <h3><a class="anchor-name" href="#issuelevel">IssueLevel</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/query/#issuelevel">IssueLevel</a> = <span class="s">&quot;error&quot;</span> | <span class="s">&quot;warn&quot;</span> | <span class="s">&quot;info&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="issuetarget">
+  <h3><a class="anchor-name" href="#issuetarget">IssueTarget</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/query/#issuetarget">IssueTarget</a> = {
+	kind: <span class="s">&quot;location&quot;</span>;
+	index: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;unit&quot;</span>;
+	index: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;trigger&quot;</span>;
+	index: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;dialog&quot;</span>;
+	id: <a class="t" href="/api/types/#dialogid">DialogId</a>;
+};</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="issue">
+  <h3><a class="anchor-name" href="#issue">Issue</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#issue">Issue</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>level: <a class="t" href="/api/query/#issuelevel">IssueLevel</a></code></th><td></td></tr>
+<tr><th><code>text: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>where: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>target?: <a class="t" href="/api/query/#issuetarget">IssueTarget</a></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="playerstatistics">
+  <h3><a class="anchor-name" href="#playerstatistics">PlayerStatistics</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#playerstatistics">PlayerStatistics</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>slot: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code><span class="k">type</span>: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>race: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>units: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>buildings: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>Null when units.dat is not loaded.</p></td></tr>
+<tr><th><code>startLocations: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="mapstatistics">
+  <h3><a class="anchor-name" href="#mapstatistics">MapStatistics</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#mapstatistics">MapStatistics</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tileset: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>revision: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>sections: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>strings: { slots: <span class="k">number</span>; set: <span class="k">number</span>; extended: <span class="k">boolean</span>; }</code></th><td></td></tr>
+<tr><th><code>players: <a class="t" href="/api/query/#playerstatistics">PlayerStatistics</a>[]</code></th><td></td></tr>
+<tr><th><code>unownedUnits: <span class="k">number</span></code></th><td><p>Units whose owner byte is past the twelve slots.</p></td></tr>
+<tr><th><code>units: { total: <span class="k">number</span>; buildings: <span class="k">number</span> | <span class="k">null</span>; top: { id: <span class="k">number</span>; name: <span class="k">string</span>; count: <span class="k">number</span>; }[]; }</code></th><td></td></tr>
+<tr><th><code>resources: { minerals: <span class="k">number</span>; gas: <span class="k">number</span>; fields: <span class="k">number</span>; geysers: <span class="k">number</span>; }</code></th><td></td></tr>
+<tr><th><code>doodads: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>sprites: { pure: <span class="k">number</span>; unit: <span class="k">number</span>; }</code></th><td></td></tr>
+<tr><th><code>locations: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>triggers: { count: <span class="k">number</span>; conditions: <span class="k">number</span>; actions: <span class="k">number</span>; preserved: <span class="k">number</span>; disabled: <span class="k">number</span>; }</code></th><td></td></tr>
+<tr><th><code>briefings: { count: <span class="k">number</span>; actions: <span class="k">number</span>; }</code></th><td><p>MBRF: the briefing&#39;s records and the actions in them.</p></td></tr>
+<tr><th><code>switchesNamed: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>sounds: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>terrain: { name: <span class="k">string</span>; tiles: <span class="k">number</span>; }[] | <span class="k">null</span></code></th><td><p>Tiles per terrain type (&quot;Edges and cliffs&quot; for the unnamed edge sets), most common first; null without the tileset graphics.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="findkind">
+  <h3><a class="anchor-name" href="#findkind">FindKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/query/#findkind">FindKind</a> = <span class="s">&quot;units&quot;</span> | <span class="s">&quot;locations&quot;</span> | <span class="s">&quot;sprites&quot;</span> | <span class="s">&quot;doodads&quot;</span> | <span class="s">&quot;strings&quot;</span> | <span class="s">&quot;triggers&quot;</span> | <span class="s">&quot;briefing&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="findresult">
+  <h3><a class="anchor-name" href="#findresult">FindResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#findresult">FindResult</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>kind: <a class="t" href="/api/query/#findkind">FindKind</a></code></th><td></td></tr>
+<tr><th><code>index: <span class="k">number</span></code></th><td><p>Index into the list the kind names (unit / sprite / trigger index, location slot, string index).</p></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>detail: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>x?: <span class="k">number</span></code></th><td><p>Tile coordinates to centre on, where the thing has a position.</p></td></tr>
+<tr><th><code>y?: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="findoptions">
+  <h3><a class="anchor-name" href="#findoptions">FindOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#findoptions">FindOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>kind: <a class="t" href="/api/query/#findkind">FindKind</a></code></th><td></td></tr>
+<tr><th><code>query: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>matchCase?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>spriteName?: (r: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a>) =&gt; <span class="k">string</span></code></th><td><p>Display name of a sprite record (needs the game data); the id when omitted.</p></td></tr>
+<tr><th><code>doodadName?: (r: <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a>) =&gt; <span class="k">string</span></code></th><td><p>Display name of a doodad record (needs the tileset); the id when omitted.</p></td></tr>
+<tr><th><code>limit?: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="stringusagekind">
+  <h3><a class="anchor-name" href="#stringusagekind">StringUsageKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/query/#stringusagekind">StringUsageKind</a> = <span class="s">&quot;name&quot;</span> | <span class="s">&quot;description&quot;</span> | <span class="s">&quot;force&quot;</span> | <span class="s">&quot;location&quot;</span> | <span class="s">&quot;unit&quot;</span> | <span class="s">&quot;switch&quot;</span> | <span class="s">&quot;trigger&quot;</span> | <span class="s">&quot;briefing&quot;</span> | <span class="s">&quot;wav&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="stringusage">
+  <h3><a class="anchor-name" href="#stringusage">StringUsage</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#stringusage">StringUsage</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>kind: <a class="t" href="/api/query/#stringusagekind">StringUsageKind</a></code></th><td></td></tr>
+<tr><th><code>ref: <span class="k">number</span></code></th><td><p>What the kind indexes: force / slot / unit id / switch / trigger index / WAV slot; 0 for name and description.</p></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="placementproblem">
+  <h3><a class="anchor-name" href="#placementproblem">PlacementProblem</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/query/#placementproblem">PlacementProblem</a> = <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;collision&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="placementverdict">
+  <h3><a class="anchor-name" href="#placementverdict">PlacementVerdict</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#placementverdict">PlacementVerdict</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>problem: <a class="t" href="/api/query/#placementproblem">PlacementProblem</a> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>blocker: <span class="k">number</span></code></th><td><p>The unit in the way, for collision problems.</p></td></tr>
+<tr><th><code>reason: <span class="k">string</span> | <span class="k">null</span></code></th><td><p>The problem as a sentence fragment — &quot;the ground is unwalkable&quot;, &quot;it overlaps Terran Marine&quot; — null when it fits.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="doodadverdict">
+  <h3><a class="anchor-name" href="#doodadverdict">DoodadVerdict</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#doodadverdict">DoodadVerdict</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>ok: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>outOfBounds: <span class="k">boolean</span></code></th><td><p>The footprint leaves the map (never allowed).</p></td></tr>
+<tr><th><code>bad: <span class="k">number</span>[]</code></th><td><p>Cell indices (row-major) whose ground fails the check, for the ghost to mark red.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="startlocation">
+  <h3><a class="anchor-name" href="#startlocation">StartLocation</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/query/#startlocation">StartLocation</a></code></pre>
+  <p>A start location on the map: the record&#39;s index, its owner and where it sits.</p>
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>owner: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>x: <span class="k">number</span></code></th><td><p>Map pixels.</p></td></tr>
+<tr><th><code>y: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tx: <span class="k">number</span></code></th><td><p>The tile it is centred on.</p></td></tr>
+<tr><th><code>ty: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-walkability"><b>Walkability</b><span>a read-only overlay drawn over the map</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-melee-wizard"><b>Melee Wizard</b><span>placing units with the editor&#39;s own placement checks</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#unitat">unitAt</a></li>
+<li><a href="#unitsin">unitsIn</a></li>
+<li><a href="#unitsof">unitsOf</a></li>
+<li><a href="#spriteat">spriteAt</a></li>
+<li><a href="#spritesin">spritesIn</a></li>
+<li><a href="#doodadat">doodadAt</a></li>
+<li><a href="#locationat">locationAt</a></li>
+<li><a href="#locationsin">locationsIn</a></li>
+<li><a href="#startlocations">startLocations</a></li>
+<li><a href="#placement">placement</a></li>
+<li><a href="#doodadplacement">doodadPlacement</a></li>
+<li><a href="#fogat">fogAt</a></li>
+<li><a href="#strings">strings</a></li>
+<li><a href="#validate">validate</a></li>
+<li><a href="#statistics">statistics</a></li>
+<li><a href="#find">find</a></li>
+<li><a href="#stringusage">stringUsage</a></li>
+<li><a href="#unusedstrings">unusedStrings</a></li>
+<li><a href="#issuelevel">IssueLevel</a></li>
+<li><a href="#issuetarget">IssueTarget</a></li>
+<li><a href="#issue">Issue</a></li>
+<li><a href="#playerstatistics">PlayerStatistics</a></li>
+<li><a href="#mapstatistics">MapStatistics</a></li>
+<li><a href="#findkind">FindKind</a></li>
+<li><a href="#findresult">FindResult</a></li>
+<li><a href="#findoptions">FindOptions</a></li>
+<li><a href="#stringusagekind">StringUsageKind</a></li>
+<li><a href="#stringusage">StringUsage</a></li>
+<li><a href="#placementproblem">PlacementProblem</a></li>
+<li><a href="#placementverdict">PlacementVerdict</a></li>
+<li><a href="#doodadverdict">DoodadVerdict</a></li>
+<li><a href="#startlocation">StartLocation</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

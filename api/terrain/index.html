@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.terrain — scmJS documentation</title>
+<meta name="description" content="Reading the terrain: the tileset&#39;s paintable types, the ISOM lattice, flood regions,
+blend candidates and the symmetry mode. Painting goes through `document.edit`.">
+<meta property="og:title" content="api.terrain — scmJS documentation">
+<meta property="og:description" content="Reading the terrain: the tileset&#39;s paintable types, the ISOM lattice, flood regions,
+blend candidates and the symmetry mode. Painting goes through `document.edit`.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="here" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.terrain</h1>
+<p class="lede">TerrainApi</p>
+<p>Reading the terrain: the tileset&#39;s paintable types, the ISOM lattice, flood regions,
+blend candidates and the symmetry mode. Painting goes through <code>document.edit</code>.</p>
+
+<ul class="chips"><li><a href="#types">types</a></li><li><a href="#isomtypes">isomTypes</a></li><li><a href="#hasisom">hasIsom</a></li><li><a href="#checkisom">checkIsom</a></li><li><a href="#tileinfo">tileInfo</a></li><li><a href="#terrainat">terrainAt</a></li><li><a href="#color">color</a></li><li><a href="#terraincolor">terrainColor</a></li><li><a href="#heightof">heightOf</a></li><li><a href="#diamondat">diamondAt</a></li><li><a href="#isdiamond">isDiamond</a></li><li><a href="#diamondsin">diamondsIn</a></li><li><a href="#floodregion">floodRegion</a></li><li><a href="#blendcandidates">blendCandidates</a></li><li><a href="#flatgroupof">flatGroupOf</a></li><li><a href="#symmetry">symmetry</a></li><li><a href="#setsymmetry">setSymmetry</a></li><li><a href="#symmetryavailable">symmetryAvailable</a></li><li><a href="#mirror">mirror</a></li><li><a href="#mirrorpoint">mirrorPoint</a></li><li><a href="#active">active</a></li><li><a href="#setactive">setActive</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="types">
+  <h3><a class="anchor-name" href="#types">types</a></h3>
+  <pre class="code"><code>types(): <a class="t" href="/api/terrain/#terraintype">TerrainType</a>[];</code></pre>
+  <p>Paintable flat terrains of the open map&#39;s tileset (empty without the graphics).</p>
+  
+  
+</div>
+<div class="member" id="isomtypes">
+  <h3><a class="anchor-name" href="#isomtypes">isomTypes</a></h3>
+  <pre class="code"><code>isomTypes(): <span class="k">number</span>[];</code></pre>
+  <p>Terrain ids the isometric brush can paint on this tileset.</p>
+  
+  
+</div>
+<div class="member" id="hasisom">
+  <h3><a class="anchor-name" href="#hasisom">hasIsom</a></h3>
+  <pre class="code"><code>hasIsom(): <span class="k">boolean</span>;</code></pre>
+  <p>Whether the open map carries an ISOM section the isometric brush can work on.</p>
+  
+  
+</div>
+<div class="member" id="checkisom">
+  <h3><a class="anchor-name" href="#checkisom">checkIsom</a></h3>
+  <pre class="code"><code>checkIsom(): <span class="k">Promise</span>&lt;<a class="t" href="/api/terrain/#isomreport">IsomReport</a> | <span class="k">null</span>&gt;;</code></pre>
+  <p>How well the ISOM describes the tiles, and what rebuilding it would do about that:
+<code>rects</code> measured, <code>mismatched</code> among them, <code>inherent</code> of those a rebuild would leave
+behind (terrain no lattice describes — hand-placed tiles, blends, another editor&#39;s
+ground), and <code>stale</code> when a rebuild would bring more than the palette&#39;s threshold
+back in step. Null when the map has no ISOM (<code>hasIsom</code>) or no map is open. Waits for
+the tileset graphics to load and rejects when they are missing.</p>
+<p>Offer <code>tx.rebuildIsom</code> on <code>stale</code>, not on <code>mismatched</code>: the two measure opposite
+directions, a rebuild converges in one pass, and <code>inherent</code> never goes away.</p>
+  <pre class="code"><code><span class="k">const</span> r = <span class="k">await</span> api.terrain.checkIsom();
+<span class="k">if</span> (r?.stale) <span class="k">await</span> api.document.edit(<span class="s">&quot;Rebuild ISOM&quot;</span>, (tx) =&gt; { tx.rebuildIsom(); });</code></pre>
+  
+</div>
+<div class="member" id="tileinfo">
+  <h3><a class="anchor-name" href="#tileinfo">tileInfo</a></h3>
+  <pre class="code"><code>tileInfo(id: <span class="k">number</span>): <a class="t" href="/api/terrain/#tileinfo">TileInfo</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="terrainat">
+  <h3><a class="anchor-name" href="#terrainat">terrainAt</a></h3>
+  <pre class="code"><code>terrainAt(tx: <span class="k">number</span>, ty: <span class="k">number</span>): <span class="k">number</span> | <span class="k">null</span>;</code></pre>
+  <p>The terrain a tile belongs to, as the id <code>types()</code> lists (a flat pair&#39;s CV5 index):
+the tile&#39;s own group when it is flat ground, else — under a cliff, a shore or a
+doodad — what the ISOM lattice says the diamond there is. Null off the map, without
+the tileset graphics, or when neither tells.</p>
+  
+  
+</div>
+<div class="member" id="color">
+  <h3><a class="anchor-name" href="#color">color</a></h3>
+  <pre class="code"><code>color(tileId: <span class="k">number</span>): <span class="k">number</span> | <span class="k">null</span>;</code></pre>
+  <p>The atlas average of a tile, packed <code>0xRRGGBB</code>, or null without graphics.</p>
+  
+  
+</div>
+<div class="member" id="terraincolor">
+  <h3><a class="anchor-name" href="#terraincolor">terrainColor</a></h3>
+  <pre class="code"><code>terrainColor(terrainId: <span class="k">number</span>): <span class="k">number</span> | <span class="k">null</span>;</code></pre>
+  <p>The mean colour of a terrain&#39;s common flat variations, packed <code>0xRRGGBB</code>.</p>
+  
+  
+</div>
+<div class="member" id="heightof">
+  <h3><a class="anchor-name" href="#heightof">heightOf</a></h3>
+  <pre class="code"><code>heightOf(terrainId: <span class="k">number</span>): <span class="n">0</span> | <span class="n">1</span> | <span class="n">2</span> | <span class="k">null</span>;</code></pre>
+  <p>A flat terrain&#39;s height level (0 low, 1 high, 2 higher), or null when it is not one.</p>
+  
+  
+</div>
+<div class="member" id="diamondat">
+  <h3><a class="anchor-name" href="#diamondat">diamondAt</a></h3>
+  <pre class="code"><code>diamondAt(px: <span class="k">number</span>, py: <span class="k">number</span>): <a class="t" href="/api/types/#diamond">Diamond</a>;</code></pre>
+  <p>The lattice diamond under a map pixel.</p>
+  
+  
+</div>
+<div class="member" id="isdiamond">
+  <h3><a class="anchor-name" href="#isdiamond">isDiamond</a></h3>
+  <pre class="code"><code>isDiamond(d: <a class="t" href="/api/types/#diamond">Diamond</a>): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="diamondsin">
+  <h3><a class="anchor-name" href="#diamondsin">diamondsIn</a></h3>
+  <pre class="code"><code>diamondsIn(rect: <a class="t" href="/api/types/#rect">Rect</a>): <a class="t" href="/api/types/#diamond">Diamond</a>[];</code></pre>
+  <p>Every in-bounds diamond whose centre tile lies in <code>rect</code>, row by row.</p>
+  
+  
+</div>
+<div class="member" id="floodregion">
+  <h3><a class="anchor-name" href="#floodregion">floodRegion</a></h3>
+  <pre class="code"><code>floodRegion(x: <span class="k">number</span>, y: <span class="k">number</span>, match?: <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;tile&quot;</span>): <span class="k">number</span>[];</code></pre>
+  <p>The 4-connected area around a tile of the same terrain type (<code>&quot;terrain&quot;</code>, the Rect fill&#39;s reading) or the same exact tile (<code>&quot;tile&quot;</code>), as flat indices.</p>
+  
+  
+</div>
+<div class="member" id="blendcandidates">
+  <h3><a class="anchor-name" href="#blendcandidates">blendCandidates</a></h3>
+  <pre class="code"><code>blendCandidates(anchorTileId: <span class="k">number</span>, side: <a class="t" href="/api/types/#side">Side</a>, options?: <span class="k">Partial</span>&lt;<a class="t" href="/api/terrain/#blendoptions">BlendOptions</a>&gt;): <a class="t" href="/api/terrain/#blendcandidate">BlendCandidate</a>[];</code></pre>
+  <p>The Blend brush&#39;s list: drawable tiles whose opposite edge meets the anchor tile&#39;s
+<code>side</code>, nearest first, with the pixel distance (<code>0..255</code>, designed pairs 0.2–8).
+Empty without the graphics.</p>
+  
+  
+</div>
+<div class="member" id="flatgroupof">
+  <h3><a class="anchor-name" href="#flatgroupof">flatGroupOf</a></h3>
+  <pre class="code"><code>flatGroupOf(terrainId: <span class="k">number</span>): <span class="k">number</span>;</code></pre>
+  <p>The Rect brush&#39;s terrain, in the tileset&#39;s own terms: the even CV5 group of a flat pair, or -1.</p>
+  
+  
+</div>
+<div class="member" id="symmetry">
+  <h3><a class="anchor-name" href="#symmetry">symmetry</a></h3>
+  <pre class="code"><code>symmetry(): <a class="t" href="/api/terrain/#symmetrymode">SymmetryMode</a>;</code></pre>
+  <p>Tools ▸ Symmetry…: the mode the brushes paint and the palettes place under.</p>
+  
+  
+</div>
+<div class="member" id="setsymmetry">
+  <h3><a class="anchor-name" href="#setsymmetry">setSymmetry</a></h3>
+  <pre class="code"><code>setSymmetry(mode: <a class="t" href="/api/terrain/#symmetrymode">SymmetryMode</a>): <span class="k">void</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="symmetryavailable">
+  <h3><a class="anchor-name" href="#symmetryavailable">symmetryAvailable</a></h3>
+  <pre class="code"><code>symmetryAvailable(mode: <a class="t" href="/api/terrain/#symmetrymode">SymmetryMode</a>): <span class="k">boolean</span>;</code></pre>
+  <p>Whether a mode can run on the open map (the rotations and diagonals need a square one).</p>
+  
+  
+</div>
+<div class="member" id="mirror">
+  <h3><a class="anchor-name" href="#mirror">mirror</a></h3>
+  <pre class="code"><code>mirror(cells: <a class="t" href="/api/types/#rect">Rect</a> | Iterable&lt;<span class="k">number</span>&gt;): <span class="k">number</span>[];</code></pre>
+  <p>Flat indices of <code>cells</code> and their images under the symmetry mode, each once.</p>
+  
+  
+</div>
+<div class="member" id="mirrorpoint">
+  <h3><a class="anchor-name" href="#mirrorpoint">mirrorPoint</a></h3>
+  <pre class="code"><code>mirrorPoint(px: <span class="k">number</span>, py: <span class="k">number</span>): { x: <span class="k">number</span>; y: <span class="k">number</span>; }[];</code></pre>
+  <p>A map pixel and its images under the symmetry mode, the original first.</p>
+  
+  
+</div>
+<div class="member" id="active">
+  <h3><a class="anchor-name" href="#active">active</a></h3>
+  <pre class="code"><code>active(): <a class="t" href="/api/terrain/#activebrush">ActiveBrush</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="setactive">
+  <h3><a class="anchor-name" href="#setactive">setActive</a></h3>
+  <pre class="code"><code>setActive(brush: <span class="k">Partial</span>&lt;<a class="t" href="/api/terrain/#activebrush">ActiveBrush</a>&gt;): <span class="k">void</span>;</code></pre>
+  
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="terraintype">
+  <h3><a class="anchor-name" href="#terraintype">TerrainType</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#terraintype">TerrainType</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>group: <span class="k">number</span></code></th><td><p>Even CV5 group of the flat pair; odd columns use <code>group + 1</code>.</p></td></tr>
+<tr><th><code>height: <span class="n">0</span> | <span class="n">1</span> | <span class="n">2</span></code></th><td></td></tr>
+<tr><th><code>buildable: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="groupkind">
+  <h3><a class="anchor-name" href="#groupkind">GroupKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/terrain/#groupkind">GroupKind</a> = <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;edge&quot;</span> | <span class="s">&quot;doodad&quot;</span> | <span class="s">&quot;other&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="tileinfo">
+  <h3><a class="anchor-name" href="#tileinfo">TileInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#tileinfo">TileInfo</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>group: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>slot: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>megatile: <span class="k">number</span></code></th><td><p>VX4 megatile, or -1 when the id points at nothing drawable.</p></td></tr>
+<tr><th><code>kind: <a class="t" href="/api/terrain/#groupkind">GroupKind</a></code></th><td></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="n">0</span> | <span class="n">1</span> | <span class="n">2</span></code></th><td></td></tr>
+<tr><th><code>buildable: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>walkable: <span class="k">number</span></code></th><td><p>Walkable minitiles out of 16, from VF4.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="isomreport">
+  <h3><a class="anchor-name" href="#isomreport">IsomReport</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#isomreport">IsomReport</a></code></pre>
+  <p><code>checkIsom</code> with what a rebuild would do about it — the verdict the palette, Check Map
+and the Repair plugin draw from.</p>
+<p>The two numbers measure opposite directions and are not inverses: <code>mismatched</code> is the
+lattice failing to reproduce the tiles, while a rebuild votes a lattice out of the
+tiles. A rebuild converges in one pass and leaves <code>inherent</code> behind for good, because
+hand-placed tiles, blends and another editor&#39;s ground are not terrain any lattice
+describes. Reporting <code>mismatched</code> alone therefore recommended a repair that could not
+move the number, on every map with terrain like that.</p>
+  <table class="fields"><tbody><tr><th><code>inherent: <span class="k">number</span></code></th><td><p>Of <code>mismatched</code>, the rects a rebuild would leave: terrain no lattice describes.</p></td></tr>
+<tr><th><code>stale: <span class="k">boolean</span></code></th><td><p>A rebuild would bring more than <code>STALE_ISOM_SHARE</code> of the rects back in step.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="symmetrymode">
+  <h3><a class="anchor-name" href="#symmetrymode">SymmetryMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/terrain/#symmetrymode">SymmetryMode</a> = <span class="s">&quot;none&quot;</span> | <span class="s">&quot;h&quot;</span> | <span class="s">&quot;v&quot;</span> | <span class="s">&quot;hv&quot;</span> | <span class="s">&quot;rot180&quot;</span> | <span class="s">&quot;rot90&quot;</span> | <span class="s">&quot;diag&quot;</span> | <span class="s">&quot;adiag&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="blendcandidate">
+  <h3><a class="anchor-name" href="#blendcandidate">BlendCandidate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#blendcandidate">BlendCandidate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td><p>MTXM tile id to place.</p></td></tr>
+<tr><th><code>megatile: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>distance: <span class="k">number</span></code></th><td><p><code>edgeDistance</code> between the anchor&#39;s side and this tile&#39;s opposite side.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="blendoptions">
+  <h3><a class="anchor-name" href="#blendoptions">BlendOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#blendoptions">BlendOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>maxDistance: <span class="k">number</span></code></th><td><p>Largest distance still listed.</p></td></tr>
+<tr><th><code>limit: <span class="k">number</span></code></th><td><p>Most candidates listed per side.</p></td></tr>
+<tr><th><code>include?: (id: <span class="k">number</span>) =&gt; <span class="k">boolean</span></code></th><td><p>Optional filter over tile ids (the palette&#39;s group-kind dropdown).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="activebrush">
+  <h3><a class="anchor-name" href="#activebrush">ActiveBrush</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/terrain/#activebrush">ActiveBrush</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>mode: <a class="t" href="/api/types/#terrainmode">TerrainMode</a></code></th><td></td></tr>
+<tr><th><code>terrain: <span class="k">number</span></code></th><td><p>The Rect / isometric brush&#39;s terrain id.</p></td></tr>
+<tr><th><code>tile: <span class="k">number</span></code></th><td><p>The Tile brush&#39;s MTXM id.</p></td></tr>
+<tr><th><code>brushSize: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>variation: <span class="k">number</span></code></th><td><p>The Rect brush&#39;s variation slot, or -1 for a random one per pair.</p></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-image-to-terrain"><b>Terrain from Image</b><span>an image turned into terrain, one transaction</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#types">types</a></li>
+<li><a href="#isomtypes">isomTypes</a></li>
+<li><a href="#hasisom">hasIsom</a></li>
+<li><a href="#checkisom">checkIsom</a></li>
+<li><a href="#tileinfo">tileInfo</a></li>
+<li><a href="#terrainat">terrainAt</a></li>
+<li><a href="#color">color</a></li>
+<li><a href="#terraincolor">terrainColor</a></li>
+<li><a href="#heightof">heightOf</a></li>
+<li><a href="#diamondat">diamondAt</a></li>
+<li><a href="#isdiamond">isDiamond</a></li>
+<li><a href="#diamondsin">diamondsIn</a></li>
+<li><a href="#floodregion">floodRegion</a></li>
+<li><a href="#blendcandidates">blendCandidates</a></li>
+<li><a href="#flatgroupof">flatGroupOf</a></li>
+<li><a href="#symmetry">symmetry</a></li>
+<li><a href="#setsymmetry">setSymmetry</a></li>
+<li><a href="#symmetryavailable">symmetryAvailable</a></li>
+<li><a href="#mirror">mirror</a></li>
+<li><a href="#mirrorpoint">mirrorPoint</a></li>
+<li><a href="#active">active</a></li>
+<li><a href="#setactive">setActive</a></li>
+<li><a href="#terraintype">TerrainType</a></li>
+<li><a href="#groupkind">GroupKind</a></li>
+<li><a href="#tileinfo">TileInfo</a></li>
+<li><a href="#isomreport">IsomReport</a></li>
+<li><a href="#symmetrymode">SymmetryMode</a></li>
+<li><a href="#blendcandidate">BlendCandidate</a></li>
+<li><a href="#blendoptions">BlendOptions</a></li>
+<li><a href="#activebrush">ActiveBrush</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

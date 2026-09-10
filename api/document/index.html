@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.document — scmJS documentation</title>
+<meta name="description" content="The open map: what it says, and the three ways of writing to it — `edit` (terrain and
+objects, one undo entry), `update` (the tables every dialog&#39;s OK writes) and
+`sections` (raw bytes). Opening, saving, exporting and closing are here too.">
+<meta property="og:title" content="api.document — scmJS documentation">
+<meta property="og:description" content="The open map: what it says, and the three ways of writing to it — `edit` (terrain and
+objects, one undo entry), `update` (the tables every dialog&#39;s OK writes) and
+`sections` (raw bytes). Opening, saving, exporting and closing are here too.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="here" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.document</h1>
+<p class="lede">DocumentApi</p>
+<p>The open map: what it says, and the three ways of writing to it — <code>edit</code> (terrain and
+objects, one undo entry), <code>update</code> (the tables every dialog&#39;s OK writes) and
+<code>sections</code> (raw bytes). Opening, saving, exporting and closing are here too.</p>
+
+<ul class="chips"><li><a href="#isopen">isOpen</a></li><li><a href="#info">info</a></li><li><a href="#scenario">scenario</a></li><li><a href="#edit">edit</a></li><li><a href="#update">update</a></li><li><a href="#undo">undo</a></li><li><a href="#redo">redo</a></li><li><a href="#history">history</a></li><li><a href="#id">id</a></li><li><a href="#list">list</a></li><li><a href="#activate">activate</a></li><li><a href="#open">open</a></li><li><a href="#create">create</a></li><li><a href="#export">export</a></li><li><a href="#save">save</a></li><li><a href="#saveas">saveAs</a></li><li><a href="#close">close</a></li><li><a href="#renderimage">renderImage</a></li><li><a href="#resize">resize</a></li><li><a href="#changetileset">changeTileset</a></li><li><a href="#extras">extras</a></li><li><a href="#sections">sections</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="isopen">
+  <h3><a class="anchor-name" href="#isopen">isOpen</a></h3>
+  <pre class="code"><code>isOpen(): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="info">
+  <h3><a class="anchor-name" href="#info">info</a></h3>
+  <pre class="code"><code>info(): <a class="t" href="/api/document/#documentinfo">DocumentInfo</a> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="scenario">
+  <h3><a class="anchor-name" href="#scenario">scenario</a></h3>
+  <pre class="code"><code>scenario(): <a class="t" href="/api/types/#scenario">Scenario</a> | <span class="k">null</span>;</code></pre>
+  <p>The live scenario, for reading. Writing to it directly bypasses undo, dirty
+tracking and repaints — use <code>edit</code>.</p>
+  
+  
+</div>
+<div class="member" id="edit">
+  <h3><a class="anchor-name" href="#edit">edit</a></h3>
+  <pre class="code"><code>edit&lt;R&gt;(label: <span class="k">string</span>, build: (tx: <a class="t" href="/api/document/#edittransaction">EditTransaction</a>) =&gt; <a class="t" href="/api/document/#sync">Sync</a>&lt;R&gt;): <a class="t" href="/api/document/#editresult">EditResult</a>;</code></pre>
+  <p>Run <code>build</code> against a transaction and record what it did as one undo entry.
+Operations apply as they are called, so later ones see earlier ones&#39; results.
+Returns an all-zero result with <code>changed: false</code> when no map is open.</p>
+<p><code>build</code> is synchronous — see <code>Sync</code>. Await what you need (graphics, a pick, a
+fetch) before the call, then write in one go. The transaction is closed when
+<code>build</code> returns; a call on it after that throws.</p>
+<p>A builder that throws is rolled back: what it had applied is taken off the map
+again, nothing reaches the history or the modified flag, and the error reaches you.</p>
+  <pre class="code"><code><span class="c">// One undo entry called &quot;Fill&quot;, however many operations it takes.</span>
+<span class="k">const</span> result = api.document.edit(<span class="s">&quot;Fill&quot;</span>, (tx) =&gt; {
+  tx.stampTerrain({ x0: <span class="n">0</span>, y0: <span class="n">0</span>, x1: <span class="n">8</span>, y1: <span class="n">8</span> }, terrainId);
+  tx.placeUnit(api.consts.unit.startLocation, <span class="n">0</span>, <span class="n">4</span> * api.consts.tile, <span class="n">4</span> * api.consts.tile);
+});
+api.ui.status(<span class="s">`${result.tiles} tiles, ${result.units} units`</span>);</code></pre>
+  
+</div>
+<div class="member" id="update">
+  <h3><a class="anchor-name" href="#update">update</a></h3>
+  <pre class="code"><code>update&lt;R&gt;(label: <span class="k">string</span>, build: (tx: <a class="t" href="/api/document/#updatetransaction">UpdateTransaction</a>) =&gt; <a class="t" href="/api/document/#sync">Sync</a>&lt;R&gt;): <a class="t" href="/api/document/#updateresult">UpdateResult</a>;</code></pre>
+  <p>The second kind of write: the tables and settings that live outside the undo model
+— triggers, the string table, switch names, the scenario&#39;s own properties — as one
+transaction, the way a settings dialog&#39;s OK applies its whole form at once.
+Operations apply as they are called; the commit marks the map modified and bumps
+what the chrome reads. There is no undo entry: keep your own if you need one.
+<code>build</code> is synchronous, as <code>edit</code>&#39;s is, and closed when it returns.</p>
+<p>There is nothing to roll an update back with, so a builder that throws leaves what
+it wrote: the sections it touched are committed — the map is modified and the
+chrome re-reads — and the error reaches you.</p>
+  <pre class="code"><code>api.document.update(<span class="s">&quot;Rename&quot;</span>, (tx) =&gt; {
+  tx.properties({ name: <span class="s">&quot;Lost Temple&quot;</span>, description: <span class="s">&quot;Four players.&quot;</span> });
+});</code></pre>
+  
+</div>
+<div class="member" id="undo">
+  <h3><a class="anchor-name" href="#undo">undo</a></h3>
+  <pre class="code"><code>undo(): <span class="k">string</span> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="redo">
+  <h3><a class="anchor-name" href="#redo">redo</a></h3>
+  <pre class="code"><code>redo(): <span class="k">string</span> | <span class="k">null</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="history">
+  <h3><a class="anchor-name" href="#history">history</a></h3>
+  <pre class="code"><code>history(): <a class="t" href="/api/document/#documenthistory">DocumentHistory</a>;</code></pre>
+  <p>The undo and redo stacks&#39; tops — the labels the Edit menu shows — and their depths, without moving anything.</p>
+  
+  
+</div>
+<div class="member" id="id">
+  <h3><a class="anchor-name" href="#id">id</a></h3>
+  <pre class="code"><code>id(): <span class="k">number</span> | <span class="k">null</span>;</code></pre>
+  <p>The id of the map in front — the one <code>info()</code>, <code>scenario()</code> and every write are
+about — or null with no map. Stable for the map&#39;s life, so a plugin can key what it
+keeps per map on it. (Null too for a scenario a test put in place without the editor.)</p>
+  
+  
+</div>
+<div class="member" id="list">
+  <h3><a class="anchor-name" href="#list">list</a></h3>
+  <pre class="code"><code>list(): <a class="t" href="/api/document/#opendocumentinfo">OpenDocumentInfo</a>[];</code></pre>
+  <p>Every open map, in the order the editor lists them, the one in front marked <code>active</code>.
+Empty with no map. The list changes only through <code>open</code>, <code>create</code>, <code>activate</code> and
+<code>close</code> (by any plugin or the user), each of which fires the <code>&quot;document&quot;</code> event.</p>
+  
+  
+</div>
+<div class="member" id="activate">
+  <h3><a class="anchor-name" href="#activate">activate</a></h3>
+  <pre class="code"><code>activate(id: <span class="k">number</span>): <span class="k">boolean</span>;</code></pre>
+  <p>Bring an open map to the front, as clicking its tab does: its history, selections and
+view come back as they were left, and the <code>&quot;document&quot;</code> event fires with reason
+<code>&quot;switch&quot;</code>. Nothing is re-read. True once it is in front (at once, when it already
+was); false for an id that is not open. Call it for something the user asked for —
+the map changing under someone mid-stroke is not a thing a plugin should do on its own.</p>
+  
+  
+</div>
+<div class="member" id="open">
+  <h3><a class="anchor-name" href="#open">open</a></h3>
+  <pre class="code"><code>open(file: File | Blob | Uint8Array, fileName?: <span class="k">string</span>, options?: <a class="t" href="/api/document/#opendocumentoptions">OpenDocumentOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>Open a map file (<code>.scx</code> / <code>.scm</code> / <code>.chk</code>), the way File ▸ Open does: beside the open
+map or in place of it as <code>options.into</code> (or, omitted, the editor&#39;s preference) says.
+In place of a map with unsaved changes, when Preferences say to ask, the Close
+Scenario dialog comes first and the user may cancel. Resolves true once the file is
+the map in front, false when the user kept the current map or the file could not be
+read (the status bar says why).</p>
+  
+  
+</div>
+<div class="member" id="create">
+  <h3><a class="anchor-name" href="#create">create</a></h3>
+  <pre class="code"><code>create(options: <a class="t" href="/api/document/#newdocumentoptions">NewDocumentOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>A blank map the way File ▸ New makes one: flat ground of the tileset&#39;s default terrain
+(or <code>terrainId</code>), an ISOM lattice to match, every section a fresh map needs. Beside
+the open map or in place of it as <code>open</code> decides, through the same unsaved-changes
+gate. Resolves true once the new map is in front, false when the user kept the
+current one.</p>
+  
+  
+</div>
+<div class="member" id="export">
+  <h3><a class="anchor-name" href="#export">export</a></h3>
+  <pre class="code"><code><span class="k">export</span>(options?: <a class="t" href="/api/document/#exportoptions">ExportOptions</a>): <span class="k">Promise</span>&lt;File | <span class="k">null</span>&gt;;</code></pre>
+  <p>The open map as a file, as Save would write it — the remembered save options, the
+archive extras included — unless <code>saveOptions</code> says otherwise. Null when no map is open.</p>
+  
+  
+</div>
+<div class="member" id="save">
+  <h3><a class="anchor-name" href="#save">save</a></h3>
+  <pre class="code"><code>save(options?: <a class="t" href="/api/document/#savedocumentoptions">SaveDocumentOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>File ▸ Save: write the map back where it came from with the options last confirmed
+for it — into the file when the browser gave a handle, else through the browser&#39;s
+save dialog or as a download; a map with no file yet goes through the Save dialog.
+Resolves true once written, false when the user dismissed a dialog or the write failed
+(the status bar and a toast say so).</p>
+  
+  
+</div>
+<div class="member" id="saveas">
+  <h3><a class="anchor-name" href="#saveas">saveAs</a></h3>
+  <pre class="code"><code>saveAs(options?: <a class="t" href="/api/document/#savedocumentoptions">SaveDocumentOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>File ▸ Save As (or Save Copy As with <code>copy</code>): the Save dialog, resolving as <code>save</code> does.</p>
+  
+  
+</div>
+<div class="member" id="close">
+  <h3><a class="anchor-name" href="#close">close</a></h3>
+  <pre class="code"><code>close(id?: <span class="k">number</span>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>File ▸ Close: the map in front, or the open map <code>id</code> names, through the same
+unsaved-changes gate as <code>open</code> (a map behind is brought to the front first, so the
+question is about what the user sees). Resolves true once the map is closed — another
+open map is then in front, or <code>isOpen()</code> is false — false when the user kept it or no
+map has that id.</p>
+  
+  
+</div>
+<div class="member" id="renderimage">
+  <h3><a class="anchor-name" href="#renderimage">renderImage</a></h3>
+  <pre class="code"><code>renderImage(options?: <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#mapimageoptions">MapImageOptions</a>&gt;): <span class="k">Promise</span>&lt;Blob | <span class="k">null</span>&gt;;</code></pre>
+  <p>A picture of the map as File ▸ Export ▸ Image draws it, as a PNG. <code>pixelsPerTile</code>
+is the one dial (32 is the game&#39;s art 1:1, 1 is a minimap); the other options
+default as the dialog&#39;s do. Needs the tileset graphics — without them, or without
+a map, null.</p>
+  
+  
+</div>
+<div class="member" id="resize">
+  <h3><a class="anchor-name" href="#resize">resize</a></h3>
+  <pre class="code"><code>resize(options: <a class="t" href="/api/document/#resizedocumentoptions">ResizeDocumentOptions</a>): <a class="t" href="/api/document/#resizeresult">ResizeResult</a> | <span class="k">null</span>;</code></pre>
+  <p>Scenario ▸ Resize / Crop Map: a transaction outside the undo model that drops both
+history stacks (as the dialog does). Content keeps its place relative to <code>anchor</code>
+(a 3 × 3 grid, row-major, 4 = centre, the default); the new ground is <code>terrainId</code>
+(the tileset&#39;s default when omitted); objects outside the new bounds are dropped,
+locations clamped unless <code>clampLocations</code> is false. Null with no map.</p>
+  
+  
+</div>
+<div class="member" id="changetileset">
+  <h3><a class="anchor-name" href="#changetileset">changeTileset</a></h3>
+  <pre class="code"><code>changeTileset(options: <a class="t" href="/api/document/#changetilesetoptions">ChangeTilesetOptions</a>): <span class="k">Promise</span>&lt;<a class="t" href="/api/document/#changetilesetresult">ChangeTilesetResult</a> | <span class="k">null</span>&gt;;</code></pre>
+  <p>Scenario ▸ Map Properties ▸ Tileset: change ERA and lay the terrain again with the
+new tileset&#39;s terrain (tile numbers do not carry across tilesets; the doodads go with
+them, everything else stays). Waits for the new graphics so the fill uses real tiles.
+Like <code>resize</code>, a transaction outside the undo model. Null with no map.</p>
+  
+  
+</div>
+<div class="member" id="extras">
+  <h3><a class="anchor-name" href="#extras">extras</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> extras: <a class="t" href="/api/document/#extrasapi">ExtrasApi</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="sections">
+  <h3><a class="anchor-name" href="#sections">sections</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> sections: <a class="t" href="/api/document/#sectionsapi">SectionsApi</a>;</code></pre>
+  
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="combinemode">
+  <h3><a class="anchor-name" href="#combinemode">CombineMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#combinemode">CombineMode</a> = 
+<span class="c">/** Zeroed fixed buffer, each occurrence copied over the front in file order. */</span>
+<span class="s">&quot;overlay&quot;</span>
+<span class="c">/** Every occurrence&#39;s records are kept, in file order. */</span>
+ | <span class="s">&quot;append&quot;</span>
+<span class="c">/** Only the last occurrence is used. */</span>
+ | <span class="s">&quot;last&quot;</span>
+<span class="c">/** Only the first occurrence is used. */</span>
+ | <span class="s">&quot;first&quot;</span>;</code></pre>
+  <p>How the game combines repeated occurrences of a section. Which mode applies is a
+per-section fact (see sections/registry.ts), not something the container can infer.</p>
+  
+  
+</div>
+<div class="type" id="terrainpick">
+  <h3><a class="anchor-name" href="#terrainpick">TerrainPick</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#terrainpick">TerrainPick</a> = {
+	kind: <span class="s">&quot;terrain&quot;</span>;
+	id: <span class="k">number</span>;
+	variation?: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;tile&quot;</span>;
+	id: <span class="k">number</span>;
+};</code></pre>
+  <p>What Replace Terrain matches or writes: a flat terrain type (by ISOM id) or one exact tile.</p>
+  
+  
+</div>
+<div class="type" id="bounds">
+  <h3><a class="anchor-name" href="#bounds">Bounds</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#bounds">Bounds</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>left: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>top: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>right: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>bottom: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="locationpatch">
+  <h3><a class="anchor-name" href="#locationpatch">LocationPatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#locationpatch">LocationPatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>name?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>left?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>top?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>right?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>bottom?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>elevationFlags?: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="sectionknowledge">
+  <h3><a class="anchor-name" href="#sectionknowledge">SectionKnowledge</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#sectionknowledge">SectionKnowledge</a></code></pre>
+  <p>What the registry knows about a section name, sized for one map.</p>
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>what: <span class="k">string</span></code></th><td><p>&quot;Placed units&quot;, &quot;String table&quot;, …</p></td></tr>
+<tr><th><code>mode: <a class="t" href="/api/document/#combinemode">CombineMode</a></code></th><td><p>How the game combines repeated occurrences.</p></td></tr>
+<tr><th><code>size: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>The fixed buffer the game reads the section into, for this map&#39;s size; null when the length varies.</p></td></tr>
+<tr><th><code>stride: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>The record length of a list section, or null.</p></td></tr>
+<tr><th><code>modelled: <span class="k">boolean</span></code></th><td><p>Whether the editor decodes the section into its model and re-encodes it on save.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="sectioninfo">
+  <h3><a class="anchor-name" href="#sectioninfo">SectionInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#sectioninfo">SectionInfo</a></code></pre>
+  <p>One occurrence of a section in the file, as Save would write it.</p>
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td><p>Position in the file&#39;s section list — what the byte-level calls take.</p></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td><p>The four characters as stored (<code>&quot;VER &quot;</code> keeps its space); junk in a protected map.</p></td></tr>
+<tr><th><code>offset: <span class="k">number</span></code></th><td><p>Byte offset of the eight-byte chunk header within the CHK.</p></td></tr>
+<tr><th><code>size: <span class="k">number</span></code></th><td><p>Payload length.</p></td></tr>
+<tr><th><code>declaredSize: <span class="k">number</span></code></th><td><p>The length field as written; differs from <code>size</code> only when the file ended early.</p></td></tr>
+<tr><th><code>truncated: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>occurrence: <span class="k">number</span></code></th><td><p>Which occurrence of this name it is, 0-based, and how many the file has.</p></td></tr>
+<tr><th><code>occurrences: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>dirty: <span class="k">boolean</span></code></th><td><p>Whether the editor has unsaved changes it will encode into this section on save.</p></td></tr>
+<tr><th><code>spec: <a class="t" href="/api/document/#sectionknowledge">SectionKnowledge</a> | <span class="k">null</span></code></th><td><p>The registry entry, or null for a section the editor has never heard of.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="rebuildresult">
+  <h3><a class="anchor-name" href="#rebuildresult">RebuildResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#rebuildresult">RebuildResult</a></code></pre>
+  <p>What <code>rebuildSections</code> did: the parser&#39;s remarks and the sections actually re-encoded.</p>
+  <table class="fields"><tbody><tr><th><code>warnings: <span class="k">string</span>[]</code></th><td></td></tr>
+<tr><th><code>rebuilt: <span class="k">string</span>[]</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="playerpatch">
+  <h3><a class="anchor-name" href="#playerpatch">PlayerPatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#playerpatch">PlayerPatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">type</span>?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>race?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>color?: <span class="k">number</span></code></th><td><p>COLR index 0–15 (playable slots).</p></td></tr>
+<tr><th><code>rgb?: [ <span class="k">number</span>, <span class="k">number</span>, <span class="k">number</span> ] | <span class="k">null</span></code></th><td><p>A CRGB custom colour, or null to go back to the palette colour (playable slots).</p></td></tr>
+<tr><th><code>force?: <span class="k">number</span></code></th><td><p>0-based force (playable slots).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="forcepatch">
+  <h3><a class="anchor-name" href="#forcepatch">ForcePatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#forcepatch">ForcePatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>name?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>allied?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>alliedVictory?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>sharedVision?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>randomStart?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>flags?: <span class="k">number</span></code></th><td><p>The whole flag word, applied before the booleans.</p></td></tr>
+<tr><th><code>players?: <span class="k">number</span>[]</code></th><td><p>0-based playable slots the force should contain (others keep theirs); moves them from their forces.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unittypepatch">
+  <h3><a class="anchor-name" href="#unittypepatch">UnitTypePatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#unittypepatch">UnitTypePatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>useDefault?: <span class="k">boolean</span></code></th><td><p>Explicitly back to (or off) the dat defaults; setting any number below turns it off.</p></td></tr>
+<tr><th><code>name?: <span class="k">string</span></code></th><td><p>Custom name; <code>&quot;&quot;</code> restores the default.</p></td></tr>
+<tr><th><code>hitPoints?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>shields?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>armor?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>buildTime?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>mineralCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>weapons?: { id: <span class="k">number</span>; damage?: <span class="k">number</span>; bonus?: <span class="k">number</span>; }[]</code></th><td></td></tr>
+<tr><th><code>available?: { player: <span class="k">number</span> | <span class="s">&quot;default&quot;</span>; value: <span class="k">boolean</span> | <span class="s">&quot;default&quot;</span>; }[]</code></th><td><p>PUNI: <code>player</code> 0-based or <code>&quot;default&quot;</code> (the default column); <code>value</code> true / false, or <code>&quot;default&quot;</code> to follow the default column again.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgradepatch">
+  <h3><a class="anchor-name" href="#upgradepatch">UpgradePatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#upgradepatch">UpgradePatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>useDefault?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>mineralCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>mineralFactor?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasFactor?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>timeCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>timeFactor?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>levels?: { player: <span class="k">number</span> | <span class="s">&quot;default&quot;</span>; start?: <span class="k">number</span>; max?: <span class="k">number</span>; useDefault?: <span class="k">boolean</span>; }[]</code></th><td><p><code>player</code> 0-based or <code>&quot;default&quot;</code>; <code>useDefault: true</code> puts a player back on the default column.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techpatch">
+  <h3><a class="anchor-name" href="#techpatch">TechPatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#techpatch">TechPatch</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>useDefault?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>mineralCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>researchTime?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>energyCost?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>state?: { player: <span class="k">number</span> | <span class="s">&quot;default&quot;</span>; available?: <span class="k">boolean</span>; researched?: <span class="k">boolean</span>; useDefault?: <span class="k">boolean</span>; }[]</code></th><td><p><code>player</code> 0-based or <code>&quot;default&quot;</code>; <code>useDefault: true</code> puts a player back on the default column.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="resizeresult">
+  <h3><a class="anchor-name" href="#resizeresult">ResizeResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#resizeresult">ResizeResult</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>dx: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>dy: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>unitsDropped: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>spritesDropped: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>doodadsDropped: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>locationsClamped: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>isomRebuilt: <span class="k">boolean</span></code></th><td><p>True when ISOM was reconstructed from the tiles; false when it is the flat fill&#39;s lattice.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="cuwpslotpatch">
+  <h3><a class="anchor-name" href="#cuwpslotpatch">CuwpSlotPatch</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#cuwpslotpatch">CuwpSlotPatch</a></code></pre>
+  <p>A slot patch the way the dialog and the plugin API both apply one: only the named fields move.</p>
+  <table class="fields"><tbody><tr><th><code>hitPointsPercent?: <span class="k">number</span> | <span class="k">null</span></code></th><td><p><code>null</code> leaves the field at the unit&#39;s default (clears its valid bit); a number sets it and the bit.</p></td></tr>
+<tr><th><code>shieldsPercent?: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>energyPercent?: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>resources?: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>hangar?: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>cloaked?: <span class="k">boolean</span> | <span class="k">null</span></code></th><td><p><code>null</code> leaves the state alone; a boolean forces it.</p></td></tr>
+<tr><th><code>burrowed?: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>inTransit?: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>hallucinated?: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>invincible?: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="archivecompression">
+  <h3><a class="anchor-name" href="#archivecompression">ArchiveCompression</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#archivecompression">ArchiveCompression</a> = <span class="s">&quot;none&quot;</span> | <span class="s">&quot;zlib&quot;</span> | <span class="s">&quot;pkware&quot;</span>;</code></pre>
+  <p>How the members of a map archive are compressed.</p>
+  
+  
+</div>
+<div class="type" id="mapformat">
+  <h3><a class="anchor-name" href="#mapformat">MapFormat</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#mapformat">MapFormat</a> = <span class="s">&quot;scx&quot;</span> | <span class="s">&quot;scm&quot;</span> | <span class="s">&quot;chk&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="saveoptions">
+  <h3><a class="anchor-name" href="#saveoptions">SaveOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#saveoptions">SaveOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>format: <a class="t" href="/api/document/#mapformat">MapFormat</a></code></th><td></td></tr>
+<tr><th><code>compression: <a class="t" href="/api/document/#archivecompression">ArchiveCompression</a></code></th><td><p>How every archive member is compressed; ignored for a bare .chk.</p></td></tr>
+<tr><th><code>encrypt: <span class="k">boolean</span></code></th><td><p>Encrypt the members as StarEdit does. Every StarCraft build reads it.</p></td></tr>
+<tr><th><code>omitExtras: <span class="k">string</span>[]</code></th><td><p>Archive members left out of the file, by name.</p></td></tr>
+<tr><th><code>stripTerrainEditing: <span class="k">boolean</span></code></th><td><p>Leave out ISOM, TILE and DD2: the terrain-editing data the game never reads.</p></td></tr>
+<tr><th><code>stripBookkeeping: <span class="k">boolean</span></code></th><td><p>Leave out IVER, IVE2, IOWN, UPUS, SWNM and WAV: editor bookkeeping the game never reads.</p></td></tr>
+<tr><th><code>stripUnknown: <span class="k">boolean</span></code></th><td><p>Leave out sections whose names the format reference does not know.</p></td></tr>
+<tr><th><code>mergeRepeats: <span class="k">boolean</span></code></th><td><p>Collapse a section that occurs more than once into the bytes the game would act on.</p></td></tr>
+<tr><th><code>dropTrailing: <span class="k">boolean</span></code></th><td><p>Drop bytes after the last section header the file could parse.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="changetilesetresult">
+  <h3><a class="anchor-name" href="#changetilesetresult">ChangeTilesetResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#changetilesetresult">ChangeTilesetResult</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">from</span>: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>to: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>doodadsDropped: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>spritesDropped: <span class="k">number</span></code></th><td><p>Overlay sprites that belonged to the dropped doodads.</p></td></tr>
+<tr><th><code>refilled: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="startlayout">
+  <h3><a class="anchor-name" href="#startlayout">StartLayout</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#startlayout">StartLayout</a> = <span class="s">&quot;ring&quot;</span> | <span class="s">&quot;corners&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="startplacementresult">
+  <h3><a class="anchor-name" href="#startplacementresult">StartPlacementResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#startplacementresult">StartPlacementResult</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>changes: <a class="t" href="/api/types/#unitchange">UnitChange</a>[]</code></th><td></td></tr>
+<tr><th><code>placed: ({ x: <span class="k">number</span>; y: <span class="k">number</span>; } | <span class="k">null</span>)[]</code></th><td><p>Per player (0-based), where the start location landed, or null when nothing within reach fit.</p></td></tr>
+<tr><th><code>removed: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="sync">
+  <h3><a class="anchor-name" href="#sync">Sync</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#sync">Sync</a>&lt;T&gt; = T <span class="k">extends</span> PromiseLike&lt;<span class="k">unknown</span>&gt; ? <span class="s">&quot;a transaction builder must be synchronous: await before document.edit() / update(), not inside it&quot;</span> : T;</code></pre>
+  <p>A transaction builder&#39;s return type: whatever it likes, so long as it is not a promise.</p>
+<p>Everything asynchronous in this API is a promise — <code>await</code> it. The two transaction
+builders (<code>document.edit</code> and <code>document.update</code>) are the exception, and deliberately
+so: their operations apply as they are called and one commit closes the transaction
+when the builder returns, so an <code>async</code> builder would commit the part of its work that
+ran before the first <code>await</code> and leave the rest with nowhere to land: the transaction
+is closed once the builder returns, and every call on it throws from then on. Do the
+awaiting <em>before</em> the call:</p>
+<pre><code class="language-ts">await api.tileset.load();                       // the async part, first
+api.document.edit(&quot;Fill&quot;, tx =&gt; tx.stampTerrain(rect, id));  // then the write
+</code></pre>
+<p>TypeScript refuses an <code>async</code> builder because of this type; <code>runTransaction</code> and
+<code>runUpdate</code> also catch one at runtime, for a plugin written in plain JavaScript.</p>
+  
+  
+</div>
+<div class="type" id="documentinfo">
+  <h3><a class="anchor-name" href="#documentinfo">DocumentInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#documentinfo">DocumentInfo</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>description: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tileset: <a class="t" href="/api/types/#tilesetid">TilesetId</a></code></th><td></td></tr>
+<tr><th><code>era: <span class="k">number</span></code></th><td><p>ERA as stored (the tileset is <code>era &amp; 7</code>).</p></td></tr>
+<tr><th><code>version: <span class="k">number</span></code></th><td><p>CHK VER: 59 original, 63 hybrid, 205 Brood War, 206 Remastered.</p></td></tr>
+<tr><th><code>fileName: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>modified: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="editresult">
+  <h3><a class="anchor-name" href="#editresult">EditResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#editresult">EditResult</a></code></pre>
+  <p>What one <code>document.edit</code> changed, per list.</p>
+  <table class="fields"><tbody><tr><th><code>changed: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>tiles: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>isom: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>units: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>sprites: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>doodads: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>locations: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>fog: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>notes: <span class="k">string</span>[]</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="mapfileformat">
+  <h3><a class="anchor-name" href="#mapfileformat">MapFileFormat</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#mapfileformat">MapFileFormat</a> = <span class="s">&quot;scx&quot;</span> | <span class="s">&quot;scm&quot;</span> | <span class="s">&quot;chk&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="exportoptions">
+  <h3><a class="anchor-name" href="#exportoptions">ExportOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#exportoptions">ExportOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>format?: <a class="t" href="/api/document/#mapfileformat">MapFileFormat</a></code></th><td><p>The container: the open file&#39;s (else <code>scx</code>) — <code>scx</code> / <code>scm</code> archives, <code>chk</code> the bare scenario.</p></td></tr>
+<tr><th><code>fileName?: <span class="k">string</span></code></th><td><p>The file&#39;s name; defaults to the open file&#39;s, or the scenario name plus the format.</p></td></tr>
+<tr><th><code>saveOptions?: <span class="k">Partial</span>&lt;<span class="k">Omit</span>&lt;<a class="t" href="/api/document/#saveoptions">SaveOptions</a>, <span class="s">&quot;format&quot;</span>&gt;&gt;</code></th><td><p>Compression, encryption and what is left out: over the options Save last used for this
+map (or its defaults — PKWARE and encryption for a new map, the way it was opened for
+an opened one), so the bytes are what Save would write unless you say otherwise.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="savedocumentoptions">
+  <h3><a class="anchor-name" href="#savedocumentoptions">SaveDocumentOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#savedocumentoptions">SaveDocumentOptions</a></code></pre>
+  <p><code>document.save</code> / <code>saveAs</code>.</p>
+  <table class="fields"><tbody><tr><th><code>copy?: <span class="k">boolean</span></code></th><td><p>Write a copy: the document keeps its own name, handle and clean state.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="changetilesetoptions">
+  <h3><a class="anchor-name" href="#changetilesetoptions">ChangeTilesetOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#changetilesetoptions">ChangeTilesetOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>tileset: <a class="t" href="/api/types/#tilesetid">TilesetId</a></code></th><td></td></tr>
+<tr><th><code>terrainId?: <span class="k">number</span></code></th><td><p>ISOM id of the terrain the map is refilled with; the tileset&#39;s default when omitted.</p></td></tr>
+<tr><th><code>keepTiles?: <span class="k">boolean</span></code></th><td><p>Keep the tile numbers and change only ERA (what SCMDraft&#39;s switch does).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="extrasapi">
+  <h3><a class="anchor-name" href="#extrasapi">ExtrasApi</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#extrasapi">ExtrasApi</a></code></pre>
+  <p>The files stored in the map archive next to <code>staredit\scenario.chk</code>: custom sounds,
+graphics, and anything a plugin wants to keep with the map. Names are archive paths
+with backslashes (<code>staredit\wav\hello.wav</code>). They are written on Save.</p>
+  <table class="fields"><tbody><tr><th><code>list(): <span class="k">string</span>[]</code></th><td></td></tr>
+<tr><th><code>get(name: <span class="k">string</span>): Uint8Array | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>set(name: <span class="k">string</span>, bytes: Uint8Array): <span class="k">void</span></code></th><td><p>Add or replace a member; marks the map modified.</p></td></tr>
+<tr><th><code>remove(name: <span class="k">string</span>): <span class="k">boolean</span></code></th><td><p>Remove a member; true when there was one.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="documenthistory">
+  <h3><a class="anchor-name" href="#documenthistory">DocumentHistory</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#documenthistory">DocumentHistory</a></code></pre>
+  <p>What <code>document.history()</code> answers.</p>
+  <table class="fields"><tbody><tr><th><code>undo: <span class="k">string</span> | <span class="k">null</span></code></th><td><p>Label of the entry Undo would take back; null with nothing to undo.</p></td></tr>
+<tr><th><code>redo: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>undoDepth: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>redoDepth: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="resizedocumentoptions">
+  <h3><a class="anchor-name" href="#resizedocumentoptions">ResizeDocumentOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#resizedocumentoptions">ResizeDocumentOptions</a></code></pre>
+  <p>Scenario ▸ Resize / Crop Map&#39;s form. Width and height are clamped to 1…256, the anchor to 0…8.</p>
+  <table class="fields"><tbody><tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>anchor?: <span class="k">number</span></code></th><td><p>3 × 3 grid, row-major: 0 top-left … 4 centre … 8 bottom-right. Default 4.</p></td></tr>
+<tr><th><code>terrainId?: <span class="k">number</span></code></th><td><p>ISOM id of the terrain for the new area (a <code>TerrainType.id</code>); the tileset&#39;s default when omitted.</p></td></tr>
+<tr><th><code>clampLocations?: <span class="k">boolean</span></code></th><td><p>Pull locations that hang past the new edge back inside; default true.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="openinto">
+  <h3><a class="anchor-name" href="#openinto">OpenInto</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#openinto">OpenInto</a> = <span class="s">&quot;new&quot;</span> | <span class="s">&quot;current&quot;</span>;</code></pre>
+  <p>Where a map opened or created goes. <code>&quot;new&quot;</code> opens it beside the open one, which stays
+open behind it; <code>&quot;current&quot;</code> opens it in place of the open one, through the unsaved-changes
+gate. Omitted, the editor follows its preference (several maps at once, on by default),
+except that the untouched blank map it started on is always replaced.</p>
+  
+  
+</div>
+<div class="type" id="opendocumentoptions">
+  <h3><a class="anchor-name" href="#opendocumentoptions">OpenDocumentOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#opendocumentoptions">OpenDocumentOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>into?: <a class="t" href="/api/document/#openinto">OpenInto</a></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="opendocumentinfo">
+  <h3><a class="anchor-name" href="#opendocumentinfo">OpenDocumentInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#opendocumentinfo">OpenDocumentInfo</a></code></pre>
+  <p>One open map, as <code>document.list()</code> reports it. <code>active</code> marks the one in front — the one every other call reads and writes.</p>
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td><p>Stable for the map&#39;s life in this session; never reused.</p></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td><p>The scenario&#39;s name.</p></td></tr>
+<tr><th><code>fileName: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>tileset: <a class="t" href="/api/types/#tilesetid">TilesetId</a></code></th><td></td></tr>
+<tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>modified: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>active: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="newdocumentoptions">
+  <h3><a class="anchor-name" href="#newdocumentoptions">NewDocumentOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#newdocumentoptions">NewDocumentOptions</a></code></pre>
+  <p>File ▸ New&#39;s form: size, tileset, and the two strings the dialog asks for.</p>
+  <table class="fields"><tbody><tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tileset: <a class="t" href="/api/types/#tilesetid">TilesetId</a></code></th><td></td></tr>
+<tr><th><code>name?: <span class="k">string</span></code></th><td><p><code>Untitled Scenario</code> when omitted.</p></td></tr>
+<tr><th><code>into?: <a class="t" href="/api/document/#openinto">OpenInto</a></code></th><td><p>Beside the open map or in place of it; see <code>OpenInto</code>.</p></td></tr>
+<tr><th><code>description?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>terrainId?: <span class="k">number</span></code></th><td><p>ISOM id of the terrain to fill with; the tileset&#39;s default ground when omitted.</p></td></tr>
+<tr><th><code>startLocations?: <span class="k">number</span></code></th><td><p>Start locations to lay down for players 1..N, as <code>tx.placeStartLocations</code> would.
+Part of making the map, so a fresh scenario has no history to undo them from.</p></td></tr>
+<tr><th><code>startLayout?: <a class="t" href="/api/document/#startlayout">StartLayout</a></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="raweditresult">
+  <h3><a class="anchor-name" href="#raweditresult">RawEditResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></pre>
+  <p>What a raw section edit reported: the parser&#39;s remarks about the file it produced.</p>
+  <table class="fields"><tbody><tr><th><code>warnings: <span class="k">string</span>[]</code></th><td><p>Warnings from parsing the edited file (a truncated section, no usable DIM, …); empty when it read cleanly.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="sectionsapi">
+  <h3><a class="anchor-name" href="#sectionsapi">SectionsApi</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#sectionsapi">SectionsApi</a></code></pre>
+  <p>The scenario file at the byte level: every section occurrence in the order Save would
+write them, with the bytes it would write — unsaved edits already encoded — and raw
+edits to any of them.</p>
+<p>A raw edit is a different kind of transaction from <code>document.edit</code>: the edited file is
+parsed again from scratch and installed as the open document, so the change reaches
+every part of the editor whether or not it models the section — and, as with Resize,
+the undo history is dropped and every selection cleared. The map is marked modified
+and the <code>&quot;document&quot;</code> event fires. Keep your own undo if you need one.</p>
+<p>Indices are positions in <code>list()</code> and shift when a section is inserted or removed
+before them; take a fresh <code>list()</code> after every edit.</p>
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/document/#sectioninfo">SectionInfo</a>[]</code></th><td><p>Every occurrence in file order; empty without a map.</p></td></tr>
+<tr><th><code>bytes(index: <span class="k">number</span>): Uint8Array</code></th><td><p>A copy of one occurrence&#39;s payload.</p></td></tr>
+<tr><th><code>combined(name: <span class="k">string</span>): Uint8Array | <span class="k">null</span></code></th><td><p>The bytes the game acts on for a name — repeated occurrences combined the way the
+game combines them (<code>SectionKnowledge.mode</code>) — or null when the file has none.</p></td></tr>
+<tr><th><code>file(): Uint8Array</code></th><td><p>The whole CHK as Save would write it (the archive extras are <code>document.extras</code>).</p></td></tr>
+<tr><th><code>spec(name: <span class="k">string</span>): <a class="t" href="/api/document/#sectionknowledge">SectionKnowledge</a> | <span class="k">null</span></code></th><td><p>What the editor knows about a section name, sized for the open map; null for an unknown name.</p></td></tr>
+<tr><th><code>known(): <a class="t" href="/api/document/#sectionknowledge">SectionKnowledge</a>[]</code></th><td><p>Every section the editor knows, sized for the open map.</p></td></tr>
+<tr><th><code>write(index: <span class="k">number</span>, bytes: Uint8Array): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td><p>Replace one occurrence&#39;s payload.</p></td></tr>
+<tr><th><code>rename(index: <span class="k">number</span>, name: <span class="k">string</span>): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td><p>Rename one occurrence (four characters; shorter names are padded with spaces).</p></td></tr>
+<tr><th><code>insert(index: <span class="k">number</span>, name: <span class="k">string</span>, bytes: Uint8Array): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td><p>Insert a section before <code>index</code> (<code>list().length</code> appends).</p></td></tr>
+<tr><th><code>remove(index: <span class="k">number</span>): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td></td></tr>
+<tr><th><code>move(<span class="k">from</span>: <span class="k">number</span>, to: <span class="k">number</span>): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td><p>Move the occurrence at <code>from</code> so that it sits at <code>to</code>.</p></td></tr>
+<tr><th><code>replaceFile(bytes: Uint8Array): <a class="t" href="/api/document/#raweditresult">RawEditResult</a></code></th><td><p>Replace the whole CHK, the way File ▸ Open reads one.</p></td></tr>
+<tr><th><code>trailing(): Uint8Array | <span class="k">null</span></code></th><td><p>Bytes after the last chunk the reader could parse — what follows a chunk header with
+a negative length, say. Save writes them back as they are; a <code>replaceFile</code> without
+them drops them. Null when the file ends cleanly.</p></td></tr>
+<tr><th><code>required(): <span class="k">string</span>[]</code></th><td><p>The sections a file of the open map&#39;s revision must carry to load, as Check Map tests them (<code>STRx</code> in place of <code>STR </code> on a Remastered file).</p></td></tr>
+<tr><th><code>defaults(name: <span class="k">string</span>): Uint8Array | <span class="k">null</span></code></th><td><p>The bytes File ▸ New would write for a section on a map of this size, tileset and
+revision — StarEdit&#39;s defaults for a settings table, the fixed VCOD, an empty list,
+null terrain. Null for a section the editor cannot produce: one it does not model,
+or an optional one a new map has no value for (CRGB, SWNM).</p></td></tr>
+<tr><th><code>rebuild(names?: <span class="k">string</span>[]): <a class="t" href="/api/document/#rebuildresult">RebuildResult</a></code></th><td><p>Re-encode sections from the editor&#39;s model, the way Save writes a dirty one, and
+install the result like any other raw edit. This is what turns a protected file back
+into a plain one: repeated occurrences collapse into one, a truncated or oversized
+section comes back at the size the model encodes to, a string table whose offsets
+point nowhere is rewritten with every string the editor could read. Names the editor
+does not model, and modelled ones whose model is absent (no ISOM, no settings table),
+are left as they are and missing from <code>rebuilt</code>; omit <code>names</code> for every modelled
+section the map has a model for.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="isomrebuildresult">
+  <h3><a class="anchor-name" href="#isomrebuildresult">IsomRebuildResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#isomrebuildresult">IsomRebuildResult</a></code></pre>
+  <p>What <code>tx.rebuildIsom</code> did.</p>
+  <table class="fields"><tbody><tr><th><code>created: <span class="k">boolean</span></code></th><td><p>The map had no usable ISOM, so one was created.</p></td></tr>
+<tr><th><code>changed: <span class="k">number</span></code></th><td><p>Lattice values that changed (every one of a created section).</p></td></tr>
+<tr><th><code>diamonds: <span class="k">number</span></code></th><td><p>Diamonds the rebuild resolved from the tiles.</p></td></tr>
+<tr><th><code>unresolved: <span class="k">number</span></code></th><td><p>Diamonds it had to guess — under doodads or off the edge.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="cells">
+  <h3><a class="anchor-name" href="#cells">Cells</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/document/#cells">Cells</a> = <a class="t" href="/api/types/#rect">Rect</a> | Iterable&lt;<span class="k">number</span>&gt;;</code></pre>
+  <p>Cells for the bulk terrain operations: a tile rect, or cell indices (<code>y * width + x</code>).</p>
+  
+  
+</div>
+<div class="type" id="edittransaction">
+  <h3><a class="anchor-name" href="#edittransaction">EditTransaction</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#edittransaction">EditTransaction</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> scenario: <a class="t" href="/api/types/#scenario">Scenario</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tileAt(x: <span class="k">number</span>, y: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>MTXM (what the game draws) at a cell.</p></td></tr>
+<tr><th><code>groundAt(x: <span class="k">number</span>, y: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>TILE (the ground without doodads) at a cell.</p></td></tr>
+<tr><th><code>setTile(x: <span class="k">number</span>, y: <span class="k">number</span>, id: <span class="k">number</span>): <span class="k">void</span></code></th><td><p>One tile into both sections.</p></td></tr>
+<tr><th><code>setTiles(cells: <a class="t" href="/api/document/#cells">Cells</a>, id: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Many tiles into both sections; returns how many changed.</p></td></tr>
+<tr><th><code>stampTerrain(cells: <a class="t" href="/api/document/#cells">Cells</a>, terrainId: <span class="k">number</span>, variation?: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>The Rect brush: flat left/right pairs by column parity, one random variation per
+pair (<code>variation</code> pins it). Needs the tileset graphics; returns tiles changed.</p></td></tr>
+<tr><th><code>fillFlat(rect: <a class="t" href="/api/types/#rect">Rect</a>, terrainId: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Lay terrain the way a new map is laid over <code>rect</code>, ISOM lattice included when the map has one.</p></td></tr>
+<tr><th><code>paintIsom(d: <a class="t" href="/api/types/#diamond">Diamond</a>, terrainId: <span class="k">number</span>, extent?: <span class="k">number</span>): <span class="k">boolean</span></code></th><td><p>The isometric brush on one diamond: sets its ISOM value and regenerates the tiles
+around it, cliffs and shores included. Needs ISOM and the tileset; returns whether
+the terrain could be painted there.</p></td></tr>
+<tr><th><code>rebuildIsom(): <a class="t" href="/api/document/#isomrebuildresult">IsomRebuildResult</a> | <span class="k">null</span></code></th><td><p>Reconstruct the ISOM section from the tiles — for a map that arrived without one, or
+whose lattice no longer matches after Rect / Tile edits: exact for terrain that was
+laid down isometrically, a best guess under doodads and for hand-placed tiles. A
+missing or wrongly sized ISOM is created (undo removes it again); an existing one gets
+only the diamonds that differ. Needs the tileset graphics; null without them.</p></td></tr>
+<tr><th><code>makeUnit(unitId: <span class="k">number</span>, owner: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>): <a class="t" href="/api/types/#unitrecord">UnitRecord</a></code></th><td><p>A StarEdit-style unit record (fresh serial, valid/used masks) centred on map pixels.</p></td></tr>
+<tr><th><code>addUnits(records: <a class="t" href="/api/types/#unitrecord">UnitRecord</a>[]): <span class="k">number</span>[]</code></th><td></td></tr>
+<tr><th><code>removeUnits(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>updateUnits(indices: <span class="k">number</span>[], patch: (u: <a class="t" href="/api/types/#unitrecord">UnitRecord</a>) =&gt; <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#unitrecord">UnitRecord</a>&gt;): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>placeUnit(unitId: <span class="k">number</span>, owner: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>A unit the way the Units palette places one: a building snaps its placement box to
+the tile grid (when the palette&#39;s <em>Snap to grid</em> is on), anything else lands where
+you say, and nothing leaves the map. No placement checks — ask <code>canPlaceUnit</code> first
+if you want them. Returns the record&#39;s index.</p></td></tr>
+<tr><th><code>canPlaceUnit(unitId: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>): <span class="k">boolean</span></code></th><td><p>Whether the Units palette&#39;s placement checks, with its current options, allow a unit of this type centred there.</p></td></tr>
+<tr><th><code>makeSprite(kind: <a class="t" href="/api/types/#spritekind">SpriteKind</a>, id: <span class="k">number</span>, owner: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>, opts?: { flipped?: <span class="k">boolean</span>; disabled?: <span class="k">boolean</span>; }): <a class="t" href="/api/types/#spriterecord">SpriteRecord</a></code></th><td></td></tr>
+<tr><th><code>addSprites(records: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a>[]): <span class="k">number</span>[]</code></th><td></td></tr>
+<tr><th><code>removeSprites(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>placeSprite(kind: <a class="t" href="/api/types/#spritekind">SpriteKind</a>, id: <span class="k">number</span>, owner: <span class="k">number</span>, x: <span class="k">number</span>, y: <span class="k">number</span>, opts?: { flipped?: <span class="k">boolean</span>; disabled?: <span class="k">boolean</span>; }): <span class="k">number</span></code></th><td><p><code>makeSprite</code> + <code>addSprites</code> in one, kept on the map; returns the record&#39;s index.</p></td></tr>
+<tr><th><code>placeDoodad(doodadId: <span class="k">number</span>, tx: <span class="k">number</span>, ty: <span class="k">number</span>, owner?: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Stamp a doodad (a <code>dddata.bin</code> id) at a tile; returns its record index, or -1 when unknown or off the map.</p></td></tr>
+<tr><th><code>removeDoodads(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>convertDoodads(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td><p>Make doodads plain terrain: their records go, their tiles stay (in TILE as well as
+MTXM, so the cells are ground to every tool from here on) and an overlay stays as an
+ordinary sprite. The way to touch up a ramp or a cliff piece tile by tile.
+Returns records converted.</p></td></tr>
+<tr><th><code>paste(clip: <a class="t" href="/api/types/#clip">Clip</a>, tx: <span class="k">number</span>, ty: <span class="k">number</span>, options?: <a class="t" href="/api/types/#pasteoptionsspec">PasteOptionsSpec</a>): <a class="t" href="/api/types/#pasteresult">PasteResult</a></code></th><td><p>Stamp a <code>Clip</code> with its top-left tile at (tx, ty) inside this transaction — the
+clipboard&#39;s paste without the clipboard: the clip can come from anywhere (<code>clipboard.copy</code>,
+a library, a file), the user&#39;s own clip is left alone, and several stamps, or a stamp
+and the strokes around it, make one undo step. Every part the clip carries is laid down
+unless <code>parts</code> says otherwise; <code>mode</code> is <code>&quot;merge&quot;</code> unless given. Terrain and doodads
+from another tileset are refused, as a paste refuses them, and anything off the map is
+skipped, both said in the result&#39;s <code>notes</code>.</p></td></tr>
+<tr><th><code>addLocation(bounds: <a class="t" href="/api/document/#bounds">Bounds</a>, name?: <span class="k">string</span>, elevationFlags?: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>A location in the lowest free slot (pixel bounds); returns the slot, or -1 when the table is full.</p></td></tr>
+<tr><th><code>editLocation(index: <span class="k">number</span>, patch: <a class="t" href="/api/document/#locationpatch">LocationPatch</a>): <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>removeLocations(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>setFog(cells: <a class="t" href="/api/document/#cells">Cells</a>, players: <span class="k">number</span>, mode: <a class="t" href="/api/types/#fogmode">FogMode</a>): <span class="k">number</span></code></th><td><p>Set (<code>&quot;fog&quot;</code>) or clear the <code>players</code> bits (bit n = player n + 1) over cells; creates MASK on first use.</p></td></tr>
+<tr><th><code>replaceTerrain(<span class="k">from</span>: <a class="t" href="/api/document/#terrainpick">TerrainPick</a>, to: <a class="t" href="/api/document/#terrainpick">TerrainPick</a>, rect?: <a class="t" href="/api/types/#rect">Rect</a>): <span class="k">number</span></code></th><td><p>Tools ▸ Replace Terrain: every tile matching <code>from</code> (a flat terrain by ISOM id, or
+one exact tile) becomes <code>to</code>, over <code>rect</code> or the whole map; pairs are laid as the
+Rect brush lays them. Returns tiles changed. Terrain picks need the graphics.</p></td></tr>
+<tr><th><code>fillArea(x: <span class="k">number</span>, y: <span class="k">number</span>, fill: { terrainId: <span class="k">number</span>; } | { tileId: <span class="k">number</span>; }, match?: <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;tile&quot;</span>): <span class="k">number</span></code></th><td><p>The bucket fill: the 4-connected area around (x, y) of the same terrain type (<code>match: &quot;terrain&quot;</code>, the Rect fill) or the same exact tile (<code>&quot;tile&quot;</code>), laid with <code>terrainId</code>
+as the Rect brush would, or set to <code>tileId</code>. Returns tiles changed.</p></td></tr>
+<tr><th><code>placeBlend(x: <span class="k">number</span>, y: <span class="k">number</span>, side: <a class="t" href="/api/types/#side">Side</a>, id: <span class="k">number</span>): <span class="k">boolean</span></code></th><td><p>The Blend brush: <code>id</code> goes on the cell beside the anchor tile on <code>side</code>
+(<code>terrain.blendCandidates</code> ranks what fits). Returns whether the cell was on the map.</p></td></tr>
+<tr><th><code>tilesFromIsom(): <span class="k">number</span> | <span class="k">null</span></code></th><td><p>What StarEdit does after an isometric edit: regenerate every tile from the ISOM
+lattice (the reverse of <code>rebuildIsom</code>). Needs ISOM and the graphics; returns tiles
+changed, or null without them.</p></td></tr>
+<tr><th><code>mirror(cells: <a class="t" href="/api/document/#cells">Cells</a>): <span class="k">number</span>[]</code></th><td><p>The cells and their images under the symmetry mode (Tools ▸ Symmetry…), each once —
+what the built-in brushes paint over. With the mode off, the cells as given.</p></td></tr>
+<tr><th><code>mirrorPoint(px: <span class="k">number</span>, py: <span class="k">number</span>): { x: <span class="k">number</span>; y: <span class="k">number</span>; }[]</code></th><td><p>A map pixel and its images under the symmetry mode, the original first.</p></td></tr>
+<tr><th><code>moveUnits(indices: <span class="k">number</span>[], dx: <span class="k">number</span>, dy: <span class="k">number</span>, snap?: <span class="k">boolean</span>): <span class="k">number</span></code></th><td><p>Shift units by a pixel delta; buildings re-snap to the grid when <code>snap</code> (the palette&#39;s option when omitted). Returns records changed.</p></td></tr>
+<tr><th><code>placeStartLocations(options: { players: <span class="k">number</span>; layout?: <a class="t" href="/api/document/#startlayout">StartLayout</a>; margin?: <span class="k">number</span>; replace?: <span class="k">boolean</span>; }): <a class="t" href="/api/document/#startplacementresult">StartPlacementResult</a></code></th><td><p>Tools ▸ Auto-place Start Locations: one per player on a ring or in the corners, each
+moved to the nearest spot the placement checks accept; <code>replace</code> removes the existing
+ones first. Players count from 1.</p></td></tr>
+<tr><th><code>updateSprites(indices: <span class="k">number</span>[], patch: (r: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a>) =&gt; <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#spriterecord">SpriteRecord</a>&gt;): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>moveSprites(indices: <span class="k">number</span>[], dx: <span class="k">number</span>, dy: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Shift sprites by a pixel delta, clamped to the map. Returns records changed.</p></td></tr>
+<tr><th><code>updateDoodads(indices: <span class="k">number</span>[], patch: { owner?: <span class="k">number</span>; disabled?: <span class="k">number</span>; }): <span class="k">number</span></code></th><td><p>Change a doodad&#39;s owner or disabled flag (its tiles stay). Returns records changed.</p></td></tr>
+<tr><th><code>restoreAnywhere(): <span class="k">boolean</span></code></th><td><p>Put Anywhere (slot 63) back to the whole map; returns whether it had to move.</p></td></tr>
+<tr><th><code>invertFog(players: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Flip every tile&#39;s fog bit for <code>players</code>; returns tiles changed.</p></td></tr>
+<tr><th><code>copyFog(<span class="k">from</span>: <span class="k">number</span>, to: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Copy one player&#39;s fog (0-based) onto the players in the <code>to</code> bit mask (bit n = player n + 1); returns tiles changed.</p></td></tr>
+<tr><th><code>floodFog(x: <span class="k">number</span>, y: <span class="k">number</span>, player: <span class="k">number</span>, players: <span class="k">number</span>, mode: <a class="t" href="/api/types/#fogmode">FogMode</a>): <span class="k">number</span></code></th><td><p>Fog or clear the connected area around (x, y) that shares <code>player</code>&#39;s fog state, for <code>players</code>; returns tiles changed.</p></td></tr>
+<tr><th><code>note(text: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>A line for the status bar, appended to the label.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="updateresult">
+  <h3><a class="anchor-name" href="#updateresult">UpdateResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#updateresult">UpdateResult</a></code></pre>
+  <p>What one <code>document.update</code> changed: every section it marked dirty, in the order the
+operations touched them, and <code>changed</code> false when they were all no-ops.</p>
+  <table class="fields"><tbody><tr><th><code>changed: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>sections: <span class="k">string</span>[]</code></th><td></td></tr>
+<tr><th><code>notes: <span class="k">string</span>[]</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerlistupdate">
+  <h3><a class="anchor-name" href="#triggerlistupdate">TriggerListUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#triggerlistupdate">TriggerListUpdate</a></code></pre>
+  <p>TRIG or MBRF as a list. Operations apply as they are called, like <code>document.edit</code>&#39;s.</p>
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]</code></th><td><p>The list as it stands, cloned.</p></td></tr>
+<tr><th><code>count(): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>set(list: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]): <span class="k">void</span></code></th><td><p>Replace the whole list.</p></td></tr>
+<tr><th><code>add(trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>, at?: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>Insert one (at the end without <code>at</code>); returns its index.</p></td></tr>
+<tr><th><code>replace(index: <span class="k">number</span>, trigger: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>): <span class="k">boolean</span></code></th><td><p>Replace one record; false when there is none at <code>index</code>.</p></td></tr>
+<tr><th><code>remove(indices: <span class="k">number</span>[]): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>move(<span class="k">from</span>: <span class="k">number</span>, to: <span class="k">number</span>): <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>fromText(source: <span class="k">string</span>, options?: { replace?: <span class="k">boolean</span>; }): <span class="k">number</span></code></th><td><p>Parse the text format (<code>triggers.text.print</code>&#39;s inverse) and append the result, or
+replace the list with <code>replace: true</code>. Strings the text names are interned as it
+parses. Throws with the line number when the text does not parse.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="stringsupdate">
+  <h3><a class="anchor-name" href="#stringsupdate">StringsUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#stringsupdate">StringsUpdate</a></code></pre>
+  <p>The string table. Nothing is ever renumbered: <code>set</code> overwrites a slot (every record
+pointing at it sees the new text) and <code>intern</code> appends rather than reusing a slot
+something else may share.</p>
+  <table class="fields"><tbody><tr><th><code>list(): (<span class="k">string</span> | <span class="k">null</span>)[]</code></th><td></td></tr>
+<tr><th><code>intern(text: <span class="k">string</span>): <span class="k">number</span></code></th><td><p>The index of <code>text</code>: an identical entry when there is one, else a new one. 0 for <code>&quot;&quot;</code>.</p></td></tr>
+<tr><th><code>set(index: <span class="k">number</span>, text: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>Overwrite one slot.</p></td></tr>
+<tr><th><code>apply(list: (<span class="k">string</span> | <span class="k">null</span>)[]): <span class="k">void</span></code></th><td><p>Install a whole table; unreferenced trailing blanks are dropped, other indices keep their place.</p></td></tr>
+<tr><th><code><span class="k">import</span>(text: <span class="k">string</span>): { replaced: <span class="k">number</span>; added: <span class="k">number</span>; }</code></th><td><p>File ▸ Import ▸ Strings: <code>index&lt;TAB&gt;text</code> lines (<code>exchange.formatStrings</code> writes
+them) set in place, indices past the end appended. Returns how many were replaced and added.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="switchesupdate">
+  <h3><a class="anchor-name" href="#switchesupdate">SwitchesUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#switchesupdate">SwitchesUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>names(): <span class="k">string</span>[]</code></th><td></td></tr>
+<tr><th><code>setName(index: <span class="k">number</span>, name: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>Name a switch (0-based); <code>&quot;&quot;</code> clears the name. Creates SWNM on the first one.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="updatetransaction">
+  <h3><a class="anchor-name" href="#updatetransaction">UpdateTransaction</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#updatetransaction">UpdateTransaction</a></code></pre>
+  <p>The second kind of write (see <code>document.update</code>): the tables and settings the editor&#39;s
+own dialogs edit. Operations apply to the scenario as they are called — a string
+interned on one line is there for the trigger added on the next — and the commit at
+the end marks the map modified and tells the chrome to re-read.</p>
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> scenario: <a class="t" href="/api/types/#scenario">Scenario</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> triggers: <a class="t" href="/api/document/#triggerlistupdate">TriggerListUpdate</a></code></th><td><p>TRIG.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> briefing: <a class="t" href="/api/document/#triggerlistupdate">TriggerListUpdate</a></code></th><td><p>MBRF, the mission briefing&#39;s own list of the same records.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> strings: <a class="t" href="/api/document/#stringsupdate">StringsUpdate</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> switches: <a class="t" href="/api/document/#switchesupdate">SwitchesUpdate</a></code></th><td><p>SWNM.</p></td></tr>
+<tr><th><code>properties(patch: { name?: <span class="k">string</span>; description?: <span class="k">string</span>; }): <span class="k">void</span></code></th><td><p>SPRP: the scenario&#39;s name and description (<code>&quot;&quot;</code> restores the file-name default).</p></td></tr>
+<tr><th><code><span class="k">readonly</span> players: <a class="t" href="/api/document/#playersupdate">PlayersUpdate</a></code></th><td><p>OWNR / SIDE / COLR / CRGB / FORC: the Player Settings and Player Colors dialogs.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> forces: <a class="t" href="/api/document/#forcesupdate">ForcesUpdate</a></code></th><td><p>FORC: the Force Settings dialog.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> unitTypes: <a class="t" href="/api/document/#unittypesupdate">UnitTypesUpdate</a></code></th><td><p>UNIS / UNIx and PUNI: the Unit Settings dialog.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> upgrades: <a class="t" href="/api/document/#upgradesupdate">UpgradesUpdate</a></code></th><td><p>UPGS / UPGx and UPGR / PUPx: the Upgrade Settings dialog.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> techs: <a class="t" href="/api/document/#techsupdate">TechsUpdate</a></code></th><td><p>TECS / TECx and PTEC / PTEx: the Technology Settings dialog.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> sounds: <a class="t" href="/api/document/#soundsupdate">SoundsUpdate</a></code></th><td><p>WAV and the archive&#39;s sound files: the Sound Editor.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> cuwp: <a class="t" href="/api/document/#cuwpupdate">CuwpUpdate</a></code></th><td><p>UPRP / UPUS: the Create Unit with Properties slots (Triggers ▸ Unit Properties Slots…).</p></td></tr>
+<tr><th><code>setVersion(version: <a class="t" href="/api/types/#mapversion">MapVersion</a>, extendedStrings?: <span class="k">boolean</span>): <span class="k">void</span></code></th><td><p>Scenario ▸ Map Revision: VER / TYPE and, moving to or from Remastered, the string table&#39;s width.</p></td></tr>
+<tr><th><code>setTextEncoding(encoding: <a class="t" href="/api/types/#textencoding">TextEncoding</a>): <span class="k">void</span></code></th><td><p>Scenario ▸ Map Revision: how the string table&#39;s text is written to bytes. A map&#39;s
+file carries no note of it; the editor guesses on open (<code>document.version().textEncoding</code>)
+and this is the correction. The strings are unchanged; the table is re-encoded on save.</p></td></tr>
+<tr><th><code>note(text: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>A line for the status bar, appended to the label.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="playersupdate">
+  <h3><a class="anchor-name" href="#playersupdate">PlayersUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#playersupdate">PlayersUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/types/#playerslotview">PlayerSlotView</a>[]</code></th><td><p>All 12 slots, 0-based, with the effective colour and force.</p></td></tr>
+<tr><th><code>set(slot: <span class="k">number</span>, patch: <a class="t" href="/api/document/#playerpatch">PlayerPatch</a>): <span class="k">boolean</span></code></th><td><p>Patch one slot; colours and forces apply to the eight playable slots only.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="forcesupdate">
+  <h3><a class="anchor-name" href="#forcesupdate">ForcesUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#forcesupdate">ForcesUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/types/#forceview">ForceView</a>[]</code></th><td></td></tr>
+<tr><th><code>set(force: <span class="k">number</span>, patch: <a class="t" href="/api/document/#forcepatch">ForcePatch</a>): <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unittypesupdate">
+  <h3><a class="anchor-name" href="#unittypesupdate">UnitTypesUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#unittypesupdate">UnitTypesUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>get(unitId: <span class="k">number</span>): <a class="t" href="/api/types/#unittypeview">UnitTypeView</a></code></th><td><p>The effective row for a units.dat id — the dat&#39;s numbers where the type is on &quot;use default&quot;.</p></td></tr>
+<tr><th><code>set(unitId: <span class="k">number</span>, patch: <a class="t" href="/api/document/#unittypepatch">UnitTypePatch</a>): <span class="k">boolean</span></code></th><td><p>Patch one type. Setting any number turns &quot;use default&quot; off for it (seeding the untouched
+columns from the dat, as the dialog does); <code>useDefault: true</code> puts it back. Hit points are
+whole points. <code>name</code> is the custom name (<code>&quot;&quot;</code> restores the default); <code>available</code> edits PUNI.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgradesupdate">
+  <h3><a class="anchor-name" href="#upgradesupdate">UpgradesUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#upgradesupdate">UpgradesUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>get(upgradeId: <span class="k">number</span>): <a class="t" href="/api/types/#upgradeview">UpgradeView</a></code></th><td></td></tr>
+<tr><th><code>set(upgradeId: <span class="k">number</span>, patch: <a class="t" href="/api/document/#upgradepatch">UpgradePatch</a>): <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techsupdate">
+  <h3><a class="anchor-name" href="#techsupdate">TechsUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#techsupdate">TechsUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>get(techId: <span class="k">number</span>): <a class="t" href="/api/types/#techview">TechView</a></code></th><td></td></tr>
+<tr><th><code>set(techId: <span class="k">number</span>, patch: <a class="t" href="/api/document/#techpatch">TechPatch</a>): <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="soundsupdate">
+  <h3><a class="anchor-name" href="#soundsupdate">SoundsUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#soundsupdate">SoundsUpdate</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/types/#soundrow">SoundRow</a>[]</code></th><td><p>The 512 WAV slots in use, joined with the archive (<code>present</code> says whether the file is there).</p></td></tr>
+<tr><th><code>add(path: <span class="k">string</span>, bytes?: Uint8Array): <span class="k">number</span></code></th><td><p>Put <code>path</code> (<code>staredit\wav\name.wav</code>, or just <code>name.wav</code>) in the first free slot — the
+existing slot when it is already listed — and, with <code>bytes</code>, store the file in the archive.
+Returns the slot, or -1 when all 512 are taken.</p></td></tr>
+<tr><th><code>remove(slot: <span class="k">number</span>, deleteFile?: <span class="k">boolean</span>): <span class="k">boolean</span></code></th><td><p>Clear a slot; with <code>deleteFile</code>, remove the archive member too.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="cuwpupdate">
+  <h3><a class="anchor-name" href="#cuwpupdate">CuwpUpdate</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/document/#cuwpupdate">CuwpUpdate</a></code></pre>
+  <p>The 64 Create Unit with Properties slots. A slot is addressed 0-based here; the action
+that uses one stores the number 1-based (<code>target</code> = slot + 1), as <code>CuwpSlotView.index</code></p>
+<ul>
+<li><ol>
+<li>A view&#39;s field is <code>null</code> where the created units keep the type&#39;s default.</li>
+</ol>
+</li>
+</ul>
+  <table class="fields"><tbody><tr><th><code>list(): <a class="t" href="/api/types/#cuwpslotview">CuwpSlotView</a>[]</code></th><td></td></tr>
+<tr><th><code>get(index: <span class="k">number</span>): <a class="t" href="/api/types/#cuwpslotview">CuwpSlotView</a> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>set(index: <span class="k">number</span>, patch: <a class="t" href="/api/document/#cuwpslotpatch">CuwpSlotPatch</a>, used?: <span class="k">boolean</span>): <span class="k">boolean</span></code></th><td><p>Patch one slot: a number sets the field and its &quot;applied&quot; bit, <code>null</code> clears the bit;
+a boolean forces a special state, <code>null</code> leaves it to the unit. <code>used</code> is StarEdit&#39;s
+&quot;in use&quot; tick, on by itself once the slot sets anything.</p></td></tr>
+<tr><th><code>clear(index: <span class="k">number</span>): <span class="k">boolean</span></code></th><td><p>Back to an empty, unticked slot.</p></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-paint"><b>Paint</b><span>map tools, a floating panel, and painting with the active layer&#39;s brush</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-section-explorer"><b>Section Explorer</b><span>raw section bytes, re-parsed into the open map</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-repair"><b>Repair</b><span>checking a file on open and repairing it</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-melee-wizard"><b>Melee Wizard</b><span>placing units with the editor&#39;s own placement checks</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-scm-scx"><b>scmscx.com</b><span>opening a map fetched from elsewhere</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#isopen">isOpen</a></li>
+<li><a href="#info">info</a></li>
+<li><a href="#scenario">scenario</a></li>
+<li><a href="#edit">edit</a></li>
+<li><a href="#update">update</a></li>
+<li><a href="#undo">undo</a></li>
+<li><a href="#redo">redo</a></li>
+<li><a href="#history">history</a></li>
+<li><a href="#id">id</a></li>
+<li><a href="#list">list</a></li>
+<li><a href="#activate">activate</a></li>
+<li><a href="#open">open</a></li>
+<li><a href="#create">create</a></li>
+<li><a href="#export">export</a></li>
+<li><a href="#save">save</a></li>
+<li><a href="#saveas">saveAs</a></li>
+<li><a href="#close">close</a></li>
+<li><a href="#renderimage">renderImage</a></li>
+<li><a href="#resize">resize</a></li>
+<li><a href="#changetileset">changeTileset</a></li>
+<li><a href="#extras">extras</a></li>
+<li><a href="#sections">sections</a></li>
+<li><a href="#combinemode">CombineMode</a></li>
+<li><a href="#terrainpick">TerrainPick</a></li>
+<li><a href="#bounds">Bounds</a></li>
+<li><a href="#locationpatch">LocationPatch</a></li>
+<li><a href="#sectionknowledge">SectionKnowledge</a></li>
+<li><a href="#sectioninfo">SectionInfo</a></li>
+<li><a href="#rebuildresult">RebuildResult</a></li>
+<li><a href="#playerpatch">PlayerPatch</a></li>
+<li><a href="#forcepatch">ForcePatch</a></li>
+<li><a href="#unittypepatch">UnitTypePatch</a></li>
+<li><a href="#upgradepatch">UpgradePatch</a></li>
+<li><a href="#techpatch">TechPatch</a></li>
+<li><a href="#resizeresult">ResizeResult</a></li>
+<li><a href="#cuwpslotpatch">CuwpSlotPatch</a></li>
+<li><a href="#archivecompression">ArchiveCompression</a></li>
+<li><a href="#mapformat">MapFormat</a></li>
+<li><a href="#saveoptions">SaveOptions</a></li>
+<li><a href="#changetilesetresult">ChangeTilesetResult</a></li>
+<li><a href="#startlayout">StartLayout</a></li>
+<li><a href="#startplacementresult">StartPlacementResult</a></li>
+<li><a href="#sync">Sync</a></li>
+<li><a href="#documentinfo">DocumentInfo</a></li>
+<li><a href="#editresult">EditResult</a></li>
+<li><a href="#mapfileformat">MapFileFormat</a></li>
+<li><a href="#exportoptions">ExportOptions</a></li>
+<li><a href="#savedocumentoptions">SaveDocumentOptions</a></li>
+<li><a href="#changetilesetoptions">ChangeTilesetOptions</a></li>
+<li><a href="#extrasapi">ExtrasApi</a></li>
+<li><a href="#documenthistory">DocumentHistory</a></li>
+<li><a href="#resizedocumentoptions">ResizeDocumentOptions</a></li>
+<li><a href="#openinto">OpenInto</a></li>
+<li><a href="#opendocumentoptions">OpenDocumentOptions</a></li>
+<li><a href="#opendocumentinfo">OpenDocumentInfo</a></li>
+<li><a href="#newdocumentoptions">NewDocumentOptions</a></li>
+<li><a href="#raweditresult">RawEditResult</a></li>
+<li><a href="#sectionsapi">SectionsApi</a></li>
+<li><a href="#isomrebuildresult">IsomRebuildResult</a></li>
+<li><a href="#cells">Cells</a></li>
+<li><a href="#edittransaction">EditTransaction</a></li>
+<li><a href="#updateresult">UpdateResult</a></li>
+<li><a href="#triggerlistupdate">TriggerListUpdate</a></li>
+<li><a href="#stringsupdate">StringsUpdate</a></li>
+<li><a href="#switchesupdate">SwitchesUpdate</a></li>
+<li><a href="#updatetransaction">UpdateTransaction</a></li>
+<li><a href="#playersupdate">PlayersUpdate</a></li>
+<li><a href="#forcesupdate">ForcesUpdate</a></li>
+<li><a href="#unittypesupdate">UnitTypesUpdate</a></li>
+<li><a href="#upgradesupdate">UpgradesUpdate</a></li>
+<li><a href="#techsupdate">TechsUpdate</a></li>
+<li><a href="#soundsupdate">SoundsUpdate</a></li>
+<li><a href="#cuwpupdate">CuwpUpdate</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

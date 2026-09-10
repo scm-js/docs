@@ -1,0 +1,1176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.ui — scmJS documentation</title>
+<meta name="description" content="Everything a plugin puts on the screen: the status line, toasts, dialogs, floating
+panels, `confirm` / `alert` / `prompt` / `progress`, a map tool that owns the pointer,
+a passive overlay drawn over the map, and picking an area or a tile.">
+<meta property="og:title" content="api.ui — scmJS documentation">
+<meta property="og:description" content="Everything a plugin puts on the screen: the status line, toasts, dialogs, floating
+panels, `confirm` / `alert` / `prompt` / `progress`, a map tool that owns the pointer,
+a passive overlay drawn over the map, and picking an area or a tile.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="here" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.ui</h1>
+<p class="lede">UiApi</p>
+<p>Everything a plugin puts on the screen: the status line, toasts, dialogs, floating
+panels, <code>confirm</code> / <code>alert</code> / <code>prompt</code> / <code>progress</code>, a map tool that owns the pointer,
+a passive overlay drawn over the map, and picking an area or a tile.</p>
+
+<ul class="chips"><li><a href="#status">status</a></li><li><a href="#statustext">statusText</a></li><li><a href="#toast">toast</a></li><li><a href="#savefile">saveFile</a></li><li><a href="#dialog">dialog</a></li><li><a href="#panel">panel</a></li><li><a href="#statusitem">statusItem</a></li><li><a href="#dialogslot">dialogSlot</a></li><li><a href="#maptool">mapTool</a></li><li><a href="#overlay">overlay</a></li><li><a href="#pickfiles">pickFiles</a></li><li><a href="#pickarea">pickArea</a></li><li><a href="#picktile">pickTile</a></li><li><a href="#pickobject">pickObject</a></li><li><a href="#loadimage">loadImage</a></li><li><a href="#readclipboardimage">readClipboardImage</a></li><li><a href="#confirm">confirm</a></li><li><a href="#alert">alert</a></li><li><a href="#prompt">prompt</a></li><li><a href="#progress">progress</a></li><li><a href="#el">el</a></li><li><a href="#widgets">widgets</a></li><li><a href="#open">open</a></li><li><a href="#ask">ask</a></li><li><a href="#repaint">repaint</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="status">
+  <h3><a class="anchor-name" href="#status">status</a></h3>
+  <pre class="code"><code>status(text: <span class="k">string</span>): <span class="k">void</span>;</code></pre>
+  <p>Set the status bar line.</p>
+  
+  
+</div>
+<div class="member" id="statustext">
+  <h3><a class="anchor-name" href="#statustext">statusText</a></h3>
+  <pre class="code"><code>statusText(): <span class="k">string</span>;</code></pre>
+  <p>The status bar line as it stands.</p>
+  
+  
+</div>
+<div class="member" id="toast">
+  <h3><a class="anchor-name" href="#toast">toast</a></h3>
+  <pre class="code"><code>toast(toast: { kind?: <a class="t" href="/api/ui/#toast">Toast</a>[<span class="s">&quot;kind&quot;</span>]; title: <span class="k">string</span>; detail?: <span class="k">string</span>; ttl?: <span class="k">number</span>; }): <span class="k">void</span>;</code></pre>
+  <p>A short notice over the map that leaves by itself — how Save reports; <code>ttl</code> 0 keeps it until dismissed.</p>
+  
+  
+</div>
+<div class="member" id="savefile">
+  <h3><a class="anchor-name" href="#savefile">saveFile</a></h3>
+  <pre class="code"><code>saveFile(data: Blob | Uint8Array, fileName: <span class="k">string</span>): <span class="k">Promise</span>&lt;{ route: <span class="s">&quot;picker&quot;</span> | <span class="s">&quot;download&quot;</span>; fileName: <span class="k">string</span>; } | <span class="k">null</span>&gt;;</code></pre>
+  <p>Write a file to disk the way the editor&#39;s own exports do: into the file the browser&#39;s
+save dialog picks, or as a download where there is no dialog. Resolves with where it
+went, or null when the user dismissed the dialog.</p>
+  
+  
+</div>
+<div class="member" id="dialog">
+  <h3><a class="anchor-name" href="#dialog">dialog</a></h3>
+  <pre class="code"><code>dialog(spec: <a class="t" href="/api/ui/#dialogspec">DialogSpec</a>): <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="panel">
+  <h3><a class="anchor-name" href="#panel">panel</a></h3>
+  <pre class="code"><code>panel(spec: <a class="t" href="/api/ui/#panelspec">PanelSpec</a>): <a class="t" href="/api/ui/#panelhandle">PanelHandle</a>;</code></pre>
+  <p>Open a panel: floating over the map, or docked at the right with the built-in panels
+(<code>spec.dock</code>). As many as you like; each closes with the plugin.</p>
+  
+  
+</div>
+<div class="member" id="statusitem">
+  <h3><a class="anchor-name" href="#statusitem">statusItem</a></h3>
+  <pre class="code"><code>statusItem(spec: <a class="t" href="/api/ui/#statusitemspec">StatusItemSpec</a>): <a class="t" href="/api/ui/#statusitemhandle">StatusItemHandle</a>;</code></pre>
+  <p>A cell of your own in the status bar. One line of text beside the plugin&#39;s icon, a
+spinner while <code>busy</code>, a click. Keep the handle and <code>set</code> it as things move; it
+leaves with <code>remove()</code> or the plugin.</p>
+  
+  
+</div>
+<div class="member" id="dialogslot">
+  <h3><a class="anchor-name" href="#dialogslot">dialogSlot</a></h3>
+  <pre class="code"><code>dialogSlot(dialog: <a class="t" href="/api/ui/#dialogslotid">DialogSlotId</a>, spec: <a class="t" href="/api/ui/#dialogslotspec">DialogSlotSpec</a>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>Add to a built-in dialog. <code>mount</code> runs in a row at the left of the dialog&#39;s footer each
+time that dialog opens, with the dialog&#39;s working-copy fields to read and fill
+(<code>SlottedDialogId</code> lists which dialogs and fields) — or to another plugin&#39;s dialog,
+by the id its <code>DialogSpec.slot</code> offers. Returns the registration; it leaves with
+<code>dispose()</code> or the plugin.</p>
+  <pre class="code"><code>api.ui.dialogSlot(<span class="s">&quot;mapProperties&quot;</span>, {
+  mount(body, dlg) {
+    body.append(api.ui.widgets.button(<span class="s">&quot;Suggest a name&quot;</span>, { onClick: <span class="k">async</span> () =&gt; {
+      dlg.fields.name.set(<span class="k">await</span> suggestName(dlg.fields.description.get()));
+    } }));
+  },
+});</code></pre>
+  
+</div>
+<div class="member" id="maptool">
+  <h3><a class="anchor-name" href="#maptool">mapTool</a></h3>
+  <pre class="code"><code>mapTool(spec: <a class="t" href="/api/ui/#maptoolspec">MapToolSpec</a>): <a class="t" href="/api/ui/#maptoolhandle">MapToolHandle</a>;</code></pre>
+  <p>Take over the pointer on the map until <code>stop()</code>, Esc, a right-click, a map change
+or another tool. One tool runs at a time — starting one stops the previous — and a
+<code>pickArea</code> / <code>pickTile</code> in progress is served first.</p>
+  
+  
+</div>
+<div class="member" id="overlay">
+  <h3><a class="anchor-name" href="#overlay">overlay</a></h3>
+  <pre class="code"><code>overlay(spec: <a class="t" href="/api/ui/#overlayspec">OverlaySpec</a>): <a class="t" href="/api/ui/#overlayhandle">OverlayHandle</a>;</code></pre>
+  <p>A picture over the map the user can switch on and off (View ▸ Overlays, the Layers
+panel) and that stays while they work on any layer. It draws at every repaint and
+hears the pointer, but never takes it. As many as you like; they go with the plugin.</p>
+  
+  
+</div>
+<div class="member" id="pickfiles">
+  <h3><a class="anchor-name" href="#pickfiles">pickFiles</a></h3>
+  <pre class="code"><code>pickFiles(options?: <a class="t" href="/api/ui/#pickfilesoptions">PickFilesOptions</a>): <span class="k">Promise</span>&lt;File[]&gt;;</code></pre>
+  <p>The browser&#39;s file picker; resolves with an empty list on cancel.</p>
+  
+  
+</div>
+<div class="member" id="pickarea">
+  <h3><a class="anchor-name" href="#pickarea">pickArea</a></h3>
+  <pre class="code"><code>pickArea(options?: <a class="t" href="/api/ui/#pickoptions">PickOptions</a>): <span class="k">Promise</span>&lt;<a class="t" href="/api/types/#rect">Rect</a> | <span class="k">null</span>&gt;;</code></pre>
+  <p>Let the user drag a rectangle on the map. The viewport switches to a crosshair, draws
+the marquee and takes the gesture ahead of the active layer&#39;s tools; resolves with
+the tile rect (exclusive <code>x1</code> / <code>y1</code>), or null when the user pressed Esc or
+right-clicked, no map is open, the map was replaced, or the plugin was disabled.
+Only one pick runs at a time — a new one cancels the previous. A modal dialog
+covers the map, so close yours first and reopen it with the result.</p>
+  
+  
+</div>
+<div class="member" id="picktile">
+  <h3><a class="anchor-name" href="#picktile">pickTile</a></h3>
+  <pre class="code"><code>pickTile(options?: <a class="t" href="/api/ui/#pickoptions">PickOptions</a>): <span class="k">Promise</span>&lt;{ x: <span class="k">number</span>; y: <span class="k">number</span>; } | <span class="k">null</span>&gt;;</code></pre>
+  <p>As <code>pickArea</code>, for a single click: the tile under it.</p>
+  
+  
+</div>
+<div class="member" id="pickobject">
+  <h3><a class="anchor-name" href="#pickobject">pickObject</a></h3>
+  <pre class="code"><code>pickObject(options?: <a class="t" href="/api/ui/#pickobjectoptions">PickObjectOptions</a>): <span class="k">Promise</span>&lt;<a class="t" href="/api/ui/#pickedobject">PickedObject</a> | <span class="k">null</span>&gt;;</code></pre>
+  <p>As <code>pickTile</code>, for an object: the user clicks a unit or a location. The viewport
+outlines and names what is under the pointer as it moves; a click on nothing keeps
+picking. Resolves with the kind and the record&#39;s index, or null as <code>pickArea</code> does.</p>
+  
+  
+</div>
+<div class="member" id="loadimage">
+  <h3><a class="anchor-name" href="#loadimage">loadImage</a></h3>
+  <pre class="code"><code>loadImage(source: Blob | <span class="k">string</span>): <span class="k">Promise</span>&lt;ImageBitmap&gt;;</code></pre>
+  <p>Decode a picture: a <code>File</code> / <code>Blob</code>, a <code>data:</code> URL, or an <code>http(s)</code> URL (fetched, and
+when the site refuses cross-origin reads, loaded through an <code>&lt;img&gt;</code> with
+<code>crossOrigin</code> — a site that allows neither rejects with a message saying so).</p>
+  
+  
+</div>
+<div class="member" id="readclipboardimage">
+  <h3><a class="anchor-name" href="#readclipboardimage">readClipboardImage</a></h3>
+  <pre class="code"><code>readClipboardImage(): <span class="k">Promise</span>&lt;Blob | <span class="k">null</span>&gt;;</code></pre>
+  <p>The image on the system clipboard, if the browser lets the page read it (a permission prompt may appear); null otherwise.</p>
+  
+  
+</div>
+<div class="member" id="confirm">
+  <h3><a class="anchor-name" href="#confirm">confirm</a></h3>
+  <pre class="code"><code>confirm(message: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#confirmoptions">ConfirmOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>Ask a yes/no question; resolves false on Cancel, Escape or the ×.</p>
+  
+  
+</div>
+<div class="member" id="alert">
+  <h3><a class="anchor-name" href="#alert">alert</a></h3>
+  <pre class="code"><code>alert(message: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#confirmoptions">ConfirmOptions</a>): <span class="k">Promise</span>&lt;<span class="k">void</span>&gt;;</code></pre>
+  <p>Say something with a single OK.</p>
+  
+  
+</div>
+<div class="member" id="prompt">
+  <h3><a class="anchor-name" href="#prompt">prompt</a></h3>
+  <pre class="code"><code>prompt(message: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#promptoptions">PromptOptions</a>): <span class="k">Promise</span>&lt;<span class="k">string</span> | <span class="k">null</span>&gt;;</code></pre>
+  <p>Ask for a line of text; null when the user cancelled.</p>
+  
+  
+</div>
+<div class="member" id="progress">
+  <h3><a class="anchor-name" href="#progress">progress</a></h3>
+  <pre class="code"><code>progress(label: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#progressoptions">ProgressOptions</a>): <a class="t" href="/api/ui/#progresshandle">ProgressHandle</a>;</code></pre>
+  <p>A progress bar over the map for long work, with an optional Cancel.</p>
+  
+  
+</div>
+<div class="member" id="el">
+  <h3><a class="anchor-name" href="#el">el</a></h3>
+  <pre class="code"><code>el&lt;K <span class="k">extends</span> <span class="k">keyof</span> HTMLElementTagNameMap&gt;(tag: K, props?: <span class="k">Record</span>&lt;<span class="k">string</span>, <span class="k">unknown</span>&gt;, ...children: <a class="t" href="/api/ui/#widgetchild">WidgetChild</a>[]): HTMLElementTagNameMap[K];</code></pre>
+  <p><code>el(&quot;div&quot;, { className: &quot;row&quot; }, …)</code>: the DOM helper the widgets are built from.</p>
+  
+  
+</div>
+<div class="member" id="widgets">
+  <h3><a class="anchor-name" href="#widgets">widgets</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> widgets: <a class="t" href="/api/ui/#widgetsapi">WidgetsApi</a>;</code></pre>
+  <p>Buttons, fields, forms and lists in the editor&#39;s own styles.</p>
+  
+  
+</div>
+<div class="member" id="open">
+  <h3><a class="anchor-name" href="#open">open</a></h3>
+  <pre class="code"><code>open(dialog: <a class="t" href="/api/types/#dialogid">DialogId</a>, payload?: <span class="k">Record</span>&lt;<span class="k">string</span>, <span class="k">unknown</span>&gt;): <span class="k">void</span>;</code></pre>
+  <p>Open a built-in dialog (fire and forget; <code>ask</code> waits for one that answers).</p>
+  
+  
+</div>
+<div class="member" id="ask">
+  <h3><a class="anchor-name" href="#ask">ask</a></h3>
+  <pre class="code"><code>ask(dialog: <a class="t" href="/api/types/#dialogid">DialogId</a>, payload?: <span class="k">Record</span>&lt;<span class="k">string</span>, <span class="k">unknown</span>&gt;): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>Open a built-in dialog that answers — <code>&quot;saveAs&quot;</code>, <code>&quot;confirmClose&quot;</code>, <code>&quot;newMap&quot;</code> — and
+resolve true when it went through, false when it was dismissed.</p>
+  
+  
+</div>
+<div class="member" id="repaint">
+  <h3><a class="anchor-name" href="#repaint">repaint</a></h3>
+  <pre class="code"><code>repaint(): <span class="k">void</span>;</code></pre>
+  <p>Ask the viewport to repaint (a transaction does this by itself). Raises no event.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="toast">
+  <h3><a class="anchor-name" href="#toast">Toast</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#toast">Toast</a></code></pre>
+  <p>A short notice over the map that leaves by itself — what a save says when it is done,
+since the status bar line is easy to miss and the menubar dot only stops glowing.</p>
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>kind: <span class="s">&quot;ok&quot;</span> | <span class="s">&quot;info&quot;</span> | <span class="s">&quot;warn&quot;</span> | <span class="s">&quot;error&quot;</span></code></th><td></td></tr>
+<tr><th><code>title: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>detail?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>ttl: <span class="k">number</span></code></th><td><p>Milliseconds before it leaves on its own; 0 keeps it until dismissed.</p></td></tr>
+<tr><th><code>action?: { label: <span class="k">string</span>; run: () =&gt; <span class="k">void</span>; }</code></th><td><p>One button beside the text, for a notice that is really a question — the update
+check&#39;s &quot;Download&quot;. Pressing it dismisses the toast as well as running this.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogsize">
+  <h3><a class="anchor-name" href="#dialogsize">DialogSize</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#dialogsize">DialogSize</a> = <span class="s">&quot;sm&quot;</span> | <span class="s">&quot;md&quot;</span> | <span class="s">&quot;lg&quot;</span> | <span class="s">&quot;xl&quot;</span> | <span class="s">&quot;full&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="dialogbutton">
+  <h3><a class="anchor-name" href="#dialogbutton">DialogButton</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogbutton">DialogButton</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>primary?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>run?: (dialog: <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a>) =&gt; <span class="k">void</span> | <span class="k">boolean</span> | <span class="k">Promise</span>&lt;<span class="k">void</span> | <span class="k">boolean</span>&gt;</code></th><td><p>Return <code>false</code> (or a promise of it) to keep the dialog open.</p></td></tr>
+<tr><th><code>closes?: <span class="k">boolean</span></code></th><td><p>Close after <code>run</code>; default true.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogtransfer">
+  <h3><a class="anchor-name" href="#dialogtransfer">DialogTransfer</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogtransfer">DialogTransfer</a></code></pre>
+  <p>What a paste or a drop brought into a dialog.</p>
+  <table class="fields"><tbody><tr><th><code>files: File[]</code></th><td></td></tr>
+<tr><th><code>text: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogspec">
+  <h3><a class="anchor-name" href="#dialogspec">DialogSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogspec">DialogSpec</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>title: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>size?: <a class="t" href="/api/ui/#dialogsize">DialogSize</a></code></th><td></td></tr>
+<tr><th><code>tall?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>mount(body: HTMLElement, dialog: <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a>): <span class="k">void</span> | (() =&gt; <span class="k">void</span>)</code></th><td><p>Fill <code>body</code> (an empty <code>&lt;div&gt;</code> inside the dialog); return a cleanup if you need one.</p></td></tr>
+<tr><th><code>buttons?: <a class="t" href="/api/ui/#dialogbutton">DialogButton</a>[]</code></th><td><p>Footer buttons, left to right; a single Close when omitted.</p></td></tr>
+<tr><th><code>onPaste?: (transfer: <a class="t" href="/api/ui/#dialogtransfer">DialogTransfer</a>, dialog: <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a>) =&gt; <span class="k">void</span></code></th><td><p>Ctrl+V anywhere in the dialog (while it is the topmost one). Files come from the
+clipboard&#39;s items — a screenshot pastes as one <code>image/png</code> file — and <code>text</code> is the
+plain-text part, so a copied image URL arrives here too.</p></td></tr>
+<tr><th><code>onDrop?: (transfer: <a class="t" href="/api/ui/#dialogtransfer">DialogTransfer</a>, dialog: <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a>) =&gt; <span class="k">void</span></code></th><td><p>Something dropped onto the dialog body.</p></td></tr>
+<tr><th><code>keepOpenOnEscape?: (target: EventTarget | <span class="k">null</span>) =&gt; <span class="k">boolean</span></code></th><td><p>Escape normally closes the dialog. Answer true to keep it open for this press —
+when the key was meant for something inside the dialog that handles Escape itself
+(a code editor dismissing its own popups), judged by the element it landed on.</p></td></tr>
+<tr><th><code>slot?: <a class="t" href="/api/ui/#dialogslotoffer">DialogSlotOffer</a></code></th><td><p>Offer a slot of this dialog&#39;s own, so other plugins can add to it with <code>ui.dialogSlot</code>
+the way they add to a built-in dialog: <code>id</code> is what they name (<code>&quot;&lt;plugin&gt;.&lt;name&gt;&quot;</code>),
+<code>fields</code> the working copy lent to them, read live, and <code>payload</code> what the dialog was
+opened with. The Text Trigger Editor plugin offers <code>&quot;trigedit.text&quot;</code> with a <code>text</code> field.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogslotoffer">
+  <h3><a class="anchor-name" href="#dialogslotoffer">DialogSlotOffer</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogslotoffer">DialogSlotOffer</a></code></pre>
+  <p>A slot a plugin dialog offers to other plugins; see <code>DialogSpec.slot</code>.</p>
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>payload?: <span class="k">Record</span>&lt;<span class="k">string</span>, <span class="k">unknown</span>&gt;</code></th><td></td></tr>
+<tr><th><code>fields?: <span class="k">Record</span>&lt;<span class="k">string</span>, <a class="t" href="/api/ui/#dialogfield">DialogField</a>&gt;</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialoghandle">
+  <h3><a class="anchor-name" href="#dialoghandle">DialogHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialoghandle">DialogHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>close(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isOpen(): <span class="k">boolean</span></code></th><td><p>Whether the dialog is still on screen.</p></td></tr>
+<tr><th><code>setTitle(title: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>Change the title strip&#39;s text.</p></td></tr>
+<tr><th><code>setBusy(label: <span class="k">string</span> | <span class="k">false</span>): <span class="k">void</span></code></th><td><p>Say the dialog is working: a ring and <code>label</code> at the left of the footer, and every
+footer button disabled until <code>setBusy(false)</code>. A button&#39;s own <code>run</code> already does this
+for as long as its promise is pending — this is for work the buttons did not start,
+such as the first load, or a search that runs as the user types.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="panelspec">
+  <h3><a class="anchor-name" href="#panelspec">PanelSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#panelspec">PanelSpec</a></code></pre>
+  <p>A panel floats over the map and does not block it: the user keeps drawing, scrolling
+and using hotkeys while it is open (except while typing in one of its fields). It
+is dragged by its title bar and closed with the × or <code>close()</code>.</p>
+  <table class="fields"><tbody><tr><th><code>title: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>width?: <span class="k">number</span></code></th><td><p>In CSS pixels; 260 by default. The panel is as tall as its content, up to the map&#39;s height. Ignored when docked.</p></td></tr>
+<tr><th><code>height?: <span class="k">number</span></code></th><td><p>Floating only: a height in CSS pixels instead of the content&#39;s own; the body then scrolls, or fills, as its content asks.</p></td></tr>
+<tr><th><code>resizable?: <span class="k">boolean</span></code></th><td><p>Floating only: a grip at the bottom-right corner lets the user resize the panel, and
+the size is remembered with the position for the session. The body is a column flex
+box, so a root element with <code>flex: 1; min-height: 0</code> fills whatever size it has —
+what a code editor or a long list beside the map wants.</p></td></tr>
+<tr><th><code>dock?: <span class="s">&quot;float&quot;</span> | <span class="s">&quot;right&quot;</span></code></th><td><p>Where the panel lives. <code>&quot;float&quot;</code> (the default) is a frame over the map the user drags
+about. <code>&quot;right&quot;</code> puts it in the right dock as a panel of its own, under Minimap, Layers
+and Properties, with the same head and hide button the built-in panels have — the
+choice for anything the user keeps open while working, such as an assistant or a
+readout. A docked panel shows the dock even when the user has hidden every built-in
+panel in it.</p></td></tr>
+<tr><th><code>grow?: <span class="k">boolean</span></code></th><td><p>A docked panel that takes the dock&#39;s spare height (a transcript, a long list); off by default.</p></td></tr>
+<tr><th><code>mount(body: HTMLElement, panel: <a class="t" href="/api/ui/#panelhandle">PanelHandle</a>): <span class="k">void</span> | (() =&gt; <span class="k">void</span>)</code></th><td><p>Fill <code>body</code> (an empty <code>&lt;div&gt;</code> inside the panel); return a cleanup if you need one.</p></td></tr>
+<tr><th><code>onClose?: () =&gt; <span class="k">void</span></code></th><td><p>The panel closed, whichever way.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="panelhandle">
+  <h3><a class="anchor-name" href="#panelhandle">PanelHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#panelhandle">PanelHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>close(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isOpen(): <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>setTitle(title: <span class="k">string</span>): <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="statusitemspec">
+  <h3><a class="anchor-name" href="#statusitemspec">StatusItemSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#statusitemspec">StatusItemSpec</a></code></pre>
+  <p>One cell in the status bar (<code>ui.statusItem</code>): a line of text with the plugin&#39;s icon,
+a spinner while <code>busy</code>, and a click. It is how a plugin that works in the background
+stays visible without a panel — &quot;AI · working 12 s&quot;, &quot;3 problems&quot;, &quot;Synced&quot;.</p>
+  <table class="fields"><tbody><tr><th><code>text: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>title?: <span class="k">string</span></code></th><td><p>The tooltip.</p></td></tr>
+<tr><th><code>busy?: <span class="k">boolean</span></code></th><td><p>Show a spinner in the cell.</p></td></tr>
+<tr><th><code>warn?: <span class="k">boolean</span></code></th><td><p>Paint the cell as a warning.</p></td></tr>
+<tr><th><code>onClick?: () =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="statusitemhandle">
+  <h3><a class="anchor-name" href="#statusitemhandle">StatusItemHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#statusitemhandle">StatusItemHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>set(patch: <span class="k">Partial</span>&lt;<a class="t" href="/api/ui/#statusitemspec">StatusItemSpec</a>&gt;): <span class="k">void</span></code></th><td><p>Change any of the fields; the cell redraws.</p></td></tr>
+<tr><th><code>remove(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isShown(): <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="slotteddialogid">
+  <h3><a class="anchor-name" href="#slotteddialogid">SlottedDialogId</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#slotteddialogid">SlottedDialogId</a> = <span class="s">&quot;mapProperties&quot;</span> | <span class="s">&quot;triggerEditor&quot;</span> | <span class="s">&quot;stringEditor&quot;</span> | <span class="s">&quot;playerSettings&quot;</span> | <span class="s">&quot;missionBriefing&quot;</span>;</code></pre>
+  <p>The dialogs a plugin may add to (<code>ui.dialogSlot</code>), and the fields each one exposes to
+the slot. A field is the dialog&#39;s <em>working copy</em> — what the person sees in the form,
+not yet applied to the map — so a slot&#39;s button can fill it in and leave OK to them.</p>
+<ul>
+<li><code>mapProperties</code>: <code>name</code>, <code>description</code>.</li>
+<li><code>triggerEditor</code>, <code>stringEditor</code>, <code>playerSettings</code>, <code>missionBriefing</code>: no fields, a slot only.</li>
+</ul>
+<p>A plugin&#39;s own dialog can offer a slot too (<code>DialogSpec.slot</code>), under an id of its
+choosing — <code>&quot;trigedit.text&quot;</code> is the Text Trigger Editor&#39;s, lending <code>text</code> with
+<code>payload.briefing</code> — and another plugin adds to it with the same <code>dialogSlot</code> call.</p>
+  
+  
+</div>
+<div class="type" id="dialogslotid">
+  <h3><a class="anchor-name" href="#dialogslotid">DialogSlotId</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#dialogslotid">DialogSlotId</a> = <a class="t" href="/api/ui/#slotteddialogid">SlottedDialogId</a> | (<span class="k">string</span> &amp; {});</code></pre>
+  <p>A slot id: one of the editor&#39;s dialogs, or the id a plugin dialog offers (<code>&quot;&lt;plugin&gt;.&lt;name&gt;&quot;</code> by convention).</p>
+  
+  
+</div>
+<div class="type" id="dialogfield">
+  <h3><a class="anchor-name" href="#dialogfield">DialogField</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogfield">DialogField</a></code></pre>
+  <p>A form field a dialog lends to a slot: read it, set it, hear it change.</p>
+  <table class="fields"><tbody><tr><th><code>get(): <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>set(value: <span class="k">string</span>): <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogslothost">
+  <h3><a class="anchor-name" href="#dialogslothost">DialogSlotHost</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogslothost">DialogSlotHost</a></code></pre>
+  <p>What a slot&#39;s <code>mount</code> is handed: which dialog, its payload, its fields, and a way to close it.</p>
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> dialog: <a class="t" href="/api/ui/#dialogslotid">DialogSlotId</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> payload: <span class="k">Readonly</span>&lt;<span class="k">Record</span>&lt;<span class="k">string</span>, <span class="k">unknown</span>&gt;&gt;</code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> fields: <span class="k">Readonly</span>&lt;<span class="k">Record</span>&lt;<span class="k">string</span>, <a class="t" href="/api/ui/#dialogfield">DialogField</a>&gt;&gt;</code></th><td></td></tr>
+<tr><th><code>close(): <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="dialogslotspec">
+  <h3><a class="anchor-name" href="#dialogslotspec">DialogSlotSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#dialogslotspec">DialogSlotSpec</a></code></pre>
+  <p>Something a plugin mounts <em>inside</em> a built-in dialog — a button in Map Properties
+that suggests a name, one in the Text Trigger Editor that explains the text. The slot
+is a row at the left of the dialog&#39;s footer; fill it with the widgets, and it looks like
+part of the dialog. <code>mount</code> runs every time the dialog opens, with a cleanup on close.</p>
+  <table class="fields"><tbody><tr><th><code>mount(body: HTMLElement, host: <a class="t" href="/api/ui/#dialogslothost">DialogSlotHost</a>): <span class="k">void</span> | (() =&gt; <span class="k">void</span>)</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="mappointer">
+  <h3><a class="anchor-name" href="#mappointer">MapPointer</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#mappointer">MapPointer</a></code></pre>
+  <p>The pointer over the map, in the map&#39;s own units. A tile is 32 × 32 pixels.</p>
+  <table class="fields"><tbody><tr><th><code>px: <span class="k">number</span></code></th><td><p>Map pixels. Kept inside the map while a button is held, as the built-in brushes do.</p></td></tr>
+<tr><th><code>py: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tx: <span class="k">number</span></code></th><td><p>The tile under the pointer.</p></td></tr>
+<tr><th><code>ty: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>inMap: <span class="k">boolean</span></code></th><td><p>False once the pointer has left the map with no button held.</p></td></tr>
+<tr><th><code>down: <span class="k">boolean</span></code></th><td><p>Whether the primary button is held.</p></td></tr>
+<tr><th><code>shift: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>ctrl: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>alt: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="mapview">
+  <h3><a class="anchor-name" href="#mapview">MapView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#mapview">MapView</a></code></pre>
+  <p>Map pixels to canvas pixels, for a tool&#39;s <code>draw</code>.</p>
+  <table class="fields"><tbody><tr><th><code>zoom: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>tilePx: <span class="k">number</span></code></th><td><p>Canvas pixels per tile.</p></td></tr>
+<tr><th><code>x(px: <span class="k">number</span>): <span class="k">number</span></code></th><td><p>A map pixel&#39;s x on the canvas.</p></td></tr>
+<tr><th><code>y(py: <span class="k">number</span>): <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>visible: <a class="t" href="/api/types/#rect">Rect</a></code></th><td><p>The tiles on screen.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="maptoolstopreason">
+  <h3><a class="anchor-name" href="#maptoolstopreason">MapToolStopReason</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#maptoolstopreason">MapToolStopReason</a> = 
+<span class="c">/** `handle.stop()`. */</span>
+<span class="s">&quot;stopped&quot;</span>
+<span class="c">/** Esc or a right-click, and `onCancel` did not keep the tool. */</span>
+ | <span class="s">&quot;cancelled&quot;</span>
+<span class="c">/** The map was closed or replaced. */</span>
+ | <span class="s">&quot;document&quot;</span>
+<span class="c">/** Another tool started. */</span>
+ | <span class="s">&quot;replaced&quot;</span>
+<span class="c">/** The plugin was disabled. */</span>
+ | <span class="s">&quot;disabled&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="maptoolspec">
+  <h3><a class="anchor-name" href="#maptoolspec">MapToolSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#maptoolspec">MapToolSpec</a></code></pre>
+  <p>A tool owns the pointer over the map: the viewport hands it every press, move and
+release ahead of the active layer&#39;s own tools, hides the layer&#39;s brush ghost, and
+lets it draw an overlay. The map stays visible and scrollable, and a panel can stay
+open beside it — which is how a plugin gets a drawing mode of its own.</p>
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td><p>Shown in the viewport&#39;s HUD and the status bar while the tool runs.</p></td></tr>
+<tr><th><code>hint?: <span class="k">string</span></code></th><td><p>After the name: <code>&quot;drag to draw a line&quot;</code>.</p></td></tr>
+<tr><th><code>cursor?: <span class="k">string</span></code></th><td><p>CSS cursor over the map; <code>&quot;crosshair&quot;</code> by default.</p></td></tr>
+<tr><th><code>onDown?(p: <a class="t" href="/api/ui/#mappointer">MapPointer</a>): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>onMove?(p: <a class="t" href="/api/ui/#mappointer">MapPointer</a>): <span class="k">void</span></code></th><td><p>Every pointer move over the map, button held or not, and once with <code>inMap: false</code> when it leaves.</p></td></tr>
+<tr><th><code>onUp?(p: <a class="t" href="/api/ui/#mappointer">MapPointer</a>): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>onCancel?(): <span class="k">boolean</span> | <span class="k">void</span></code></th><td><p>Esc or a right-click. Return <code>true</code> to keep the tool running (you cancelled a gesture of your own); otherwise it stops.</p></td></tr>
+<tr><th><code>draw?(ctx: CanvasRenderingContext2D, view: <a class="t" href="/api/ui/#mapview">MapView</a>): <span class="k">void</span></code></th><td><p>Draw over the map, after everything else, each time the viewport repaints.</p></td></tr>
+<tr><th><code>onStop?(reason: <a class="t" href="/api/ui/#maptoolstopreason">MapToolStopReason</a>): <span class="k">void</span></code></th><td><p>The tool is no longer running, for whatever reason (once).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="maptoolhandle">
+  <h3><a class="anchor-name" href="#maptoolhandle">MapToolHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#maptoolhandle">MapToolHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>stop(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isActive(): <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>redraw(): <span class="k">void</span></code></th><td><p>Repaint the viewport — and so call <code>draw</code> — now. Cheap; call it from <code>onMove</code>.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="overlayabove">
+  <h3><a class="anchor-name" href="#overlayabove">OverlayAbove</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#overlayabove">OverlayAbove</a> = 
+<span class="c">/** Over the terrain and grid, under doodad footprints, units, sprites and locations (the default). */</span>
+<span class="s">&quot;terrain&quot;</span>
+<span class="c">/** Over units, sprites and locations, under fog of war. */</span>
+ | <span class="s">&quot;objects&quot;</span>
+<span class="c">/** Over everything but a running map tool&#39;s own drawing. */</span>
+ | <span class="s">&quot;everything&quot;</span>;</code></pre>
+  <p>Where in the viewport&#39;s paint pass an overlay draws.</p>
+  
+  
+</div>
+<div class="type" id="overlayspec">
+  <h3><a class="anchor-name" href="#overlayspec">OverlaySpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#overlayspec">OverlaySpec</a></code></pre>
+  <p>An overlay is a picture drawn over the map that the user can turn on and off: it
+is listed under View ▸ Overlays and in the Layers panel, stays while the user works
+on any layer, and never takes the pointer — clicks go to the active layer&#39;s tools
+as usual. It hears the pointer through <code>onHover</code>, which is how a readout follows the
+mouse while the user places units. Register one at activation and keep the handle;
+it goes away with the plugin.</p>
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td><p>Shown in View ▸ Overlays and the Layers panel. Unique per plugin.</p></td></tr>
+<tr><th><code>visible?: <span class="k">boolean</span></code></th><td><p>Start visible; true by default. What the user last set for this name wins for the session.</p></td></tr>
+<tr><th><code>above?: <a class="t" href="/api/ui/#overlayabove">OverlayAbove</a></code></th><td><p>Where the picture goes in the paint pass; <code>&quot;terrain&quot;</code> by default.</p></td></tr>
+<tr><th><code>draw(ctx: CanvasRenderingContext2D, view: <a class="t" href="/api/ui/#mapview">MapView</a>): <span class="k">void</span></code></th><td><p>Draw in canvas pixels through <code>view</code>, each time the viewport repaints while visible.</p></td></tr>
+<tr><th><code>onHover?(p: <a class="t" href="/api/ui/#mappointer">MapPointer</a> | <span class="k">null</span>): <span class="k">void</span></code></th><td><p>The pointer over the map while the overlay is visible, on every layer and while a
+map tool runs; <code>null</code> once when it leaves. Call <code>handle.redraw()</code> here to move a
+hover mark. A press sets <code>down</code> but is never captured for you.</p></td></tr>
+<tr><th><code>onToggle?(visible: <span class="k">boolean</span>): <span class="k">void</span></code></th><td><p>The overlay was shown or hidden, by the user in the chrome or by your handle.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="overlayhandle">
+  <h3><a class="anchor-name" href="#overlayhandle">OverlayHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#overlayhandle">OverlayHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>show(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>hide(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>toggle(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isVisible(): <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>redraw(): <span class="k">void</span></code></th><td><p>Repaint the viewport — and so call <code>draw</code> — now.</p></td></tr>
+<tr><th><code>remove(): <span class="k">void</span></code></th><td><p>Take the overlay out of the chrome for good; <code>isVisible</code> is false from then on.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pickoptions">
+  <h3><a class="anchor-name" href="#pickoptions">PickOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#pickoptions">PickOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>prompt?: <span class="k">string</span></code></th><td><p>Shown in the viewport&#39;s HUD while the user picks; also the status line.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pickobjectkind">
+  <h3><a class="anchor-name" href="#pickobjectkind">PickObjectKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#pickobjectkind">PickObjectKind</a> = <span class="s">&quot;unit&quot;</span> | <span class="s">&quot;location&quot;</span>;</code></pre>
+  <p>What <code>ui.pickObject</code> can pick.</p>
+  
+  
+</div>
+<div class="type" id="pickobjectoptions">
+  <h3><a class="anchor-name" href="#pickobjectoptions">PickObjectOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#pickobjectoptions">PickObjectOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>kinds?: <a class="t" href="/api/ui/#pickobjectkind">PickObjectKind</a>[]</code></th><td><p>Which kinds count; every kind when omitted. Under the pointer, a unit wins over a location.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pickedobject">
+  <h3><a class="anchor-name" href="#pickedobject">PickedObject</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#pickedobject">PickedObject</a></code></pre>
+  <p>What the user picked: the record&#39;s index in <code>document.scenario().units</code> or <code>.locations</code>.</p>
+  <table class="fields"><tbody><tr><th><code>kind: <a class="t" href="/api/ui/#pickobjectkind">PickObjectKind</a></code></th><td></td></tr>
+<tr><th><code>index: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pickfilesoptions">
+  <h3><a class="anchor-name" href="#pickfilesoptions">PickFilesOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#pickfilesoptions">PickFilesOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>accept?: <span class="k">string</span></code></th><td><p><code>accept</code> for the file input, e.g. <code>&quot;image/*&quot;</code> or <code>&quot;.png,.jpg&quot;</code>.</p></td></tr>
+<tr><th><code>multiple?: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="confirmoptions">
+  <h3><a class="anchor-name" href="#confirmoptions">ConfirmOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#confirmoptions">ConfirmOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>title?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>confirmLabel?: <span class="k">string</span></code></th><td><p>The primary button; <code>OK</code> by default.</p></td></tr>
+<tr><th><code>cancelLabel?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>danger?: <span class="k">boolean</span></code></th><td><p>Paint the primary button as a destructive action.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="promptoptions">
+  <h3><a class="anchor-name" href="#promptoptions">PromptOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#promptoptions">PromptOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>placeholder?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>multiline?: <span class="k">boolean</span></code></th><td><p>A multi-line field.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="progressoptions">
+  <h3><a class="anchor-name" href="#progressoptions">ProgressOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#progressoptions">ProgressOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>title?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>cancellable?: <span class="k">boolean</span></code></th><td><p>Show a Cancel button; <code>cancelled()</code> answers true once it is pressed.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="progresshandle">
+  <h3><a class="anchor-name" href="#progresshandle">ProgressHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#progresshandle">ProgressHandle</a></code></pre>
+  <p>A progress panel over the map. It does not block the editor — the user can still
+scroll and look — so a plugin doing long work should report often and check
+<code>cancelled()</code> in its loop.</p>
+  <table class="fields"><tbody><tr><th><code>report(fraction: <span class="k">number</span>, text?: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>How far along (0…1), and optionally a line under the bar.</p></td></tr>
+<tr><th><code>cancelled(): <span class="k">boolean</span></code></th><td><p>True once the user pressed Cancel or closed the panel. Poll it inside a loop.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> signal: AbortSignal</code></th><td><p>The same answer as a signal, for work that takes one: aborted when the user
+cancels, so <code>fetch(url, { signal })</code> and anything built on <code>AbortSignal</code> stop
+with the panel. Never aborted by <code>done()</code>.</p></td></tr>
+<tr><th><code>done(): <span class="k">void</span></code></th><td></td></tr>
+<tr><th><code>isOpen(): <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="widgetchild">
+  <h3><a class="anchor-name" href="#widgetchild">WidgetChild</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#widgetchild">WidgetChild</a> = Node | <span class="k">string</span> | <span class="k">number</span> | <span class="k">null</span> | <span class="k">undefined</span> | <span class="k">false</span>;</code></pre>
+  <p>Anything the widget builders accept as a child: a node, text, or nothing.</p>
+  
+  
+</div>
+<div class="type" id="buttonoptions">
+  <h3><a class="anchor-name" href="#buttonoptions">ButtonOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#buttonoptions">ButtonOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>primary?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>danger?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>ghost?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>busy?: <span class="k">boolean</span></code></th><td><p>Start off waiting: a ring in front of the label, and the button disabled.</p></td></tr>
+<tr><th><code>onClick?: (event: MouseEvent) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="buttonelement">
+  <h3><a class="anchor-name" href="#buttonelement">ButtonElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#buttonelement">ButtonElement</a> = HTMLButtonElement &amp; {
+	<span class="c">/**
+	 * A ring in front of the label while `busy`, and the button disabled — so the press
+	 * that started the work cannot be repeated, and says why it cannot.
+	 */</span>
+	setBusy(busy: <span class="k">boolean</span>): <span class="k">void</span>;
+};</code></pre>
+  <p>The <code>&lt;button&gt;</code>, with the one call that puts it in and out of its waiting state.</p>
+  
+  
+</div>
+<div class="type" id="checkboxoptions">
+  <h3><a class="anchor-name" href="#checkboxoptions">CheckboxOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#checkboxoptions">CheckboxOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>radio?: <span class="k">boolean</span></code></th><td><p>A radio button instead; give the group a <code>name</code>.</p></td></tr>
+<tr><th><code>name?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>onChange?: (value: <span class="k">boolean</span>) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="checkboxelement">
+  <h3><a class="anchor-name" href="#checkboxelement">CheckboxElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#checkboxelement">CheckboxElement</a> = HTMLLabelElement &amp; {
+	input: HTMLInputElement;
+};</code></pre>
+  <p>The <code>&lt;label&gt;</code> a checkbox is, with its <code>&lt;input&gt;</code> on it so you can read or set the value.</p>
+  
+  
+</div>
+<div class="type" id="textfieldoptions">
+  <h3><a class="anchor-name" href="#textfieldoptions">TextFieldOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#textfieldoptions">TextFieldOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>placeholder?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>password?: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>onChange?: (value: <span class="k">string</span>) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="numberfieldoptions">
+  <h3><a class="anchor-name" href="#numberfieldoptions">NumberFieldOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#numberfieldoptions">NumberFieldOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>min?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>max?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>step?: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>onChange?: (value: <span class="k">number</span>) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="selectoption">
+  <h3><a class="anchor-name" href="#selectoption">SelectOption</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#selectoption">SelectOption</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value: <span class="k">string</span> | <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>disabled?: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="selectoptions">
+  <h3><a class="anchor-name" href="#selectoptions">SelectOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#selectoptions">SelectOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">string</span> | <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>onChange?: (value: <span class="k">string</span>) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="formrow">
+  <h3><a class="anchor-name" href="#formrow">FormRow</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#formrow">FormRow</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>field: HTMLElement</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="listitem">
+  <h3><a class="anchor-name" href="#listitem">ListItem</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#listitem">ListItem</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>value: T</code></th><td></td></tr>
+<tr><th><code>hint?: <span class="k">string</span></code></th><td><p>Dimmed text at the end of the row.</p></td></tr>
+<tr><th><code>index?: <span class="k">number</span></code></th><td><p>A number in the row&#39;s gutter, as the editor&#39;s own lists show indices.</p></td></tr>
+<tr><th><code>title?: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="listoptions">
+  <h3><a class="anchor-name" href="#listoptions">ListOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#listoptions">ListOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>selected?: <span class="k">number</span></code></th><td><p>Which row starts selected.</p></td></tr>
+<tr><th><code>height?: <span class="k">number</span></code></th><td><p>Maximum height in pixels; the list scrolls past it.</p></td></tr>
+<tr><th><code>className?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>onPick?: (value: T, index: <span class="k">number</span>) =&gt; <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="spinneroptions">
+  <h3><a class="anchor-name" href="#spinneroptions">SpinnerOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#spinneroptions">SpinnerOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>size?: <span class="s">&quot;sm&quot;</span> | <span class="s">&quot;md&quot;</span> | <span class="s">&quot;lg&quot;</span></code></th><td><p><code>&quot;sm&quot;</code> 10px, <code>&quot;md&quot;</code> 14px (the default), <code>&quot;lg&quot;</code> 20px.</p></td></tr>
+<tr><th><code>label?: <span class="k">string</span></code></th><td><p>Text beside the ring. Without it you get the bare ring, to put beside your own.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="progressbaroptions">
+  <h3><a class="anchor-name" href="#progressbaroptions">ProgressBarOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#progressbaroptions">ProgressBarOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>value?: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>How far along to start: 0…1, or null (the default) for the sliding bar that means &quot;no idea how long&quot;.</p></td></tr>
+<tr><th><code>label?: <span class="k">string</span></code></th><td><p>A line under the bar — what is being waited for, or how much of it is done.</p></td></tr>
+<tr><th><code>percent?: <span class="k">boolean</span></code></th><td><p>The percentage at the end of the bar; on for a bar that knows how far along it is.</p></td></tr>
+<tr><th><code>width?: <span class="k">number</span></code></th><td><p>Width in CSS pixels; it fills the width it is given by default.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="progressbarelement">
+  <h3><a class="anchor-name" href="#progressbarelement">ProgressBarElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#progressbarelement">ProgressBarElement</a> = HTMLElement &amp; {
+	<span class="c">/**
+	 * How far along: 0…1, or null for the sliding bar. `label` replaces the line under it.
+	 * Cheap to call often — it repaints only when the bar actually moves.
+	 */</span>
+	set(value: <span class="k">number</span> | <span class="k">null</span>, label?: <span class="k">string</span>): <span class="k">void</span>;
+};</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="statuslineoptions">
+  <h3><a class="anchor-name" href="#statuslineoptions">StatusLineOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#statuslineoptions">StatusLineOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>text?: <span class="k">string</span></code></th><td><p>What it says before anything has happened.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="statuslineelement">
+  <h3><a class="anchor-name" href="#statuslineelement">StatusLineElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#statuslineelement">StatusLineElement</a> = HTMLElement &amp; {
+	<span class="c">/**
+	 * A finished line. `kind` colours it; nothing means plain. A `Node` in place of the
+	 * text is for a line that carries more than words — a failure with a link to the
+	 * settings that would fix it.
+	 */</span>
+	set(text: <span class="k">string</span> | Node, kind?: <span class="s">&quot;ok&quot;</span> | <span class="s">&quot;warn&quot;</span> | <span class="s">&quot;error&quot;</span>): <span class="k">void</span>;
+	<span class="c">/** Waiting, with no idea how long: a ring and the text. */</span>
+	busy(text: <span class="k">string</span>): <span class="k">void</span>;
+	<span class="c">/** Waiting with a share done (0…1), or null for the sliding bar. */</span>
+	progress(text: <span class="k">string</span>, value: <span class="k">number</span> | <span class="k">null</span>): <span class="k">void</span>;
+	<span class="c">/**
+	 * A Cancel beside the line that calls `stop`; null takes it away. `label` is the
+	 * button&#39;s word — &quot;Stop&quot; for a request that is running, since Cancel in a dialog
+	 * means leaving it.
+	 */</span>
+	cancel(stop: (() =&gt; <span class="k">void</span>) | <span class="k">null</span>, label?: <span class="k">string</span>): <span class="k">void</span>;
+	<span class="c">/** Back to an empty line. */</span>
+	clear(): <span class="k">void</span>;
+};</code></pre>
+  <p>The line along the bottom of a dialog: what happened, what is happening, how far
+along it is, and the Cancel that stops it — in one place, so a dialog has one voice.
+It is a live region, so a screen reader hears the outcome (but not every byte of a
+download: the bar&#39;s own movement is not announced).</p>
+  
+  
+</div>
+<div class="type" id="skeletonoptions">
+  <h3><a class="anchor-name" href="#skeletonoptions">SkeletonOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#skeletonoptions">SkeletonOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>width?: <span class="k">string</span></code></th><td><p>CSS width, <code>&quot;100%&quot;</code> by default.</p></td></tr>
+<tr><th><code>height?: <span class="k">number</span></code></th><td><p>Height in CSS pixels: 10 for a line, 44 for a block.</p></td></tr>
+<tr><th><code>lines?: <span class="k">number</span></code></th><td><p>How many lines, stacked; 1 by default. The last is drawn short, as text ends short.</p></td></tr>
+<tr><th><code>block?: <span class="k">boolean</span></code></th><td><p>A block — the place a thumbnail or a picture will take — rather than a line of text.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="busyoptions">
+  <h3><a class="anchor-name" href="#busyoptions">BusyOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#busyoptions">BusyOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label?: <span class="k">string</span></code></th><td><p>What is being waited for, over the covered box.</p></td></tr>
+<tr><th><code>dim?: <span class="k">boolean</span></code></th><td><p>Dim what is already there rather than leaving it at full strength; true by default.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="busyhandle">
+  <h3><a class="anchor-name" href="#busyhandle">BusyHandle</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#busyhandle">BusyHandle</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>set(label: <span class="k">string</span>): <span class="k">void</span></code></th><td><p>Change the label without lifting the cover.</p></td></tr>
+<tr><th><code>done(): <span class="k">void</span></code></th><td><p>Uncover the box. Safe to call twice.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="stepsoptions">
+  <h3><a class="anchor-name" href="#stepsoptions">StepsOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#stepsoptions">StepsOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>tail?: <span class="k">number</span></code></th><td><p>While the list is <code>running</code>, show only its last this many rows; the rest come back
+when it stops. For a list that grows past what a panel can hold while it is watched.
+0, the default, shows every row.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="stepoptions">
+  <h3><a class="anchor-name" href="#stepoptions">StepOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#stepoptions">StepOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>icon?: <span class="k">string</span></code></th><td><p>A character in front of the label, in the list&#39;s own vocabulary: ✎ for a change, ▸ for a read.</p></td></tr>
+<tr><th><code>title?: <span class="k">string</span></code></th><td><p>The row&#39;s tooltip.</p></td></tr>
+<tr><th><code>running?: <span class="k">boolean</span></code></th><td><p>Begin running (a ring) rather than pending (a hollow mark).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="stephandle">
+  <h3><a class="anchor-name" href="#stephandle">StepHandle</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#stephandle">StepHandle</a> = {
+	<span class="k">readonly</span> element: HTMLElement;
+	<span class="c">/** Rename the row (a step named before its arguments were known), and its tooltip. */</span>
+	set(label: <span class="k">string</span>, title?: <span class="k">string</span>): <span class="k">void</span>;
+	start(detail?: <span class="k">string</span>): <span class="k">void</span>;
+	done(detail?: <span class="k">string</span>): <span class="k">void</span>;
+	fail(detail?: <span class="k">string</span>): <span class="k">void</span>;
+	skip(detail?: <span class="k">string</span>): <span class="k">void</span>;
+	<span class="c">/** Change the detail and nothing else — a clock ticking beside a running step. */</span>
+	detail(text: <span class="k">string</span>): <span class="k">void</span>;
+	<span class="c">/** Something under the label — a thumbnail, a line of output. */</span>
+	append(node: Node): <span class="k">void</span>;
+};</code></pre>
+  <p>One row of a <code>steps</code> list. Each state takes the detail shown dim after the label.</p>
+  
+  
+</div>
+<div class="type" id="stepselement">
+  <h3><a class="anchor-name" href="#stepselement">StepsElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#stepselement">StepsElement</a> = HTMLElement &amp; {
+	add(label: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#stepoptions">StepOptions</a>): <a class="t" href="/api/ui/#stephandle">StepHandle</a>;
+	<span class="c">/**
+	 * A line between rows that is not a step — an assistant&#39;s words between its tool
+	 * calls. `at` puts it before the row at that index; without it, at the end.
+	 */</span>
+	note(content: <span class="k">string</span> | Node, at?: <span class="k">number</span>): HTMLElement;
+	<span class="c">/** Rows and notes so far, for `note`&#39;s `at`. */</span>
+	size(): <span class="k">number</span>;
+	<span class="c">/** Steps so far (rows, not notes). */</span>
+	count(): <span class="k">number</span>;
+	<span class="c">/** Whether work is running: while it is, the `tail` window applies. */</span>
+	running(on: <span class="k">boolean</span>): <span class="k">void</span>;
+};</code></pre>
+  <p>A list of steps: one row per unit of work, each pending, running, done, failed or
+skipped, with a detail after its label and a mark at its end. What a builder shows
+while it builds, and what a tool-using assistant shows while it works.</p>
+  
+  
+</div>
+<div class="type" id="foldoptions">
+  <h3><a class="anchor-name" href="#foldoptions">FoldOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#foldoptions">FoldOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>text?: <span class="k">string</span></code></th><td><p>The line to begin with.</p></td></tr>
+<tr><th><code>open?: <span class="k">boolean</span></code></th><td><p>Open to begin with.</p></td></tr>
+<tr><th><code>busy?: <span class="k">boolean</span></code></th><td><p>Start with a ring for a mark.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="foldelement">
+  <h3><a class="anchor-name" href="#foldelement">FoldElement</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/ui/#foldelement">FoldElement</a> = HTMLDetailsElement &amp; {
+	<span class="c">/** Where the content goes. */</span>
+	<span class="k">readonly</span> body: HTMLElement;
+	<span class="c">/** The line: text, or text and nodes. */</span>
+	set(...content: (<span class="k">string</span> | Node)[]): <span class="k">void</span>;
+	<span class="c">/** The mark in front of the line: `&quot;busy&quot;` for a ring, a character (✓, ✗) in a colour, or null for none. */</span>
+	mark(sym: <span class="k">string</span> | <span class="k">null</span>, kind?: <span class="s">&quot;ok&quot;</span> | <span class="s">&quot;warn&quot;</span> | <span class="s">&quot;error&quot;</span>): <span class="k">void</span>;
+	<span class="c">/** A control at the end of the line — an Undo — whose click does not fold the block; null takes it away. */</span>
+	action(node: HTMLElement | <span class="k">null</span>): <span class="k">void</span>;
+};</code></pre>
+  <p>A block that folds to one line: a mark, the line, a control at its end, and a body.
+For work worth a line when it is done and a list while it runs — one turn of an
+assistant, a pass over the map — and for anything long that most readers skip, such
+as a model&#39;s reasoning.</p>
+  
+  
+</div>
+<div class="type" id="widgetsapi">
+  <h3><a class="anchor-name" href="#widgetsapi">WidgetsApi</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/ui/#widgetsapi">WidgetsApi</a></code></pre>
+  <p>Buttons, fields, forms and lists in the editor&#39;s own styles, as plain DOM. A plugin
+dialog built from these looks like a built-in one; <code>el</code> is the escape hatch for
+anything they do not cover.</p>
+  <table class="fields"><tbody><tr><th><code>button(label: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#buttonoptions">ButtonOptions</a>): <a class="t" href="/api/ui/#buttonelement">ButtonElement</a></code></th><td></td></tr>
+<tr><th><code>checkbox(label: <span class="k">string</span>, options?: <a class="t" href="/api/ui/#checkboxoptions">CheckboxOptions</a>): <a class="t" href="/api/ui/#checkboxelement">CheckboxElement</a></code></th><td></td></tr>
+<tr><th><code>text(options?: <a class="t" href="/api/ui/#textfieldoptions">TextFieldOptions</a>): HTMLInputElement</code></th><td></td></tr>
+<tr><th><code><span class="k">number</span>(options?: <a class="t" href="/api/ui/#numberfieldoptions">NumberFieldOptions</a>): HTMLInputElement</code></th><td></td></tr>
+<tr><th><code>select(items: <a class="t" href="/api/ui/#selectoption">SelectOption</a>[], options?: <a class="t" href="/api/ui/#selectoptions">SelectOptions</a>): HTMLSelectElement</code></th><td></td></tr>
+<tr><th><code>form(rows: (<a class="t" href="/api/ui/#formrow">FormRow</a> | <span class="k">null</span> | <span class="k">undefined</span> | <span class="k">false</span>)[]): HTMLElement</code></th><td><p>A two-column grid of labelled fields.</p></td></tr>
+<tr><th><code>group(title: <span class="k">string</span>, ...children: <a class="t" href="/api/ui/#widgetchild">WidgetChild</a>[]): HTMLElement</code></th><td><p>A titled box (a <code>fieldset</code> with a legend, as the dialogs use).</p></td></tr>
+<tr><th><code>row(...children: <a class="t" href="/api/ui/#widgetchild">WidgetChild</a>[]): HTMLDivElement</code></th><td></td></tr>
+<tr><th><code>column(...children: <a class="t" href="/api/ui/#widgetchild">WidgetChild</a>[]): HTMLDivElement</code></th><td></td></tr>
+<tr><th><code>hint(text: <span class="k">string</span>): HTMLElement</code></th><td><p>Small dimmed explanatory text.</p></td></tr>
+<tr><th><code>separator(): HTMLElement</code></th><td></td></tr>
+<tr><th><code>list&lt;T&gt;(items: <a class="t" href="/api/ui/#listitem">ListItem</a>&lt;T&gt;[], options?: <a class="t" href="/api/ui/#listoptions">ListOptions</a>&lt;T&gt;): HTMLElement</code></th><td></td></tr>
+<tr><th><code>spinner(options?: <a class="t" href="/api/ui/#spinneroptions">SpinnerOptions</a>): HTMLElement</code></th><td><p>A turning ring: on its own to put beside your own text, or with a <code>label</code> beside it.</p></td></tr>
+<tr><th><code>progressBar(options?: <a class="t" href="/api/ui/#progressbaroptions">ProgressBarOptions</a>): <a class="t" href="/api/ui/#progressbarelement">ProgressBarElement</a></code></th><td><p>A bar, with the percentage and a line under it. <code>set(0…1)</code> moves it; <code>set(null)</code>
+gives the sliding bar for work whose length is not known. Use it where the wait has
+a size — a download, a pass over every trigger — and a spinner where it does not.</p></td></tr>
+<tr><th><code>statusLine(options?: <a class="t" href="/api/ui/#statuslineoptions">StatusLineOptions</a>): <a class="t" href="/api/ui/#statuslineelement">StatusLineElement</a></code></th><td><p>The dialog&#39;s bottom line: <code>set</code>, <code>busy</code>, <code>progress</code> and a <code>cancel</code> button.</p></td></tr>
+<tr><th><code>skeleton(options?: <a class="t" href="/api/ui/#skeletonoptions">SkeletonOptions</a>): HTMLElement</code></th><td><p>A grey stand-in for content that has not arrived, in the shape it will take. Rows of
+these in the list you are about to fill say more than an empty box does, and the list
+does not jump when the answer lands.</p></td></tr>
+<tr><th><code>busy(target: HTMLElement, options?: <a class="t" href="/api/ui/#busyoptions">BusyOptions</a> | <span class="k">string</span>): <a class="t" href="/api/ui/#busyhandle">BusyHandle</a></code></th><td><p>Cover a box while what is in it is being replaced: dimmed, deaf to clicks, with a
+ring and a label over it. <code>done()</code> uncovers it. Give it the box, not the page — the
+search field that starts the work should stay live so the user can change their mind.
+Calling it again on a covered box only changes the label.</p></td></tr>
+<tr><th><code>steps(options?: <a class="t" href="/api/ui/#stepsoptions">StepsOptions</a>): <a class="t" href="/api/ui/#stepselement">StepsElement</a></code></th><td><p>A list of steps, each pending → running → done / failed / skipped, with a detail.</p></td></tr>
+<tr><th><code>fold(options?: <a class="t" href="/api/ui/#foldoptions">FoldOptions</a>): <a class="t" href="/api/ui/#foldelement">FoldElement</a></code></th><td><p>A block folded to one line — a mark, a line that can change, a control at its end — over a body.</p></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-hello-world"><b>Hello World</b><span>the smallest complete plugin: one menu item and one dialog, to copy from</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-paint"><b>Paint</b><span>map tools, a floating panel, and painting with the active layer&#39;s brush</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-walkability"><b>Walkability</b><span>a read-only overlay drawn over the map</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-melee-wizard"><b>Melee Wizard</b><span>placing units with the editor&#39;s own placement checks</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-image-to-terrain"><b>Terrain from Image</b><span>an image turned into terrain, one transaction</span></a></li><li><a class="card" href="https://github.com/scm-js/plugin-scm-scx"><b>scmscx.com</b><span>opening a map fetched from elsewhere</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#status">status</a></li>
+<li><a href="#statustext">statusText</a></li>
+<li><a href="#toast">toast</a></li>
+<li><a href="#savefile">saveFile</a></li>
+<li><a href="#dialog">dialog</a></li>
+<li><a href="#panel">panel</a></li>
+<li><a href="#statusitem">statusItem</a></li>
+<li><a href="#dialogslot">dialogSlot</a></li>
+<li><a href="#maptool">mapTool</a></li>
+<li><a href="#overlay">overlay</a></li>
+<li><a href="#pickfiles">pickFiles</a></li>
+<li><a href="#pickarea">pickArea</a></li>
+<li><a href="#picktile">pickTile</a></li>
+<li><a href="#pickobject">pickObject</a></li>
+<li><a href="#loadimage">loadImage</a></li>
+<li><a href="#readclipboardimage">readClipboardImage</a></li>
+<li><a href="#confirm">confirm</a></li>
+<li><a href="#alert">alert</a></li>
+<li><a href="#prompt">prompt</a></li>
+<li><a href="#progress">progress</a></li>
+<li><a href="#el">el</a></li>
+<li><a href="#widgets">widgets</a></li>
+<li><a href="#open">open</a></li>
+<li><a href="#ask">ask</a></li>
+<li><a href="#repaint">repaint</a></li>
+<li><a href="#toast">Toast</a></li>
+<li><a href="#dialogsize">DialogSize</a></li>
+<li><a href="#dialogbutton">DialogButton</a></li>
+<li><a href="#dialogtransfer">DialogTransfer</a></li>
+<li><a href="#dialogspec">DialogSpec</a></li>
+<li><a href="#dialogslotoffer">DialogSlotOffer</a></li>
+<li><a href="#dialoghandle">DialogHandle</a></li>
+<li><a href="#panelspec">PanelSpec</a></li>
+<li><a href="#panelhandle">PanelHandle</a></li>
+<li><a href="#statusitemspec">StatusItemSpec</a></li>
+<li><a href="#statusitemhandle">StatusItemHandle</a></li>
+<li><a href="#slotteddialogid">SlottedDialogId</a></li>
+<li><a href="#dialogslotid">DialogSlotId</a></li>
+<li><a href="#dialogfield">DialogField</a></li>
+<li><a href="#dialogslothost">DialogSlotHost</a></li>
+<li><a href="#dialogslotspec">DialogSlotSpec</a></li>
+<li><a href="#mappointer">MapPointer</a></li>
+<li><a href="#mapview">MapView</a></li>
+<li><a href="#maptoolstopreason">MapToolStopReason</a></li>
+<li><a href="#maptoolspec">MapToolSpec</a></li>
+<li><a href="#maptoolhandle">MapToolHandle</a></li>
+<li><a href="#overlayabove">OverlayAbove</a></li>
+<li><a href="#overlayspec">OverlaySpec</a></li>
+<li><a href="#overlayhandle">OverlayHandle</a></li>
+<li><a href="#pickoptions">PickOptions</a></li>
+<li><a href="#pickobjectkind">PickObjectKind</a></li>
+<li><a href="#pickobjectoptions">PickObjectOptions</a></li>
+<li><a href="#pickedobject">PickedObject</a></li>
+<li><a href="#pickfilesoptions">PickFilesOptions</a></li>
+<li><a href="#confirmoptions">ConfirmOptions</a></li>
+<li><a href="#promptoptions">PromptOptions</a></li>
+<li><a href="#progressoptions">ProgressOptions</a></li>
+<li><a href="#progresshandle">ProgressHandle</a></li>
+<li><a href="#widgetchild">WidgetChild</a></li>
+<li><a href="#buttonoptions">ButtonOptions</a></li>
+<li><a href="#buttonelement">ButtonElement</a></li>
+<li><a href="#checkboxoptions">CheckboxOptions</a></li>
+<li><a href="#checkboxelement">CheckboxElement</a></li>
+<li><a href="#textfieldoptions">TextFieldOptions</a></li>
+<li><a href="#numberfieldoptions">NumberFieldOptions</a></li>
+<li><a href="#selectoption">SelectOption</a></li>
+<li><a href="#selectoptions">SelectOptions</a></li>
+<li><a href="#formrow">FormRow</a></li>
+<li><a href="#listitem">ListItem</a></li>
+<li><a href="#listoptions">ListOptions</a></li>
+<li><a href="#spinneroptions">SpinnerOptions</a></li>
+<li><a href="#progressbaroptions">ProgressBarOptions</a></li>
+<li><a href="#progressbarelement">ProgressBarElement</a></li>
+<li><a href="#statuslineoptions">StatusLineOptions</a></li>
+<li><a href="#statuslineelement">StatusLineElement</a></li>
+<li><a href="#skeletonoptions">SkeletonOptions</a></li>
+<li><a href="#busyoptions">BusyOptions</a></li>
+<li><a href="#busyhandle">BusyHandle</a></li>
+<li><a href="#stepsoptions">StepsOptions</a></li>
+<li><a href="#stepoptions">StepOptions</a></li>
+<li><a href="#stephandle">StepHandle</a></li>
+<li><a href="#stepselement">StepsElement</a></li>
+<li><a href="#foldoptions">FoldOptions</a></li>
+<li><a href="#foldelement">FoldElement</a></li>
+<li><a href="#widgetsapi">WidgetsApi</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

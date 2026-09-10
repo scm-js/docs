@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Writing a plugin — scmJS documentation</title>
+<meta name="description" content="A plugin is one TypeScript or JavaScript file that exports an activate(api) function, sitting next to a plugin.json in a public repository.">
+<meta property="og:title" content="Writing a plugin — scmJS documentation">
+<meta property="og:description" content="A plugin is one TypeScript or JavaScript file that exports an activate(api) function, sitting next to a plugin.json in a public repository.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="here" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Writing a plugin</h1>
+<p>A plugin is one TypeScript or JavaScript file that exports an <code>activate(api)</code> function,
+sitting next to a <code>plugin.json</code> in a public repository. There is nothing to install and no
+build step to start with: the editor fetches your source, transpiles it in the browser and
+calls <code>activate</code> with the whole API.</p>
+<p>The place to start is <a href="https://github.com/scm-js/plugin-hello-world">Hello World</a>, a
+complete plugin kept as small as it can be: one Tools menu item that opens a pane saying
+hello with the name of the open map. It is in Browse Plugins if you want to see it run,
+and its repository is the one to copy: <code>plugin.ts</code> is about sixty lines, most of them
+comments, and the typings, the type-check, the build and the CI workflow described below
+are all set up in it. What follows explains the same pieces one at a time.</p>
+<h2 id="the-two-files">The two files<a class="anchor" href="#the-two-files" aria-label="Link to this section">#</a></h2>
+<p><code>plugin.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;Hello&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Says hello from the Tools menu.&quot;,
+  &quot;entry&quot;: &quot;plugin.ts&quot;,
+  &quot;icon&quot;: &quot;icon.svg&quot;,
+  &quot;api&quot;: 1
+}
+</code></pre>
+<p><code>name</code> is the only required field. <code>id</code>, used for storage keys and log prefixes, is
+derived from the name when absent. <code>entry</code> defaults to <code>plugin.ts</code>, then <code>plugin.js</code>.
+<code>api</code> is the API version the plugin needs (see <strong>The typings</strong>). Two optional fields are
+covered below: <code>icon</code> and <code>build</code>.</p>
+<p><code>plugin.ts</code>:</p>
+<pre><code class="language-ts">import type { PluginApi } from &quot;@scm-js/plugin-api&quot;;
+
+export default function activate(api: PluginApi) {
+  api.menu.add(&quot;Tools&quot;, {
+    label: &quot;Say Hello&quot;,
+    enabled: () =&gt; api.document.isOpen(),
+    run: () =&gt; api.ui.status(`Hello, ${api.document.info()?.name}!`),
+  });
+}
+</code></pre>
+<p>Everything <code>add</code> and <code>on</code> return is a <code>Disposable</code>. Keep the ones you need to drop early
+and forget the rest: turning the plugin off disposes them all. A function returned from
+<code>activate</code> runs at deactivation too, for anything the API does not know about, such as
+timers or sockets.</p>
+<h2 id="developing-locally">Developing locally<a class="anchor" href="#developing-locally" aria-label="Link to this section">#</a></h2>
+<p>Serve the folder and add it to the editor:</p>
+<pre><code class="language-sh">npx serve --cors .
+</code></pre>
+<p>Then paste <code>http://localhost:3000/</code> into Plugins ▸ Manage Plugins… and press <strong>Reload</strong>
+on its row after each change.</p>
+<h2 id="the-typings">The typings<a class="anchor" href="#the-typings" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">npm i -D @scm-js/plugin-api
+</code></pre>
+<p>That package is the whole toolchain: one generated <code>index.d.ts</code>, types only, nothing to
+configure. The <code>import type</code> line in <code>plugin.ts</code> is erased before the file runs, so the
+package matters only while editing and type-checking. The same files are committed and
+tagged at <a href="https://github.com/scm-js/plugin-api"><code>scm-js/plugin-api</code></a> if you would rather
+depend on a git ref.</p>
+<p>The package&#39;s <strong>major version is the API version</strong>, and its minor version moves when the
+declarations do, so <code>^1</code> in your <code>package.json</code> means what it says. Your manifest&#39;s
+<code>&quot;api&quot;: 1</code> is the version you <em>need</em>: an editor offering an older one refuses to load the
+plugin rather than failing halfway through <code>activate</code>. Additions to the API do not move the
+version, because a new call appearing on <code>api</code> breaks nothing that does not use it. The
+version is reserved for a change that would.</p>
+<h2 id="what-the-editor-does-for-you">What the editor does for you<a class="anchor" href="#what-the-editor-does-for-you" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Every edit is one undo entry.</strong> You never touch the scenario&#39;s internals.
+<code>api.document.edit</code> takes a label and a builder, applies your operations as you call
+them, and commits them as a single history entry. It is the path a brush stroke takes,
+so the right file sections are marked dirty, the canvas repaints, and doodads or units
+your terrain edit stranded are lifted in the same entry. If your builder throws, the
+edit is rolled back and the error is yours. <code>api.document.update</code> is the same shape
+for the tables that live outside the undo model, and <code>api.document.sections</code> for raw
+bytes. See <strong>The three kinds of write</strong>.</li>
+<li><strong>Everything you add is taken back for you.</strong> A menu item, hotkey, context-menu entry,
+dialog, panel, overlay, map tool or event listener each hand you a <code>Disposable</code>, and the
+editor keeps its own list of them besides. Turning your plugin off, reloading it or
+removing it sweeps the lot whether or not you cleaned up.</li>
+<li><strong>Reading the map is safe.</strong> Every method that reads answers <code>null</code>, <code>[]</code> or <code>false</code>
+when no map is open, rather than throwing, so you do not have to guard the empty
+editor. The one exception is <code>document.sections</code>, the raw-bytes path: <code>file()</code> and
+<code>bytes(index)</code> throw with no map open, since bytes with no file behind them have no
+empty answer.</li>
+<li><strong>The graphics may not be there.</strong> The user may not have installed Blizzard&#39;s data, and
+the editor works without it. Anything that needs the tileset degrades instead of
+failing: a terrain operation writes nothing and leaves a note on its result. Check what
+you get back rather than assuming.</li>
+</ul>
+<h2 id="imports-and-dependencies">Imports and dependencies<a class="anchor" href="#imports-and-dependencies" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Write plain DOM, not React.</strong> <code>api.ui.dialog</code> and <code>api.ui.panel</code> hand you an element
+to fill. <code>api.ui.el</code> and <code>api.ui.widgets</code> build content in the editor&#39;s own styles, so a
+plain-DOM dialog looks like a built-in one without copying any CSS. If you want a
+framework, bundle one into that element; it is yours.</li>
+<li><strong>Relative imports work, with or without the extension.</strong> <code>./convert</code>, <code>./convert.js</code>
+(resolving to <code>convert.ts</code>, the way a TypeScript project means it), or a folder with an
+<code>index.ts</code> are all tried. A cycle is an error naming the file.</li>
+<li><strong>Bare package names do not work on the source path.</strong> <code>import x from &quot;some-package&quot;</code>
+is refused when the editor loads your source, because there is no module resolver
+behind a <code>fetch</code>. An <code>import type</code> from <code>@scm-js/plugin-api</code> is fine: the compiler
+erases it before the loader sees the name. For a real dependency, ship a bundle and
+name it in the manifest&#39;s <code>build</code> (see <strong>Building</strong>).</li>
+</ul>
+<h2 id="the-icon">The icon<a class="anchor" href="#the-icon" aria-label="Link to this section">#</a></h2>
+<p><code>icon</code> is the plugin&#39;s face in Manage Plugins and in the title bar of every dialog the
+plugin opens. Four forms are understood:</p>
+<table>
+<thead>
+<tr>
+<th><code>icon</code></th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;icon.svg&quot;</code>, <code>&quot;art/mark.png&quot;</code></td>
+<td>An image file beside the manifest (<code>.png .svg .jpg .gif .webp .avif .ico</code>).</td>
+</tr>
+<tr>
+<td><code>&quot;https://…/mark.png&quot;</code></td>
+<td>An image anywhere, fetched by the browser when the dialog shows.</td>
+</tr>
+<tr>
+<td><code>&quot;data:image/svg+xml,…&quot;</code></td>
+<td>An image inline in the manifest, nothing extra to fetch.</td>
+</tr>
+<tr>
+<td><code>&quot;🗺️&quot;</code></td>
+<td>Up to four characters, drawn as text. An emoji is the cheapest icon there is.</td>
+</tr>
+</tbody></table>
+<p>Anything else is ignored and the plugin shows the editor&#39;s default plugin mark, as it does
+with no icon at all or one that fails to load. Draw for a 30 px square (it is also shown at
+14 px in a dialog title) on nothing: the editor draws no frame behind it, and an icon that
+is itself a bordered square reads as a second control next to the row&#39;s tick box. Terrain
+from Image&#39;s <code>icon.svg</code> is a worked example.</p>
+<h2 id="building">Building<a class="anchor" href="#building" aria-label="Link to this section">#</a></h2>
+<p>A plugin can ship a built bundle and name it in the manifest:</p>
+<pre><code class="language-json">&quot;build&quot;: &quot;dist/plugin.js&quot;
+</code></pre>
+<p>The editor then fetches that one file and imports it, in place of fetching your source,
+starting the TypeScript compiler in a worker and walking your imports one file at a time.
+It is worth doing for anything bigger than a single file, and it is the only way to use an
+npm dependency. <code>entry</code> stays in the manifest either way: it is what a person reads, and
+what loads for a repository that publishes no build.</p>
+<p>The organisation&#39;s plugins all build the same way, with one esbuild call:</p>
+<pre><code class="language-json">&quot;build&quot;: &quot;esbuild plugin.ts --bundle --format=esm --target=es2022 --platform=browser --outfile=dist/plugin.js&quot;,
+&quot;dev&quot;: &quot;npm run build -- --watch&quot;
+</code></pre>
+<p><code>dist/plugin.js</code> is committed, because the editor loads it straight from the repository at
+whatever version the address names. The shared workflow in
+<a href="https://github.com/scm-js/.github"><code>scm-js/.github</code></a> does the rest. A plugin repository
+calls it in six lines:</p>
+<pre><code class="language-yaml">name: CI
+on:
+  push: { branches: [main], tags: [&quot;v*&quot;] }
+  pull_request:
+  schedule: [{ cron: &quot;0 6 * * 1&quot; }]
+permissions: { contents: write }
+jobs:
+  ci:
+    uses: scm-js/.github/.github/workflows/plugin-ci.yml@main
+</code></pre>
+<p>It type-checks, tests, rebuilds the bundle and commits it on a push to <code>main</code>. At a <code>v*</code>
+tag it rebuilds and <em>checks</em> instead, so the bundle a pinned plugin runs is provably what
+its source builds to (esbuild&#39;s output is deterministic, and the bundle carries no commit
+hash or date for that reason). The weekly run type-checks against the newest
+<code>@scm-js/plugin-api</code>, so a change in the contract turns a check red instead of going
+unnoticed.</p>
+<p>Ship the bundle unminified. What the Add screen offers a user is your repository, and a
+plugin they cannot read is a plugin they cannot judge.</p>
+<h2 id="what-your-users-see">What your users see<a class="anchor" href="#what-your-users-see" aria-label="Link to this section">#</a></h2>
+<p>Three things follow from <strong>What you are trusting</strong> above and are worth writing for:</p>
+<ul>
+<li><strong>Your manifest is all they see before deciding.</strong> Fill in the name, version, author,
+description, icon, repository and homepage. It is the only thing a user has to judge
+you by.</li>
+<li><strong>They are pinned to a commit and never auto-updated.</strong> Installing stores the commit
+your address pointed at, so a push of yours reaches nobody already running the plugin.
+They move forward with the update check on the row, which shows them the new manifest
+first. Tag
+your releases: a tag is what the registry lists, and what a considered version looks
+like from the outside.</li>
+<li><strong>They may be running a copy saved in their browser.</strong> That copy is replaced only when
+they press Reload.</li>
+</ul>
+<h2 id="talking-to-a-server">Talking to a server<a class="anchor" href="#talking-to-a-server" aria-label="Link to this section">#</a></h2>
+<p>The editor puts nothing between your plugin and the network — you call <code>fetch</code> yourself —
+but a plugin that reaches its own server has two things to settle before it works
+everywhere, and both of them show up only in the desktop app:</p>
+<ul>
+<li><strong>The desktop editor&#39;s origin is <code>app://scmjs</code>.</strong> The web builds are on
+<code>https://editor.scmjs.dev</code> and <code>https://nightly.editor.scmjs.dev</code>; the desktop app serves
+its own bundle from a custom scheme instead, so that is the <code>Origin</code> your server is sent
+and what its CORS allowance has to name. A server that lists the web origins alone answers
+every desktop request perfectly well and the browser throws all of them away — which
+looks, from inside the plugin, exactly like the server being down.</li>
+<li><strong>A sign-in popup must be opened blank and pointed afterwards.</strong> A link with an address
+in it opens in the user&#39;s real browser, which is right for a homepage and useless for
+OAuth, since a browser tab cannot post a session back to the page that sent it. Open the
+window empty and named — <code>window.open(&quot;&quot;, &quot;my-plugin-signin&quot;, &quot;width=540,height=720&quot;)</code> —
+then set its <code>location.href</code> once your server has said where to go. That window is a plain
+web page with none of the editor&#39;s privileges, and links inside it leave for the browser.</li>
+</ul>
+<h2 id="getting-listed">Getting listed<a class="anchor" href="#getting-listed" aria-label="Link to this section">#</a></h2>
+<p>The project&#39;s registry, <a href="https://github.com/scm-js/registry"><code>scm-js/registry</code></a>, is
+generated from the organisation itself: every repository named <code>plugin-…</code>, or carrying
+both the <code>scmjs</code> and <code>plugin</code> topics, is listed with the <code>plugin.json</code> at its newest
+version tag (an untagged repository falls back to its default branch). It refreshes hourly
+and within about a minute of a plugin repository saying it changed.</p>
+<p>For a plugin anywhere else, fill in the
+<a href="https://github.com/scm-js/registry/issues/new?template=submit-plugin.yml">submission form</a>.
+It asks for the address of your repository and the words you want the editor&#39;s search to
+match, and nothing else: the listing reads your name, version, description, author and icon
+from your own <code>plugin.json</code>. A bot checks the repository as soon as you post the form and
+replies with what it found, reading it the same way the index does, so you can fix what it
+names and edit the issue rather than wait to be told. Someone here then reads the code and
+decides whether to list it, because a plugin runs unsandboxed and the list is what the editor
+offers.</p>
+<p>That registry is not the only one there can be. Any URL serving a file of that shape is a
+registry, and a user can add one under Sources.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#the-two-files">The two files</a></li>
+<li><a href="#developing-locally">Developing locally</a></li>
+<li><a href="#the-typings">The typings</a></li>
+<li><a href="#what-the-editor-does-for-you">What the editor does for you</a></li>
+<li><a href="#imports-and-dependencies">Imports and dependencies</a></li>
+<li><a href="#the-icon">The icon</a></li>
+<li><a href="#building">Building</a></li>
+<li><a href="#what-your-users-see">What your users see</a></li>
+<li><a href="#talking-to-a-server">Talking to a server</a></li>
+<li><a href="#getting-listed">Getting listed</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

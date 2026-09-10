@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.consts — scmJS documentation</title>
+<meta name="description" content="Bit masks, special unit ids and the pixels-per-tile every record is written in.">
+<meta property="og:title" content="api.consts — scmJS documentation">
+<meta property="og:description" content="Bit masks, special unit ids and the pixels-per-tile every record is written in.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="here" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.consts</h1>
+<p class="lede">ConstsApi</p>
+<p>Bit masks, special unit ids and the pixels-per-tile every record is written in.</p>
+<p>The constants a plugin needs to <em>write</em> a record rather than read one: the bit masks in
+a UNIT / THG2 / MRGN record, the condition, action and argument numbers of a TRIG /
+MBRF one, the few unit ids the game itself treats specially, and the one conversion —
+32 pixels to a tile — every object position goes through.</p>
+<p>They are the editor&#39;s own (<code>sections/objects.ts</code>, <code>editor/units.ts</code>) and they arrive
+here at run time rather than in the typings on purpose: <code>@scm-js/plugin-api</code> is erased
+before the loader ever sees the specifier, so a <em>value</em> imported from that package
+type-checks and is then undefined. Anything a plugin needs while it runs has to come
+off <code>api</code>. Without this a plugin writes the hex itself, which is how a sprite&#39;s kind
+came to be read as <code>flags &amp; 0x1000</code> in three places.</p>
+<ul class="chips"><li><a href="#tile">tile</a></li><li><a href="#unit">unit</a></li><li><a href="#sprite">sprite</a></li><li><a href="#location">location</a></li><li><a href="#triggers">triggers</a></li><li><a href="#isresource">isResource</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="tile">
+  <h3><a class="anchor-name" href="#tile">tile</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> tile: <span class="n">32</span>;</code></pre>
+  <p>Map pixels to a tile. UNIT and THG2 store pixels; MTXM, MRGN and the brushes count tiles.</p>
+  
+  
+</div>
+<div class="member" id="unit">
+  <h3><a class="anchor-name" href="#unit">unit</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> unit: <a class="t" href="/api/consts/#unitconsts">UnitConsts</a>;</code></pre>
+  <p>UNIT: the special unit ids, the default resource amounts, and the record&#39;s four bit masks.</p>
+  
+  
+</div>
+<div class="member" id="sprite">
+  <h3><a class="anchor-name" href="#sprite">sprite</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> sprite: <a class="t" href="/api/consts/#spriteconsts">SpriteConsts</a>;</code></pre>
+  <p>THG2: the sprite record&#39;s flag word.</p>
+  
+  
+</div>
+<div class="member" id="location">
+  <h3><a class="anchor-name" href="#location">location</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> location: <a class="t" href="/api/consts/#locationconsts">LocationConsts</a>;</code></pre>
+  <p>MRGN: the Anywhere slot, and the elevation bits.</p>
+  
+  
+</div>
+<div class="member" id="triggers">
+  <h3><a class="anchor-name" href="#triggers">triggers</a></h3>
+  <pre class="code"><code><span class="k">readonly</span> triggers: <a class="t" href="/api/consts/#triggerconsts">TriggerConsts</a>;</code></pre>
+  <p>TRIG / MBRF: the condition and action types, and the enumerated arguments.</p>
+  
+  
+</div>
+<div class="member" id="isresource">
+  <h3><a class="anchor-name" href="#isresource">isResource</a></h3>
+  <pre class="code"><code>isResource(unitId: <span class="k">number</span>): <span class="k">boolean</span>;</code></pre>
+  <p>Whether a unit type is a mineral field or a vespene geyser.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="conditiontype">
+  <h3><a class="anchor-name" href="#conditiontype">ConditionType</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#conditiontype">ConditionType</a>: {
+	<span class="k">readonly</span> None: <span class="n">0</span>;
+	<span class="k">readonly</span> CountdownTimer: <span class="n">1</span>;
+	<span class="k">readonly</span> Command: <span class="n">2</span>;
+	<span class="k">readonly</span> Bring: <span class="n">3</span>;
+	<span class="k">readonly</span> Accumulate: <span class="n">4</span>;
+	<span class="k">readonly</span> Kill: <span class="n">5</span>;
+	<span class="k">readonly</span> CommandTheMost: <span class="n">6</span>;
+	<span class="k">readonly</span> CommandTheMostAt: <span class="n">7</span>;
+	<span class="k">readonly</span> MostKills: <span class="n">8</span>;
+	<span class="k">readonly</span> HighestScore: <span class="n">9</span>;
+	<span class="k">readonly</span> MostResources: <span class="n">10</span>;
+	<span class="k">readonly</span> Switch: <span class="n">11</span>;
+	<span class="k">readonly</span> ElapsedTime: <span class="n">12</span>;
+	<span class="k">readonly</span> Briefing: <span class="n">13</span>;
+	<span class="k">readonly</span> Opponents: <span class="n">14</span>;
+	<span class="k">readonly</span> Deaths: <span class="n">15</span>;
+	<span class="k">readonly</span> CommandTheLeast: <span class="n">16</span>;
+	<span class="k">readonly</span> CommandTheLeastAt: <span class="n">17</span>;
+	<span class="k">readonly</span> LeastKills: <span class="n">18</span>;
+	<span class="k">readonly</span> LowestScore: <span class="n">19</span>;
+	<span class="k">readonly</span> LeastResources: <span class="n">20</span>;
+	<span class="k">readonly</span> Score: <span class="n">21</span>;
+	<span class="k">readonly</span> Always: <span class="n">22</span>;
+	<span class="k">readonly</span> Never: <span class="n">23</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="actiontype">
+  <h3><a class="anchor-name" href="#actiontype">ActionType</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#actiontype">ActionType</a>: {
+	<span class="k">readonly</span> None: <span class="n">0</span>;
+	<span class="k">readonly</span> Victory: <span class="n">1</span>;
+	<span class="k">readonly</span> Defeat: <span class="n">2</span>;
+	<span class="k">readonly</span> PreserveTrigger: <span class="n">3</span>;
+	<span class="k">readonly</span> Wait: <span class="n">4</span>;
+	<span class="k">readonly</span> PauseGame: <span class="n">5</span>;
+	<span class="k">readonly</span> UnpauseGame: <span class="n">6</span>;
+	<span class="k">readonly</span> Transmission: <span class="n">7</span>;
+	<span class="k">readonly</span> PlayWav: <span class="n">8</span>;
+	<span class="k">readonly</span> DisplayText: <span class="n">9</span>;
+	<span class="k">readonly</span> CenterView: <span class="n">10</span>;
+	<span class="k">readonly</span> CreateUnitWithProperties: <span class="n">11</span>;
+	<span class="k">readonly</span> SetMissionObjectives: <span class="n">12</span>;
+	<span class="k">readonly</span> SetSwitch: <span class="n">13</span>;
+	<span class="k">readonly</span> SetCountdownTimer: <span class="n">14</span>;
+	<span class="k">readonly</span> RunAiScript: <span class="n">15</span>;
+	<span class="k">readonly</span> RunAiScriptAt: <span class="n">16</span>;
+	<span class="k">readonly</span> LeaderboardControl: <span class="n">17</span>;
+	<span class="k">readonly</span> LeaderboardControlAt: <span class="n">18</span>;
+	<span class="k">readonly</span> LeaderboardResources: <span class="n">19</span>;
+	<span class="k">readonly</span> LeaderboardKills: <span class="n">20</span>;
+	<span class="k">readonly</span> LeaderboardPoints: <span class="n">21</span>;
+	<span class="k">readonly</span> KillUnit: <span class="n">22</span>;
+	<span class="k">readonly</span> KillUnitAt: <span class="n">23</span>;
+	<span class="k">readonly</span> RemoveUnit: <span class="n">24</span>;
+	<span class="k">readonly</span> RemoveUnitAt: <span class="n">25</span>;
+	<span class="k">readonly</span> SetResources: <span class="n">26</span>;
+	<span class="k">readonly</span> SetScore: <span class="n">27</span>;
+	<span class="k">readonly</span> MinimapPing: <span class="n">28</span>;
+	<span class="k">readonly</span> TalkingPortrait: <span class="n">29</span>;
+	<span class="k">readonly</span> MuteUnitSpeech: <span class="n">30</span>;
+	<span class="k">readonly</span> UnmuteUnitSpeech: <span class="n">31</span>;
+	<span class="k">readonly</span> LeaderboardComputerPlayers: <span class="n">32</span>;
+	<span class="k">readonly</span> LeaderboardGoalControl: <span class="n">33</span>;
+	<span class="k">readonly</span> LeaderboardGoalControlAt: <span class="n">34</span>;
+	<span class="k">readonly</span> LeaderboardGoalResources: <span class="n">35</span>;
+	<span class="k">readonly</span> LeaderboardGoalKills: <span class="n">36</span>;
+	<span class="k">readonly</span> LeaderboardGoalPoints: <span class="n">37</span>;
+	<span class="k">readonly</span> MoveLocation: <span class="n">38</span>;
+	<span class="k">readonly</span> MoveUnit: <span class="n">39</span>;
+	<span class="k">readonly</span> LeaderboardGreed: <span class="n">40</span>;
+	<span class="k">readonly</span> SetNextScenario: <span class="n">41</span>;
+	<span class="k">readonly</span> SetDoodadState: <span class="n">42</span>;
+	<span class="k">readonly</span> SetInvincibility: <span class="n">43</span>;
+	<span class="k">readonly</span> CreateUnit: <span class="n">44</span>;
+	<span class="k">readonly</span> SetDeaths: <span class="n">45</span>;
+	<span class="k">readonly</span> <a class="t" href="/api/consts/#order">Order</a>: <span class="n">46</span>;
+	<span class="k">readonly</span> Comment: <span class="n">47</span>;
+	<span class="k">readonly</span> GiveUnits: <span class="n">48</span>;
+	<span class="k">readonly</span> ModifyHitPoints: <span class="n">49</span>;
+	<span class="k">readonly</span> ModifyEnergy: <span class="n">50</span>;
+	<span class="k">readonly</span> ModifyShields: <span class="n">51</span>;
+	<span class="k">readonly</span> ModifyResourceAmount: <span class="n">52</span>;
+	<span class="k">readonly</span> ModifyHangarCount: <span class="n">53</span>;
+	<span class="k">readonly</span> PauseTimer: <span class="n">54</span>;
+	<span class="k">readonly</span> UnpauseTimer: <span class="n">55</span>;
+	<span class="k">readonly</span> Draw: <span class="n">56</span>;
+	<span class="k">readonly</span> SetAllianceStatus: <span class="n">57</span>;
+	<span class="k">readonly</span> DisableDebugMode: <span class="n">58</span>;
+	<span class="k">readonly</span> EnableDebugMode: <span class="n">59</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="briefingactiontype">
+  <h3><a class="anchor-name" href="#briefingactiontype">BriefingActionType</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#briefingactiontype">BriefingActionType</a>: {
+	<span class="k">readonly</span> None: <span class="n">0</span>;
+	<span class="k">readonly</span> Wait: <span class="n">1</span>;
+	<span class="k">readonly</span> PlayWav: <span class="n">2</span>;
+	<span class="k">readonly</span> TextMessage: <span class="n">3</span>;
+	<span class="k">readonly</span> MissionObjectives: <span class="n">4</span>;
+	<span class="k">readonly</span> ShowPortrait: <span class="n">5</span>;
+	<span class="k">readonly</span> HidePortrait: <span class="n">6</span>;
+	<span class="k">readonly</span> DisplaySpeakingPortrait: <span class="n">7</span>;
+	<span class="k">readonly</span> Transmission: <span class="n">8</span>;
+	<span class="k">readonly</span> SkipTutorialEnabled: <span class="n">9</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="playergroup">
+  <h3><a class="anchor-name" href="#playergroup">PlayerGroup</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#playergroup">PlayerGroup</a>: {
+	<span class="k">readonly</span> Player1: <span class="n">0</span>;
+	<span class="k">readonly</span> Player2: <span class="n">1</span>;
+	<span class="k">readonly</span> Player3: <span class="n">2</span>;
+	<span class="k">readonly</span> Player4: <span class="n">3</span>;
+	<span class="k">readonly</span> Player5: <span class="n">4</span>;
+	<span class="k">readonly</span> Player6: <span class="n">5</span>;
+	<span class="k">readonly</span> Player7: <span class="n">6</span>;
+	<span class="k">readonly</span> Player8: <span class="n">7</span>;
+	<span class="k">readonly</span> Player9: <span class="n">8</span>;
+	<span class="k">readonly</span> Player10: <span class="n">9</span>;
+	<span class="k">readonly</span> Player11: <span class="n">10</span>;
+	<span class="k">readonly</span> Player12: <span class="n">11</span>;
+	<span class="k">readonly</span> None: <span class="n">12</span>;
+	<span class="k">readonly</span> CurrentPlayer: <span class="n">13</span>;
+	<span class="k">readonly</span> Foes: <span class="n">14</span>;
+	<span class="k">readonly</span> Allies: <span class="n">15</span>;
+	<span class="k">readonly</span> NeutralPlayers: <span class="n">16</span>;
+	<span class="k">readonly</span> AllPlayers: <span class="n">17</span>;
+	<span class="k">readonly</span> Force1: <span class="n">18</span>;
+	<span class="k">readonly</span> Force2: <span class="n">19</span>;
+	<span class="k">readonly</span> Force3: <span class="n">20</span>;
+	<span class="k">readonly</span> Force4: <span class="n">21</span>;
+	<span class="k">readonly</span> Unused1: <span class="n">22</span>;
+	<span class="k">readonly</span> Unused2: <span class="n">23</span>;
+	<span class="k">readonly</span> Unused3: <span class="n">24</span>;
+	<span class="k">readonly</span> Unused4: <span class="n">25</span>;
+	<span class="k">readonly</span> NonAlliedVictoryPlayers: <span class="n">26</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="comparison">
+  <h3><a class="anchor-name" href="#comparison">Comparison</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#comparison">Comparison</a>: {
+	<span class="k">readonly</span> AtLeast: <span class="n">0</span>;
+	<span class="k">readonly</span> AtMost: <span class="n">1</span>;
+	<span class="k">readonly</span> Exactly: <span class="n">10</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="switchstate">
+  <h3><a class="anchor-name" href="#switchstate">SwitchState</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#switchstate">SwitchState</a>: {
+	<span class="k">readonly</span> Set: <span class="n">2</span>;
+	<span class="k">readonly</span> Cleared: <span class="n">3</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="switchaction">
+  <h3><a class="anchor-name" href="#switchaction">SwitchAction</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#switchaction">SwitchAction</a>: {
+	<span class="k">readonly</span> Set: <span class="n">4</span>;
+	<span class="k">readonly</span> Clear: <span class="n">5</span>;
+	<span class="k">readonly</span> Toggle: <span class="n">6</span>;
+	<span class="k">readonly</span> Randomize: <span class="n">11</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="setmodifier">
+  <h3><a class="anchor-name" href="#setmodifier">SetModifier</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#setmodifier">SetModifier</a>: {
+	<span class="k">readonly</span> SetTo: <span class="n">7</span>;
+	<span class="k">readonly</span> Add: <span class="n">8</span>;
+	<span class="k">readonly</span> Subtract: <span class="n">9</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="unitstate">
+  <h3><a class="anchor-name" href="#unitstate">UnitState</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#unitstate">UnitState</a>: {
+	<span class="k">readonly</span> Enable: <span class="n">4</span>;
+	<span class="k">readonly</span> Disable: <span class="n">5</span>;
+	<span class="k">readonly</span> Toggle: <span class="n">6</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="order">
+  <h3><a class="anchor-name" href="#order">Order</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#order">Order</a>: {
+	<span class="k">readonly</span> Move: <span class="n">0</span>;
+	<span class="k">readonly</span> Patrol: <span class="n">1</span>;
+	<span class="k">readonly</span> Attack: <span class="n">2</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="alliancestatus">
+  <h3><a class="anchor-name" href="#alliancestatus">AllianceStatus</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#alliancestatus">AllianceStatus</a>: {
+	<span class="k">readonly</span> Enemy: <span class="n">0</span>;
+	<span class="k">readonly</span> Ally: <span class="n">1</span>;
+	<span class="k">readonly</span> AlliedVictory: <span class="n">2</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="resourcetype">
+  <h3><a class="anchor-name" href="#resourcetype">ResourceType</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#resourcetype">ResourceType</a>: {
+	<span class="k">readonly</span> Ore: <span class="n">0</span>;
+	<span class="k">readonly</span> Gas: <span class="n">1</span>;
+	<span class="k">readonly</span> OreAndGas: <span class="n">2</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="scoretype">
+  <h3><a class="anchor-name" href="#scoretype">ScoreType</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#scoretype">ScoreType</a>: {
+	<span class="k">readonly</span> Total: <span class="n">0</span>;
+	<span class="k">readonly</span> Units: <span class="n">1</span>;
+	<span class="k">readonly</span> Buildings: <span class="n">2</span>;
+	<span class="k">readonly</span> UnitsAndBuildings: <span class="n">3</span>;
+	<span class="k">readonly</span> Kills: <span class="n">4</span>;
+	<span class="k">readonly</span> Razings: <span class="n">5</span>;
+	<span class="k">readonly</span> KillsAndRazings: <span class="n">6</span>;
+	<span class="k">readonly</span> Custom: <span class="n">7</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="unitclass">
+  <h3><a class="anchor-name" href="#unitclass">UnitClass</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#unitclass">UnitClass</a>: {
+	<span class="k">readonly</span> Any: <span class="n">228</span>;
+	<span class="k">readonly</span> Men: <span class="n">229</span>;
+	<span class="k">readonly</span> Buildings: <span class="n">230</span>;
+	<span class="k">readonly</span> Factories: <span class="n">231</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="conditionflag">
+  <h3><a class="anchor-name" href="#conditionflag">ConditionFlag</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#conditionflag">ConditionFlag</a>: {
+	<span class="c">/** Game bookkeeping. */</span>
+	<span class="k">readonly</span> Unknown: <span class="n">1</span>;
+	<span class="k">readonly</span> Disabled: <span class="n">2</span>;
+	<span class="k">readonly</span> AlwaysDisplay: <span class="n">4</span>;
+	<span class="k">readonly</span> UnitPropertiesUsed: <span class="n">8</span>;
+	<span class="k">readonly</span> UnitTypeUsed: <span class="n">16</span>;
+	<span class="k">readonly</span> UnitIdUsed: <span class="n">32</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="actionflag">
+  <h3><a class="anchor-name" href="#actionflag">ActionFlag</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#actionflag">ActionFlag</a>: {
+	<span class="c">/** Ignore a Wait / Transmission once (game bookkeeping). */</span>
+	<span class="k">readonly</span> IgnoreWaitOnce: <span class="n">1</span>;
+	<span class="k">readonly</span> Disabled: <span class="n">2</span>;
+	<span class="k">readonly</span> AlwaysDisplay: <span class="n">4</span>;
+	<span class="k">readonly</span> UnitPropertiesUsed: <span class="n">8</span>;
+	<span class="k">readonly</span> UnitTypeUsed: <span class="n">16</span>;
+	<span class="k">readonly</span> UnitIdUsed: <span class="n">32</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="triggerflag">
+  <h3><a class="anchor-name" href="#triggerflag">TriggerFlag</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/consts/#triggerflag">TriggerFlag</a>: {
+	<span class="c">/** Game bookkeeping: every condition was met this cycle. */</span>
+	<span class="k">readonly</span> ConditionsMet: <span class="n">1</span>;
+	<span class="c">/** Ignore Defeat / Draw for this trigger. */</span>
+	<span class="k">readonly</span> IgnoreGameEnd: <span class="n">2</span>;
+	<span class="c">/** Same as a Preserve Trigger action. */</span>
+	<span class="k">readonly</span> Preserve: <span class="n">4</span>;
+	<span class="c">/** The trigger never runs. */</span>
+	<span class="k">readonly</span> Disabled: <span class="n">8</span>;
+	<span class="c">/** Skip Wait / text / view actions for the rest of this loop (game bookkeeping). */</span>
+	<span class="k">readonly</span> IgnoreDisplay: <span class="n">16</span>;
+	<span class="c">/** Game bookkeeping. */</span>
+	<span class="k">readonly</span> Paused: <span class="n">32</span>;
+	<span class="c">/** Game bookkeeping. */</span>
+	<span class="k">readonly</span> WaitSkipDisabled: <span class="n">64</span>;
+}</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="unitconsts">
+  <h3><a class="anchor-name" href="#unitconsts">UnitConsts</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/consts/#unitconsts">UnitConsts</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> startLocation: <span class="n">214</span></code></th><td><p>The units.dat id of the Start Location marker.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> mineralFields: <span class="k">readonly</span> [ <span class="n">176</span>, <span class="n">177</span>, <span class="n">178</span> ]</code></th><td><p>The three mineral field types — a mineral line uses all three so it is not one sprite repeated.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> vespeneGeyser: <span class="n">188</span></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> defaultMinerals: <span class="n">1500</span></code></th><td><p>What a fresh resource is worth, as StarEdit writes it.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> defaultGas: <span class="n">5000</span></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> valid: { <span class="k">readonly</span> Cloak: <span class="n">1</span>; <span class="k">readonly</span> Burrow: <span class="n">2</span>; <span class="k">readonly</span> InTransit: <span class="n">4</span>; <span class="k">readonly</span> Hallucinated: <span class="n">8</span>; <span class="k">readonly</span> Invincible: <span class="n">16</span>; }</code></th><td><p><code>validProperties</code> (offset 0x0C): which special-property fields the game reads.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> used: { <span class="k">readonly</span> Owner: <span class="n">1</span>; <span class="k">readonly</span> HitPoints: <span class="n">2</span>; <span class="k">readonly</span> Shields: <span class="n">4</span>; <span class="k">readonly</span> Energy: <span class="n">8</span>; <span class="k">readonly</span> Resources: <span class="n">16</span>; <span class="k">readonly</span> Hangar: <span class="n">32</span>; <span class="k">readonly</span> State: <span class="n">64</span>; }</code></th><td><p><code>validStates</code> (offset 0x0E): which of the record&#39;s fields are set at all.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> state: { <span class="k">readonly</span> Cloaked: <span class="n">1</span>; <span class="k">readonly</span> Burrowed: <span class="n">2</span>; <span class="k">readonly</span> InTransit: <span class="n">4</span>; <span class="k">readonly</span> Hallucinated: <span class="n">8</span>; <span class="k">readonly</span> Invincible: <span class="n">16</span>; }</code></th><td><p><code>stateFlags</code> (offset 0x18): the special properties themselves.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> relation: { <span class="k">readonly</span> NydusLink: <span class="n">512</span>; <span class="k">readonly</span> Addon: <span class="n">1024</span>; }</code></th><td><p><code>relationType</code> (offset 0x0A): how <code>relatedSerial</code> is linked.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="spriteconsts">
+  <h3><a class="anchor-name" href="#spriteconsts">SpriteConsts</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/consts/#spriteconsts">SpriteConsts</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> flags: { <span class="k">readonly</span> PureSprite: <span class="n">4096</span>; <span class="k">readonly</span> Flipped: <span class="n">16384</span>; <span class="k">readonly</span> Disabled: <span class="n">32768</span>; }</code></th><td><p>THG2 <code>flags</code>. <code>PureSprite</code> is what <code>spriteKind</code> reads: with it the id is a sprites.dat
+one and the game only draws it, without it the id is a units.dat one and the game
+creates the unit (Installation doors and traps).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="locationconsts">
+  <h3><a class="anchor-name" href="#locationconsts">LocationConsts</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/consts/#locationconsts">LocationConsts</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> anywhere: <span class="n">63</span></code></th><td><p>The MRGN slot that is Anywhere. The editor protects it; nothing else may write it.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> elevation: { <span class="k">readonly</span> LowGround: <span class="n">1</span>; <span class="k">readonly</span> MediumGround: <span class="n">2</span>; <span class="k">readonly</span> HighGround: <span class="n">4</span>; <span class="k">readonly</span> LowAir: <span class="n">8</span>; <span class="k">readonly</span> MediumAir: <span class="n">16</span>; <span class="k">readonly</span> HighAir: <span class="n">32</span>; }</code></th><td><p><code>elevationFlags</code>. A <em>set</em> bit <strong>excludes</strong> that elevation — the game tests a unit
+against the location only on the elevations whose bit is clear — so 0 means
+everywhere, and StarEdit&#39;s ticked &quot;Low ground&quot; box is bit 0 clear.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerconsts">
+  <h3><a class="anchor-name" href="#triggerconsts">TriggerConsts</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/consts/#triggerconsts">TriggerConsts</a></code></pre>
+  <p>The numbers a TRIG / MBRF record is written in: the condition and action types, and the
+enumerated arguments the game stores as bare bytes.</p>
+<p>A trigger record is sixteen conditions and sixty-four actions of plain numbers — the
+codec knows no types — so writing one field by field means knowing that a Countdown
+Timer condition is type 1 and <code>AtLeast</code> is 0. <code>triggers.defs</code> says which <em>field</em> an
+argument lives in; this says what to put in it.</p>
+<p>The keys of the argument groups are <code>ArgDef.kind</code>, so a generic argument editor can
+look one up by the kind the def gave it (<code>api.consts.triggers[arg.kind]</code>).</p>
+<p>Generating a whole run of triggers is usually better done through
+<code>tx.triggers.fromText</code>, which resolves names against the open map; these are for
+editing a field of an existing record, and for reading one back.</p>
+  <table class="fields"><tbody><tr><th><code><span class="k">readonly</span> condition: <span class="k">typeof</span> <a class="t" href="/api/consts/#conditiontype">ConditionType</a></code></th><td><p>Condition <code>type</code>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> action: <span class="k">typeof</span> <a class="t" href="/api/consts/#actiontype">ActionType</a></code></th><td><p>Action <code>type</code> in TRIG.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> briefingAction: <span class="k">typeof</span> <a class="t" href="/api/consts/#briefingactiontype">BriefingActionType</a></code></th><td><p>Action <code>type</code> in MBRF, where the same byte means something else.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> player: <span class="k">typeof</span> <a class="t" href="/api/consts/#playergroup">PlayerGroup</a></code></th><td><p>The 27 player-group values, which are also the indices of a trigger&#39;s <code>players</code>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> comparison: <span class="k">typeof</span> <a class="t" href="/api/consts/#comparison">Comparison</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> switchState: <span class="k">typeof</span> <a class="t" href="/api/consts/#switchstate">SwitchState</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> switchAction: <span class="k">typeof</span> <a class="t" href="/api/consts/#switchaction">SwitchAction</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> modifier: <span class="k">typeof</span> <a class="t" href="/api/consts/#setmodifier">SetModifier</a></code></th><td><p>Set Resources / Set Score / Modify …: <code>SetTo</code>, <code>Add</code>, <code>Subtract</code>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> unitState: <span class="k">typeof</span> <a class="t" href="/api/consts/#unitstate">UnitState</a></code></th><td><p>Set Doodad State / Set Invincibility: <code>Enable</code>, <code>Disable</code>, <code>Toggle</code>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> order: <span class="k">typeof</span> <a class="t" href="/api/consts/#order">Order</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> alliance: <span class="k">typeof</span> <a class="t" href="/api/consts/#alliancestatus">AllianceStatus</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> resource: <span class="k">typeof</span> <a class="t" href="/api/consts/#resourcetype">ResourceType</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> score: <span class="k">typeof</span> <a class="t" href="/api/consts/#scoretype">ScoreType</a></code></th><td></td></tr>
+<tr><th><code><span class="k">readonly</span> unitClass: <span class="k">typeof</span> <a class="t" href="/api/consts/#unitclass">UnitClass</a></code></th><td><p>The unit ids past units.dat that a condition or action accepts: <em>Any unit</em>, <em>Men</em>, <em>Buildings</em>, <em>Factories</em>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> conditionFlags: <span class="k">typeof</span> <a class="t" href="/api/consts/#conditionflag">ConditionFlag</a></code></th><td><p>A condition&#39;s <code>flags</code>. <code>UnitTypeUsed</code> is the hint bit the text format cannot carry.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> actionFlags: <span class="k">typeof</span> <a class="t" href="/api/consts/#actionflag">ActionFlag</a></code></th><td><p>An action&#39;s <code>flags</code>.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> triggerFlags: <span class="k">typeof</span> <a class="t" href="/api/consts/#triggerflag">TriggerFlag</a></code></th><td><p>A trigger&#39;s <code>flags</code>; <code>Preserve</code> is what <code>triggers.isPreserved</code> reads.</p></td></tr>
+<tr><th><code><span class="k">readonly</span> deathsTable: <span class="k">number</span></code></th><td><p>The address of the game&#39;s death table, which is the base an EUD player value is
+counted from: <code>epd = (address - deathsTable) / 4 + 0x2000</code>.</p></td></tr></tbody></table>
+  
+</div>
+
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#tile">tile</a></li>
+<li><a href="#unit">unit</a></li>
+<li><a href="#sprite">sprite</a></li>
+<li><a href="#location">location</a></li>
+<li><a href="#triggers">triggers</a></li>
+<li><a href="#isresource">isResource</a></li>
+<li><a href="#conditiontype">ConditionType</a></li>
+<li><a href="#actiontype">ActionType</a></li>
+<li><a href="#briefingactiontype">BriefingActionType</a></li>
+<li><a href="#playergroup">PlayerGroup</a></li>
+<li><a href="#comparison">Comparison</a></li>
+<li><a href="#switchstate">SwitchState</a></li>
+<li><a href="#switchaction">SwitchAction</a></li>
+<li><a href="#setmodifier">SetModifier</a></li>
+<li><a href="#unitstate">UnitState</a></li>
+<li><a href="#order">Order</a></li>
+<li><a href="#alliancestatus">AllianceStatus</a></li>
+<li><a href="#resourcetype">ResourceType</a></li>
+<li><a href="#scoretype">ScoreType</a></li>
+<li><a href="#unitclass">UnitClass</a></li>
+<li><a href="#conditionflag">ConditionFlag</a></li>
+<li><a href="#actionflag">ActionFlag</a></li>
+<li><a href="#triggerflag">TriggerFlag</a></li>
+<li><a href="#unitconsts">UnitConsts</a></li>
+<li><a href="#spriteconsts">SpriteConsts</a></li>
+<li><a href="#locationconsts">LocationConsts</a></li>
+<li><a href="#triggerconsts">TriggerConsts</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

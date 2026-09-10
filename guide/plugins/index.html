@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plugins — scmJS documentation</title>
+<meta name="description" content="Plugins add tools to the editor, and some of what this guide describes is a plugin: Walkability, Paint, Repair, Terrain from Image, TrigScript, Stamp Library and the scmscx.com search are…">
+<meta property="og:title" content="Plugins — scmJS documentation">
+<meta property="og:description" content="Plugins add tools to the editor, and some of what this guide describes is a plugin: Walkability, Paint, Repair, Terrain from Image, TrigScript, Stamp Library and the scmscx.com search are…">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="here" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Plugins</h1>
+<p>Plugins add tools to the editor, and some of what this guide describes is a plugin:
+Walkability, Paint, Repair, Terrain from Image, TrigScript, Stamp Library and the
+scmscx.com search are installed and on from the start. Two more are installed but start
+<em>off</em>: scmjs.dev — the account and the AI, because an account and a trial are yours to ask
+for — and TrigEdit, the Text Trigger Editor, which is for text carried in from SCMDraft
+rather than for every map. Tick either on in Plugins ▸ Manage Plugins… and what it adds
+appears: scmjs.dev&#39;s Account menu, its File entries and Tools ▸ AI; TrigEdit&#39;s Triggers ▸
+Text Trigger Editor…. Melee Wizard and Section Explorer are a click away.</p>
+<p><img src="/images/browse-plugins.webp" alt="Browse Plugins"></p>
+<p>Plugins ▸ Browse Plugins… lists the plugins the project publishes; press Install on one
+and it shows where the code comes from before adding it. Plugins ▸ Manage Plugins… lists
+what is installed, turns each on or off, and takes the address of any other plugin —
+a GitHub repository, a link to its <code>plugin.json</code>, or <code>http://localhost:3000/</code> while you
+write one. There is no sandbox: a plugin has the same access as the editor itself, so only
+add plugins you trust. The Add screen says as much and shows the manifest, the repository
+and the addresses it will fetch from.</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Where</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/scm-js/plugin-walkability">Walkability</a></td>
+<td>View ▸ Walkability (Ctrl+Shift+W)</td>
+<td>Draws the ground as a unit walks it: islands, the areas the map divides into and the chokes between them with their widths, height seams with no ramp, and the distances between start locations. Reads only.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-paint">Paint</a></td>
+<td>Tools ▸ Paint… (Ctrl+Shift+P)</td>
+<td>Freehand, lines, shapes, spray and text, laying down whatever the active layer&#39;s palette has picked — so it paints units, doodads, sprites, terrain or fog depending on the layer.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-repair">Repair</a></td>
+<td>on open, Tools ▸ Repair Map…</td>
+<td>Reads a map the way the game does and lists what is missing, damaged, repeated or the wrong size, each with the repair and what the game does without it. Rebuilds a stripped isometric record.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-image-to-terrain">Terrain from Image</a></td>
+<td>File ▸ Import ▸ Terrain from Image…</td>
+<td>Turns a picture into terrain, over the whole map or a rectangle you drag, painted with the isometric brush so cliffs and shorelines are laid at every boundary.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-scm-scx">scmscx.com</a></td>
+<td>File ▸ Find on scmscx.com…</td>
+<td>Searches the map archive at <a href="https://scmscx.com">scmscx.com</a> by name, tileset, players and size, shows each map&#39;s minimap and details, and opens the one you pick. The site&#39;s API sends no cross-origin header, so unless the editor is served from scmscx.com the requests go by way of a small forwarder the plugin comes with; Plugins ▸ scmscx.com Settings… holds its address and how many minimaps to ask for.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-melee-wizard">Melee Wizard</a></td>
+<td>Tools ▸ Melee Wizard… (Ctrl+Shift+M)</td>
+<td>Symmetric start locations, and mineral lines and geysers laid out at the distance the game mines fastest from; presets for main, natural and third; a symmetry check and a resource summary.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-trigscript">TrigScript</a></td>
+<td>Triggers ▸ TrigScript…</td>
+<td>Triggers as code: TypeScript files kept inside the map and built into a block of the trigger list — ordinary code that runs when you build, and <code>program()</code> bodies that run in the game as death-counter state machines. See <a href="/guide/trigscript/">TrigScript</a>.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-stamp-library">Stamp Library</a></td>
+<td>Tools ▸ Stamp Library… (Ctrl+Shift+L), Edit ▸ Save as Stamp… (Ctrl+Shift+K)</td>
+<td>Named pieces — a ramp, a bridge, a cliff corner, a mineral line — saved from the marked area and kept across maps in the browser&#39;s storage. Click one and it hangs under the pointer, drawn with the map&#39;s graphics, aligned to the isometric lattice it came off; click to lay it down. Search, tags, JSON export and import, and one stamp as a line of text to share.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-section-explorer">Section Explorer</a></td>
+<td>Tools ▸ Section Explorer… (Ctrl+Shift+H)</td>
+<td>The map file as the game reads it: every section, a hex editor over the bytes, and what the byte under the cursor means.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/scm-js/plugin-scmjs-dev">scmjs.dev</a></td>
+<td>Account menu, File ▸ Open from / Save to scmjs.dev…, Tools ▸ AI</td>
+<td>Your <a href="https://scmjs.dev">scmjs.dev</a> account and the AI that comes with it — see <a href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a> and <a href="/guide/the-ai/">The AI</a> above. One tick in its Account dialog turns the AI off and keeps the account.</td>
+</tr>
+</tbody></table>
+<p><img src="/images/walkability.webp" alt="The Walkability overlay on Big Game Hunters"></p>
+<p><img src="/images/paint.webp" alt="The Paint panel, drawing a line of the terrain palette&#39;s pick"></p>
+<p>Each plugin has its own README with the details. Installing plugins, what they are allowed
+to do, and writing one are covered in <a href="/plugins/">docs/plugins.md</a>. Browse Plugins
+also lists <a href="https://github.com/scm-js/plugin-hello-world">Hello World</a>, an example plugin
+with nothing in it but a Tools menu item, kept as the one to copy when writing your own.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

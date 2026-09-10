@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrigScript — scmJS documentation</title>
+<meta name="description" content="TrigScript is a way to write triggers as code.">
+<meta property="og:title" content="TrigScript — scmJS documentation">
+<meta property="og:description" content="TrigScript is a way to write triggers as code.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="here" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>TrigScript</h1>
+<p>TrigScript is a way to write triggers as code. The code is TypeScript, it lives inside
+the map, and Build turns it into ordinary triggers — the same kind the Trigger Editor
+shows, with no EUD anywhere in them, so a map built with it plays on any version of the
+game. It is a plugin, on from the start: Triggers ▸ TrigScript… opens it as soon as a map
+is open.</p>
+<p>Two ideas carry it. The files are real TypeScript and they <em>run</em> when you press Build:
+every <code>trigger()</code> call they make becomes one trigger of the map, so a helper that returns
+the ten triggers a shop needs, a loop over the players, a table of waves and the whole
+standard library are there to write triggers <em>with</em>. And code inside <code>program(() =&gt; { … })</code>
+runs <em>in the game</em> instead: its variables become death counters and switches, its <code>if</code>s
+and loops become a state machine of triggers, and a lives counter or a wave timer is
+written as a loop rather than as a dozen triggers with hand-numbered death counts.</p>
+<p><img src="/images/trigscript.webp" alt="The TrigScript editor on a wave-defence script: the files on the left, the code checked as you type, and the cost of each line at its end"></p>
+<h2 id="opening-the-script">Opening the script<a class="anchor" href="#opening-the-script" aria-label="Link to this section">#</a></h2>
+<p>Triggers ▸ TrigScript… opens the map&#39;s script in a window. The list on the left is its
+files: <code>main.ts</code> is where a build starts, <strong>New file</strong> adds another, and a file&#39;s ✎ and ×
+rename and remove it. Edits are saved into the map as you type — the files are members
+of the map archive, like a sound — and only <strong>Build</strong> changes triggers.</p>
+<p>The code is checked as you type, against the map&#39;s own names: <code>locations.</code> completes to
+the locations the map has, <code>units.</code> to every unit type (and the map&#39;s custom names),
+<code>switches.</code> to the switches by number and by the names the map gives them, and
+<code>players.</code> to the forces. A location passed where a unit belongs is an error before you
+build, and so is a name the map no longer has. The line under the toolbar says <em>No
+problems</em> or how many there are, and the list below the code says where.</p>
+<p><img src="/images/trigscript-complete.webp" alt="Completion on locations., listing what the open map has"></p>
+<p><strong>Build</strong> runs the script and puts the triggers it recorded into the map as one
+contiguous block of the trigger list, replacing the previous block or adding the first.
+<strong>Build &amp; Close</strong> does that and closes. The Trigger Editor shows those triggers with a
+<code>script</code> badge and will not edit them; <em>Open TrigScript</em> there jumps to the file and line
+that made one. The Text Trigger Editor fences them in comments. Hand-made triggers around
+the block are left alone, and a hand-made trigger inserted before the block just moves
+it along.</p>
+<p><img src="/images/trigscript-triggers.webp" alt="The Trigger Editor on a built script: the generated rows badged, and the way back to the line that made one"></p>
+<p>Editing one of the generated triggers by hand makes the block <em>stale</em>, and the editor
+says so at the next open: how many of its triggers are still the build&#39;s and how many
+were changed. The next Build replaces the unchanged ones and keeps the edited ones as
+hand-made triggers right after the block, so a wave system tuned in one trigger does not
+come back twice; <em>Append instead</em> on the notice leaves them all alone and adds a fresh
+block after them. <strong>Import map triggers</strong> goes the other way: it rewrites the map&#39;s
+hand-made triggers as <code>trigger()</code> calls, in their order, so a map made in the Trigger
+Editor can carry on as a script.</p>
+<p><strong>Simulate</strong> runs the built triggers for thirty trigger cycles in a built-in interpreter
+and lists every action that ran, with its cycle and the source line, and the final
+value of every program variable. It models death counters, switches, preserve, list
+order and the game&#39;s counting (adding wraps, subtracting stops at zero); unit
+conditions answer &quot;false&quot;, so it is a check on the logic, not on the units. The
+summary button on the toolbar lists the programs, how many triggers each cost and
+where each variable lives.</p>
+<p><img src="/images/trigscript-simulate.webp" alt="Simulate: thirty cycles of the script, each action with its cycle and line"></p>
+<p>The files and a build record live in the map archive under <code>trigscript\</code> — <code>main.ts</code>,
+any other file, and <code>build.json</code> — next to the scenario, so they travel with the <code>.scx</code>.
+The <a href="/guide/checking-testing-and-saving/#saving">Save dialog</a> lists them under the archive&#39;s other files, each with a tick,
+so a copy for release can leave the source out; the triggers stay either way.</p>
+<h2 id="beside-the-map">Beside the map<a class="anchor" href="#beside-the-map" aria-label="Link to this section">#</a></h2>
+<p>The editor opens two ways. The window is for writing; <em>Beside the map</em> — a button on its
+toolbar, or Triggers ▸ TrigScript beside the map — is a panel over the map that blocks
+nothing: drag it by its title, resize it by its corner, and keep placing units while the
+code sits next to them.</p>
+<p><img src="/images/trigscript-beside.webp" alt="The script beside the map"></p>
+<p>Beside the map, the names in the code and the objects on the map know about each other:</p>
+<ul>
+<li><strong>Ctrl+click</strong> on <code>locations.Beacon</code> scrolls the map to the location and flashes it.
+Hovering the name says where it is and how big.</li>
+<li><strong>Pick from map</strong> on the toolbar: click a location or a unit on the map, and its name
+(<code>locations.Beacon</code>, <code>units.TerranMarine</code>) lands at the cursor. From the window, the
+button first moves the editor beside the map.</li>
+<li>When you rename a location or a switch the script mentions, a notice offers to
+<strong>update the references</strong> in every file. It follows the name the way the code does — an
+alias from <code>import { locations as L }</code> counts — and leaves comments, strings and
+anything merely spelled the same alone.</li>
+</ul>
+<h2 id="writing-triggers">Writing triggers<a class="anchor" href="#writing-triggers" aria-label="Link to this section">#</a></h2>
+<p>A trigger is one call:</p>
+<pre><code class="language-ts">trigger(AllPlayers, [
+  bring(CurrentPlayer, units.AnyUnit, locations.Beacon, &quot;&gt;=&quot;, 1),
+], [
+  displayText(&quot;You found it!&quot;),
+  preserve(),
+]);
+</code></pre>
+<p><code>trigger(players, conditions, actions, options?)</code> records one trigger. <code>players</code> is a
+player or a list of them; <code>conditions</code> and <code>actions</code> are lists of what the condition and
+action functions return. The options are the execution flags by name: <code>{ preserve: true }</code>
+is the same as the <code>preserve()</code> action, and <code>disabled</code>, <code>ignoreGameEnd</code> and the rest are
+there too.</p>
+<p>Every condition and action the game has is a function named after StarEdit&#39;s, in camel
+case: <code>bring</code>, <code>deaths</code>, <code>command</code>, <code>accumulate</code>, <code>elapsedTime</code>, <code>switchIs</code> (its real name
+is a reserved word), <code>createUnit</code>, <code>displayText</code>, <code>setResources</code>, <code>moveUnit</code>, <code>order</code>,
+<code>runAiScript</code>, <code>victory</code>. The arguments come in the order the Trigger Editor shows them,
+and the ones the editor offers as a list are short words: <code>&quot;&gt;=&quot;</code>, <code>&quot;&lt;=&quot;</code>, <code>&quot;==&quot;</code> for a
+comparison; <code>&quot;set&quot;</code>, <code>&quot;add&quot;</code>, <code>&quot;subtract&quot;</code> for a modifier; <code>&quot;set&quot;</code>, <code>&quot;clear&quot;</code>,
+<code>&quot;toggle&quot;</code>, <code>&quot;randomize&quot;</code> for a switch; <code>&quot;ore&quot;</code>, <code>&quot;gas&quot;</code>, <code>&quot;oreAndGas&quot;</code> for a resource;
+<code>&quot;move&quot;</code>, <code>&quot;patrol&quot;</code>, <code>&quot;attack&quot;</code> for an order. A unit count is a number or <code>&quot;All&quot;</code>.
+StarEdit&#39;s own labels (<code>&quot;At least&quot;</code>) are accepted as well. <code>not(condition)</code> is the
+opposite of a condition where one condition can say it: <code>not(bring(…, &quot;&gt;=&quot;, 1))</code> is &quot;at
+most 0&quot;. Hover any of them in the editor for its arguments.</p>
+<p>Names come from the map. Each display name becomes an identifier — <code>Terran Marine</code> is
+<code>units.TerranMarine</code>, <code>Terran Siege Tank (Tank Mode)</code> is
+<code>units.TerranSiegeTankTankMode</code> — and the display name itself still works as an index,
+<code>units[&quot;Terran Marine&quot;]</code>. <code>P1</code> … <code>P12</code>, <code>CurrentPlayer</code> and <code>AllPlayers</code> are constants,
+and the other groups are under <code>players</code>: <code>players.Force1</code>, <code>players.Foes</code>,
+<code>players.Allies</code>. A raw number works wherever a name does, which is how an EUD player or
+an odd unit id gets in.</p>
+<p>The script is a program that runs when you build, and everything TypeScript offers at
+that moment is fair game. A loop makes the same trigger for several players; a function
+returns a list of actions; a table holds the numbers; a template string builds the text:</p>
+<pre><code class="language-ts">function reinforce(p: Player) {
+  return trigger(p, [deaths(p, units.TerranMarine, &quot;&gt;=&quot;, 10)], [
+    createUnit(p, units.TerranSiegeTankTankMode, 1, locations.Spawn),
+    setDeaths(p, units.TerranMarine, &quot;subtract&quot;, 10),
+    displayText(&quot;Reinforcements have arrived.&quot;),
+  ], { preserve: true });
+}
+
+for (const p of [P1, P2, P3, P4]) reinforce(p);
+</code></pre>
+<p>Nested lists are flattened and <code>false</code>, <code>null</code> and <code>undefined</code> entries are skipped, so a
+helper can return a list of actions and a condition can be written <code>hardMode &amp;&amp; bring(…)</code>.
+What the script records is what the map gets, and the order of the <code>trigger()</code> calls is
+the order of the triggers.</p>
+<p>A condition is a <em>value</em> here — the game tests it later — so <code>if (bring(…))</code> outside a
+program does not do what it looks like, and the editor says so and where the test belongs:
+in a trigger&#39;s conditions, or in an <code>if</code> inside a program.</p>
+<p>A script can be several files. <code>import { x } from &quot;./name&quot;</code> brings in another file of the
+map&#39;s script; nothing else can be imported. The library is available as globals, so no
+import is needed, and also as the module <code>&quot;trigscript&quot;</code> for anyone who prefers
+<code>import { trigger, bring } from &quot;trigscript&quot;</code>.</p>
+<p><code>hyperTriggers(P8)</code> anywhere in the script emits the classic three preserved triggers of
+sixty-two waits, so the whole trigger list runs every frame instead of every two seconds.
+Give them to a player whose other triggers never wait — a computer slot, usually — since
+a Wait stalls every trigger of that player.</p>
+<h2 id="programs">Programs<a class="anchor" href="#programs" aria-label="Link to this section">#</a></h2>
+<p>Everything inside <code>program(() =&gt; { … })</code> runs in the game:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  let wave = 0;
+  let alarm = false;
+  while (true) {
+    if (bring(P1, units.AnyUnit, locations.Beacon, &quot;&gt;=&quot;, 1) &amp;&amp; !alarm) {
+      alarm = true;
+      displayText(&quot;They are coming.&quot;);
+    }
+    if (alarm) {
+      createUnit(P8, units.ZergZergling, 4, locations.Spawn);
+      wave += 1;
+    }
+    if (wave &gt;= 10) defeat();
+    sleep(seconds(20));
+  }
+}, { owner: P1 });
+</code></pre>
+<p><strong>Variables are death counters.</strong> A <code>let n = 0</code> takes a death counter on a unit that can
+never die (the &quot;(Unused)&quot; entries of the unit list), twelve players per unit, so there
+are hundreds to go round; a <code>let f = false</code> takes a switch; a <code>let p = { lives: 3, gold: 0 }</code>
+is a variable per field. Numbers are what a death counter holds, 0 to 4 294 967 295: a
+result below zero is stored as 0, and a <code>u8</code> or <code>u16</code> variable (<code>let lives: u8 = 3</code>)
+stays within 0 … 255 or 0 … 65 535 and is much cheaper to compare and copy. <code>+</code>, <code>-</code>,
+<code>*</code> by a constant, <code>/</code> and <code>%</code> by a constant, <code>Math.min</code>, <code>Math.max</code>, <code>Math.abs</code> and
+<code>clamp()</code> all work. The allocator keeps clear of every death counter and switch the
+map&#39;s hand-made triggers use, so a script can be added to a map that already has some.</p>
+<p><strong>Control flow is what it says.</strong> <code>if</code>/<code>else</code>, <code>while</code>, <code>do</code>, <code>for</code>, <code>switch</code>, <code>break</code>,
+<code>continue</code> and <code>c ? a : b</code> all work. Conditions go in an <code>if</code> or a <code>while</code>; actions stand
+as statements. Straight-line code runs within one trigger cycle, and a loop&#39;s back edge
+waits for the next one, so <code>while (true) { … }</code> is a game loop running once per cycle —
+every two seconds at normal speed, every frame with hyper triggers. A <code>for</code> whose bounds
+are known when you build is unrolled and runs at once.</p>
+<p><strong>Time is <code>sleep</code>.</strong> <code>sleep(seconds(15))</code> pauses the program: what follows runs that
+much later, and nothing else of <em>this</em> program runs meanwhile, while other programs and
+the map&#39;s triggers carry on. <code>minutes()</code> and <code>cycles()</code> are the other units, and the
+count is worked out from whether the script emits hyper triggers. Something that runs on
+its own clock is another program — one program per concurrent activity. The game&#39;s own
+<code>wait()</code> is allowed but is a different thing: it stalls every trigger of that player,
+hyper triggers included, so use it for a short pause inside one cycle (a text, then a
+sound) and <code>sleep</code> to pass time.</p>
+<p><strong>Edges.</strong> <code>if (rose(bring(…)))</code> is true on the cycle the condition becomes true and not
+again until it has been false in between; <code>once(…)</code> is true the first time only.
+<code>random()</code> is a coin toss.</p>
+<p><strong>Functions</strong> declared inside the program, or made with <code>game()</code> in any file, run in the
+game too. They are inlined at each call, arguments pass by value, and they may return a
+number or a boolean — <code>function canAfford(price: number) { return gold &gt;= price; }</code>.
+There is no recursion.</p>
+<p><strong>A program runs for its owner</strong> (Player 1 unless <code>{ owner: … }</code> says otherwise), as one
+thread running as that player. <code>AllPlayers</code>, a force or a list of players makes a
+<strong>per-player program</strong>: the same code runs once for each of them at the same time,
+<code>CurrentPlayer</code> is that player, and every variable is per player, each with their own
+copy — which is how lives, scores and cooldowns are written once. <code>let total = shared(0)</code>
+is one cell they all share.</p>
+<p><strong>Everything the body reads from outside is computed when you build.</strong> A constant, a
+helper, a condition, an action: each is worked out once, when the script runs, and the
+editor underlines those parts with dots so the boundary is visible as you type. That is
+what lets a helper written outside the program emit actions inside it. It is also the
+one rule to keep in mind: a program variable can never reach a condition, an action or a
+helper, because those were computed before the game started. <code>createUnit(P8, unit, wave, at)</code> is an error saying so. The exceptions are the amount of <code>setResources</code>, <code>setDeaths</code>,
+<code>setScore</code> and <code>setCountdownTimer</code> and the unit count of <code>createUnit</code>, <code>killUnitAt</code>,
+<code>removeUnitAt</code> and <code>giveUnits</code>, which can be a variable or an expression over one — the
+action is done bit by bit.</p>
+<p><strong>Cost is shown where you write it.</strong> Every line that generates more than one trigger gets
+its count at its end, and the <code>program(</code> line its total. <code>n += 5</code>, <code>n = 3</code> and a
+comparison with a number are one trigger each; an operation between two <em>variables</em>
+(<code>a = b</code>, <code>a &lt; b</code>, <code>a += b</code>) is the classic binary decomposition, 66 triggers for a plain
+number and 19 for a <code>u8</code>, so declare the range on anything you compare or copy in a hot
+loop. Hover a variable to see where it lives.</p>
+<h2 id="examples">Examples<a class="anchor" href="#examples" aria-label="Link to this section">#</a></h2>
+<p>Each of these is a complete <code>main.ts</code>. They assume a map with locations named <code>Beacon</code>,
+<code>Spawn</code>, <code>Base</code>, <code>Hill</code> and <code>Shop</code>; use your own names, and the editor completes them.</p>
+<p><strong>Starting resources and a welcome.</strong> The simplest trigger: no preserve, so it runs once,
+and <code>CurrentPlayer</code> means each player in turn.</p>
+<pre><code class="language-ts">trigger(AllPlayers, [always()], [
+  setResources(CurrentPlayer, &quot;set&quot;, 500, &quot;ore&quot;),
+  setResources(CurrentPlayer, &quot;set&quot;, 100, &quot;gas&quot;),
+  displayText(&quot;Hold the hill for five minutes to win.&quot;),
+]);
+</code></pre>
+<p><strong>Hyper triggers.</strong> One line, and the whole trigger list runs every frame. Player 8 is
+the computer slot here, and nothing else in the script makes that player wait.</p>
+<pre><code class="language-ts">hyperTriggers(P8);
+</code></pre>
+<p><strong>Something for every player.</strong> A helper returns the trigger; a loop calls it. Death
+counts are the game&#39;s own counters, and subtracting ten after the reward makes the
+trigger fire again at the next ten, which <code>preserve: true</code> allows.</p>
+<pre><code class="language-ts">function reinforce(p: Player) {
+  return trigger(p, [deaths(p, units.TerranMarine, &quot;&gt;=&quot;, 10)], [
+    createUnit(p, units.TerranSiegeTankTankMode, 1, locations.Spawn),
+    setDeaths(p, units.TerranMarine, &quot;subtract&quot;, 10),
+    displayText(&quot;Reinforcements have arrived.&quot;),
+  ], { preserve: true });
+}
+
+for (const p of [P1, P2, P3, P4]) reinforce(p);
+</code></pre>
+<p><strong>A shop.</strong> Bring a civilian to the shop with enough minerals, and four marines appear
+at the spawn. The civilian is moved out first, so the trigger does not fire again on the
+next cycle, and <code>price</code> is an ordinary constant used twice.</p>
+<pre><code class="language-ts">const price = 150;
+
+trigger(AllPlayers, [
+  bring(CurrentPlayer, units.TerranCivilian, locations.Shop, &quot;&gt;=&quot;, 1),
+  accumulate(CurrentPlayer, &quot;&gt;=&quot;, price, &quot;ore&quot;),
+], [
+  moveUnit(CurrentPlayer, units.TerranCivilian, 1, locations.Shop, locations.Spawn),
+  setResources(CurrentPlayer, &quot;subtract&quot;, price, &quot;ore&quot;),
+  createUnit(CurrentPlayer, units.TerranMarine, 4, locations.Spawn),
+  displayText(`Four marines for ${price} minerals.`),
+], { preserve: true });
+</code></pre>
+<p><strong>Waves from a table.</strong> The table is ordinary data; the program walks it, one wave every
+forty-five seconds, then waits for the last attacker to die. <code>for … of</code> over a list known
+when you build is unrolled, so <code>w.unit</code> and <code>w.n</code> are plain values in each copy. The
+program runs as Player 1, so <code>victory()</code> is Player 1&#39;s; a team needs a <code>trigger()</code> for
+the others.</p>
+<pre><code class="language-ts">hyperTriggers(P8);
+
+const waves = [
+  { unit: units.ZergZergling, n: 8 },
+  { unit: units.ZergHydralisk, n: 6 },
+  { unit: units.ZergUltralisk, n: 2 },
+];
+
+program(() =&gt; {
+  displayText(&quot;The first wave arrives in thirty seconds.&quot;);
+  sleep(seconds(30));
+  for (const w of waves) {
+    createUnit(P8, w.unit, w.n, locations.Spawn);
+    order(P8, w.unit, locations.Spawn, locations.Base, &quot;attack&quot;);
+    minimapPing(locations.Spawn);
+    sleep(seconds(45));
+  }
+  while (command(P8, units.AnyUnit, &quot;&gt;=&quot;, 1)) {
+    sleep(seconds(2));
+  }
+  displayText(&quot;The last wave is broken.&quot;);
+  victory();
+});
+</code></pre>
+<p><strong>Lives, per player.</strong> One program, run once for every player: <code>lives</code> is a separate
+counter for each. When the hero dies the game&#39;s death count for it goes to 1; the
+program resets that count, takes a life, and either brings the hero back or ends the
+game for that player. <code>u8</code> keeps the counter cheap.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  let lives: u8 = 3;
+  while (true) {
+    if (deaths(CurrentPlayer, units.JimRaynorMarine, &quot;&gt;=&quot;, 1)) {
+      setDeaths(CurrentPlayer, units.JimRaynorMarine, &quot;set&quot;, 0);
+      lives -= 1;
+      if (lives == 0) {
+        displayText(&quot;No lives left.&quot;);
+        defeat();
+      } else {
+        createUnit(CurrentPlayer, units.JimRaynorMarine, 1, locations.Spawn);
+        displayText(&quot;Your hero returns.&quot;);
+      }
+    }
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p><strong>King of the hill.</strong> A point a second for holding the hill alone, shown on a
+leaderboard, and a win at a hundred. <code>points</code> is a variable of the program and the
+amount of <code>setScore</code> follows it; <code>players.Foes</code> is &quot;anyone at war with the current
+player&quot;, so the check is written once for everyone.</p>
+<pre><code class="language-ts">hyperTriggers(P8);
+
+trigger(AllPlayers, [always()], [leaderboardPoints(&quot;Hill&quot;, &quot;custom&quot;)]);
+
+program(() =&gt; {
+  let points: u16 = 0;
+  while (true) {
+    if (bring(CurrentPlayer, units.AnyUnit, locations.Hill, &quot;&gt;=&quot;, 1)
+        &amp;&amp; !bring(players.Foes, units.AnyUnit, locations.Hill, &quot;&gt;=&quot;, 1)) {
+      points += 1;
+      setScore(CurrentPlayer, &quot;set&quot;, points, &quot;custom&quot;);
+      if (points &gt;= 100) {
+        displayText(&quot;The hill is yours.&quot;);
+        victory();
+      }
+    }
+    sleep(seconds(1));
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p><strong>Random events.</strong> Every two minutes, a coin toss decides which of two things happens.
+<code>random()</code> is a randomized switch; <code>else</code> is the other side of it.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  while (true) {
+    sleep(minutes(2));
+    if (random()) {
+      displayText(&quot;Reinforcements pour from the nydus canal.&quot;);
+      createUnit(P8, units.ZergZergling, 12, locations.Spawn);
+    } else {
+      displayText(&quot;A supply drop: 100 minerals for everyone.&quot;);
+      setResources(AllPlayers, &quot;add&quot;, 100, &quot;ore&quot;);
+    }
+  }
+});
+</code></pre>
+<p><strong>A beacon that opens a gate, once.</strong> <code>rose()</code> fires on the cycle the condition becomes
+true, <code>once()</code> only the first time it does, so this runs exactly once however long the
+unit stands there. Two things happen on their own clocks, so there are two programs.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  while (true) {
+    if (once(bring(P1, units.AnyUnit, locations.Beacon, &quot;&gt;=&quot;, 1))) {
+      displayText(&quot;The gate opens.&quot;);
+      killUnitAt(P12, units.LeftUpperLevelDoor, &quot;All&quot;, locations.Base);
+      setSwitch(switches.Switch1, &quot;set&quot;);
+    }
+  }
+});
+
+program(() =&gt; {
+  while (true) {
+    if (switchIs(switches.Switch1, &quot;set&quot;)) {
+      createUnit(P8, units.ZergHydralisk, 2, locations.Spawn);
+      sleep(seconds(30));
+    }
+  }
+});
+</code></pre>
+<p><strong>A map that already has triggers.</strong> Open TrigScript and press <strong>Import map triggers</strong>:
+every hand-made trigger comes back as a <code>trigger()</code> call in its order, and the next Build
+replaces the whole list with what the script makes. From there a repeated trigger becomes
+a loop, a number used in ten places becomes a constant, and the rest stays as it was.</p>
+<h2 id="reference">Reference<a class="anchor" href="#reference" aria-label="Link to this section">#</a></h2>
+<p>The trigger form and its options:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>trigger(players, conditions, actions, options?)</code></td>
+<td>One trigger. <code>players</code> is a player or a list; up to 16 conditions and 64 actions.</td>
+</tr>
+<tr>
+<td><code>{ preserve, disabled, ignoreGameEnd, ignoreDisplay, conditionsMet, paused, waitSkipDisabled, flags }</code></td>
+<td>The options: each execution flag by name, and <code>flags</code> for raw bits.</td>
+</tr>
+<tr>
+<td><code>preserve()</code></td>
+<td>The same as <code>{ preserve: true }</code>, as an action.</td>
+</tr>
+<tr>
+<td><code>not(condition)</code></td>
+<td>The opposite, where one condition can say it: a comparison flips, a switch test flips, <code>always()</code> becomes <code>never()</code>. &quot;Exactly n&quot; has no opposite and is an error.</td>
+</tr>
+<tr>
+<td><code>disabled(item)</code></td>
+<td>The condition or action kept in the trigger but switched off, as the Trigger Editor&#39;s disable does.</td>
+</tr>
+<tr>
+<td><code>hyperTriggers(owner?)</code></td>
+<td>The three preserved triggers of sixty-two waits that make the list run every frame.</td>
+</tr>
+<tr>
+<td><code>condition(type, …)</code>, <code>action(type, …)</code></td>
+<td>A record by raw type number and fields, for anything the tables do not know.</td>
+</tr>
+<tr>
+<td><code>memory(address, comparison, value)</code>, <code>setMemory(address, modifier, value)</code></td>
+<td>EUD: the value at a memory address, through the deaths table.</td>
+</tr>
+</tbody></table>
+<p>The words the enumerated arguments take (StarEdit&#39;s labels work too):</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Words</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Comparison</td>
+<td><code>&quot;&gt;=&quot;</code>, <code>&quot;&lt;=&quot;</code>, <code>&quot;==&quot;</code></td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><code>&quot;set&quot;</code>, <code>&quot;add&quot;</code>, <code>&quot;subtract&quot;</code></td>
+</tr>
+<tr>
+<td>Switch state, switch action</td>
+<td><code>&quot;set&quot;</code>, <code>&quot;cleared&quot;</code>; <code>&quot;set&quot;</code>, <code>&quot;clear&quot;</code>, <code>&quot;toggle&quot;</code>, <code>&quot;randomize&quot;</code></td>
+</tr>
+<tr>
+<td>Resource</td>
+<td><code>&quot;ore&quot;</code>, <code>&quot;gas&quot;</code>, <code>&quot;oreAndGas&quot;</code></td>
+</tr>
+<tr>
+<td>Score</td>
+<td><code>&quot;total&quot;</code>, <code>&quot;units&quot;</code>, <code>&quot;buildings&quot;</code>, <code>&quot;unitsAndBuildings&quot;</code>, <code>&quot;kills&quot;</code>, <code>&quot;razings&quot;</code>, <code>&quot;killsAndRazings&quot;</code>, <code>&quot;custom&quot;</code></td>
+</tr>
+<tr>
+<td>Order</td>
+<td><code>&quot;move&quot;</code>, <code>&quot;patrol&quot;</code>, <code>&quot;attack&quot;</code></td>
+</tr>
+<tr>
+<td>Alliance</td>
+<td><code>&quot;enemy&quot;</code>, <code>&quot;ally&quot;</code>, <code>&quot;alliedVictory&quot;</code></td>
+</tr>
+<tr>
+<td>Unit state (doodads, invincibility)</td>
+<td><code>&quot;enable&quot;</code>, <code>&quot;disable&quot;</code>, <code>&quot;toggle&quot;</code></td>
+</tr>
+<tr>
+<td>Count</td>
+<td>A number, or <code>&quot;All&quot;</code></td>
+</tr>
+<tr>
+<td>Text display</td>
+<td><code>displayText(text)</code> always displays; <code>displayText(text, false)</code> follows the game&#39;s message setting</td>
+</tr>
+</tbody></table>
+<p>The names:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>P1</code> … <code>P12</code>, <code>CurrentPlayer</code>, <code>AllPlayers</code></td>
+<td>Constants.</td>
+</tr>
+<tr>
+<td><code>players.</code></td>
+<td>Every player group: <code>Force1</code> … <code>Force4</code> (and the force&#39;s own name), <code>Foes</code>, <code>Allies</code>, <code>Neutral</code>, <code>NonAlliedVictory</code>, and the twelve players again.</td>
+</tr>
+<tr>
+<td><code>units.</code></td>
+<td>Every unit type by StarEdit name as an identifier (<code>TerranMarine</code>) or a string index (<code>units[&quot;Terran Marine&quot;]</code>), and by the custom name the map gives it. <code>AnyUnit</code>, <code>Men</code>, <code>Buildings</code>, <code>Factories</code> are there.</td>
+</tr>
+<tr>
+<td><code>locations.</code></td>
+<td>The map&#39;s locations by name; <code>Anywhere</code> and <code>NoLocation</code>.</td>
+</tr>
+<tr>
+<td><code>switches.</code></td>
+<td><code>Switch1</code> … <code>Switch256</code>, and any name the map sets.</td>
+</tr>
+<tr>
+<td><code>aiScripts.</code></td>
+<td>The AI scripts by StarEdit name; a four-letter code as a string works too.</td>
+</tr>
+<tr>
+<td>A number</td>
+<td>Accepted wherever a name is: an EUD player, an unlisted unit id.</td>
+</tr>
+</tbody></table>
+<p>Inside a program:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>program(body, options?)</code></td>
+<td>Code that runs in the game. Options: <code>owner</code> (a player, <code>AllPlayers</code>, a force, or a list — the last three run it once per player), <code>comments</code> (a comment naming the source line on every generated trigger; on by default), <code>variableUnits</code> (which unit types&#39; death counters hold the variables).</td>
+</tr>
+<tr>
+<td><code>game(fn)</code></td>
+<td>A function that runs in the game, for programs to call; it can live in any file and be imported.</td>
+</tr>
+<tr>
+<td><code>let n = 0</code>, <code>let f = false</code>, <code>let p = { … }</code></td>
+<td>A death counter, a switch, a record of them. <code>const</code> is a build-time value when it can be.</td>
+</tr>
+<tr>
+<td><code>u8</code>, <code>u16</code>, <code>u32</code></td>
+<td>The declared range of a number variable: <code>let lives: u8 = 3</code>. Narrower is cheaper, and saturates at its maximum.</td>
+</tr>
+<tr>
+<td><code>shared(value)</code></td>
+<td>In a per-player program, one cell for all the players instead of one each.</td>
+</tr>
+<tr>
+<td><code>sleep(duration)</code></td>
+<td>Pause this program. <code>seconds(n)</code>, <code>minutes(n)</code>, <code>cycles(n)</code> make a duration.</td>
+</tr>
+<tr>
+<td><code>rose(condition)</code>, <code>once(condition)</code></td>
+<td>True on the cycle the condition becomes true; true the first time only.</td>
+</tr>
+<tr>
+<td><code>random()</code></td>
+<td>A coin toss (a randomized switch).</td>
+</tr>
+<tr>
+<td><code>clamp(x, lo, hi)</code>, <code>Math.min</code>, <code>Math.max</code>, <code>Math.abs</code></td>
+<td>Work on variables. <code>Math.floor</code> and its siblings are accepted around a division and change nothing, since division is whole.</td>
+</tr>
+<tr>
+<td><code>wait(ms)</code></td>
+<td>The game&#39;s own Wait: allowed, stalls every trigger of the player, so prefer <code>sleep</code>.</td>
+</tr>
+</tbody></table>
+<p>What things cost, in triggers, for a plain number and for a <code>u8</code> (the editor shows the
+exact count at the end of each line):</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Plain number</th>
+<th><code>u8</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>n += 5</code>, <code>n = 3</code>, <code>n++</code></td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>if (n &gt;= 3) { … }</code></td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>a = b</code>, <code>a += b</code> (two variables)</td>
+<td>65</td>
+<td>18</td>
+</tr>
+<tr>
+<td><code>if (a &lt; b) { … }</code> (two variables)</td>
+<td>133</td>
+<td>38</td>
+</tr>
+<tr>
+<td><code>c = a * 3</code></td>
+<td>as <code>c = a</code></td>
+<td>as <code>c = a</code></td>
+</tr>
+<tr>
+<td><code>c = a / 4</code>, <code>c = a % 4</code></td>
+<td>157</td>
+<td>40</td>
+</tr>
+<tr>
+<td><code>c = a * b</code> (two variables)</td>
+<td>far more</td>
+<td>203</td>
+</tr>
+<tr>
+<td><code>if (rose(…)) { … }</code>, <code>if (once(…)) { … }</code></td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr>
+<td><code>setResources(p, &quot;add&quot;, n, &quot;ore&quot;)</code></td>
+<td>65</td>
+<td>18</td>
+</tr>
+<tr>
+<td><code>createUnit(p, unit, n, at)</code></td>
+<td>74</td>
+<td>18</td>
+</tr>
+<tr>
+<td><code>sleep(seconds(2))</code></td>
+<td>4</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>What a program cannot do:</p>
+<ul>
+<li>A text, a location, a unit type or a player is fixed when you build; only the amounts
+and counts listed above can follow a variable.</li>
+<li>A condition cannot be tested against a variable — the game compares a quantity with a
+number it is given — so compare variables in the program&#39;s own statements.</li>
+<li>No recursion, no division by a variable, no <code>for</code> unrolled more than 256 times (write a
+<code>while</code>), and no sum past 4 294 967 295 in a plain number.</li>
+<li>A program variable cannot reach a helper, a condition or an action, since those were
+computed when the script was built.</li>
+</ul>
+<p>The full description of the language, its compiler and the commands it offers other
+plugins is in the plugin&#39;s own README at
+<a href="https://github.com/scm-js/plugin-trigscript">scm-js/plugin-trigscript</a>.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#opening-the-script">Opening the script</a></li>
+<li><a href="#beside-the-map">Beside the map</a></li>
+<li><a href="#writing-triggers">Writing triggers</a></li>
+<li><a href="#programs">Programs</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

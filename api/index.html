@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API reference — scmJS documentation</title>
+<meta name="description" content="Every call a scmJS plugin can make — plugin API version 1, generated from the editor&#39;s own declarations.">
+<meta property="og:title" content="API reference — scmJS documentation">
+<meta property="og:description" content="Every call a scmJS plugin can make — plugin API version 1, generated from the editor&#39;s own declarations.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head here" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>API reference</h1>
+<p class="lede">Everything a plugin can see and do, as the editor declares it. Plugin API version 1; generated from <code>src/plugins/api.ts</code>, the same declarations <a href="https://www.npmjs.com/package/@scm-js/plugin-api"><code>@scm-js/plugin-api</code></a> publishes.</p>
+<p>A plugin is one <code>activate(api)</code> function. Everything below hangs off that argument.</p>
+<pre class="code"><code><span class="k">import</span> <span class="k">type</span> { <a class="t" href="/api/">PluginApi</a> } <span class="k">from</span> <span class="s">&quot;@scm-js/plugin-api&quot;</span>;
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">function</span> activate(api: <a class="t" href="/api/">PluginApi</a>) {
+  api.menu.add(<span class="s">&quot;Tools&quot;</span>, { label: <span class="s">&quot;Say hello&quot;</span>, run: () =&gt; api.ui.toast({ title: <span class="s">&quot;Hello&quot;</span> }) });
+}</code></pre>
+<p>Nothing here is written by hand. A member with no description has no doc comment in <code>api.ts</code>; the fix belongs there, not on this page.</p>
+<h2 id="groups">Groups</h2>
+<table><tbody>
+<tr>
+<th><a href="/api/document/"><code>api.document</code></a></th>
+<td><p>The open map: what it says, and the three ways of writing to it — <code>edit</code> (terrain and
+objects, one undo entry), <code>update</code> (the tables every dialog&#39;s OK writes) and
+<code>sections</code> (raw bytes). Opening, saving, exporting and closing are here too.</p></td>
+</tr>
+<tr>
+<th><a href="/api/settings/"><code>api.settings</code></a></th>
+<td><p>The settings dialogs&#39; tables, read-only; <code>document.update</code> writes them.</p></td>
+</tr>
+<tr>
+<th><a href="/api/triggers/"><code>api.triggers</code></a></th>
+<td><p>Reading triggers, and the pure helpers that make them presentable. Writing goes
+through <code>document.update</code>.</p></td>
+</tr>
+<tr>
+<th><a href="/api/terrain/"><code>api.terrain</code></a></th>
+<td><p>Reading the terrain: the tileset&#39;s paintable types, the ISOM lattice, flood regions,
+blend candidates and the symmetry mode. Painting goes through <code>document.edit</code>.</p></td>
+</tr>
+<tr>
+<th><a href="/api/tileset/"><code>api.tileset</code></a></th>
+<td><p>The loaded tileset graphics: whether they are there, and the decoded files behind them.</p></td>
+</tr>
+<tr>
+<th><a href="/api/selection/"><code>api.selection</code></a></th>
+<td><p>What is selected on each object layer, the marked area, the active layer and the locked ones.</p></td>
+</tr>
+<tr>
+<th><a href="/api/clipboard/"><code>api.clipboard</code></a></th>
+<td><p>Cut / Copy / Paste: the clip, its parts, and pasting — what the clipboard layer does.</p></td>
+</tr>
+<tr>
+<th><a href="/api/exchange/"><code>api.exchange</code></a></th>
+<td><p>The file formats behind File ▸ Import / Export: <code>.trg</code> and the strings text.</p></td>
+</tr>
+<tr>
+<th><a href="/api/palette/"><code>api.palette</code></a></th>
+<td><p>The palettes&#39; current picks — the terrain brush, the unit, sprite and doodad, the fog
+mode — and the placement options a plugin that places things should honour.</p></td>
+</tr>
+<tr>
+<th><a href="/api/names/"><code>api.names</code></a></th>
+<td><p>The names behind the numbers a map stores, so a plugin that shows raw values need not
+carry the game&#39;s tables itself. The per-map ones (<code>string</code>, <code>location</code>, <code>switch</code>,
+<code>player</code>) read the open scenario and answer a placeholder without one; the rest are
+the editor&#39;s own tables — the same names StarEdit shows.</p></td>
+</tr>
+<tr>
+<th><a href="/api/text/"><code>api.text</code></a></th>
+<td><p>StarCraft&#39;s <code>&lt;XX&gt;</code> text control codes: what they mean, and what a string looks like drawn.</p></td>
+</tr>
+<tr>
+<th><a href="/api/query/"><code>api.query</code></a></th>
+<td><p>Reading the open map: what is under a point, what lies in a rectangle, and the
+editor&#39;s own analyses — Check Map&#39;s issues, Tools ▸ Statistics, the Ctrl+F search and
+the string usage map the String Editor is built on.</p>
+<p>Everything here is a read: nothing changes the map, and nothing throws without one
+(an empty list, or null).</p></td>
+</tr>
+<tr>
+<th><a href="/api/data/"><code>api.data</code></a></th>
+<td><p>The game&#39;s own tables, as the editor decoded them: <code>units.dat</code> and its neighbours.
+<code>names</code> gives the labels, this gives the numbers — hit points, costs, build times,
+weapons, flags, the sprite and image each unit draws through.</p>
+<p>Everything is null until the tables are loaded (<code>load</code>), and stays null when the game
+data was never extracted.</p></td>
+</tr>
+<tr>
+<th><a href="/api/game-data/"><code>api.gameData</code></a></th>
+<td><p>Which set of game files the editor draws from — the game&#39;s own or a mod&#39;s — and installing, switching and removing sets.</p></td>
+</tr>
+<tr>
+<th><a href="/api/consts/"><code>api.consts</code></a></th>
+<td><p>Bit masks, special unit ids and the pixels-per-tile every record is written in.</p></td>
+</tr>
+<tr>
+<th><a href="/api/graphics/"><code>api.graphics</code></a></th>
+<td><p>The pictures the viewport draws, for a plugin&#39;s own lists and previews: the same
+cached canvases, so asking for one costs nothing after the first time. Everything is
+null when the graphics it needs were never extracted — a plugin shows a name instead.</p></td>
+</tr>
+<tr>
+<th><a href="/api/view/"><code>api.view</code></a></th>
+<td><p>The map view: where the viewport is looking, how far in, and what it draws over the
+terrain. A plugin that finds something needs this to show the user where it is.</p></td>
+</tr>
+<tr>
+<th><a href="/api/ui/"><code>api.ui</code></a></th>
+<td><p>Everything a plugin puts on the screen: the status line, toasts, dialogs, floating
+panels, <code>confirm</code> / <code>alert</code> / <code>prompt</code> / <code>progress</code>, a map tool that owns the pointer,
+a passive overlay drawn over the map, and picking an area or a tile.</p></td>
+</tr>
+<tr>
+<th><a href="/api/menu/"><code>api.menu</code></a></th>
+<td><p>Items in the editor&#39;s menu bar. A path whose last segment names no submenu makes one.</p></td>
+</tr>
+<tr>
+<th><a href="/api/context-menu/"><code>api.contextMenu</code></a></th>
+<td><p>Items in the right-click menus of the map and the terrain palette.</p></td>
+</tr>
+<tr>
+<th><a href="/api/hotkeys/"><code>api.hotkeys</code></a></th>
+<td><p>Key combinations, tried before the editor&#39;s own and never while a text field has focus.</p></td>
+</tr>
+<tr>
+<th><a href="/api/commands/"><code>api.commands</code></a></th>
+<td><p>Named things a plugin can do, so a menu item, a hotkey, a context entry and another
+plugin all reach the same one. <code>menu.add</code>, <code>contextMenu.add</code> and <code>hotkeys.add</code> take a
+<code>command</code> id in place of a <code>run</code>.</p></td>
+</tr>
+<tr>
+<th><a href="/api/services/"><code>api.services</code></a></th>
+<td><p>Live objects one plugin holds out for others to use, found by name and watched for arriving.</p></td>
+</tr>
+<tr>
+<th><a href="/api/i18n/"><code>api.i18n</code></a></th>
+<td><p>The plugin&#39;s words in the editor&#39;s language: its own catalogues, and a <code>t</code> over them.</p></td>
+</tr>
+<tr>
+<th><a href="/api/events/"><code>api.events</code></a></th>
+<td><p>Listeners are notifications: they run after the change, in the order the plugins were
+activated, and cannot veto or reorder one another. A listener that rewrites the map in
+response (through <code>document.sections</code>) simply raises a fresh <code>&quot;document&quot;</code> event with
+reason <code>&quot;replace&quot;</code>, which every other listener sees in turn.</p></td>
+</tr>
+<tr>
+<th><a href="/api/storage/"><code>api.storage</code></a></th>
+<td><p>A small key-value store of the plugin&#39;s own, kept in the browser&#39;s local storage under
+the plugin&#39;s id and listed with everything else in Preferences ▸ Browser storage.</p></td>
+</tr>
+</tbody></table>
+<h2 id="root">On the api object itself</h2>
+<ul>
+<li><code>api.apiVersion</code> — number</li>
+<li><code>api.plugin</code> — PluginInfo</li>
+<li><code>api.log</code> — console.log with the plugin&#39;s name in front.</li>
+<li><code>api.plugin</code> — the manifest of the plugin this <code>api</code> belongs to (<a href="/api/types/#plugininfo"><code>PluginInfo</code></a>).</li>
+</ul>
+<h2 id="examples">Plugins to read</h2>
+<p>Every plugin the editor ships is a repository of its own, compiled against these declarations; <a href="/plugins/plugins-to-read/">Plugins to read</a> says what each one demonstrates.</p>
+<ul class="cards">
+<li><a class="card" href="https://github.com/scm-js/plugin-hello-world"><b>Hello World</b><span>the smallest complete plugin: one menu item and one dialog, to copy from</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-paint"><b>Paint</b><span>map tools, a floating panel, and painting with the active layer&#39;s brush</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-walkability"><b>Walkability</b><span>a read-only overlay drawn over the map</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-section-explorer"><b>Section Explorer</b><span>raw section bytes, re-parsed into the open map</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-repair"><b>Repair</b><span>checking a file on open and repairing it</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-melee-wizard"><b>Melee Wizard</b><span>placing units with the editor&#39;s own placement checks</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-image-to-terrain"><b>Terrain from Image</b><span>an image turned into terrain, one transaction</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-scm-scx"><b>scmscx.com</b><span>opening a map fetched from elsewhere</span></a></li>
+<li><a class="card" href="https://github.com/scm-js/plugin-trigscript"><b>TrigScript</b><span>generating a run of triggers and claiming it</span></a></li>
+</ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scenario settings — scmJS documentation</title>
+<meta name="description" content="The Scenario menu holds the map&#39;s own tables.">
+<meta property="og:title" content="Scenario settings — scmJS documentation">
+<meta property="og:description" content="The Scenario menu holds the map&#39;s own tables.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="here" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Scenario settings</h1>
+<p>The Scenario menu holds the map&#39;s own tables. Each dialog is its own OK / Apply / Cancel
+transaction; none of it is in the undo history.</p>
+<h2 id="map-properties-players-forces-colours">Map Properties, Players, Forces, Colours<a class="anchor" href="#map-properties-players-forces-colours" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/map-properties.webp" alt="Map Properties"></p>
+<p><strong>Map Properties</strong> (Alt+Enter) is the name and description the lobby shows, the tileset,
+the size and the revision, with buttons to the rest. Changing the tileset lays the terrain
+again with a terrain you pick — tile numbers mean something else in every tileset — and
+drops the doodads with it, while units, sprites, locations, fog and triggers stay; or
+keep the tile numbers, as SCMDraft does, to see what they draw. <strong>Resize / Crop</strong> grows
+or trims the map about a corner or the centre. Both clear the undo history.</p>
+<p><img src="/images/player-settings.webp" alt="Player Settings"></p>
+<p><strong>Player Settings</strong> is each slot&#39;s controller (Human, Computer, Rescuable, Neutral…),
+race, colour and force.</p>
+<p><img src="/images/force-settings.webp" alt="Force Settings"></p>
+<p><strong>Force Settings</strong> groups the players into up to four teams and sets, per team, allied
+victory, shared vision, allies and random start locations.</p>
+<p><strong>Player Colors</strong> picks each slot&#39;s palette colour and, for a Remastered map, a custom
+RGB, random, or the player&#39;s own choice; the map repaints as you change them.</p>
+<p><img src="/images/player-colors.webp" alt="Player Colors"></p>
+<h2 id="units-upgrades-and-technology">Units, upgrades and technology<a class="anchor" href="#units-upgrades-and-technology" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/unit-settings.webp" alt="Unit Settings"></p>
+<p><strong>Unit Settings</strong>, <strong>Upgrade Settings</strong> and <strong>Technology Settings</strong> edit the cost and
+availability tables: a unit&#39;s hit points, armour, build time, cost and weapon damage, a
+custom name, and which players may build it; an upgrade&#39;s cost and levels; a
+technology&#39;s cost and whether each player starts with it or may research it. A row on
+<em>use default</em> shows the greyed-out numbers from the game&#39;s own data files and seeds itself
+from them when you untick it.</p>
+<h2 id="strings">Strings<a class="anchor" href="#strings" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/string-editor.webp" alt="The String Editor"></p>
+<p>Every piece of text a map carries — its name, the force names, location names, every
+trigger message — is a numbered string, and the <strong>String Editor</strong> lists them all with
+where each is used. Edits keep their number, so triggers and locations keep pointing
+where they did; <em>Delete unused</em> clears out what nothing refers to.</p>
+<p>The row of buttons inserts the game&#39;s colour codes, each drawn in the colour it produces,
+and the preview under the box shows the string the way the game draws it. The same codes
+work in every field whose text the game draws: the map name and description, force names,
+custom unit names, and the text of a trigger or briefing action — each of those fields
+shows the string as the game draws it until you click into it, and has a palette button
+at its right-hand end.</p>
+<p>The previews follow Remastered&#39;s rule, where a colour set on one line carries onto the
+next. StarCraft 1.16.1 reset the colour at every line break, so a string written before
+the remaster can draw in colours its author never chose; the <em>1.16.1 colours</em> tick (also
+in Preferences ▸ Display) switches every preview to the old rendering, and the Repair
+plugin offers to write the reset the old game used to supply.</p>
+<p>A map file does not say what encoding its text is in. StarEdit wrote whatever code page
+Windows was using — EUC-KR on a Korean machine, Shift_JIS on a Japanese one,
+Windows-1252 nearly everywhere else — and 1.16.1 still reads the file that way;
+Remastered writes UTF-8 and, reading, tries UTF-8 first and then the code page of the
+machine it is running on. The editor guesses the encoding from the file&#39;s bytes when a
+map opens and shows the guess in <strong>Scenario ▸ Map Revision</strong>, where it can be corrected:
+Korean text that opened as garbage is a wrong guess, and choosing <em>Korean</em> there fixes
+every string at once. The same choice decides how the text is written on save, so a map
+made for 1.16.1 on a Korean Windows stays readable there; a new map is UTF-8, and moving
+a map to Remastered&#39;s STRx table makes it UTF-8 too. A character the chosen encoding
+cannot hold is written as <code>?</code>, and Check Map and the Save dialog both say so beforehand.</p>
+<h2 id="sounds-and-switches">Sounds and switches<a class="anchor" href="#sounds-and-switches" aria-label="Link to this section">#</a></h2>
+<p>The <strong>Sound Editor</strong> joins the map&#39;s sound table with the <code>.wav</code> files in the archive:
+import, play, remove, and adopt files the archive carries but the table does not list.
+Import takes any file the browser can decode (MP3, FLAC, AAC, Ogg, WAV in any encoding)
+and writes it as PCM WAV in the format picked next to the button; the default, 22050 Hz
+16-bit mono, is what the game&#39;s own sounds are, and the smaller presets are for maps
+chasing the size limit. A <em>Play WAV</em> action then names the file.</p>
+<p><strong>Switches</strong> names the 256 switches triggers set and test, so the trigger editors show
+&quot;Gate open&quot; rather than &quot;Switch 3&quot;.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#map-properties-players-forces-colours">Map Properties, Players, Forces, Colours</a></li>
+<li><a href="#units-upgrades-and-technology">Units, upgrades and technology</a></li>
+<li><a href="#strings">Strings</a></li>
+<li><a href="#sounds-and-switches">Sounds and switches</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

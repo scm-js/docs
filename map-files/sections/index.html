@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sections — scmJS documentation</title>
+<meta name="description" content="Every section the editor knows.">
+<meta property="og:title" content="Sections — scmJS documentation">
+<meta property="og:description" content="Every section the editor knows.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="here" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Sections</h1>
+<p>Every section the editor knows. <em>Modelled</em> sections are decoded into the editor&#39;s own
+model and re-encoded when you change them; the rest are carried as bytes. <em>Required</em>
+sections are ones the game refuses to load a map without, and Tools ▸ Check Map reports
+a missing one as an error.</p>
+<p><strong>Identity</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TYPE</code></td>
+<td><code>RAWS</code> (original StarCraft) or <code>RAWB</code> (Brood War)</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>VER </code></td>
+<td>the file revision, see <a href="/map-files/revisions/">Revisions</a></td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>IVER</code>, <code>IVE2</code></td>
+<td>StarEdit&#39;s version stamps, read by nothing</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>VCOD</code></td>
+<td>a 1040-byte verification table, the same in every unprotected map; the game refuses a map without it</td>
+<td></td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<p><strong>Players</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>OWNR</code></td>
+<td>each slot&#39;s type: human, computer, rescuable, neutral, unused</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>IOWN</code></td>
+<td>StarEdit&#39;s own copy of the player types; the editor writes both and Check Map warns when a file&#39;s two disagree</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>SIDE</code></td>
+<td>each slot&#39;s race</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>COLR</code></td>
+<td>each slot&#39;s colour, from the classic palette</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>CRGB</code></td>
+<td>Remastered&#39;s per-slot RGB colours and colour modes</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>FORC</code></td>
+<td>the four forces: names, membership, allied victory and the other flags</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<p><strong>The map</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>DIM </code></td>
+<td>width and height in tiles</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>ERA </code></td>
+<td>the tileset</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>MTXM</code></td>
+<td>the terrain as the game draws it, one tile id per cell, doodads included</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>TILE</code></td>
+<td>the terrain under the doodads, StarEdit&#39;s copy; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>ISOM</code></td>
+<td>the isometric record: the lattice of terrain diamonds the isometric brush paints; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>DD2 </code></td>
+<td>the placed doodads as objects, so an editor can select and remove one; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>MASK</code></td>
+<td>fog of war: which players start with each tile unexplored</td>
+<td>yes</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Objects</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>UNIT</code></td>
+<td>every placed unit, 36 bytes each</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>THG2</code></td>
+<td>sprites, both pure sprites and the unit-shaped ones</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>MRGN</code></td>
+<td>locations: 64 slots on an original map, 255 on Brood War; slot 64 is Anywhere</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<p><strong>Text and sound</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>STR </code>, <code>STRx</code></td>
+<td>the string table, 16-bit or 32-bit offsets</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>SPRP</code></td>
+<td>which strings are the scenario name and description</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>SWNM</code></td>
+<td>switch names; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr>
+<td><code>WAV </code></td>
+<td>the list of sound files, for the Sound Editor; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Triggers</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>TRIG</code></td>
+<td>the triggers, 2400 bytes each</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>MBRF</code></td>
+<td>the mission briefing, in the same record</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>UPRP</code></td>
+<td>the 64 Create Unit with Properties slots</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>UPUS</code></td>
+<td>which of those slots StarEdit considers in use; editor-only</td>
+<td>yes</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>Settings</strong></p>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Holds</th>
+<th>Modelled</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PUNI</code></td>
+<td>which unit types each player may build</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>UNIS</code>, <code>UNIx</code></td>
+<td>unit settings: hit points, shields, armour, build time, cost, weapon damage, names</td>
+<td>yes</td>
+<td>by revision</td>
+</tr>
+<tr>
+<td><code>UPGS</code>, <code>UPGx</code></td>
+<td>upgrade costs and times</td>
+<td>yes</td>
+<td>by revision</td>
+</tr>
+<tr>
+<td><code>UPGR</code>, <code>PUPx</code></td>
+<td>upgrade levels each player starts at and may reach</td>
+<td>yes</td>
+<td>by revision</td>
+</tr>
+<tr>
+<td><code>TECS</code>, <code>TECx</code></td>
+<td>technology costs and times</td>
+<td>yes</td>
+<td>by revision</td>
+</tr>
+<tr>
+<td><code>PTEC</code>, <code>PTEx</code></td>
+<td>which technologies each player starts with and may research</td>
+<td>yes</td>
+<td>by revision</td>
+</tr>
+</tbody></table>
+<p>The settings pairs are the original and Brood War layouts of the same table; the next
+section says which a file needs. Anything not in these tables is a section the editor
+does not know, carried through untouched.</p>
+<h2 id="what-the-game-reads-and-what-it-skips">What the game reads and what it skips<a class="anchor" href="#what-the-game-reads-and-what-it-skips" aria-label="Link to this section">#</a></h2>
+<p>Nine sections are read by editors and skipped by the game: <code>ISOM</code>, <code>TILE</code> and <code>DD2 </code>
+for terrain editing, and <code>IVER</code>, <code>IVE2</code>, <code>IOWN</code>, <code>UPUS</code>, <code>SWNM</code> and <code>WAV </code> as
+bookkeeping. The Save dialog can leave each group out, and <em>Smallest that plays</em> leaves
+out both. The map plays the same without them. What changes is what an editor can do
+with the file afterwards:</p>
+<ul>
+<li>Without <code>ISOM</code>, the isometric brush has nothing to paint with. The Repair plugin can
+rebuild the record from the tiles, and does a good job on terrain that was laid
+isometrically to begin with.</li>
+<li>Without <code>TILE</code> and <code>DD2 </code>, doodads are no longer objects. Their tiles are still in the
+terrain and their sprites are still in <code>THG2</code>, but an editor cannot pick one up or
+restore the ground beneath it.</li>
+<li>Without <code>SWNM</code> and <code>WAV </code>, switches lose their names and the Sound Editor its list; the
+triggers that use them are unaffected.</li>
+<li><code>IOWN</code>, <code>IVER</code>, <code>IVE2</code> and <code>UPUS</code> are StarEdit&#39;s own notes and cost nothing.</li>
+</ul>
+<p>Stripping these is what map protectors and &quot;map compressors&quot; have always done. It is
+reversible only as far as the Repair plugin can reconstruct the record, so keep an
+unstripped copy of any map you are still working on.</p>
+<h2 id="sections-a-map-may-not-have">Sections a map may not have<a class="anchor" href="#sections-a-map-may-not-have" aria-label="Link to this section">#</a></h2>
+<p><code>ISOM</code>, <code>MASK</code>, <code>WAV </code>, <code>CRGB</code>, <code>SWNM</code>, the CUWP slots and every settings table are
+optional, and the editor writes none of them into a file that had none: a map without a
+<code>MASK</code> section stays without one, rather than gaining an all-clear fog table it never
+had. A map with no <code>MASK</code> plays as fully fogged for every player, which is also how the
+editor shows it. A map with no <code>ISOM</code> cannot use the isometric brush until the record is
+rebuilt.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#what-the-game-reads-and-what-it-skips">What the game reads and what it skips</a></li>
+<li><a href="#sections-a-map-may-not-have">Sections a map may not have</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

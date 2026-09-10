@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using plugins — scmJS documentation</title>
+<meta name="description" content="Plugins ▸ Browse Plugins… lists the plugins the project publishes.">
+<meta property="og:title" content="Using plugins — scmJS documentation">
+<meta property="og:description" content="Plugins ▸ Browse Plugins… lists the plugins the project publishes.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="here" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Using plugins</h1>
+<h2 id="finding-and-installing-one">Finding and installing one<a class="anchor" href="#finding-and-installing-one" aria-label="Link to this section">#</a></h2>
+<p>Plugins ▸ <strong>Browse Plugins…</strong> lists the plugins the project publishes. Press <strong>Install</strong>
+on one and the editor shows where the code comes from and asks before it adds anything.
+Plugins ▸ <strong>Manage Plugins…</strong> lists what is installed, turns each plugin on or off, and
+takes the address of any plugin that is not on the list.</p>
+<p>Nine plugins are <em>defaults</em> (two of them, TrigEdit and scmjs.dev, start off). They are on
+the list from the start and compiled into the editor, so a fresh install has them without
+touching the network. They are ordinary
+plugins from their own repositories and can be turned off, but not removed.</p>
+<p>An address can take any of these forms:</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>What it points at</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>github:owner/repo</code></td>
+<td>A GitHub repository, at its default branch.</td>
+</tr>
+<tr>
+<td><code>github:owner/repo@v1.2</code></td>
+<td>A tag, a branch or a commit of it.</td>
+</tr>
+<tr>
+<td><code>github:owner/repo@v1.2/plugins/mine</code></td>
+<td>A folder inside a repository, for several plugins in one.</td>
+</tr>
+<tr>
+<td><code>https://github.com/owner/repo/tree/v1.2/plugins/mine</code></td>
+<td>The same, as the URL copied from the browser&#39;s address bar.</td>
+</tr>
+<tr>
+<td><code>https://…/plugin.json</code></td>
+<td>A plugin&#39;s manifest anywhere: GitLab, a gist, your own server.</td>
+</tr>
+<tr>
+<td><code>https://…/plugin.ts</code></td>
+<td>A single plugin file with no manifest.</td>
+</tr>
+<tr>
+<td><code>http://localhost:3000/</code></td>
+<td>A folder holding <code>plugin.json</code>, served from your own machine. This is how a plugin is developed.</td>
+</tr>
+</tbody></table>
+<h2 id="what-you-are-trusting">What you are trusting<a class="anchor" href="#what-you-are-trusting" aria-label="Link to this section">#</a></h2>
+<p><strong>There is no sandbox.</strong> A plugin runs with the same access as the editor itself: it can
+read and change the map you have open, read and write the files stored in the map archive,
+read and write the editor&#39;s own browser storage, and make network requests. That is the
+same trust a browser extension asks for. Only add plugins you trust, and prefer ones whose
+source you can read.</p>
+<p>Before any code is fetched, the Add screen shows what the plugin says about itself: its
+name, version, author, description and icon out of its <code>plugin.json</code>, links to the
+repository and homepage, and the addresses the code will be fetched from. Nothing else has
+been downloaded or run at that point, so this is your chance to check the repository.</p>
+<p>The Add screen has three ticks:</p>
+<table>
+<thead>
+<tr>
+<th>Tick</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Enable it now</td>
+<td>on</td>
+<td>Start the plugin as soon as it is added. Off adds it to the list and leaves it for later.</td>
+</tr>
+<tr>
+<td>Pin to this version</td>
+<td>on</td>
+<td>Store the exact commit the address points at today, so the plugin never changes under you. See the next section.</td>
+</tr>
+<tr>
+<td>Load from a copy saved here</td>
+<td>off</td>
+<td>Keep a copy of the plugin&#39;s files in this browser and load from that copy, never from the address, until you press Reload.</td>
+</tr>
+</tbody></table>
+<h2 id="keeping-a-plugin-up-to-date">Keeping a plugin up to date<a class="anchor" href="#keeping-a-plugin-up-to-date" aria-label="Link to this section">#</a></h2>
+<p>A pinned plugin never changes on its own. A push to its repository reaches nobody who has
+it installed. <strong>Check for update</strong> on its row in Manage Plugins asks the repository for its
+newest released version. When that is newer than the one installed the button becomes
+<em>Update to …</em>, which shows the new version&#39;s manifest and asks before anything changes, the
+same way the Add screen did; when it is not, the row says <em>Up to date</em>. Nothing of the
+plugin is fetched or run by the check itself.</p>
+<p>It asks about <em>releases</em>, not about what the author has pushed since. Work landing on a
+plugin&#39;s main branch after its newest version — a change to its documentation, a rebuilt
+bundle — is not an update and is not offered as one; the next version its author publishes
+is.</p>
+<p>The defaults have the button too, including in the builds that compile them in. A bundled
+plugin is asked for nothing — not at startup, not when the list is drawn — until you press
+it. Updating one turns it into an ordinary plugin fetched from its repository, each time
+the editor starts; the confirmation says so, <em>Load from a copy saved here</em> is the nearest
+way back to how it behaved, and <strong>Revert</strong> on the row returns it to the version this
+editor ships.</p>
+<p>You need not press the button to find out. Preferences ▸ Plugins has one choice, <strong>Plugin
+updates</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Choice</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tell me (the default)</td>
+<td>A few seconds after the plugins start, the editor reads the plugin index it browses from and raises a notice naming what is newer. Its <em>Plugins…</em> button opens Manage Plugins with <em>Update to …</em> already on those rows; each still shows the new version before anything changes.</td>
+</tr>
+<tr>
+<td>Do nothing</td>
+<td>Nothing is asked until you press a row&#39;s button.</td>
+</tr>
+<tr>
+<td>Install them</td>
+<td>What is newer is installed, for the plugins you added yourself. A default moves with the editor&#39;s own releases — each release carries the versions it was tested with — so it is named in the notice and left to its button, as is a plugin loading from a saved copy, one turned off, or a version built for a newer plugin API than this editor has. The notice says what was installed and what was left.</td>
+</tr>
+</tbody></table>
+<p>The check reads the index rather than asking each plugin&#39;s repository, so it costs one
+request however many plugins are installed; only a plugin no index lists is asked at its
+own address. It runs at most once every six hours. <strong>Check all for updates</strong> above the
+list asks every row&#39;s repository in turn, which is the thorough version.</p>
+<p>Browse Plugins shows the same thing from the other side. A row for a plugin you have prints
+the version <em>you</em> are running — the number Manage Plugins shows beside it — and marks it
+<em>v… available</em> when the list carries a newer one. A row for a plugin you do not have prints
+the version the list carries, since that is the one an Install would get. The lists
+themselves are read at most once an hour; <strong>Refresh</strong> asks again.</p>
+<p><strong>Reload</strong> fetches the plugin again from its address and replaces any copy saved in the
+browser. For a pinned plugin that is the same commit again, so the update check is the way
+forward and Reload is for a plugin you are writing.</p>
+<p>Turning a plugin off takes back everything it added: menu items, hotkeys, dialogs, panels,
+overlays and its event listeners. <strong>Remove</strong> takes it off the list as well. A default
+cannot be removed, only turned off.</p>
+<p>A plugin that fails to load says so: a notice appears with a button to Manage Plugins,
+where the row shows the error.</p>
+<h2 id="where-a-plugin-keeps-its-data">Where a plugin keeps its data<a class="anchor" href="#where-a-plugin-keeps-its-data" aria-label="Link to this section">#</a></h2>
+<p>A plugin can keep settings in the browser. Preferences ▸ General ▸ Browser storage lists
+them as one row under the plugin&#39;s id, with a button to clear them, and Clear all data
+sweeps them with the rest.</p>
+<p>A plugin can also keep files inside the map archive, next to the scenario itself. The
+TrigScript plugin stores its script&#39;s files there, so the script travels with the map.
+The Save dialog lists those files and can leave them out.</p>
+<h2 id="sources">Sources<a class="anchor" href="#sources" aria-label="Link to this section">#</a></h2>
+<p>Browse Plugins reads <em>registries</em>: JSON files, each listing plugins with the address to
+install them from. The project&#39;s own is
+<a href="https://github.com/scm-js/registry"><code>scm-js/registry</code></a>. The <strong>Sources</strong> button shows the
+lists being searched and takes the address of another. A registry decides only what is
+<em>offered</em>. Installing from a Browse row goes through the same Add screen, the same manifest
+fetch and the same pinning as an address you pasted by hand.</p>
+<p>A registry decides what is offered, not what exists, so Browse also shows the plugins you
+have that no registry lists — one you pasted in by address, or one a list has stopped
+carrying. They are marked <em>not listed</em> and sit under <em>Already installed</em>, with no Install
+to press. Nothing you have installed is missing from Browse.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#finding-and-installing-one">Finding and installing one</a></li>
+<li><a href="#what-you-are-trusting">What you are trusting</a></li>
+<li><a href="#keeping-a-plugin-up-to-date">Keeping a plugin up to date</a></li>
+<li><a href="#where-a-plugin-keeps-its-data">Where a plugin keeps its data</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

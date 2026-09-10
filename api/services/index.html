@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.services — scmJS documentation</title>
+<meta name="description" content="Live objects one plugin holds out for others to use, found by name and watched for arriving.">
+<meta property="og:title" content="api.services — scmJS documentation">
+<meta property="og:description" content="Live objects one plugin holds out for others to use, found by name and watched for arriving.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="here" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.services</h1>
+<p class="lede">ServicesApi</p>
+<p>Live objects one plugin holds out for others to use, found by name and watched for arriving.</p>
+<p>A command is one thing to do; a service is a thing to <em>hold</em> — an account another
+plugin signs in through, a connection, a catalogue. A plugin provides one live object
+under a name and every other plugin reaches it by that name, whatever order they were
+activated in: <code>watch</code> answers at once with what is there and again whenever the
+provider arrives or goes.</p>
+<p>The object&#39;s shape is the provider&#39;s to publish (a <code>contract.d.ts</code> in its repository,
+taken as a dev dependency and imported with <code>import type</code>, which is erased before the
+loader sees it); the editor never reads it. A name without a dot is namespaced under
+the plugin (<code>&quot;account&quot;</code> → <code>&quot;scmjs-dev.account&quot;</code>); one with a dot is taken as it is.</p>
+<ul class="chips"><li><a href="#provide">provide</a></li><li><a href="#get">get</a></li><li><a href="#has">has</a></li><li><a href="#watch">watch</a></li><li><a href="#list">list</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="provide">
+  <h3><a class="anchor-name" href="#provide">provide</a></h3>
+  <pre class="code"><code>provide&lt;T <span class="k">extends</span> <span class="k">object</span>&gt;(id: <span class="k">string</span>, service: T, options?: <a class="t" href="/api/services/#serviceoptions">ServiceOptions</a>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>Hold an object out under a name. Providing the same name again replaces it; the Disposable withdraws it.</p>
+  
+  
+</div>
+<div class="member" id="get">
+  <h3><a class="anchor-name" href="#get">get</a></h3>
+  <pre class="code"><code>get&lt;T <span class="k">extends</span> <span class="k">object</span>&gt;(id: <span class="k">string</span>): T | <span class="k">null</span>;</code></pre>
+  <p>The object under a name, or null when no plugin provides it.</p>
+  
+  
+</div>
+<div class="member" id="has">
+  <h3><a class="anchor-name" href="#has">has</a></h3>
+  <pre class="code"><code>has(id: <span class="k">string</span>): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="watch">
+  <h3><a class="anchor-name" href="#watch">watch</a></h3>
+  <pre class="code"><code>watch&lt;T <span class="k">extends</span> <span class="k">object</span>&gt;(id: <span class="k">string</span>, listener: (service: T | <span class="k">null</span>, info: <a class="t" href="/api/services/#serviceinfo">ServiceInfo</a> | <span class="k">null</span>) =&gt; <span class="k">void</span>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>Called at once with the current object (or null) and again on every change of provider.</p>
+  
+  
+</div>
+<div class="member" id="list">
+  <h3><a class="anchor-name" href="#list">list</a></h3>
+  <pre class="code"><code>list(): <a class="t" href="/api/services/#serviceinfo">ServiceInfo</a>[];</code></pre>
+  <p>Every service provided by every plugin.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="serviceinfo">
+  <h3><a class="anchor-name" href="#serviceinfo">ServiceInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/services/#serviceinfo">ServiceInfo</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>pluginId: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>version: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="serviceoptions">
+  <h3><a class="anchor-name" href="#serviceoptions">ServiceOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/services/#serviceoptions">ServiceOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>version?: <span class="k">number</span></code></th><td><p>The provider&#39;s version of the contract, 1 by default; a consumer that needs a newer one checks <code>ServiceInfo.version</code>.</p></td></tr></tbody></table>
+  
+</div>
+
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#provide">provide</a></li>
+<li><a href="#get">get</a></li>
+<li><a href="#has">has</a></li>
+<li><a href="#watch">watch</a></li>
+<li><a href="#list">list</a></li>
+<li><a href="#serviceinfo">ServiceInfo</a></li>
+<li><a href="#serviceoptions">ServiceOptions</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

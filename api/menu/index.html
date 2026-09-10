@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.menu — scmJS documentation</title>
+<meta name="description" content="Items in the editor&#39;s menu bar. A path whose last segment names no submenu makes one.">
+<meta property="og:title" content="api.menu — scmJS documentation">
+<meta property="og:description" content="Items in the editor&#39;s menu bar. A path whose last segment names no submenu makes one.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="here" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.menu</h1>
+<p class="lede">MenuApi</p>
+<p>Items in the editor&#39;s menu bar. A path whose last segment names no submenu makes one.</p>
+
+<ul class="chips"><li><a href="#add">add</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="add">
+  <h3><a class="anchor-name" href="#add">add</a></h3>
+  <pre class="code"><code>add(path: <a class="t" href="/api/menu/#menupath">MenuPath</a>, item: <a class="t" href="/api/menu/#menuitemspec">MenuItemSpec</a>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>Items in the editor&#39;s menu bar.</p>
+  <pre class="code"><code>api.menu.add(<span class="s">&quot;Tools&quot;</span>, {
+  label: <span class="s">&quot;Count units\u2026&quot;</span>,
+  icon: <span class="s">&quot;plugin&quot;</span>,
+  run: () =&gt; api.ui.alert(<span class="s">`Player 1 has ${api.query.unitsOf(0).length} units.`</span>),
+});</code></pre>
+<pre class="code"><code><span class="c">// A path whose last segment names no submenu makes one, at the end of that menu.</span>
+api.menu.add(<span class="s">&quot;Tools/My plugin&quot;</span>, { label: <span class="s">&quot;Settings\u2026&quot;</span>, command: <span class="s">&quot;settings&quot;</span> });</code></pre>
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="pluginicon">
+  <h3><a class="anchor-name" href="#pluginicon">PluginIcon</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/menu/#pluginicon">PluginIcon</a> = {
+	kind: <span class="s">&quot;text&quot;</span>;
+	text: <span class="k">string</span>;
+} | {
+	kind: <span class="s">&quot;image&quot;</span>;
+	url: <span class="k">string</span>;
+};</code></pre>
+  <p>A manifest <code>icon</code> after resolution: a glyph to print, or an image to show.</p>
+  
+  
+</div>
+<div class="type" id="topmenu">
+  <h3><a class="anchor-name" href="#topmenu">TopMenu</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/menu/#topmenu">TopMenu</a> = <span class="s">&quot;File&quot;</span> | <span class="s">&quot;Edit&quot;</span> | <span class="s">&quot;View&quot;</span> | <span class="s">&quot;Layer&quot;</span> | <span class="s">&quot;Scenario&quot;</span> | <span class="s">&quot;Triggers&quot;</span> | <span class="s">&quot;Tools&quot;</span> | <span class="s">&quot;Plugins&quot;</span> | <span class="s">&quot;Help&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="menupath">
+  <h3><a class="anchor-name" href="#menupath">MenuPath</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/menu/#menupath">MenuPath</a> = <a class="t" href="/api/menu/#topmenu">TopMenu</a> | <span class="s">`${TopMenu}/${string}`</span> | (<span class="k">string</span> &amp; {});</code></pre>
+  <p>A top-level menu, or a submenu by label: <code>&quot;File/Import&quot;</code>. A last segment that names no
+submenu gets one of the plugin&#39;s own, at the end of the menu (<code>&quot;Tools/AI&quot;</code>), and a
+first segment that names no top-level menu gets one made for the plugin, placed before
+Help (<code>&quot;Account&quot;</code>).</p>
+  
+  
+</div>
+<div class="type" id="menuitemspec">
+  <h3><a class="anchor-name" href="#menuitemspec">MenuItemSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/menu/#menuitemspec">MenuItemSpec</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>label: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>shortcut?: <span class="k">string</span></code></th><td><p>Display only — bind the key with <code>hotkeys.add</code>.</p></td></tr>
+<tr><th><code>icon?: <span class="s">&quot;plugin&quot;</span> | <a class="t" href="/api/menu/#pluginicon">PluginIcon</a></code></th><td><p>A mark in front of the label: <code>&quot;plugin&quot;</code> for the plugin&#39;s own icon (the manifest&#39;s),
+or any <code>PluginIcon</code>. Use it when the item does something a built-in never would —
+reach a network, say — so the user can tell at a glance.</p></td></tr>
+<tr><th><code>after?: <span class="k">string</span></code></th><td><p>Where in the menu: the English label of the built-in item or submenu to sit directly
+under (<code>&quot;Open Recent&quot;</code>) — labels are identities, and the same whatever language the
+menu is showing. Without it, or when nothing has that label, the item goes to the
+end of the menu after a separator.</p></td></tr>
+<tr><th><code>separator?: <span class="k">boolean</span></code></th><td><p>A separator line above this item — for grouping the items of a submenu of your own.</p></td></tr>
+<tr><th><code>enabled?: () =&gt; <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>run?: () =&gt; <span class="k">void</span></code></th><td><p>What the item does. Give this or <code>command</code>.</p></td></tr>
+<tr><th><code>command?: <span class="k">string</span></code></th><td><p>A registered command&#39;s id, instead of a <code>run</code> of its own.</p></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-hello-world"><b>Hello World</b><span>the smallest complete plugin: one menu item and one dialog, to copy from</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#add">add</a></li>
+<li><a href="#pluginicon">PluginIcon</a></li>
+<li><a href="#topmenu">TopMenu</a></li>
+<li><a href="#menupath">MenuPath</a></li>
+<li><a href="#menuitemspec">MenuItemSpec</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The scenario — scmJS documentation</title>
+<meta name="description" content="The scenario is a flat sequence of chunks.">
+<meta property="og:title" content="The scenario — scmJS documentation">
+<meta property="og:description" content="The scenario is a flat sequence of chunks.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="here" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The scenario</h1>
+<p>The scenario is a flat sequence of chunks. Each chunk is a four-character name, a length,
+and that many bytes of data: <code>MTXM</code> holds the terrain, <code>UNIT</code> the placed units, <code>TRIG</code>
+the triggers. The complete list is under <a href="/map-files/sections/">Sections</a>. The community
+reference for the layout of every section is
+<a href="http://wiki.staredit.net/wiki/Scenario.chk">wiki.staredit.net/wiki/Scenario.chk</a>.</p>
+<h2 id="how-the-game-reads-a-file">How the game reads a file<a class="anchor" href="#how-the-game-reads-a-file" aria-label="Link to this section">#</a></h2>
+<p>The game reads the chunks one after another into fixed-size buffers, so a section that
+appears twice in a file is not simply replaced by its second copy. What happens depends
+on the section:</p>
+<table>
+<thead>
+<tr>
+<th>Behaviour</th>
+<th>Sections</th>
+<th>What a repeat does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Overlay</td>
+<td><code>MTXM</code>, <code>TILE</code>, <code>ISOM</code>, <code>MASK</code>, <code>MRGN</code></td>
+<td>The second copy overwrites only as many bytes as it carries. A second <code>MTXM</code> half the size of the map rewrites the top half and leaves the bottom as the first copy had it.</td>
+</tr>
+<tr>
+<td>Append</td>
+<td><code>UNIT</code>, <code>THG2</code>, <code>DD2 </code>, <code>TRIG</code>, <code>MBRF</code></td>
+<td>The copies concatenate into one list. Two <code>TRIG</code> sections are one longer trigger list.</td>
+</tr>
+<tr>
+<td>Last</td>
+<td>everything else</td>
+<td>The later copy replaces the earlier one.</td>
+</tr>
+</tbody></table>
+<p>A section can also be shorter or longer than the game expects, carry a name that is not a
+real section, or declare a length that runs past the end of the file. The game copes with
+all of it in its own particular ways, and <em>protected</em> maps rely on exactly that: a map
+protector writes a file that the game reads correctly and that a naive editor reads
+wrongly, so opening and saving it in that editor produces a different map.</p>
+<h2 id="what-the-editor-does-with-it">What the editor does with it<a class="anchor" href="#what-the-editor-does-with-it" aria-label="Link to this section">#</a></h2>
+<p>The editor keeps every chunk in the order it found it, repeats included, and reproduces
+the game&#39;s reading when it decodes them. Opening a protected map shows what the game
+would show.</p>
+<p>On save, only the sections you changed are written from the editor&#39;s own model. Edit a
+trigger and <code>TRIG</code> is re-encoded; every other chunk, known or not, is written back from
+the bytes it came in with, in its original order and with its original repeats. A section
+that has to be added, because the map had none and an edit created one, goes in among the
+others at the place StarEdit would put it rather than at the end. Bytes after the last
+chunk are kept as well, unless the Save dialog is told to drop them.</p>
+<p>Two consequences are worth knowing:</p>
+<ul>
+<li>A file another editor wrote with a section this one does not model keeps that section.
+Nothing is lost by opening a map here, whatever made it.</li>
+<li>Repeated sections stay repeated. If you want a protected map flattened into one clean
+copy of each section, that is a deliberate choice: the Save dialog&#39;s <em>Merge repeated
+sections into one</em> tick does it using the same rules the game uses, and the Repair plugin
+explains each finding before it changes anything.</li>
+</ul>
+<p>The scenario&#39;s own strings live in one table, <code>STR </code> (or <code>STRx</code> on a Remastered map),
+and every name in the file points into it by number: the scenario name and description,
+force names, location names, custom unit names, switch names, sound file paths, and the
+text and sound of every trigger action. Index 0 means no string. Because raw sections
+keep pointing at the numbers they were written with, the editor never renumbers the
+table on save; a string that stops being used is blanked, not removed. <code>STR </code> addresses
+its strings with 16-bit offsets, so the whole table has to fit in 64 KB; <code>STRx</code> uses
+32-bit offsets and has no such limit.</p>
+<p>Neither table says how its bytes spell characters. StarEdit wrote the code page of the
+Windows it ran on — EUC-KR (CP949) for Korean, Shift_JIS for Japanese, GBK or Big5 for
+Chinese, Windows-1251 for Russian, Windows-1252 for the rest — and 1.16.1 reads a file in
+the code page of the machine it runs on. Remastered writes UTF-8 (always in <code>STRx</code>) and
+reads <code>STR </code> as UTF-8 when the bytes are valid UTF-8, falling back to the local code
+page when they are not. The editor follows the same reading: a table that is valid
+UTF-8 is UTF-8; otherwise every legacy encoding that decodes the bytes without error is
+scored by how much of the non-ASCII text falls in its own script, and the best guess is
+shown in Scenario ▸ Map Revision for the user to correct. Korean and Chinese bytes are
+often valid in each other&#39;s encoding, so a tie goes to Korean. The table is written back
+in the encoding chosen, <code>?</code> standing in for a character it cannot hold, which Check Map
+and the Save dialog report first. <code>stat_txt.tbl</code> and the other game tables are read the
+same way, so a localized install names its units in its own language.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#how-the-game-reads-a-file">How the game reads a file</a></li>
+<li><a href="#what-the-editor-does-with-it">What the editor does with it</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

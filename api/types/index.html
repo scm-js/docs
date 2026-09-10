@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shared types — scmJS documentation</title>
+<meta name="description" content="The types more than one group of the scmJS plugin API names.">
+<meta property="og:title" content="Shared types — scmJS documentation">
+<meta property="og:description" content="The types more than one group of the scmJS plugin API names.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="here" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Shared types</h1>
+<p class="lede">The declarations more than one group names — everything else is documented on the page of the group that uses it.</p>
+<ul class="chips"><li><a href="#chksection">ChkSection</a></li><li><a href="#chkfile">ChkFile</a></li><li><a href="#textencoding">TextEncoding</a></li><li><a href="#stringtable">StringTable</a></li><li><a href="#unitrecord">UnitRecord</a></li><li><a href="#spriterecord">SpriteRecord</a></li><li><a href="#doodadrecord">DoodadRecord</a></li><li><a href="#locationrecord">LocationRecord</a></li><li><a href="#forces">Forces</a></li><li><a href="#playerrgb">PlayerRgb</a></li><li><a href="#unitsettings">UnitSettings</a></li><li><a href="#unitavailability">UnitAvailability</a></li><li><a href="#upgradesettings">UpgradeSettings</a></li><li><a href="#upgraderestrictions">UpgradeRestrictions</a></li><li><a href="#techsettings">TechSettings</a></li><li><a href="#techrestrictions">TechRestrictions</a></li><li><a href="#cuwpslot">CuwpSlot</a></li><li><a href="#conditionrecord">ConditionRecord</a></li><li><a href="#actionrecord">ActionRecord</a></li><li><a href="#triggerrecord">TriggerRecord</a></li><li><a href="#scenario">Scenario</a></li><li><a href="#mapversion">MapVersion</a></li><li><a href="#tilesetid">TilesetId</a></li><li><a href="#terrainname">TerrainName</a></li><li><a href="#tilechange">TileChange</a></li><li><a href="#rect">Rect</a></li><li><a href="#diamond">Diamond</a></li><li><a href="#isomcheck">IsomCheck</a></li><li><a href="#locationstringchange">LocationStringChange</a></li><li><a href="#locationchange">LocationChange</a></li><li><a href="#fogmode">FogMode</a></li><li><a href="#spritechange">SpriteChange</a></li><li><a href="#spritekind">SpriteKind</a></li><li><a href="#editorlayer">EditorLayer</a></li><li><a href="#terrainmode">TerrainMode</a></li><li><a href="#dialogid">DialogId</a></li><li><a href="#mapimageoptions">MapImageOptions</a></li><li><a href="#unitchange">UnitChange</a></li><li><a href="#playerslotview">PlayerSlotView</a></li><li><a href="#forceview">ForceView</a></li><li><a href="#weaponview">WeaponView</a></li><li><a href="#unittypeview">UnitTypeView</a></li><li><a href="#upgradelevelsview">UpgradeLevelsView</a></li><li><a href="#upgradeview">UpgradeView</a></li><li><a href="#techstateview">TechStateView</a></li><li><a href="#techview">TechView</a></li><li><a href="#soundrow">SoundRow</a></li><li><a href="#cuwpslotview">CuwpSlotView</a></li><li><a href="#doodadchange">DoodadChange</a></li><li><a href="#side">Side</a></li><li><a href="#historyedit">HistoryEdit</a></li><li><a href="#clippart">ClipPart</a></li><li><a href="#clipparts">ClipParts</a></li><li><a href="#pastemode">PasteMode</a></li><li><a href="#cliplocation">ClipLocation</a></li><li><a href="#clip">Clip</a></li><li><a href="#pastecounts">PasteCounts</a></li><li><a href="#pasteresult">PasteResult</a></li><li><a href="#plugin_api_version">PLUGIN_API_VERSION</a></li><li><a href="#disposable">Disposable</a></li><li><a href="#pluginmanifest">PluginManifest</a></li><li><a href="#deactivate">Deactivate</a></li><li><a href="#pluginactivate">PluginActivate</a></li><li><a href="#pluginmodule">PluginModule</a></li><li><a href="#plugininfo">PluginInfo</a></li><li><a href="#pasteoptionsspec">PasteOptionsSpec</a></li><li><a href="#widgetoptions">WidgetOptions</a></li><li><a href="#pluginidof">pluginIdOf</a></li></ul>
+<div class="type" id="chksection">
+  <h3><a class="anchor-name" href="#chksection">ChkSection</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#chksection">ChkSection</a></code></pre>
+  <p>CHK is a flat stream of chunks: 4-byte name, int32 length, then that many bytes.</p>
+<p>StarCraft applies chunks <em>sequentially into fixed-size buffers</em>, so a section that
+appears twice is not &quot;last one wins&quot; — the later copy overwrites only as many bytes
+as it carries. Protected maps lean on this constantly, so the reader keeps every
+occurrence in file order and <code>layer()</code> reproduces the overwrite semantics.</p>
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td><p>4-character chunk name, latin1. May contain junk in protected maps.</p></td></tr>
+<tr><th><code>offset: <span class="k">number</span></code></th><td><p>Byte offset of the chunk&#39;s <em>name</em> within the CHK.</p></td></tr>
+<tr><th><code>declaredSize: <span class="k">number</span></code></th><td><p>Length field as written, which may disagree with <code>data.length</code> when truncated.</p></td></tr>
+<tr><th><code>data: Uint8Array</code></th><td></td></tr>
+<tr><th><code>truncated?: <span class="k">boolean</span></code></th><td><p>Set when the declared size ran past the end of the file.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="chkfile">
+  <h3><a class="anchor-name" href="#chkfile">ChkFile</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#chkfile">ChkFile</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>sections: <a class="t" href="/api/types/#chksection">ChkSection</a>[]</code></th><td></td></tr>
+<tr><th><code>trailing?: Uint8Array</code></th><td><p>Bytes after the last parseable chunk header, if any.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="textencoding">
+  <h3><a class="anchor-name" href="#textencoding">TextEncoding</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#textencoding">TextEncoding</a> = <span class="s">&quot;utf-8&quot;</span> | <span class="s">&quot;euc-kr&quot;</span> | <span class="s">&quot;shift_jis&quot;</span> | <span class="s">&quot;gbk&quot;</span> | <span class="s">&quot;big5&quot;</span> | <span class="s">&quot;windows-1251&quot;</span> | <span class="s">&quot;windows-1252&quot;</span>;</code></pre>
+  <p>The byte encodings a map&#39;s text can be in, and how to tell which one a file used.</p>
+<p>StarEdit wrote the string table in whatever code page Windows was running — EUC-KR
+(CP949) on a Korean machine, Shift_JIS on a Japanese one, Windows-1252 nearly everywhere
+else — and 1.16.1 still reads it that way. Remastered writes UTF-8 and, reading, tries
+UTF-8 first and falls back to the client&#39;s legacy code page when the bytes are not
+valid UTF-8. The file itself carries no note of which was used, so a table is <em>guessed</em>
+on open (<code>detectTextEncoding</code>) and the guess is a setting the user can correct
+(Scenario ▸ Map Revision).</p>
+<p>Decoding is the platform&#39;s (<code>TextDecoder</code> knows every label here). Encoding is not —
+<code>TextEncoder</code> is UTF-8 only — so each legacy encoding&#39;s table is built once, lazily,
+by decoding every byte and every lead/trail byte pair it has and remembering what came
+back (<code>reverseTable</code>). A character the encoding cannot hold is written as <code>?</code>, the
+way StarEdit&#39;s own dialogs did, and <code>unencodable</code> lists them so Check Map and the
+dialog can say so before the file is written.</p>
+  
+  
+</div>
+<div class="type" id="stringtable">
+  <h3><a class="anchor-name" href="#stringtable">StringTable</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#stringtable">StringTable</a></code></pre>
+  <p>STR/STRx string table.</p>
+<p>Index 0 means &quot;no string&quot; and is never stored. Indices are referenced from TRIG,
+MRGN, SPRP and friends — several of which we round-trip as raw bytes — so the table
+must keep its index space stable across a save. Entries are therefore addressed by
+position, never renumbered.</p>
+<p>The bytes carry no note of their encoding (see <code>text/encoding.ts</code>): <code>decodeStrings</code>
+guesses one from the whole table&#39;s bytes unless told, and <code>encodeStrings</code> writes the
+table&#39;s, so a file opened and saved keeps its bytes and a Korean file edited on a
+Korean game stays readable there.</p>
+  <table class="fields"><tbody><tr><th><code>strings: (<span class="k">string</span> | <span class="k">null</span>)[]</code></th><td><p><code>strings[i]</code> is string index <code>i</code>; slot 0 is always null.</p></td></tr>
+<tr><th><code>extended: <span class="k">boolean</span></code></th><td><p>True when the source section was STRx (Remastered, 32-bit count and offsets).</p></td></tr>
+<tr><th><code>encoding: <a class="t" href="/api/types/#textencoding">TextEncoding</a></code></th><td><p>How the text is written to bytes; guessed on open, a setting afterwards.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unitrecord">
+  <h3><a class="anchor-name" href="#unitrecord">UnitRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#unitrecord">UnitRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>serial: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>x: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>y: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>unitId: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>relationType: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>validProperties: <span class="k">number</span></code></th><td><p>Bit set of which &quot;special properties&quot; fields below are meaningful.</p></td></tr>
+<tr><th><code>validStates: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>owner: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>hitPointsPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>shieldPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>energyPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>resourceAmount: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>hangarUnits: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>stateFlags: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>unused: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>relatedSerial: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="spriterecord">
+  <h3><a class="anchor-name" href="#spriterecord">SpriteRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#spriterecord">SpriteRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>spriteId: <span class="k">number</span></code></th><td><p>sprites.dat id for a pure sprite, units.dat id for a unit sprite (see <code>SpriteFlag.PureSprite</code>).</p></td></tr>
+<tr><th><code>x: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>y: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>owner: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>unused: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>flags: <span class="k">number</span></code></th><td><p><code>SpriteFlag</code> bits. StarEdit writes a doodad&#39;s overlay sprite with the doodad&#39;s whole
+CV5 flag word here, so real maps carry the terrain bits (0x80, 0x100, …) too.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="doodadrecord">
+  <h3><a class="anchor-name" href="#doodadrecord">DoodadRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a></code></pre>
+  <p>One placed doodad, as StarEdit records it (the game never reads this section: it sees
+only the doodad&#39;s tiles in MTXM and its overlay in THG2). <code>doodadId</code> is the index into
+the tileset&#39;s <code>dddata.bin</code>, not a CV5 group; <code>x</code>/<code>y</code> are the pixel centre of the
+footprint, so the top-left tile is <code>x / 32 - width / 2</code>.</p>
+  <table class="fields"><tbody><tr><th><code>doodadId: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>x: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>y: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>owner: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>disabled: <span class="k">number</span></code></th><td><p>0 = enabled (every doodad in Blizzard&#39;s maps), 1 = disabled.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="locationrecord">
+  <h3><a class="anchor-name" href="#locationrecord">LocationRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#locationrecord">LocationRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>left: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>top: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>right: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>bottom: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>nameIndex: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>elevationFlags: <span class="k">number</span></code></th><td><p>Bit 0 low ground, 1 medium, 2 high, 3 low air, 4 medium air, 5 high air.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="forces">
+  <h3><a class="anchor-name" href="#forces">Forces</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#forces">Forces</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>playerForce: <span class="k">number</span>[]</code></th><td><p>Force index (0-3) each of the 8 playable slots belongs to.</p></td></tr>
+<tr><th><code>nameIndex: <span class="k">number</span>[]</code></th><td><p>String index of each force&#39;s name.</p></td></tr>
+<tr><th><code>flags: <span class="k">number</span>[]</code></th><td><p>Bit 0 random start, 1 allied, 2 allied victory, 3 shared vision.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="playerrgb">
+  <h3><a class="anchor-name" href="#playerrgb">PlayerRgb</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#playerrgb">PlayerRgb</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>rgb: [ <span class="k">number</span>, <span class="k">number</span>, <span class="k">number</span> ][]</code></th><td><p><code>[r, g, b]</code> for each of the 8 playable slots; only read when <code>mode</code> is <code>Custom</code>.</p></td></tr>
+<tr><th><code>mode: <span class="k">number</span>[]</code></th><td><p>A <code>ColorMode</code> per slot.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unitsettings">
+  <h3><a class="anchor-name" href="#unitsettings">UnitSettings</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#unitsettings">UnitSettings</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>useDefault: Uint8Array</code></th><td><p>1 = the game uses units.dat / weapons.dat for this type and ignores the columns below.</p></td></tr>
+<tr><th><code>hitPoints: Uint32Array</code></th><td><p>Fixed point: hit points × 256, like units.dat.</p></td></tr>
+<tr><th><code>shields: Uint16Array</code></th><td></td></tr>
+<tr><th><code>armor: Uint8Array</code></th><td></td></tr>
+<tr><th><code>buildTime: Uint16Array</code></th><td><p>Game frames (15 per second at Fastest).</p></td></tr>
+<tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>gasCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>nameIndex: Uint16Array</code></th><td><p>String index of the custom name, 0 for the default one.</p></td></tr>
+<tr><th><code>weaponDamage: Uint16Array</code></th><td><p>Per weapons.dat id, always <code>WEAPONS_BW</code> long; UNIS only stores the first 100.</p></td></tr>
+<tr><th><code>weaponBonus: Uint16Array</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unitavailability">
+  <h3><a class="anchor-name" href="#unitavailability">UnitAvailability</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#unitavailability">UnitAvailability</a></code></pre>
+  <p>Which players may build which unit types. Three tables, player-major (<code>puniIndex</code>):
+a per-player answer, the global default, and whether each player defers to it.</p>
+  <table class="fields"><tbody><tr><th><code>playerAvailable: Uint8Array</code></th><td><p>1 = the player can build the type; read only where <code>playerUsesDefault</code> is 0.</p></td></tr>
+<tr><th><code>defaultAvailable: Uint8Array</code></th><td><p>1 = the type is available to every player that uses the default.</p></td></tr>
+<tr><th><code>playerUsesDefault: Uint8Array</code></th><td><p>1 = the player takes <code>defaultAvailable</code> for the type.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgradesettings">
+  <h3><a class="anchor-name" href="#upgradesettings">UpgradeSettings</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#upgradesettings">UpgradeSettings</a></code></pre>
+  <p>Research cost per upgrade: a base and a per-level factor for minerals, gas and time.
+Struct of arrays over 61 upgrades; the original sections only store the first 46.</p>
+  <table class="fields"><tbody><tr><th><code>useDefault: Uint8Array</code></th><td><p>1 = the game uses upgrades.dat for this upgrade and ignores the columns below.</p></td></tr>
+<tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>mineralFactor: Uint16Array</code></th><td></td></tr>
+<tr><th><code>gasCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>gasFactor: Uint16Array</code></th><td></td></tr>
+<tr><th><code>timeCost: Uint16Array</code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>timeFactor: Uint16Array</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgraderestrictions">
+  <h3><a class="anchor-name" href="#upgraderestrictions">UpgradeRestrictions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#upgraderestrictions">UpgradeRestrictions</a></code></pre>
+  <p>How far each player may research each upgrade and where they start. Player-major
+tables (<code>upgradeIndex</code>), a global default pair, and a per-player &quot;use the default&quot; flag.</p>
+  <table class="fields"><tbody><tr><th><code>playerMax: Uint8Array</code></th><td></td></tr>
+<tr><th><code>playerStart: Uint8Array</code></th><td></td></tr>
+<tr><th><code>defaultMax: Uint8Array</code></th><td></td></tr>
+<tr><th><code>defaultStart: Uint8Array</code></th><td></td></tr>
+<tr><th><code>playerUsesDefault: Uint8Array</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techsettings">
+  <h3><a class="anchor-name" href="#techsettings">TechSettings</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#techsettings">TechSettings</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>useDefault: Uint8Array</code></th><td><p>1 = the game uses techdata.dat for this ability.</p></td></tr>
+<tr><th><code>mineralCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>gasCost: Uint16Array</code></th><td></td></tr>
+<tr><th><code>researchTime: Uint16Array</code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>energyCost: Uint16Array</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techrestrictions">
+  <h3><a class="anchor-name" href="#techrestrictions">TechRestrictions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#techrestrictions">TechRestrictions</a></code></pre>
+  <p>Whether each player may research each ability and whether they start with it. Same shape as <code>UpgradeRestrictions</code>.</p>
+  <table class="fields"><tbody><tr><th><code>playerAvailable: Uint8Array</code></th><td></td></tr>
+<tr><th><code>playerResearched: Uint8Array</code></th><td></td></tr>
+<tr><th><code>defaultAvailable: Uint8Array</code></th><td></td></tr>
+<tr><th><code>defaultResearched: Uint8Array</code></th><td></td></tr>
+<tr><th><code>playerUsesDefault: Uint8Array</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="cuwpslot">
+  <h3><a class="anchor-name" href="#cuwpslot">CuwpSlot</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#cuwpslot">CuwpSlot</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>validProperties: <span class="k">number</span></code></th><td><p><code>CuwpValid</code> bits.</p></td></tr>
+<tr><th><code>validFields: <span class="k">number</span></code></th><td><p><code>CuwpField</code> bits.</p></td></tr>
+<tr><th><code>owner: <span class="k">number</span></code></th><td><p>Unused by the game; StarEdit writes 0.</p></td></tr>
+<tr><th><code>hitPointsPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>shieldsPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>energyPercent: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>resources: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>hangar: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>stateFlags: <span class="k">number</span></code></th><td><p><code>CuwpState</code> bits.</p></td></tr>
+<tr><th><code>unused: <span class="k">number</span></code></th><td><p>The record&#39;s last four bytes, kept for fidelity.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="conditionrecord">
+  <h3><a class="anchor-name" href="#conditionrecord">ConditionRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#conditionrecord">ConditionRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>location: <span class="k">number</span></code></th><td><p>1-based location number, 0 = none.</p></td></tr>
+<tr><th><code>player: <span class="k">number</span></code></th><td><p><code>PlayerGroup</code>.</p></td></tr>
+<tr><th><code>amount: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>unitId: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>comparison: <span class="k">number</span></code></th><td><p><code>Comparison</code> for numeric conditions; <code>SwitchState</code> for Switch.</p></td></tr>
+<tr><th><code><span class="k">type</span>: <span class="k">number</span></code></th><td><p><code>ConditionType</code>.</p></td></tr>
+<tr><th><code>resource: <span class="k">number</span></code></th><td><p><code>ResourceType</code> / <code>ScoreType</code> / switch number, per type.</p></td></tr>
+<tr><th><code>flags: <span class="k">number</span></code></th><td><p><code>ConditionFlag</code> bits.</p></td></tr>
+<tr><th><code>mask: <span class="k">number</span></code></th><td><p>EUD mask word; 0 in ordinary maps.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="actionrecord">
+  <h3><a class="anchor-name" href="#actionrecord">ActionRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#actionrecord">ActionRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>location: <span class="k">number</span></code></th><td><p>1-based source location, 0 = none.</p></td></tr>
+<tr><th><code>text: <span class="k">number</span></code></th><td><p>String index for text / comment / leaderboard label, 0 = none.</p></td></tr>
+<tr><th><code>wav: <span class="k">number</span></code></th><td><p>String index of the WAV file name, 0 = none.</p></td></tr>
+<tr><th><code>time: <span class="k">number</span></code></th><td><p>Milliseconds for Wait / Transmission / Talking Portrait; WAV duration for Play WAV.</p></td></tr>
+<tr><th><code>player: <span class="k">number</span></code></th><td><p><code>PlayerGroup</code> (first).</p></td></tr>
+<tr><th><code>target: <span class="k">number</span></code></th><td><p>Second player / destination location / amount / AI script code, per type.</p></td></tr>
+<tr><th><code>unitId: <span class="k">number</span></code></th><td><p>Unit id / <code>ScoreType</code> / <code>ResourceType</code> / <code>AllianceStatus</code>, per type.</p></td></tr>
+<tr><th><code><span class="k">type</span>: <span class="k">number</span></code></th><td><p><code>ActionType</code> (or <code>BriefingActionType</code> in MBRF).</p></td></tr>
+<tr><th><code>modifier: <span class="k">number</span></code></th><td><p>Unit count (0 = all) / <code>SetModifier</code> / <code>SwitchAction</code> / <code>Order</code> / <code>UnitState</code>, per type.</p></td></tr>
+<tr><th><code>flags: <span class="k">number</span></code></th><td><p><code>ActionFlag</code> bits.</p></td></tr>
+<tr><th><code>padding: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>mask: <span class="k">number</span></code></th><td><p>EUD mask word; 0 in ordinary maps.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="triggerrecord">
+  <h3><a class="anchor-name" href="#triggerrecord">TriggerRecord</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>conditions: <a class="t" href="/api/types/#conditionrecord">ConditionRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>actions: <a class="t" href="/api/types/#actionrecord">ActionRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>flags: <span class="k">number</span></code></th><td><p><code>TriggerFlag</code> bits.</p></td></tr>
+<tr><th><code>players: <span class="k">number</span>[]</code></th><td><p>27 bytes, one per <code>PlayerGroup</code>; non-zero = the trigger runs for that group.</p></td></tr>
+<tr><th><code>currentAction: <span class="k">number</span></code></th><td><p>The game&#39;s bookkeeping byte (offset 2399); StarEdit writes 0.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="scenario">
+  <h3><a class="anchor-name" href="#scenario">Scenario</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#scenario">Scenario</a></code></pre>
+  <p>A parsed scenario.</p>
+<p><code>chk</code> holds every original section in file order and is the fidelity anchor: sections
+we do not model are re-emitted byte for byte, so opening and saving a map we only
+partly understand does not destroy the parts we don&#39;t. Only names listed in <code>dirty</code>
+are re-encoded on save.</p>
+  <table class="fields"><tbody><tr><th><code>chk: <a class="t" href="/api/types/#chkfile">ChkFile</a></code></th><td></td></tr>
+<tr><th><code>dirty: Set&lt;<span class="k">string</span>&gt;</code></th><td></td></tr>
+<tr><th><code>warnings: <span class="k">string</span>[]</code></th><td></td></tr>
+<tr><th><code><span class="k">type</span>: <span class="k">string</span></code></th><td><p>TYPE, e.g. &quot;RAWB&quot; for Brood War.</p></td></tr>
+<tr><th><code>fileVersion: <span class="k">number</span></code></th><td><p>VER: 59 original, 63 hybrid, 205 Brood War, 206 Remastered.</p></td></tr>
+<tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>era: <span class="k">number</span></code></th><td><p>ERA value as stored; the meaningful tileset is <code>tilesetId</code>.</p></td></tr>
+<tr><th><code>strings: <a class="t" href="/api/types/#stringtable">StringTable</a></code></th><td></td></tr>
+<tr><th><code>nameIndex: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>descriptionIndex: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>playerTypes: <span class="k">number</span>[]</code></th><td></td></tr>
+<tr><th><code>editorPlayerTypes: <span class="k">number</span>[] | <span class="k">null</span></code></th><td><p>IOWN: StarEdit&#39;s own copy of the player types — what its Player Settings dialog
+shows, where the game reads OWNR. The editor keeps the two in step; a file where they
+differ (another tool wrote one and not the other) is flagged by Check Map. Null when
+the file has no section.</p></td></tr>
+<tr><th><code>playerRaces: <span class="k">number</span>[]</code></th><td></td></tr>
+<tr><th><code>playerColors: <span class="k">number</span>[]</code></th><td></td></tr>
+<tr><th><code>playerRgb: <a class="t" href="/api/types/#playerrgb">PlayerRgb</a> | <span class="k">null</span></code></th><td><p>CRGB, Remastered&#39;s per-slot colour choice; null when the file has none (every client then reads COLR).</p></td></tr>
+<tr><th><code>forces: <a class="t" href="/api/types/#forces">Forces</a></code></th><td></td></tr>
+<tr><th><code>unitSettings: <a class="t" href="/api/types/#unitsettings">UnitSettings</a> | <span class="k">null</span></code></th><td><p>UNIx if the file has one, else UNIS; null when it has neither (every type on its dat defaults).</p></td></tr>
+<tr><th><code>unitAvailability: <a class="t" href="/api/types/#unitavailability">UnitAvailability</a> | <span class="k">null</span></code></th><td><p>PUNI; null when the file has none (everything buildable by everyone).</p></td></tr>
+<tr><th><code>upgradeSettings: <a class="t" href="/api/types/#upgradesettings">UpgradeSettings</a> | <span class="k">null</span></code></th><td><p>UPGx if the file has one, else UPGS; null when it has neither (every upgrade on its dat costs).</p></td></tr>
+<tr><th><code>upgradeRestrictions: <a class="t" href="/api/types/#upgraderestrictions">UpgradeRestrictions</a> | <span class="k">null</span></code></th><td><p>PUPx else UPGR; null when absent (every player on the dat level caps, starting at 0).</p></td></tr>
+<tr><th><code>techSettings: <a class="t" href="/api/types/#techsettings">TechSettings</a> | <span class="k">null</span></code></th><td><p>TECx else TECS; null when absent.</p></td></tr>
+<tr><th><code>techRestrictions: <a class="t" href="/api/types/#techrestrictions">TechRestrictions</a> | <span class="k">null</span></code></th><td><p>PTEx else PTEC; null when absent (everything researchable, nothing researched).</p></td></tr>
+<tr><th><code>wavs: <span class="k">number</span>[] | <span class="k">null</span></code></th><td><p>WAV: 512 string indices of the map&#39;s sound paths; null when the file has no section.</p></td></tr>
+<tr><th><code>cuwp: <a class="t" href="/api/types/#cuwpslot">CuwpSlot</a>[] | <span class="k">null</span></code></th><td><p>UPRP: the 64 Create Unit with Properties slots (the action names one 1-based); null when the file has no section.</p></td></tr>
+<tr><th><code>cuwpUsed: <span class="k">boolean</span>[] | <span class="k">null</span></code></th><td><p>UPUS: StarEdit&#39;s &quot;slot in use&quot; byte per CUWP slot; null when the file has no section.</p></td></tr>
+<tr><th><code>tiles: Uint16Array</code></th><td><p>MTXM: what the game draws — terrain with the doodads stamped over it.</p></td></tr>
+<tr><th><code>editorTiles: Uint16Array</code></th><td><p>TILE: StarEdit&#39;s copy of the terrain <em>without</em> doodads (a doodad&#39;s cells hold the
+ground it was placed on). Terrain brushes write both arrays; placing a doodad writes
+only <code>tiles</code>, and removing one restores its cells from here. A file without TILE
+starts with a copy of MTXM.</p></td></tr>
+<tr><th><code>isom: Uint16Array | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>mask: Uint8Array | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>units: <a class="t" href="/api/types/#unitrecord">UnitRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>sprites: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>doodads: <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>locations: <a class="t" href="/api/types/#locationrecord">LocationRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>triggers: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]</code></th><td><p>TRIG, in execution order.</p></td></tr>
+<tr><th><code>briefing: <a class="t" href="/api/types/#triggerrecord">TriggerRecord</a>[]</code></th><td><p>MBRF: mission briefings, same record layout with briefing action types.</p></td></tr>
+<tr><th><code>switchNames: <span class="k">number</span>[] | <span class="k">null</span></code></th><td><p>SWNM: string index per switch (0 = unnamed); null when the file has no section.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="mapversion">
+  <h3><a class="anchor-name" href="#mapversion">MapVersion</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#mapversion">MapVersion</a> = <span class="s">&quot;original&quot;</span> | <span class="s">&quot;hybrid&quot;</span> | <span class="s">&quot;broodwar&quot;</span> | <span class="s">&quot;remastered&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="tilesetid">
+  <h3><a class="anchor-name" href="#tilesetid">TilesetId</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#tilesetid">TilesetId</a> = <span class="s">&quot;badlands&quot;</span> | <span class="s">&quot;platform&quot;</span> | <span class="s">&quot;install&quot;</span> | <span class="s">&quot;ashworld&quot;</span> | <span class="s">&quot;jungle&quot;</span> | <span class="s">&quot;desert&quot;</span> | <span class="s">&quot;ice&quot;</span> | <span class="s">&quot;twilight&quot;</span>;</code></pre>
+  <p>StarCraft tileset reference data.</p>
+  
+  
+</div>
+<div class="type" id="terrainname">
+  <h3><a class="anchor-name" href="#terrainname">TerrainName</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#terrainname">TerrainName</a></code></pre>
+  <p>One ISOM terrain type: its id is the CV5 <code>index</code> of the flat left/right group pair
+that draws it, and the value the ISOM section stores for it.</p>
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="tilechange">
+  <h3><a class="anchor-name" href="#tilechange">TileChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#tilechange">TileChange</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>at: <span class="k">number</span></code></th><td><p>Flat index into <code>scenario.tiles</code>.</p></td></tr>
+<tr><th><code>before: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>after: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>under?: <span class="k">number</span></code></th><td><p>What <code>scenario.editorTiles</code> (TILE) held before a terrain change, when that differs
+from <code>before</code> (the cell was under a doodad). Filled in by <code>applyChanges</code> the first
+time a change is applied, so undo can put the ground back rather than the doodad tile.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="rect">
+  <h3><a class="anchor-name" href="#rect">Rect</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#rect">Rect</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>x0: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>y0: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>x1: <span class="k">number</span></code></th><td><p>Exclusive.</p></td></tr>
+<tr><th><code>y1: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="diamond">
+  <h3><a class="anchor-name" href="#diamond">Diamond</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#diamond">Diamond</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>x: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>y: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="isomcheck">
+  <h3><a class="anchor-name" href="#isomcheck">IsomCheck</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#isomcheck">IsomCheck</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>rects: <span class="k">number</span></code></th><td><p>Rects that have tiles under them.</p></td></tr>
+<tr><th><code>mismatched: <span class="k">number</span></code></th><td><p>Rects whose tiles are not what their ISOM resolves to (doodad tiles are excused).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="locationstringchange">
+  <h3><a class="anchor-name" href="#locationstringchange">LocationStringChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#locationstringchange">LocationStringChange</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>before: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>after: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="locationchange">
+  <h3><a class="anchor-name" href="#locationchange">LocationChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#locationchange">LocationChange</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>before: <a class="t" href="/api/types/#locationrecord">LocationRecord</a></code></th><td></td></tr>
+<tr><th><code>after: <a class="t" href="/api/types/#locationrecord">LocationRecord</a></code></th><td></td></tr>
+<tr><th><code><span class="k">string</span>?: <a class="t" href="/api/types/#locationstringchange">LocationStringChange</a></code></th><td><p>A string slot the edit adds (a name no existing string matched); removed again on undo.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="fogmode">
+  <h3><a class="anchor-name" href="#fogmode">FogMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#fogmode">FogMode</a> = <span class="s">&quot;fog&quot;</span> | <span class="s">&quot;clear&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="spritechange">
+  <h3><a class="anchor-name" href="#spritechange">SpriteChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#spritechange">SpriteChange</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>before: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>after: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="spritekind">
+  <h3><a class="anchor-name" href="#spritekind">SpriteKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#spritekind">SpriteKind</a> = <span class="s">&quot;pure&quot;</span> | <span class="s">&quot;unit&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="editorlayer">
+  <h3><a class="anchor-name" href="#editorlayer">EditorLayer</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#editorlayer">EditorLayer</a> = <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;doodads&quot;</span> | <span class="s">&quot;units&quot;</span> | <span class="s">&quot;sprites&quot;</span> | <span class="s">&quot;locations&quot;</span> | <span class="s">&quot;fog&quot;</span> | <span class="s">&quot;clipboard&quot;</span>;</code></pre>
+  <p>The classic SCMDraft layer combo; <code>&quot;clipboard&quot;</code> is Cut / Copy / Paste.</p>
+  
+  
+</div>
+<div class="type" id="terrainmode">
+  <h3><a class="anchor-name" href="#terrainmode">TerrainMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#terrainmode">TerrainMode</a> = <span class="s">&quot;isom&quot;</span> | <span class="s">&quot;rect&quot;</span> | <span class="s">&quot;tile&quot;</span> | <span class="s">&quot;blend&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="dialogid">
+  <h3><a class="anchor-name" href="#dialogid">DialogId</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#dialogid">DialogId</a> = <span class="s">&quot;newMap&quot;</span> | <span class="s">&quot;openMap&quot;</span> | <span class="s">&quot;saveAs&quot;</span> | <span class="s">&quot;exportImage&quot;</span> | <span class="s">&quot;mapProperties&quot;</span> | <span class="s">&quot;resizeMap&quot;</span> | <span class="s">&quot;mapRevision&quot;</span> | <span class="s">&quot;playerSettings&quot;</span> | <span class="s">&quot;forceSettings&quot;</span> | <span class="s">&quot;playerColors&quot;</span> | <span class="s">&quot;unitSettings&quot;</span> | <span class="s">&quot;upgradeSettings&quot;</span> | <span class="s">&quot;techSettings&quot;</span> | <span class="s">&quot;stringEditor&quot;</span> | <span class="s">&quot;soundEditor&quot;</span> | <span class="s">&quot;switches&quot;</span> | <span class="s">&quot;locationList&quot;</span> | <span class="s">&quot;unitProperties&quot;</span> | <span class="s">&quot;locationProperties&quot;</span> | <span class="s">&quot;spriteProperties&quot;</span> | <span class="s">&quot;triggerEditor&quot;</span> | <span class="s">&quot;missionBriefing&quot;</span> | <span class="s">&quot;cuwpEditor&quot;</span> | <span class="s">&quot;replaceTerrain&quot;</span> | <span class="s">&quot;autoStarts&quot;</span> | <span class="s">&quot;testMap&quot;</span> | <span class="s">&quot;symmetry&quot;</span> | <span class="s">&quot;gridSettings&quot;</span> | <span class="s">&quot;preferences&quot;</span> | <span class="s">&quot;shortcuts&quot;</span> | <span class="s">&quot;validateMap&quot;</span> | <span class="s">&quot;statistics&quot;</span> | <span class="s">&quot;importTriggers&quot;</span> | <span class="s">&quot;exportTriggers&quot;</span> | <span class="s">&quot;importStrings&quot;</span> | <span class="s">&quot;exportStrings&quot;</span> | <span class="s">&quot;find&quot;</span> | <span class="s">&quot;about&quot;</span> | <span class="s">&quot;confirmClose&quot;</span> | <span class="s">&quot;plugins&quot;</span> | <span class="s">&quot;confirmPlugin&quot;</span> | <span class="s">&quot;pluginDialog&quot;</span> | <span class="s">&quot;gameData&quot;</span> | <span class="s">&quot;update&quot;</span>;</code></pre>
+  <p>Every built-in dialog, by the id <code>openDialogAtom</code> takes; <code>DialogHost</code> maps each to its component.</p>
+  
+  
+</div>
+<div class="type" id="mapimageoptions">
+  <h3><a class="anchor-name" href="#mapimageoptions">MapImageOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#mapimageoptions">MapImageOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>pixelsPerTile: <span class="k">number</span></code></th><td><p>Output pixels per map tile. 32 matches the game&#39;s art 1:1; 1 is a minimap.</p></td></tr>
+<tr><th><code>units: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>sprites: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>locations: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>locationNames: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>startLocations: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>fog: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>fogPlayer: <span class="k">number</span></code></th><td><p>Whose fog is drawn (0-based player), when <code>fog</code> is on.</p></td></tr>
+<tr><th><code>grid: <span class="k">number</span></code></th><td><p>Grid spacing in map pixels (32 = one tile); 0 for no grid.</p></td></tr>
+<tr><th><code>rect?: <a class="t" href="/api/types/#rect">Rect</a> | <span class="k">null</span></code></th><td><p>The part of the map to draw, in tiles (exclusive <code>x1</code> / <code>y1</code>). The whole map when
+absent. Everything is drawn in map coordinates and the canvas is translated, so a
+region looks exactly like that part of the full picture — a unit half outside the
+region still leans in.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unitchange">
+  <h3><a class="anchor-name" href="#unitchange">UnitChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#unitchange">UnitChange</a></code></pre>
+  <p>Unit edits as invertible change lists, in the same spirit as terrain&#39;s <code>TileChange</code>.
+<code>before</code>/<code>after</code> are whole records: null <code>before</code> is an insertion at <code>index</code>, null
+<code>after</code> a removal, both set a replacement. Removals are listed highest index first so
+that applying them in order keeps the remaining indices valid; undo walks the list
+backwards and so re-inserts lowest first.</p>
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>before: <a class="t" href="/api/types/#unitrecord">UnitRecord</a> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>after: <a class="t" href="/api/types/#unitrecord">UnitRecord</a> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="playerslotview">
+  <h3><a class="anchor-name" href="#playerslotview">PlayerSlotView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#playerslotview">PlayerSlotView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>slot: <span class="k">number</span></code></th><td><p>0-based; the chrome shows it as <code>slot + 1</code>.</p></td></tr>
+<tr><th><code><span class="k">type</span>: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>typeName: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>race: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>raceName: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>color: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>COLR index; null for the four unplayable slots.</p></td></tr>
+<tr><th><code>colorHex: <span class="k">string</span> | <span class="k">null</span></code></th><td><p>The colour the chrome shows for the slot (CRGB-aware).</p></td></tr>
+<tr><th><code>rgb: [ <span class="k">number</span>, <span class="k">number</span>, <span class="k">number</span> ] | <span class="k">null</span></code></th><td><p>The CRGB custom triple when one is in effect.</p></td></tr>
+<tr><th><code>force: <span class="k">number</span> | <span class="k">null</span></code></th><td><p>0-based force; null for the unplayable slots.</p></td></tr>
+<tr><th><code>forceName: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="forceview">
+  <h3><a class="anchor-name" href="#forceview">ForceView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#forceview">ForceView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>force: <span class="k">number</span></code></th><td><p>0-based.</p></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>flags: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>allied: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>alliedVictory: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>sharedVision: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>randomStart: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>players: <span class="k">number</span>[]</code></th><td><p>0-based playable slots in the force.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="weaponview">
+  <h3><a class="anchor-name" href="#weaponview">WeaponView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#weaponview">WeaponView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>damage: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>bonus: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="unittypeview">
+  <h3><a class="anchor-name" href="#unittypeview">UnitTypeView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#unittypeview">UnitTypeView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td><p>The game&#39;s name (or the custom one when the map sets it).</p></td></tr>
+<tr><th><code>customName: <span class="k">string</span></code></th><td><p>The custom name the map sets, <code>&quot;&quot;</code> for the default.</p></td></tr>
+<tr><th><code>useDefault: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>hitPoints: <span class="k">number</span></code></th><td><p>Whole hit points.</p></td></tr>
+<tr><th><code>shields: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>armor: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>buildTime: <span class="k">number</span></code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>mineralCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>weapons: <a class="t" href="/api/types/#weaponview">WeaponView</a>[]</code></th><td><p>The type&#39;s ground and air weapons (a turreted vehicle&#39;s are its turret&#39;s), with the effective damage.</p></td></tr>
+<tr><th><code>defaults: { hitPoints: <span class="k">number</span>; shields: <span class="k">number</span>; armor: <span class="k">number</span>; buildTime: <span class="k">number</span>; mineralCost: <span class="k">number</span>; gasCost: <span class="k">number</span>; weapons: <a class="t" href="/api/types/#weaponview">WeaponView</a>[]; } | <span class="k">null</span></code></th><td><p>units.dat / weapons.dat, null without the game data.</p></td></tr>
+<tr><th><code>availability: { defaultAvailable: <span class="k">boolean</span>; players: (<span class="k">boolean</span> | <span class="s">&quot;default&quot;</span>)[]; }</code></th><td><p>PUNI: whether the type can be built by default, and per player (<code>&quot;default&quot;</code> where the player follows the default).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgradelevelsview">
+  <h3><a class="anchor-name" href="#upgradelevelsview">UpgradeLevelsView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#upgradelevelsview">UpgradeLevelsView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>start: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>max: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>usesDefault: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="upgradeview">
+  <h3><a class="anchor-name" href="#upgradeview">UpgradeView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#upgradeview">UpgradeView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>useDefault: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>mineralCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>mineralFactor: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasFactor: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>timeCost: <span class="k">number</span></code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>timeFactor: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>defaults: { mineralCost: <span class="k">number</span>; mineralFactor: <span class="k">number</span>; gasCost: <span class="k">number</span>; gasFactor: <span class="k">number</span>; timeCost: <span class="k">number</span>; timeFactor: <span class="k">number</span>; maxLevel: <span class="k">number</span>; } | <span class="k">null</span></code></th><td><p>upgrades.dat, null without the game data.</p></td></tr>
+<tr><th><code>levels: { defaultStart: <span class="k">number</span>; defaultMax: <span class="k">number</span>; players: <a class="t" href="/api/types/#upgradelevelsview">UpgradeLevelsView</a>[]; }</code></th><td><p>UPGR / PUPx: the default start and cap, and each of the 12 players&#39; (effective, with <code>usesDefault</code>).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techstateview">
+  <h3><a class="anchor-name" href="#techstateview">TechStateView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#techstateview">TechStateView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>available: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>researched: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>usesDefault: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="techview">
+  <h3><a class="anchor-name" href="#techview">TechView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#techview">TechView</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>useDefault: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>mineralCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>gasCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>researchTime: <span class="k">number</span></code></th><td><p>Game frames.</p></td></tr>
+<tr><th><code>energyCost: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>defaults: { mineralCost: <span class="k">number</span>; gasCost: <span class="k">number</span>; researchTime: <span class="k">number</span>; energyCost: <span class="k">number</span>; } | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>state: { defaultAvailable: <span class="k">boolean</span>; defaultResearched: <span class="k">boolean</span>; players: <a class="t" href="/api/types/#techstateview">TechStateView</a>[]; }</code></th><td><p>PTEC / PTEx: the default column and each of the 12 players&#39; effective state.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="soundrow">
+  <h3><a class="anchor-name" href="#soundrow">SoundRow</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#soundrow">SoundRow</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>slot: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>stringIndex: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>path: <span class="k">string</span></code></th><td><p>The path as the string table has it.</p></td></tr>
+<tr><th><code>present: <span class="k">boolean</span></code></th><td><p>Whether the archive carries a member at that path.</p></td></tr>
+<tr><th><code>size: <span class="k">number</span></code></th><td><p>Bytes in the archive, 0 when absent.</p></td></tr>
+<tr><th><code>member: <span class="k">string</span> | <span class="k">null</span></code></th><td><p>The archive member&#39;s name as stored (case may differ from the path).</p></td></tr>
+<tr><th><code>usedBy: <span class="k">string</span>[]</code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="cuwpslotview">
+  <h3><a class="anchor-name" href="#cuwpslotview">CuwpSlotView</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#cuwpslotview">CuwpSlotView</a></code></pre>
+  <p>The slot as a patch-shaped view: null where the unit&#39;s default applies.</p>
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>used: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>references: <span class="k">number</span></code></th><td><p>How many Create Unit with Properties actions name the slot.</p></td></tr>
+<tr><th><code>hitPointsPercent: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>shieldsPercent: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>energyPercent: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>resources: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>hangar: <span class="k">number</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>cloaked: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>burrowed: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>inTransit: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>hallucinated: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>invincible: <span class="k">boolean</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>summary: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="doodadchange">
+  <h3><a class="anchor-name" href="#doodadchange">DoodadChange</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#doodadchange">DoodadChange</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>index: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>before: <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>after: <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a> | <span class="k">null</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="side">
+  <h3><a class="anchor-name" href="#side">Side</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#side">Side</a> = <span class="s">&quot;left&quot;</span> | <span class="s">&quot;top&quot;</span> | <span class="s">&quot;right&quot;</span> | <span class="s">&quot;bottom&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="historyedit">
+  <h3><a class="anchor-name" href="#historyedit">HistoryEdit</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#historyedit">HistoryEdit</a></code></pre>
+  <p>The change lists of one edit; <code>HistoryEntry</code> adds the label.</p>
+  <table class="fields"><tbody><tr><th><code>changes: <a class="t" href="/api/types/#tilechange">TileChange</a>[]</code></th><td></td></tr>
+<tr><th><code>isom?: <a class="t" href="/api/types/#tilechange">TileChange</a>[]</code></th><td><p>The isometric brush&#39;s changes to <code>scenario.isom</code>, undone together with the tiles.</p></td></tr>
+<tr><th><code>createdIsom?: Uint16Array</code></th><td><p>Set when the edit gave a map an ISOM section it did not have (Rebuild ISOM). Undo
+removes the section again rather than leaving an all-zero one behind.</p></td></tr>
+<tr><th><code>rebuiltIsom?: <span class="k">boolean</span></code></th><td><p>Set when the edit rebuilt an existing lattice from the tiles, which is the one edit
+to <code>isom</code> the ISOM health is re-measured after: a brush stroke keeps the two in step
+by construction and is deliberately not measured (<code>useIsomStatus</code>), and measuring
+costs a second rebuild.</p></td></tr>
+<tr><th><code>units?: <a class="t" href="/api/types/#unitchange">UnitChange</a>[]</code></th><td><p>Unit placements, moves and deletions (see editor/units.ts).</p></td></tr>
+<tr><th><code>doodadTiles?: <a class="t" href="/api/types/#tilechange">TileChange</a>[]</code></th><td><p>Doodad tiles stamped into or lifted off MTXM alone — TILE keeps the ground beneath
+(see editor/doodads.ts). Applied after <code>changes</code>, so a terrain stroke that removes
+the doodads it painted over restores their remaining cells on top of its own edit.</p></td></tr>
+<tr><th><code>doodads?: <a class="t" href="/api/types/#doodadchange">DoodadChange</a>[]</code></th><td><p>DD2 record insertions, removals and replacements.</p></td></tr>
+<tr><th><code>sprites?: <a class="t" href="/api/types/#spritechange">SpriteChange</a>[]</code></th><td><p>THG2 record changes: the Sprites layer&#39;s edits, and a doodad&#39;s overlay sprite coming and going with it.</p></td></tr>
+<tr><th><code>locations?: <a class="t" href="/api/types/#locationchange">LocationChange</a>[]</code></th><td><p>MRGN slot replacements — create, move, resize, rename, delete (see editor/locations.ts); a rename may carry a string.</p></td></tr>
+<tr><th><code>fog?: <a class="t" href="/api/types/#tilechange">TileChange</a>[]</code></th><td><p>Fog of war edits to <code>scenario.mask</code> (see editor/fog.ts); <code>at</code> indexes the MASK byte.</p></td></tr>
+<tr><th><code>createdMask?: Uint8Array</code></th><td><p>Set when the edit gave a map a MASK section it did not have (the first fog stroke
+on such a map). Undo removes the section again.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="clippart">
+  <h3><a class="anchor-name" href="#clippart">ClipPart</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#clippart">ClipPart</a> = <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;doodads&quot;</span> | <span class="s">&quot;units&quot;</span> | <span class="s">&quot;sprites&quot;</span> | <span class="s">&quot;locations&quot;</span> | <span class="s">&quot;fog&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="clipparts">
+  <h3><a class="anchor-name" href="#clipparts">ClipParts</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#clipparts">ClipParts</a> = <span class="k">Record</span>&lt;<a class="t" href="/api/types/#clippart">ClipPart</a>, <span class="k">boolean</span>&gt;;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="pastemode">
+  <h3><a class="anchor-name" href="#pastemode">PasteMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#pastemode">PasteMode</a> = <span class="s">&quot;merge&quot;</span> | <span class="s">&quot;replace&quot;</span>;</code></pre>
+  <p>Whether a paste adds to what is in the target area or clears its objects first.</p>
+  
+  
+</div>
+<div class="type" id="cliplocation">
+  <h3><a class="anchor-name" href="#cliplocation">ClipLocation</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#cliplocation">ClipLocation</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>left: <span class="k">number</span></code></th><td><p>Bounds in map pixels relative to the clip&#39;s origin (an inverted box keeps its inversion).</p></td></tr>
+<tr><th><code>top: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>right: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>bottom: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>elevationFlags: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="clip">
+  <h3><a class="anchor-name" href="#clip">Clip</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#clip">Clip</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>width: <span class="k">number</span></code></th><td><p>Size in tiles.</p></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>era: <span class="k">number</span></code></th><td><p>ERA of the source map: tile ids mean nothing on another tileset.</p></td></tr>
+<tr><th><code>tiles: Uint16Array | <span class="k">null</span></code></th><td><p>MTXM ids, row-major, or null when terrain was not included.</p></td></tr>
+<tr><th><code>ground: Uint16Array | <span class="k">null</span></code></th><td><p>TILE ids (the ground under the doodads), alongside <code>tiles</code>.</p></td></tr>
+<tr><th><code>doodads: <a class="t" href="/api/types/#doodadrecord">DoodadRecord</a>[]</code></th><td><p>Records with positions relative to the origin in map pixels.</p></td></tr>
+<tr><th><code>units: <a class="t" href="/api/types/#unitrecord">UnitRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>sprites: <a class="t" href="/api/types/#spriterecord">SpriteRecord</a>[]</code></th><td></td></tr>
+<tr><th><code>locations: <a class="t" href="/api/types/#cliplocation">ClipLocation</a>[]</code></th><td></td></tr>
+<tr><th><code>fog: Uint8Array | <span class="k">null</span></code></th><td><p>MASK bytes, row-major, or null when fog was not included.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pastecounts">
+  <h3><a class="anchor-name" href="#pastecounts">PasteCounts</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#pastecounts">PasteCounts</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>tiles: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>doodads: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>units: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>sprites: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>locations: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>fog: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>removed: <span class="k">number</span></code></th><td><p>Objects the paste cleared out of the way (replace mode) or that a new tile stranded.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pasteresult">
+  <h3><a class="anchor-name" href="#pasteresult">PasteResult</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#pasteresult">PasteResult</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>edit: <a class="t" href="/api/types/#historyedit">HistoryEdit</a></code></th><td></td></tr>
+<tr><th><code>counts: <a class="t" href="/api/types/#pastecounts">PasteCounts</a></code></th><td></td></tr>
+<tr><th><code>notes: <span class="k">string</span>[]</code></th><td><p>Things that could not be pasted, in words.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="plugin_api_version">
+  <h3><a class="anchor-name" href="#plugin_api_version">PLUGIN_API_VERSION</a><span class="kind">const</span></h3>
+  <pre class="code"><code><span class="k">const</span> <a class="t" href="/api/types/#plugin_api_version">PLUGIN_API_VERSION</a> = <span class="n">1</span></code></pre>
+  <p>The version a host provides; a manifest that asks for a newer one is refused. It stays
+at 1 while the API is only used by the plugins in the scm-js organisation and grows
+with them — the first incompatible change after outside plugins exist bumps it.</p>
+  
+  
+</div>
+<div class="type" id="disposable">
+  <h3><a class="anchor-name" href="#disposable">Disposable</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#disposable">Disposable</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>dispose(): <span class="k">void</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pluginmanifest">
+  <h3><a class="anchor-name" href="#pluginmanifest">PluginManifest</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#pluginmanifest">PluginManifest</a></code></pre>
+  <p><code>plugin.json</code>, next to the entry file. Only <code>name</code> is required.</p>
+  <table class="fields"><tbody><tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>id?: <span class="k">string</span></code></th><td><p>Stable identifier (storage prefix, log prefix); derived from the name when absent.</p></td></tr>
+<tr><th><code>version?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>description?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>author?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>homepage?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>entry?: <span class="k">string</span></code></th><td><p>Entry file relative to the manifest; <code>plugin.ts</code> by default, then <code>plugin.js</code>.</p></td></tr>
+<tr><th><code>build?: <span class="k">string</span></code></th><td><p>A built, self-contained JavaScript bundle of the plugin, relative to the manifest
+(<code>&quot;dist/plugin.js&quot;</code>). When there is one the editor loads <strong>it</strong> and never <code>entry</code>:
+one fetch, no TypeScript compiler, no import graph to walk — and the plugin may use
+npm dependencies, which the source path cannot (<code>bundleModule</code> refuses a bare
+specifier because it has no resolver).</p>
+<p><code>entry</code> stays the source of truth and stays in the manifest: it is what a person
+reads, what <code>npm run typecheck</code> checks, and what loads when there is no build. A
+repository that publishes one builds it in CI at the tag it is loaded from — see
+<code>docs/plugins.md</code>.</p></td></tr>
+<tr><th><code>icon?: <span class="k">string</span></code></th><td><p>The plugin&#39;s face in Manage Plugins and on its own dialogs: an emoji (<code>&quot;🗺️&quot;</code>), a
+<code>data:image/…</code> URI, an <code>https://…</code> image, or an image file beside the manifest
+(<code>&quot;icon.svg&quot;</code>). Anything else is ignored — see <code>resolveIcon</code> in <code>loader.ts</code>.</p></td></tr>
+<tr><th><code>api?: <span class="k">number</span></code></th><td><p>The <code>PLUGIN_API_VERSION</code> the plugin was written against.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="deactivate">
+  <h3><a class="anchor-name" href="#deactivate">Deactivate</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#deactivate">Deactivate</a> = <span class="k">void</span> | (() =&gt; <span class="k">void</span>) | <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>What <code>activate</code> may hand back: nothing, a cleanup function, or a Disposable.</p>
+  
+  
+</div>
+<div class="type" id="pluginactivate">
+  <h3><a class="anchor-name" href="#pluginactivate">PluginActivate</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/types/#pluginactivate">PluginActivate</a> = (api: <a class="t" href="/api/">PluginApi</a>) =&gt; <a class="t" href="/api/types/#deactivate">Deactivate</a> | <span class="k">Promise</span>&lt;<a class="t" href="/api/types/#deactivate">Deactivate</a>&gt;;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="pluginmodule">
+  <h3><a class="anchor-name" href="#pluginmodule">PluginModule</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#pluginmodule">PluginModule</a></code></pre>
+  <p>The shape of the entry module: <code>export default function activate(api) {…}</code>, or
+<code>export default { activate }</code>, or <code>export function activate(api) {…}</code>.</p>
+  <table class="fields"><tbody><tr><th><code>activate: <a class="t" href="/api/types/#pluginactivate">PluginActivate</a></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="plugininfo">
+  <h3><a class="anchor-name" href="#plugininfo">PluginInfo</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#plugininfo">PluginInfo</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>id: <span class="k">string</span></code></th><td><p>Manifest id (or slug of the name).</p></td></tr>
+<tr><th><code>name: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>source: <span class="k">string</span></code></th><td><p>The spec the plugin was installed from (<code>builtin:…</code>, <code>github:…</code>, a URL).</p></td></tr>
+<tr><th><code>version?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>icon?: <a class="t" href="/api/menu/#pluginicon">PluginIcon</a></code></th><td><p>The manifest&#39;s <code>icon</code>, resolved; absent when it declared none (or an unusable one).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pasteoptionsspec">
+  <h3><a class="anchor-name" href="#pasteoptionsspec">PasteOptionsSpec</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#pasteoptionsspec">PasteOptionsSpec</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>parts?: <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#clipparts">ClipParts</a>&gt;</code></th><td><p>Over what <code>clipboard.parts()</code> says.</p></td></tr>
+<tr><th><code>mode?: <a class="t" href="/api/types/#pastemode">PasteMode</a></code></th><td><p>Over <code>clipboard.mode()</code>.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="widgetoptions">
+  <h3><a class="anchor-name" href="#widgetoptions">WidgetOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/types/#widgetoptions">WidgetOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>className?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>title?: <span class="k">string</span></code></th><td></td></tr>
+<tr><th><code>disabled?: <span class="k">boolean</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pluginidof">
+  <h3><a class="anchor-name" href="#pluginidof">pluginIdOf</a><span class="kind">function</span></h3>
+  <pre class="code"><code><span class="k">function</span> <a class="t" href="/api/types/#pluginidof">pluginIdOf</a>(manifest: {
+	id?: <span class="k">string</span>;
+	name: <span class="k">string</span>;
+}): <span class="k">string</span>;</code></pre>
+  <p>A slug for storage keys and log prefixes.</p>
+  
+  
+</div>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#chksection">ChkSection</a></li>
+<li><a href="#chkfile">ChkFile</a></li>
+<li><a href="#textencoding">TextEncoding</a></li>
+<li><a href="#stringtable">StringTable</a></li>
+<li><a href="#unitrecord">UnitRecord</a></li>
+<li><a href="#spriterecord">SpriteRecord</a></li>
+<li><a href="#doodadrecord">DoodadRecord</a></li>
+<li><a href="#locationrecord">LocationRecord</a></li>
+<li><a href="#forces">Forces</a></li>
+<li><a href="#playerrgb">PlayerRgb</a></li>
+<li><a href="#unitsettings">UnitSettings</a></li>
+<li><a href="#unitavailability">UnitAvailability</a></li>
+<li><a href="#upgradesettings">UpgradeSettings</a></li>
+<li><a href="#upgraderestrictions">UpgradeRestrictions</a></li>
+<li><a href="#techsettings">TechSettings</a></li>
+<li><a href="#techrestrictions">TechRestrictions</a></li>
+<li><a href="#cuwpslot">CuwpSlot</a></li>
+<li><a href="#conditionrecord">ConditionRecord</a></li>
+<li><a href="#actionrecord">ActionRecord</a></li>
+<li><a href="#triggerrecord">TriggerRecord</a></li>
+<li><a href="#scenario">Scenario</a></li>
+<li><a href="#mapversion">MapVersion</a></li>
+<li><a href="#tilesetid">TilesetId</a></li>
+<li><a href="#terrainname">TerrainName</a></li>
+<li><a href="#tilechange">TileChange</a></li>
+<li><a href="#rect">Rect</a></li>
+<li><a href="#diamond">Diamond</a></li>
+<li><a href="#isomcheck">IsomCheck</a></li>
+<li><a href="#locationstringchange">LocationStringChange</a></li>
+<li><a href="#locationchange">LocationChange</a></li>
+<li><a href="#fogmode">FogMode</a></li>
+<li><a href="#spritechange">SpriteChange</a></li>
+<li><a href="#spritekind">SpriteKind</a></li>
+<li><a href="#editorlayer">EditorLayer</a></li>
+<li><a href="#terrainmode">TerrainMode</a></li>
+<li><a href="#dialogid">DialogId</a></li>
+<li><a href="#mapimageoptions">MapImageOptions</a></li>
+<li><a href="#unitchange">UnitChange</a></li>
+<li><a href="#playerslotview">PlayerSlotView</a></li>
+<li><a href="#forceview">ForceView</a></li>
+<li><a href="#weaponview">WeaponView</a></li>
+<li><a href="#unittypeview">UnitTypeView</a></li>
+<li><a href="#upgradelevelsview">UpgradeLevelsView</a></li>
+<li><a href="#upgradeview">UpgradeView</a></li>
+<li><a href="#techstateview">TechStateView</a></li>
+<li><a href="#techview">TechView</a></li>
+<li><a href="#soundrow">SoundRow</a></li>
+<li><a href="#cuwpslotview">CuwpSlotView</a></li>
+<li><a href="#doodadchange">DoodadChange</a></li>
+<li><a href="#side">Side</a></li>
+<li><a href="#historyedit">HistoryEdit</a></li>
+<li><a href="#clippart">ClipPart</a></li>
+<li><a href="#clipparts">ClipParts</a></li>
+<li><a href="#pastemode">PasteMode</a></li>
+<li><a href="#cliplocation">ClipLocation</a></li>
+<li><a href="#clip">Clip</a></li>
+<li><a href="#pastecounts">PasteCounts</a></li>
+<li><a href="#pasteresult">PasteResult</a></li>
+<li><a href="#plugin_api_version">PLUGIN_API_VERSION</a></li>
+<li><a href="#disposable">Disposable</a></li>
+<li><a href="#pluginmanifest">PluginManifest</a></li>
+<li><a href="#deactivate">Deactivate</a></li>
+<li><a href="#pluginactivate">PluginActivate</a></li>
+<li><a href="#pluginmodule">PluginModule</a></li>
+<li><a href="#plugininfo">PluginInfo</a></li>
+<li><a href="#pasteoptionsspec">PasteOptionsSpec</a></li>
+<li><a href="#widgetoptions">WidgetOptions</a></li>
+<li><a href="#pluginidof">pluginIdOf</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

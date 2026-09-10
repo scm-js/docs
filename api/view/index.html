@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.view — scmJS documentation</title>
+<meta name="description" content="The map view: where the viewport is looking, how far in, and what it draws over the
+terrain. A plugin that finds something needs this to show the user where it is.">
+<meta property="og:title" content="api.view — scmJS documentation">
+<meta property="og:description" content="The map view: where the viewport is looking, how far in, and what it draws over the
+terrain. A plugin that finds something needs this to show the user where it is.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="here" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.view</h1>
+<p class="lede">ViewApi</p>
+<p>The map view: where the viewport is looking, how far in, and what it draws over the
+terrain. A plugin that finds something needs this to show the user where it is.</p>
+
+<ul class="chips"><li><a href="#zoom">zoom</a></li><li><a href="#setzoom">setZoom</a></li><li><a href="#visible">visible</a></li><li><a href="#center">center</a></li><li><a href="#reveal">reveal</a></li><li><a href="#goto">goTo</a></li><li><a href="#cursortile">cursorTile</a></li><li><a href="#flags">flags</a></li><li><a href="#setflags">setFlags</a></li><li><a href="#gridsize">gridSize</a></li><li><a href="#setgridsize">setGridSize</a></li><li><a href="#flash">flash</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="zoom">
+  <h3><a class="anchor-name" href="#zoom">zoom</a></h3>
+  <pre class="code"><code>zoom(): <span class="k">number</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="setzoom">
+  <h3><a class="anchor-name" href="#setzoom">setZoom</a></h3>
+  <pre class="code"><code>setZoom(zoom: <span class="k">number</span>): <span class="k">void</span>;</code></pre>
+  <p>0.25 … 8, as the zoom control&#39;s steps.</p>
+  
+  
+</div>
+<div class="member" id="visible">
+  <h3><a class="anchor-name" href="#visible">visible</a></h3>
+  <pre class="code"><code>visible(): <a class="t" href="/api/types/#rect">Rect</a>;</code></pre>
+  <p>The tiles on screen.</p>
+  
+  
+</div>
+<div class="member" id="center">
+  <h3><a class="anchor-name" href="#center">center</a></h3>
+  <pre class="code"><code>center(x: <span class="k">number</span>, y: <span class="k">number</span>): <span class="k">void</span>;</code></pre>
+  <p>Scroll so a tile is in the middle of the viewport.</p>
+  
+  
+</div>
+<div class="member" id="reveal">
+  <h3><a class="anchor-name" href="#reveal">reveal</a></h3>
+  <pre class="code"><code>reveal(rect: <a class="t" href="/api/types/#rect">Rect</a>, options?: <a class="t" href="/api/view/#revealoptions">RevealOptions</a>): <span class="k">Promise</span>&lt;<span class="k">boolean</span>&gt;;</code></pre>
+  <p>Bring a tile rect onto the screen, gliding there by the shortest way rather than
+jumping, and leaving the view alone when the rect is already visible. With <code>fit</code> the
+view zooms out (never in) as far as the rect needs. Resolves once the view is there;
+<code>false</code> when the user, or another request, moved it first — a plugin that follows its
+own work around the map takes that as its cue to stop.</p>
+  <pre class="code"><code><span class="k">if</span> (!(<span class="k">await</span> api.view.reveal(rect))) following = <span class="k">false</span>;</code></pre>
+  
+</div>
+<div class="member" id="goto">
+  <h3><a class="anchor-name" href="#goto">goTo</a></h3>
+  <pre class="code"><code>goTo(target: <a class="t" href="/api/view/#goto">GoTo</a>): <span class="k">void</span>;</code></pre>
+  <p>Scroll to an object (and select it, for a unit, sprite or location).</p>
+  
+  
+</div>
+<div class="member" id="cursortile">
+  <h3><a class="anchor-name" href="#cursortile">cursorTile</a></h3>
+  <pre class="code"><code>cursorTile(): { x: <span class="k">number</span>; y: <span class="k">number</span>; };</code></pre>
+  <p>The tile under the pointer, as the status bar shows it.</p>
+  
+  
+</div>
+<div class="member" id="flags">
+  <h3><a class="anchor-name" href="#flags">flags</a></h3>
+  <pre class="code"><code>flags(): <a class="t" href="/api/view/#viewflags">ViewFlags</a>;</code></pre>
+  <p>The View menu&#39;s ticks: grid, locations, units, sprites, doodads, fog, …</p>
+  
+  
+</div>
+<div class="member" id="setflags">
+  <h3><a class="anchor-name" href="#setflags">setFlags</a></h3>
+  <pre class="code"><code>setFlags(patch: <span class="k">Partial</span>&lt;<a class="t" href="/api/view/#viewflags">ViewFlags</a>&gt;): <span class="k">void</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="gridsize">
+  <h3><a class="anchor-name" href="#gridsize">gridSize</a></h3>
+  <pre class="code"><code>gridSize(): <span class="k">number</span>;</code></pre>
+  <p>Grid spacing in map pixels (32 = one tile).</p>
+  
+  
+</div>
+<div class="member" id="setgridsize">
+  <h3><a class="anchor-name" href="#setgridsize">setGridSize</a></h3>
+  <pre class="code"><code>setGridSize(size: <span class="n">8</span> | <span class="n">16</span> | <span class="n">32</span> | <span class="n">64</span> | <span class="n">128</span>): <span class="k">void</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="flash">
+  <h3><a class="anchor-name" href="#flash">flash</a></h3>
+  <pre class="code"><code>flash(target: <a class="t" href="/api/view/#flashtarget">FlashTarget</a>): <span class="k">void</span>;</code></pre>
+  <p>Highlight something on the map for a moment: the rect an edit filled, the units it
+placed, the location it moved. Fades by itself; several may run at once. Nothing to
+clean up.</p>
+  <pre class="code"><code><span class="k">const</span> r = api.document.edit(<span class="s">&quot;Fill&quot;</span>, (tx) =&gt; tx.fillFlat(rect, terrain));
+<span class="k">if</span> (r.changed) api.view.flash({ rect });</code></pre>
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="viewflags">
+  <h3><a class="anchor-name" href="#viewflags">ViewFlags</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/view/#viewflags">ViewFlags</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>grid: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>locations: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>locationNames: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>units: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>sprites: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>doodads: <span class="k">boolean</span></code></th><td><p>Off draws the ground under the doodads (TILE) instead of the picture (MTXM).</p></td></tr>
+<tr><th><code>fog: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>elevation: <span class="k">boolean</span></code></th><td><p>Ground height per minitile, tinted (mid amber, high red).</p></td></tr>
+<tr><th><code>buildability: <span class="k">boolean</span></code></th><td><p>Unbuildable tile groups, hatched in blue.</p></td></tr>
+<tr><th><code>startLocations: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>animateWater: <span class="k">boolean</span></code></th><td><p>Cycle the palette so water and lava animate as they do in game.</p></td></tr>
+<tr><th><code>animateUnits: <span class="k">boolean</span></code></th><td><p>Run the units&#39; iscript idle animations (turrets, pulsing buildings, fires, smoke).</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="goto">
+  <h3><a class="anchor-name" href="#goto">GoTo</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/view/#goto">GoTo</a> = {
+	kind: <span class="s">&quot;tile&quot;</span>;
+	x: <span class="k">number</span>;
+	y: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;unit&quot;</span>;
+	index: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;sprite&quot;</span>;
+	index: <span class="k">number</span>;
+} | {
+	kind: <span class="s">&quot;location&quot;</span>;
+	index: <span class="k">number</span>;
+};</code></pre>
+  <p>Where <code>view.goTo</code> should take the user. Issues from <code>query.validate</code> carry one.</p>
+  
+  
+</div>
+<div class="type" id="revealoptions">
+  <h3><a class="anchor-name" href="#revealoptions">RevealOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/view/#revealoptions">RevealOptions</a></code></pre>
+  <p>How <code>view.reveal</code> brings a rect on screen.</p>
+  <table class="fields"><tbody><tr><th><code>fit?: <span class="k">boolean</span></code></th><td><p>Zoom out to the zoom control&#39;s nearest step that fits the rect (plus the margin); never zooms in. Off by default.</p></td></tr>
+<tr><th><code>animate?: <span class="k">boolean</span></code></th><td><p>Glide rather than jump. On by default.</p></td></tr>
+<tr><th><code>margin?: <span class="k">number</span></code></th><td><p>Tiles kept clear between the rect and the viewport&#39;s edge when the view has to move. 1 by default.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="flashtarget">
+  <h3><a class="anchor-name" href="#flashtarget">FlashTarget</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/view/#flashtarget">FlashTarget</a> = {
+	rect: <a class="t" href="/api/types/#rect">Rect</a>;
+	kind?: <a class="t" href="/api/view/#flashkind">FlashKind</a>;
+	ms?: <span class="k">number</span>;
+} | {
+	units: <span class="k">number</span>[];
+	kind?: <a class="t" href="/api/view/#flashkind">FlashKind</a>;
+	ms?: <span class="k">number</span>;
+} | {
+	locations: <span class="k">number</span>[];
+	kind?: <a class="t" href="/api/view/#flashkind">FlashKind</a>;
+	ms?: <span class="k">number</span>;
+} | {
+	tiles: {
+		x: <span class="k">number</span>;
+		y: <span class="k">number</span>;
+	}[];
+	kind?: <a class="t" href="/api/view/#flashkind">FlashKind</a>;
+	ms?: <span class="k">number</span>;
+};</code></pre>
+  <p>What <code>view.flash</code> highlights: a tile rect, or units / locations by index. The
+highlight fades over <code>ms</code> (600 by default) and never blocks or takes the pointer; it is
+the shared way to say &quot;this just changed&quot; or &quot;look here&quot;, so every plugin&#39;s flash looks
+the same. <code>kind</code> picks the colour: <code>&quot;change&quot;</code> (gold, the default) or <code>&quot;attention&quot;</code> (teal).</p>
+  
+  
+</div>
+<div class="type" id="flashkind">
+  <h3><a class="anchor-name" href="#flashkind">FlashKind</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/view/#flashkind">FlashKind</a> = <span class="s">&quot;change&quot;</span> | <span class="s">&quot;attention&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-walkability"><b>Walkability</b><span>a read-only overlay drawn over the map</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#zoom">zoom</a></li>
+<li><a href="#setzoom">setZoom</a></li>
+<li><a href="#visible">visible</a></li>
+<li><a href="#center">center</a></li>
+<li><a href="#reveal">reveal</a></li>
+<li><a href="#goto">goTo</a></li>
+<li><a href="#cursortile">cursorTile</a></li>
+<li><a href="#flags">flags</a></li>
+<li><a href="#setflags">setFlags</a></li>
+<li><a href="#gridsize">gridSize</a></li>
+<li><a href="#setgridsize">setGridSize</a></li>
+<li><a href="#flash">flash</a></li>
+<li><a href="#viewflags">ViewFlags</a></li>
+<li><a href="#goto">GoTo</a></li>
+<li><a href="#revealoptions">RevealOptions</a></li>
+<li><a href="#flashtarget">FlashTarget</a></li>
+<li><a href="#flashkind">FlashKind</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Releases — scmJS documentation</title>
+<meta name="description" content=".github/workflows/build.yml has three channels, and the release list only grows when a version is cut:">
+<meta property="og:title" content="Releases — scmJS documentation">
+<meta property="og:description" content=".github/workflows/build.yml has three channels, and the release list only grows when a version is cut:">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="here" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Releases</h1>
+<p><code>.github/workflows/build.yml</code> has three channels, and the release list only grows when a
+version is cut:</p>
+<table>
+<thead>
+<tr>
+<th>channel</th>
+<th>trigger</th>
+<th>what lands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ci</code></td>
+<td>every push to <code>main</code></td>
+<td>lint, tests and the web bundle, built and thrown away. Nothing is deployed and nothing is released.</td>
+</tr>
+<tr>
+<td><code>nightly</code></td>
+<td>a daily cron at 07:17 UTC, or a manual dispatch with the <code>nightly</code> input ticked</td>
+<td>installers for Windows, macOS (x64 and arm64) and Linux (AppImage and deb), a zip of the web bundle and the updater&#39;s <code>latest*.yml</code>, all on one rolling prerelease, plus that zip unpacked onto <code>nightly.editor.scmjs.dev</code>.</td>
+</tr>
+<tr>
+<td><code>stable</code></td>
+<td>a pushed <code>vX.Y.Z</code> tag</td>
+<td>a permanent release with the same assets, its notes, the container image on GHCR, the Pages deploy of <code>editor.scmjs.dev</code>, and the docs site.</td>
+</tr>
+</tbody></table>
+<p>The cron exits early when <code>main</code> has not moved since the last nightly. The nightly is
+updated in place: its <code>nightly</code> tag is force-moved and its assets replaced, never deleted
+and recreated, so there is one prerelease in the list however many nights run. Its notes
+link <code>nightly.editor.scmjs.dev</code>, which is that same build running, so the release page is
+somewhere to try it from as well as somewhere to download it from.</p>
+<h2 id="download-links">Download links<a class="anchor" href="#download-links" aria-label="Link to this section">#</a></h2>
+<p>GitHub redirects <code>/releases/latest/download/&lt;asset&gt;</code> to the newest release that is not a
+prerelease or a draft, so the download buttons on the site are plain links that never
+need updating and never resolve to a nightly:</p>
+<pre><code>https://github.com/scm-js/scm-js/releases/latest/download/scmJS-windows-x64-setup.exe
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-windows-x64.zip
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-macos-arm64.dmg
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-macos-x64.dmg
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-linux-x86_64.AppImage
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-linux-amd64.deb
+https://github.com/scm-js/scm-js/releases/latest/download/scmJS-web.zip
+https://github.com/scm-js/scm-js/releases/download/nightly/scmJS-windows-x64-setup.exe
+</code></pre>
+<p>That redirect can only resolve a fixed file name, which is why the asset names carry no
+version; the version is in the release title, the notes and <code>latest*.yml</code>. To un-promote
+a bad release, tick &quot;This is a pre-release&quot; on it and the redirect falls back to the one
+before.</p>
+<h2 id="the-container-image">The container image<a class="anchor" href="#the-container-image" aria-label="Link to this section">#</a></h2>
+<p><code>docker/Dockerfile</code> is nginx with the built web bundle, pushed to <code>ghcr.io/scm-js/scm-js</code>
+by the <code>image</code> job on a tagged release only, as <code>latest</code>, the full version, and the
+moving <code>X.Y</code> and <code>X</code>. A nightly publishes no image, because <code>latest</code> is what a
+<code>docker run</code> picks up without asking.</p>
+<pre><code class="language-sh">docker run --rm -p 8080:80 ghcr.io/scm-js/scm-js:latest   # http://localhost:8080
+npm run build:image                                       # build it locally, tagged scmjs
+</code></pre>
+<p>The image copies the release&#39;s own web zip rather than building one, so it cannot differ
+from the download, and with no <code>RUN</code> step one buildx manifest covers <code>linux/amd64</code> and
+<code>linux/arm64</code> without emulation. It carries no game data: <code>.dockerignore</code> cuts the
+extracted trees out of the build context and <code>docker/nginx.conf</code> answers 404 for those
+paths, so a container asks through Help ▸ Game Data… like the hosted build. Mounting an
+extracted tree over those paths is in <a href="/game-data/getting-the-files/#the-container-image">game-data.md</a>.</p>
+<h2 id="cutting-a-release">Cutting a release<a class="anchor" href="#cutting-a-release" aria-label="Link to this section">#</a></h2>
+<p>Run the <strong>Release</strong> workflow (<code>.github/workflows/release.yml</code>) from the Actions tab. It
+takes the version (<code>0.3</code>, <code>1.0</code> and <code>1</code> are padded to three parts; blank promotes the
+line the nightlies have been building), an optional <code>notes</code> box, and a <code>dry_run</code> tick
+that does everything except push.</p>
+<p>It refuses to run anywhere but <code>main</code>, refuses a version whose tag exists, refuses one
+that is not newer than the last release, and runs lint, tests (the network suite
+included), the build and a check of the container image before writing anything. Then it
+commits the version into <code>package.json</code> and the lock file, tags that commit <code>vX.Y.Z</code>, and
+dispatches the Build workflow on the tag. The dispatch is necessary because a push made
+with the repository&#39;s own token starts no further workflow run; that one dispatch is the
+whole release, the hosted editor and the docs site included.</p>
+<p>There is no step moving <code>package.json</code> on to a next version. A nightly is named
+<code>&lt;base&gt;-nightly.&lt;date&gt;.&lt;run number&gt;</code> where the base is a patch bump of the newest release
+tag, worked out by <code>scripts/next-version.mjs</code>. A patch bump is the one choice that sorts
+above the release it follows and below whatever comes next, whether that is a patch, a
+minor or a major, so the updater is never offered a downgrade and never starved. It also
+leaves <code>package.json</code> on <code>main</code> meaning something true: the last released version.</p>
+<h2 id="release-notes">Release notes<a class="anchor" href="#release-notes" aria-label="Link to this section">#</a></h2>
+<p>The hand-written part of a release comes from <code>docs/releases/&lt;version&gt;.md</code>, committed to
+<code>main</code> before the release is cut and read from the tag&#39;s own tree (the full three-part
+name: cutting <code>0.3</code> reads <code>0.3.0.md</code>), or from the Release workflow&#39;s <code>notes</code> input, which
+wins over the file and lives only in the release. Either goes above GitHub&#39;s generated
+list of commits; with neither, the release carries that list alone. The pre-flight prints
+what it found, so a dry run shows the body. <code>docs/releases/README.md</code> is the convention.</p>
+<h2 id="versions">Versions<a class="anchor" href="#versions" aria-label="Link to this section">#</a></h2>
+<p>The version is the tag&#39;s, or the nightly name on <code>main</code>. Every job writes it into
+<code>package.json</code> before building; <code>vite.config.ts</code> injects it as <code>__APP_VERSION__</code>,
+<code>src/version.ts</code> is where the splash and About read it, the boot splash in <code>index.html</code>
+gets it through a small Vite plugin, and electron-builder writes it into <code>latest*.yml</code>.
+The run number rather than a commit hash orders same-day nightlies, since semver compares
+prerelease identifiers as strings.</p>
+<h2 id="the-two-hosted-builds">The two hosted builds<a class="anchor" href="#the-two-hosted-builds" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>deployed by</th>
+<th>from</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>editor.scmjs.dev</code></td>
+<td>the <code>pages</code> job, on a tag</td>
+<td>GitHub Pages on this repository</td>
+</tr>
+<tr>
+<td><code>nightly.editor.scmjs.dev</code></td>
+<td>the <code>nightly-site</code> job, each nightly</td>
+<td>one force-pushed orphan commit on <code>scm-js/nightly</code>&#39;s <code>gh-pages</code> branch, carrying <code>CNAME</code></td>
+</tr>
+<tr>
+<td><code>docs.scmjs.dev</code></td>
+<td>the <code>docs</code> job, on a tag</td>
+<td>the same shape, on <code>scm-js/docs</code></td>
+</tr>
+</tbody></table>
+<p>The hosted editor is a release like every other way of running the editor: the site, the
+installers, the image and the notes are one tag. The nightly site is the nightly&#39;s own
+web zip unpacked, never a second build, which is why the nightly&#39;s notes can point at it:
+the page and the installers on that release are the same version. To put <code>editor.scmjs.dev</code> back on an older
+version, dispatch Build on that tag; the deploy is the only thing a re-run rewrites.</p>
+<p>The two editors are separate origins on purpose. The extracted game data lives in the
+browser&#39;s private file storage and every setting in <code>localStorage</code>, both per origin, so
+the nightly asks for the game data again and keeps its own preferences, recents and
+plugins rather than writing a stored shape the stable build then reads back.</p>
+<h2 id="variables-and-secrets">Variables and secrets<a class="anchor" href="#variables-and-secrets" aria-label="Link to this section">#</a></h2>
+<p>None of these is required: a fork builds and releases without any of them, and each
+deploy that lacks its own is skipped with a notice.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Kind</th>
+<th>For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PAGES_BASE</code></td>
+<td>variable</td>
+<td>The hosted editor&#39;s base path: <code>/</code> for a custom domain, the repository name by default. When it is not <code>/</code>, the <code>web</code> job builds a second bundle for Pages, since the release zip is always rooted.</td>
+</tr>
+<tr>
+<td><code>NIGHTLY_DOMAIN</code></td>
+<td>variable</td>
+<td>The domain written into the nightly site&#39;s <code>CNAME</code>.</td>
+</tr>
+<tr>
+<td><code>NIGHTLY_PAT</code></td>
+<td>repository secret</td>
+<td>A fine-grained token with Contents: write on <code>&lt;owner&gt;/nightly</code>, since a repository&#39;s own token cannot write to another repository.</td>
+</tr>
+<tr>
+<td><code>DOCS_DOMAIN</code>, <code>DOCS_PAT</code></td>
+<td>variable, repository secret</td>
+<td>The same pair for the docs site on <code>&lt;owner&gt;/docs</code>.</td>
+</tr>
+<tr>
+<td><code>PLUGIN_API_PAT</code></td>
+<td>organisation secret</td>
+<td>Pushes the plugin typings to <code>scm-js/plugin-api</code>.</td>
+</tr>
+<tr>
+<td><code>PUBLISH_PLUGIN_API</code></td>
+<td>variable</td>
+<td>Turns on the npm publish of <code>@scm-js/plugin-api</code>.</td>
+</tr>
+</tbody></table>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#download-links">Download links</a></li>
+<li><a href="#the-container-image">The container image</a></li>
+<li><a href="#cutting-a-release">Cutting a release</a></li>
+<li><a href="#release-notes">Release notes</a></li>
+<li><a href="#versions">Versions</a></li>
+<li><a href="#the-two-hosted-builds">The two hosted builds</a></li>
+<li><a href="#variables-and-secrets">Variables and secrets</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

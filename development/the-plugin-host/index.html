@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The plugin host — scmJS documentation</title>
+<meta name="description" content="plugins.md is written for someone who has the npm package and none of this repository.">
+<meta property="og:title" content="The plugin host — scmJS documentation">
+<meta property="og:description" content="plugins.md is written for someone who has the npm package and none of this repository.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="here" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The plugin host</h1>
+<p><a href="/plugins/">plugins.md</a> is written for someone who has the npm package and none of this
+repository. This is the editor&#39;s half: where the plugin system lives and how a plugin
+gets from an address to a running <code>activate</code>.</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>src/plugins/api.ts</code></td>
+<td>The public types, and the only place the contract is written. <code>PLUGIN_API_VERSION</code> bumps for a change that is not backward compatible; additions leave it alone.</td>
+</tr>
+<tr>
+<td><code>src/plugins/host.ts</code></td>
+<td><code>createPluginApi(store, info)</code> builds one plugin&#39;s <code>PluginApi</code> over the store, with a <code>Contributions</code> bag that <code>dispose()</code> empties. <code>activatePlugin</code> / <code>deactivatePlugin</code> drive the lifecycle; <code>inspectPlugin</code> / <code>installPlugin</code> are the confirm-then-add pair.</td>
+</tr>
+<tr>
+<td><code>src/plugins/loader.ts</code></td>
+<td>Spec parsing, the manifest fetch, and the fetch / transpile / rewrite-imports / blob-URL pipeline. Pure apart from the callbacks it takes, so the tests run it in Node.</td>
+</tr>
+<tr>
+<td><code>src/plugins/defaults.ts</code></td>
+<td>The plugins a fresh editor starts with, each pinned to a tag.</td>
+</tr>
+<tr>
+<td><code>src/plugins/registry.ts</code></td>
+<td>Browse Plugins: parsing, searching and caching the JSON indexes.</td>
+</tr>
+<tr>
+<td><code>src/plugins/widgets.ts</code></td>
+<td><code>el</code> and <code>api.ui.widgets</code>: plain DOM in the editor&#39;s own class names, so a plugin&#39;s dialog looks like a built-in one. The waiting kit — <code>spinner</code>, <code>progressBar</code>, <code>statusLine</code>, <code>skeleton</code>, <code>busy</code>, and a button&#39;s <code>setBusy</code> — is here too; its styles are the Waiting block at the end of <code>src/styles/ui.css</code>, which is also where the reduced-motion behaviour lives, so nothing here animates in JavaScript.</td>
+</tr>
+<tr>
+<td><code>src/plugins/claims.ts</code></td>
+<td>The trigger-list claims the trigger editors read.</td>
+</tr>
+<tr>
+<td><code>src/plugins/images.ts</code></td>
+<td>Image loading, clipboard images, and drop / paste transfers for plugin dialogs.</td>
+</tr>
+<tr>
+<td><code>src/plugins/failures.ts</code></td>
+<td>The toast a failed activation raises.</td>
+</tr>
+<tr>
+<td><code>src/plugins/builtin.ts</code></td>
+<td><code>import.meta.glob</code> over <code>plugins/*/</code>, where the vendored defaults land.</td>
+</tr>
+<tr>
+<td><code>src/plugins/transpile.worker.ts</code></td>
+<td>TypeScript in a worker, for a <code>.ts</code> plugin loaded from source.</td>
+</tr>
+<tr>
+<td><code>src/atoms/pluginAtoms.ts</code></td>
+<td>The installed list, the stored code copies, the runtimes, the contribution registries, and the one-at-a-time requests the viewport serves: picks, map tools, overlays, panels, claims.</td>
+</tr>
+<tr>
+<td><code>src/hooks/usePlugins.ts</code></td>
+<td>Activates the enabled plugins at startup and keeps the runtimes in step with the list.</td>
+</tr>
+<tr>
+<td><code>src/components/dialogs/PluginDialogs.tsx</code></td>
+<td>Manage Plugins, Browse, the Add / Update confirmation, and the frame a plugin&#39;s dialog mounts into.</td>
+</tr>
+<tr>
+<td><code>src/components/panels/PluginPanels.tsx</code></td>
+<td>The floating frames a plugin&#39;s panel mounts into, and <code>DockedPluginPanels</code>, the <code>.panel</code>s the right dock renders for <code>dock: &quot;right&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>src/components/ui/DialogSlots.tsx</code></td>
+<td>The footer row a plugin&#39;s <code>dialogSlot</code> mounts into; a dialog opts in by passing <code>slot</code> to <code>DialogFrame</code>, naming its id and lending its working-copy fields.</td>
+</tr>
+</tbody></table>
+<p>The chrome reads the registries: the menu bar merges plugin menu items into its model,
+the viewport and the terrain palette append the matching context items, the status bar
+renders the plugin status items after its message cell, the right dock renders the docked
+panels after Properties (and stays on screen for them), <code>DialogFrame</code> mounts the slots
+registered for its dialog, and the hotkey hook checks plugin combos first. <code>view.flash</code>
+puts boxes in map pixels on <code>viewFlashesAtom</code>; the viewport paints them fading at the end
+of its pass and repaints every frame until the last one is over. The viewport also serves the requests: a pick ahead of
+every layer, then a running map tool, then the overlays at their slots in the paint pass,
+each with a guarded <code>finish</code> so its promise settles exactly once however it ends.</p>
+<p>A plugin&#39;s <code>document.edit</code> wraps the scenario in a transaction whose operations apply as
+they are called and accumulate change lists, then commits one history entry through the
+same path a brush stroke takes, stranded-object pass included. <code>document.update</code> is the
+settings-and-triggers equivalent, committing through the settings and triggers commits.
+<code>document.sections</code> rewrites the file and installs the re-parsed scenario, which is why
+it drops the history.</p>
+<h2 id="the-loading-pipeline">The loading pipeline<a class="anchor" href="#the-loading-pipeline" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>The spec is parsed into a base URL. <code>builtin:&lt;name&gt;</code> is a plugin compiled in from
+<code>plugins/&lt;name&gt;/</code>; a <code>github:</code> spec or a github.com URL resolves to
+<code>raw.githubusercontent.com/owner/repo/&lt;ref or HEAD&gt;/&lt;dir&gt;/</code>; any other URL is a
+manifest, an entry file (a manifest is synthesised from its name) or a directory
+holding <code>plugin.json</code>.</li>
+<li>The manifest is fetched and validated; only <code>name</code> is required.</li>
+<li>The file to import is the manifest&#39;s <code>build</code> when it has one (a committed bundle, one
+fetch, no transpile), else its <code>entry</code>.</li>
+<li>That file is fetched as text and, if it is TypeScript, transpiled in the worker.
+Fetching as text matters: <code>raw.githubusercontent.com</code> serves <code>text/plain</code>, which a
+browser refuses to import as a module.</li>
+<li>Relative imports are followed depth first, and each file becomes a <code>blob:</code> module URL
+with its specifiers rewritten. An extensionless specifier is tried as <code>.ts</code>, <code>.tsx</code>,
+<code>.mts</code>, <code>.js</code>, <code>.mjs</code> and then as that directory&#39;s <code>index.*</code>; <code>./x.js</code> falls back to
+<code>./x.ts</code>. Cycles and bare package names are errors naming the file.</li>
+<li>The module is imported and its default export (or a named <code>activate</code>) is called with
+the API. Whatever it returns is kept for deactivation.</li>
+</ol>
+<h2 id="adding-one">Adding one<a class="anchor" href="#adding-one" aria-label="Link to this section">#</a></h2>
+<p>Pressing <strong>Add</strong> in Manage Plugins installs nothing. The editor canonicalises the
+address, asks GitHub which commit the ref points at, and reads the <code>plugin.json</code> at that
+commit. No entry file is fetched, nothing is transpiled and nothing is imported; probing
+for <code>plugin.ts</code> would mean fetching code the user has not agreed to. The confirmation
+opens only once a manifest came back; an address with nothing behind it is reported under
+the Add field instead.</p>
+<p>The install is the only writer past the dialog. Its three ticks are <em>Enable it now</em>,
+<em>Pin to this version</em> (the stored spec becomes <code>github:owner/repo@&lt;sha&gt;</code>) and <em>Load from
+a copy saved here</em> (below). The <strong>Update</strong> button on a pinned row previews the branch and,
+when it holds a different commit, reopens the same dialog with the old commit marked to be
+replaced.</p>
+<p>A listed plugin that is not running is still described: the manifest alone is fetched to
+fill in name, version, description and icon, and the answers are cached in browser
+storage so the next visit renders from them while the refresh runs. Browse Plugins reads
+the registry indexes the same way and hands a chosen entry to the same Add path, so a
+registry decides what is listed and never what is trusted.</p>
+<h2 id="loading-from-a-copy">Loading from a copy<a class="anchor" href="#loading-from-a-copy" aria-label="Link to this section">#</a></h2>
+<p><em>Load from a copy saved here</em> means &quot;prefer the copy&quot;. With no copy yet, the load records
+every fetched file into browser storage (capped; a larger plugin stays remote with a
+console warning). With a copy, the load has no network path at all and errors on a file
+the copy lacks, so a plugin that grew a file since the copy was made says so rather than
+fetching it. Reload drops the copy and fetches again; turning the option off drops it too.</p>
+<h2 id="defaults-and-vendoring">Defaults and vendoring<a class="anchor" href="#defaults-and-vendoring" aria-label="Link to this section">#</a></h2>
+<p>The default plugins (scmscx.com, Repair, Walkability, Terrain from Image, Paint, TrigEdit,
+TrigScript, Stamp Library and scmjs.dev, of which TrigEdit and scmjs.dev are installed but
+start off) are ordinary plugins from their own repositories, each pinned in <code>src/plugins/defaults.ts</code>
+to a <strong>tag</strong>, never a branch, so that a push to a plugin repository cannot change every
+editor already in use and any release can be rebuilt as it shipped. Moving a default
+forward is a commit that changes the tag there. A plugin&#39;s identity is its repository,
+whatever version follows, which is what keeps an older editor&#39;s unpinned spec, the
+compiled-in copy and the pinned default from being listed and run as three plugins.</p>
+<p><code>scripts/vendor-plugins.mjs</code> writes each default&#39;s source at its tag into the gitignored
+<code>plugins/</code>, where <code>builtin.ts</code> compiles it into the bundle. It runs from <code>predev</code>,
+<code>prebuild</code> and the desktop build, fetches only what is not already there at the pinned
+version, and honours <code>GITHUB_TOKEN</code> to stay off the anonymous rate limit (CI sets it).
+A directory it wrote carries a <code>vendored.json</code>; one you put there by hand is left alone.</p>
+<pre><code class="language-sh">npm run vendor:plugins             # bring plugins/ up to date
+npm run vendor:plugins -- --force  # fetch again even where the spec matches
+npm run vendor:plugins -- --clean  # remove the directory
+npm run vendor:plugins -- --list   # print the pinned specs
+SCMJS_SKIP_VENDOR=1 npm run build  # skip it: that bundle fetches its defaults at startup
+</code></pre>
+<p>Every build compiles them in, not only the desktop, because of the cold path: one remote
+<code>.ts</code> plugin starts the transpile worker, and TypeScript is inlined into that worker, so
+five remote defaults put 3.4 MB (975 KB gzipped) of compiler onto a first visit. Measured
+on the production build, a cold visit went from 1235 KB gzipped and 20 cross-origin
+requests to 344 KB and none. <code>tests/vendor-plugins.test.ts</code> pins the script&#39;s parsing and
+the rule that no default may be unpinned.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#the-loading-pipeline">The loading pipeline</a></li>
+<li><a href="#adding-one">Adding one</a></li>
+<li><a href="#loading-from-a-copy">Loading from a copy</a></li>
+<li><a href="#defaults-and-vendoring">Defaults and vendoring</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

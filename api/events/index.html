@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.events — scmJS documentation</title>
+<meta name="description" content="Listeners are notifications: they run after the change, in the order the plugins were
+activated, and cannot veto or reorder one another. A listener that rewrites the map in
+response (through `document.sections`) simply raises a fresh `&quot;document&quot;` event with
+reason `&quot;replace&quot;`, which every other listener sees in turn.">
+<meta property="og:title" content="api.events — scmJS documentation">
+<meta property="og:description" content="Listeners are notifications: they run after the change, in the order the plugins were
+activated, and cannot veto or reorder one another. A listener that rewrites the map in
+response (through `document.sections`) simply raises a fresh `&quot;document&quot;` event with
+reason `&quot;replace&quot;`, which every other listener sees in turn.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="here" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.events</h1>
+<p class="lede">EventsApi</p>
+<p>Listeners are notifications: they run after the change, in the order the plugins were
+activated, and cannot veto or reorder one another. A listener that rewrites the map in
+response (through <code>document.sections</code>) simply raises a fresh <code>&quot;document&quot;</code> event with
+reason <code>&quot;replace&quot;</code>, which every other listener sees in turn.</p>
+
+<ul class="chips"><li><a href="#on">on</a></li><li><a href="#on">on</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="on">
+  <h3><a class="anchor-name" href="#on">on</a></h3>
+  <pre class="code"><code>on(event: <span class="s">&quot;document&quot;</span>, listener: (event: <a class="t" href="/api/events/#documentevent">DocumentEvent</a>) =&gt; <span class="k">void</span>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  
+  <pre class="code"><code><span class="c">// Notifications, in activation order; a listener never intercepts what it hears.</span>
+api.events.on(<span class="s">&quot;document&quot;</span>, (e) =&gt; {
+  <span class="k">if</span> (e.reason === <span class="s">&quot;open&quot;</span>) check(e.fileName);
+});
+api.events.on(<span class="s">&quot;terrain&quot;</span>, () =&gt; redraw());</code></pre>
+  
+</div>
+<div class="member" id="on">
+  <h3><a class="anchor-name" href="#on">on</a></h3>
+  <pre class="code"><code>on(event: <a class="t" href="/api/events/#pluginevent">PluginEvent</a>, listener: () =&gt; <span class="k">void</span>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="locale">
+  <h3><a class="anchor-name" href="#locale">Locale</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/events/#locale">Locale</a> = <span class="s">&quot;en&quot;</span> | <span class="s">&quot;ko&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="languagepreference">
+  <h3><a class="anchor-name" href="#languagepreference">LanguagePreference</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/events/#languagepreference">LanguagePreference</a> = <span class="s">&quot;auto&quot;</span> | <a class="t" href="/api/events/#locale">Locale</a>;</code></pre>
+  <p><code>&quot;auto&quot;</code> follows the browser (or the desktop app&#39;s system language).</p>
+  
+  
+</div>
+<div class="type" id="preferences">
+  <h3><a class="anchor-name" href="#preferences">Preferences</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/events/#preferences">Preferences</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>language: <a class="t" href="/api/events/#languagepreference">LanguagePreference</a></code></th><td><p>The editor&#39;s own language: <code>&quot;auto&quot;</code> follows the browser&#39;s (the system&#39;s, in the desktop app), else one of <code>LOCALES</code>. Applied live.</p></td></tr>
+<tr><th><code>splash: <span class="k">boolean</span></code></th><td><p>Show the splash while the game data loads; off starts straight on the editor.</p></td></tr>
+<tr><th><code>confirmClose: <span class="k">boolean</span></code></th><td><p>Ask before closing or replacing a map with unsaved changes.</p></td></tr>
+<tr><th><code>multipleMaps: <span class="k">boolean</span></code></th><td><p>Open each map beside the ones already open, in its own tab, rather than in place of
+the open one. Off is StarEdit&#39;s one map at a time: Open and New replace the map, asking
+about unsaved changes first. Either way the blank map the editor starts on, untouched,
+is replaced by the first map opened rather than kept beside it.</p></td></tr>
+<tr><th><code>newMap: { tileset: <a class="t" href="/api/types/#tilesetid">TilesetId</a>; width: <span class="k">number</span>; height: <span class="k">number</span>; }</code></th><td><p>What File ▸ New and the startup map start with.</p></td></tr>
+<tr><th><code>animateWater: <span class="k">boolean</span></code></th><td><p>Initial View ▸ Animate Water / Animate Units.</p></td></tr>
+<tr><th><code>animateUnits: <span class="k">boolean</span></code></th><td></td></tr>
+<tr><th><code>animateWaterSpeed: <span class="k">number</span></code></th><td><p>How fast the two animations run, as a multiple of the game&#39;s own speed (1 = the
+game&#39;s &quot;Fastest&quot;). One of <code>ANIMATION_SPEEDS</code>; applied live, not just at startup.</p></td></tr>
+<tr><th><code>animateUnitsSpeed: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>classicText: <span class="k">boolean</span></code></th><td><p>Preview the <code>&lt;XX&gt;</code> colour codes in strings the way <strong>1.16.1</strong> drew them: the colour
+resets at every line break. Off is Remastered&#39;s rule, which carries a colour onto the
+next line — see <code>editor/textColors.ts</code>. It changes only what the editor draws, never
+the map, and every preview in the chrome reads it.</p></td></tr>
+<tr><th><code>testMap: { launch: <span class="k">boolean</span>; dir: <span class="k">string</span>; }</code></th><td><p>Tools ▸ Test Map: whether to start the game after writing the map (desktop build), and
+the game folder to use when the desktop build should not search (&quot;&quot; = search). The
+browser&#39;s folder is a handle in IndexedDB (<code>services/handleStore.ts</code>), not here.</p></td></tr>
+<tr><th><code>updates: { checkOnStart: <span class="k">boolean</span>; nightly: <span class="k">boolean</span>; }</code></th><td><p>The desktop build&#39;s in-app updates (<code>editor/updates.ts</code>, <code>desktop/updater.ts</code>); the
+browser build shows none of this, having nothing to update. <code>checkOnStart</code> asks GitHub
+for a newer version a few seconds after launch and raises a toast when there is one.
+<code>nightly</code> follows the nightly channel instead of the numbered releases — one-way in
+practice, since going back to a stable release is a downgrade the updater will not
+offer.</p></td></tr>
+<tr><th><code>plugins: { updates: <a class="t" href="/api/events/#pluginupdatemode">PluginUpdateMode</a>; }</code></th><td><p>What to do when an installed plugin has a newer release than the one running
+(<code>plugins/updates.ts</code>). <code>notify</code> looks a few seconds after the plugins start and
+raises a notice with a button to the rows offering the update; <code>manual</code> asks nothing
+until <strong>Check for update</strong> is pressed on a row; <code>auto</code> installs what it finds, for the
+plugins the user added — a default moves with the editor&#39;s own releases and is only
+ever named in the notice. Every mode leaves the confirmation on a row&#39;s button alone.</p></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="pluginupdatemode">
+  <h3><a class="anchor-name" href="#pluginupdatemode">PluginUpdateMode</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/events/#pluginupdatemode">PluginUpdateMode</a> = <span class="s">&quot;notify&quot;</span> | <span class="s">&quot;manual&quot;</span> | <span class="s">&quot;auto&quot;</span>;</code></pre>
+  <p>See <code>Preferences.plugins.updates</code>.</p>
+  
+  
+</div>
+<div class="type" id="pluginevent">
+  <h3><a class="anchor-name" href="#pluginevent">PluginEvent</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/events/#pluginevent">PluginEvent</a> = 
+<span class="c">/** A map was opened, closed or replaced. */</span>
+<span class="s">&quot;document&quot;</span>
+<span class="c">/** The editor&#39;s language changed (Preferences ▸ Display): re-label what is showing through `api.i18n.t`. */</span>
+ | <span class="s">&quot;language&quot;</span>
+<span class="c">/** Any committed edit (every `document.edit`, stroke, undo and redo bumps it, terrain or not), and a fog edit. */</span>
+ | <span class="s">&quot;terrain&quot;</span> | <span class="s">&quot;units&quot;</span> | <span class="s">&quot;doodads&quot;</span> | <span class="s">&quot;locations&quot;</span> | <span class="s">&quot;settings&quot;</span> | <span class="s">&quot;triggers&quot;</span> | <span class="s">&quot;layer&quot;</span>
+<span class="c">/** THG2 sprites — the same bump doodad edits make. */</span>
+ | <span class="s">&quot;sprites&quot;</span> | <span class="s">&quot;selection&quot;</span>
+<span class="c">/** The marked area or the clip on the clipboard changed. */</span>
+ | <span class="s">&quot;clipboard&quot;</span>
+<span class="c">/** The viewport scrolled, zoomed, or a View menu tick moved. */</span>
+ | <span class="s">&quot;view&quot;</span>
+<span class="c">/** A map tool or a map pick started or stopped. */</span>
+ | <span class="s">&quot;tool&quot;</span>
+<span class="c">/** The map&#39;s unsaved-changes flag changed. */</span>
+ | <span class="s">&quot;modified&quot;</span>
+<span class="c">/** A palette&#39;s pick changed: terrain brush, unit and owner, sprite, doodad, fog players. */</span>
+ | <span class="s">&quot;palette&quot;</span>
+<span class="c">/** An editing option moved: symmetry, placement rules, doodad rules, location snap, the fog view player, clip parts and paste mode, locked layers, the grid look, Preferences. */</span>
+ | <span class="s">&quot;options&quot;</span>
+<span class="c">/** The document&#39;s file changed: its name or handle after a Save, the save options, the archive extras, the recent list. */</span>
+ | <span class="s">&quot;file&quot;</span>
+<span class="c">/** A plugin registered or removed a command — how a plugin learns that one it calls by id has arrived. */</span>
+ | <span class="s">&quot;commands&quot;</span>
+<span class="c">/** A plugin provided or withdrew a service — `services.watch` is the usual way to hear this for one name. */</span>
+ | <span class="s">&quot;services&quot;</span>
+<span class="c">/** The game data source changed: installed, switched to another data set, or a copy removed. `gameData.source()` says what it is now. */</span>
+ | <span class="s">&quot;gameData&quot;</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="type" id="documentchangereason">
+  <h3><a class="anchor-name" href="#documentchangereason">DocumentChangeReason</a><span class="kind">type</span></h3>
+  <pre class="code"><code><span class="k">type</span> <a class="t" href="/api/events/#documentchangereason">DocumentChangeReason</a> = 
+<span class="c">/** File ▸ Open, drag-and-drop, `document.open`: a file the user chose. */</span>
+<span class="s">&quot;open&quot;</span>
+<span class="c">/** File ▸ New (the startup map included). */</span>
+ | <span class="s">&quot;new&quot;</span>
+<span class="c">/** File ▸ Close: `document.isOpen()` is now false. */</span>
+ | <span class="s">&quot;close&quot;</span>
+<span class="c">/** The open map parsed again from edited bytes — a `document.sections` write, by any plugin. */</span>
+ | <span class="s">&quot;replace&quot;</span>
+<span class="c">/**
+ * Another open map came to the front — a tab clicked, `document.activate`, or the map
+ * in front closed with others still open. Nothing was read or written; the map that
+ * was in front is still open behind, as it was. `id` says which map is in front now.
+ */</span>
+ | <span class="s">&quot;switch&quot;</span>;</code></pre>
+  <p>Why the document changed.</p>
+  
+  
+</div>
+<div class="type" id="documentevent">
+  <h3><a class="anchor-name" href="#documentevent">DocumentEvent</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/events/#documentevent">DocumentEvent</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>reason: <a class="t" href="/api/events/#documentchangereason">DocumentChangeReason</a></code></th><td></td></tr>
+<tr><th><code>fileName: <span class="k">string</span> | <span class="k">null</span></code></th><td></td></tr>
+<tr><th><code>id: <span class="k">number</span> | <span class="k">null</span></code></th><td><p><code>document.id()</code> after the change: the map now in front, or null after a close.</p></td></tr></tbody></table>
+  
+</div>
+<h2 id="seen-in">Seen in</h2>
+<ul class="cards"><li><a class="card" href="https://github.com/scm-js/plugin-repair"><b>Repair</b><span>checking a file on open and repairing it</span></a></li></ul>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#on">on</a></li>
+<li><a href="#on">on</a></li>
+<li><a href="#locale">Locale</a></li>
+<li><a href="#languagepreference">LanguagePreference</a></li>
+<li><a href="#preferences">Preferences</a></li>
+<li><a href="#pluginupdatemode">PluginUpdateMode</a></li>
+<li><a href="#pluginevent">PluginEvent</a></li>
+<li><a href="#documentchangereason">DocumentChangeReason</a></li>
+<li><a href="#documentevent">DocumentEvent</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

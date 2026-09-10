@@ -1,0 +1,1797 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The API, group by group — scmJS documentation</title>
+<meta name="description" content="The complete typings are the package&#39;s own index.d.ts, and every call has a page at docs.scmjs.dev/api.">
+<meta property="og:title" content="The API, group by group — scmJS documentation">
+<meta property="og:description" content="The complete typings are the package&#39;s own index.d.ts, and every call has a page at docs.scmjs.dev/api.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="here" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The API, group by group</h1>
+<p>The complete typings are the package&#39;s own <code>index.d.ts</code>, and every call has a page at
+<a href="https://docs.scmjs.dev/api/">docs.scmjs.dev/api</a>. This part is the tour: what each group
+is for, how the pieces fit together, and the rules a signature does not show. Every method
+that reads the map answers <code>null</code>, <code>[]</code> or <code>false</code> when no map is open, rather than
+throwing.</p>
+<h2 id="asynchronous-calls-and-the-one-synchronous-builder">Asynchronous calls, and the one synchronous builder<a class="anchor" href="#asynchronous-calls-and-the-one-synchronous-builder" aria-label="Link to this section">#</a></h2>
+<p><strong>Everything asynchronous returns a promise.</strong> There is no completion callback and no
+<code>(err, result)</code> pair anywhere in the API. <code>await</code> the call and read the answer. When the
+user dismisses something (Esc, Cancel, a right-click, the ×), the promise resolves with
+<code>null</code> or <code>false</code> rather than rejecting, so the ordinary path needs no <code>try</code>. That covers:</p>
+<ul>
+<li>opening, saving, exporting and rendering a map: <code>document.open</code>, <code>create</code>, <code>save</code>,
+<code>saveAs</code>, <code>close</code>, <code>export</code>, <code>renderImage</code>, <code>changeTileset</code>;</li>
+<li>loading game data: <code>tileset.load</code>, <code>data.load</code>, <code>graphics.load</code>, <code>terrain.checkIsom</code>,
+and installing, switching and removing a data set through <code>gameData</code>;</li>
+<li>everything that waits for the user: <code>ui.pickArea</code>, <code>pickTile</code>, <code>pickFiles</code>, <code>saveFile</code>,
+<code>loadImage</code>, <code>readClipboardImage</code>, <code>confirm</code>, <code>alert</code>, <code>prompt</code>, <code>ask</code>.</li>
+</ul>
+<pre><code class="language-ts">const rect = await api.ui.pickArea({ prompt: &quot;Pick an area to flatten&quot; });
+if (!rect) return;                       // Esc, a right-click, or no map
+await api.tileset.load();                // the graphics the fill needs
+api.document.edit(&quot;Flatten&quot;, tx =&gt; tx.stampTerrain(rect, terrainId));
+</code></pre>
+<p><code>activate</code> itself may be <code>async</code>; the editor awaits it before the plugin counts as loaded.
+So may a dialog button&#39;s <code>run</code>, which keeps the dialog open until it settles and closes it
+on anything but <code>false</code>.</p>
+<p>The callbacks that remain are real callbacks rather than deferred answers: event
+listeners (<code>api.events.on</code>), the DOM handlers of <code>ui.widgets</code>, a dialog&#39;s or panel&#39;s
+<code>mount</code>, and the pointer and <code>draw</code> hooks of <code>ui.mapTool</code> and <code>ui.overlay</code>. Each returns
+a <code>Disposable</code> or a cleanup function, so there is no <code>off()</code> to pair up and nothing to
+unregister at deactivation.</p>
+<p><strong>The one exception is a transaction&#39;s builder.</strong> <code>document.edit(label, build)</code> and
+<code>document.update(label, build)</code> take a <em>synchronous</em> <code>build</code>. Its operations apply as they
+are called, and the transaction commits the moment <code>build</code> returns. An <code>async</code> builder
+would commit whatever ran before its first <code>await</code> and let the rest change the map
+outside that entry, where undo cannot reach it. TypeScript refuses one, and the editor
+also catches it at runtime for a plugin written in plain JavaScript: the result&#39;s <code>notes</code>
+and the console say so.</p>
+<pre><code class="language-ts">// Wrong: commits at the await, and the placement lands outside the undo entry.
+api.document.edit(&quot;Place&quot;, async tx =&gt; {
+  await api.data.load();
+  tx.placeUnit(0, 0, 128, 128);
+});
+
+// Right: await first, then write in one go.
+await api.data.load();
+api.document.edit(&quot;Place&quot;, tx =&gt; tx.placeUnit(0, 0, 128, 128));
+</code></pre>
+<p>Long work of your own gets a progress panel that does not block the editor.
+<code>handle.cancelled()</code> is the poll and <code>handle.signal</code> is an <code>AbortSignal</code> with the same
+answer, so anything that takes one stops with the panel:</p>
+<pre><code class="language-ts">const job = api.ui.progress(&quot;Converting&quot;, { cancellable: true });
+try {
+  for (let i = 0; i &lt; steps; i++) {
+    if (job.cancelled()) break;
+    job.report(i / steps, `Row ${i}`);
+    const data = await fetch(url, { signal: job.signal });
+  }
+} finally {
+  job.done();
+}
+</code></pre>
+<h2 id="the-three-kinds-of-write">The three kinds of write<a class="anchor" href="#the-three-kinds-of-write" aria-label="Link to this section">#</a></h2>
+<p>Everything a plugin can change about the open map goes through one of three calls. They
+are the editor&#39;s own three ways of writing (a brush stroke, a dialog&#39;s OK, a raw file
+edit) and they differ in what they cost:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>What it covers</th>
+<th>Undo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>document.edit(label, build)</code></td>
+<td>Terrain and objects: tiles, ISOM, units, sprites, doodads, locations, fog.</td>
+<td>One history entry, like a brush stroke.</td>
+</tr>
+<tr>
+<td><code>document.update(label, build)</code></td>
+<td>The tables and settings: triggers, briefing, the string table, switch names, the scenario&#39;s name and description, players, forces and colours, unit / upgrade / technology settings, sounds, the map revision.</td>
+<td>None. It is a settings-dialog transaction, as in StarEdit.</td>
+</tr>
+<tr>
+<td><code>document.sections.*</code></td>
+<td>The file&#39;s own bytes, any section, modelled by the editor or not.</td>
+<td>None, and the undo history is dropped, as after Resize.</td>
+</tr>
+</tbody></table>
+<p>Both transactions apply their operations <strong>as they are called</strong>, so a later operation
+sees the result of an earlier one, and both commit once at the end. That is why the
+builder is synchronous: the transaction is closed when the builder returns, and a call
+on it after that — a handle you kept, or the rest of an <code>async</code> builder after its first
+<code>await</code> — throws rather than writing outside the entry.</p>
+<p>When a builder throws, the two differ. An <code>edit</code> is rolled back: the changes it had
+applied are taken off the map, nothing reaches the history or the modified flag, and the
+error comes out of <code>edit</code> for you to handle. An <code>update</code> has no change lists to roll
+back with, so what it wrote stays and is committed — the map is modified and the chrome
+re-reads — before the error comes out.</p>
+<p>A plugin that has been turned off keeps nothing of the editor: a callback it left
+behind finds every contribution it adds taken straight back, <code>edit</code> and <code>update</code>
+answering <code>changed: false</code> with a note, and the other document writes doing nothing,
+with a line in the console each time.</p>
+<h2 id="apidocument"><code>api.document</code><a class="anchor" href="#apidocument" aria-label="Link to this section">#</a></h2>
+<p>The open map as a whole: opening, saving and closing it, its properties, and the entry
+points to the three kinds of write.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isOpen()</code></td>
+<td>Whether a scenario is loaded.</td>
+</tr>
+<tr>
+<td><code>info()</code></td>
+<td><code>{ name, description, width, height, tileset, era, version, fileName, modified }</code>.</td>
+</tr>
+<tr>
+<td><code>scenario()</code></td>
+<td>The live <code>Scenario</code> object, for <strong>reading</strong>. Changing it directly bypasses undo and dirty tracking.</td>
+</tr>
+<tr>
+<td><code>edit(label, build)</code></td>
+<td>Run <code>build(tx)</code> and record what it did as one undo entry named <code>label</code>. Returns an <code>EditResult</code> with counts per list.</td>
+</tr>
+<tr>
+<td><code>update(label, build)</code></td>
+<td>The tables and settings as one settings-style transaction (see <code>UpdateTransaction</code>). Not in the undo model. Returns an <code>UpdateResult</code>.</td>
+</tr>
+<tr>
+<td><code>undo()</code> / <code>redo()</code></td>
+<td>The Edit menu&#39;s.</td>
+</tr>
+<tr>
+<td><code>history()</code></td>
+<td><code>{ undo, redo, undoDepth, redoDepth }</code>: the labels the Edit menu shows and how deep each stack is, without moving anything. A plugin can tell whether its own edit is still the top entry before undoing it.</td>
+</tr>
+<tr>
+<td><code>id()</code></td>
+<td>The id of the map in front — the one every other call here reads and writes — or null with no map. Stable for the map&#39;s life in the session and never reused, so a plugin can key what it keeps per map on it.</td>
+</tr>
+<tr>
+<td><code>list()</code></td>
+<td>Every open map, in the order the editor&#39;s tabs show them: <code>{ id, name, fileName, tileset, width, height, modified, active }</code>, <code>active</code> marking the one in front. Empty with no map.</td>
+</tr>
+<tr>
+<td><code>activate(id)</code></td>
+<td>Bring an open map to the front, as clicking its tab does: its history, selections and view come back as they were left, nothing is re-read, and the <code>&quot;document&quot;</code> event fires with reason <code>&quot;switch&quot;</code>. <code>true</code> once it is in front, <code>false</code> for an id that is not open. Do it for something the user asked for; a map changing under someone mid-stroke is not a plugin&#39;s call.</td>
+</tr>
+<tr>
+<td><code>open(file, fileName?, { into? })</code></td>
+<td>Open a map file (<code>File</code>, <code>Blob</code> or bytes; <code>.scx</code>, <code>.scm</code> or <code>.chk</code>) as File ▸ Open does: beside the open map (<code>into: &quot;new&quot;</code>), in its place (<code>&quot;current&quot;</code>), or — omitted — as the editor&#39;s preference says (beside, by default, except over the untouched blank map it started on). In place of a modified map it goes through the Close Scenario dialog first when Preferences say to ask. Resolves <code>true</code> once the file is the map in front, <code>false</code> when the user kept the current map or the file could not be read (the status bar says which).</td>
+</tr>
+<tr>
+<td><code>create({ width, height, tileset, name?, description?, terrainId?, startLocations?, startLayout?, into? })</code></td>
+<td>A blank map as File ▸ New makes one: flat ground of the tileset&#39;s default terrain (or <code>terrainId</code>), an ISOM lattice to match, and every section a fresh map needs; beside the open map or in its place as <code>open</code> decides, through the same unsaved-changes gate. <code>startLocations</code> lays one down for each of players 1..N as <code>tx.placeStartLocations</code> would (<code>&quot;ring&quot;</code> unless <code>startLayout</code> says <code>&quot;corners&quot;</code>); they are part of making the map, so there is no history entry to undo them from.</td>
+</tr>
+<tr>
+<td><code>export({ format?, fileName?, saveOptions? })</code></td>
+<td>The open map as a <code>File</code>, as Save writes it: the save options last confirmed for this map (or their defaults), archive extras included, as <code>scx</code>, <code>scm</code> or a bare <code>chk</code>. <code>saveOptions</code> overrides compression, encryption and what is left out. Null with no map. Hand it to a <code>FormData</code> and it uploads.</td>
+</tr>
+<tr>
+<td><code>save({ copy? })</code> / <code>saveAs({ copy? })</code></td>
+<td>File ▸ Save and Save As. <code>save</code> writes back where the map came from with its remembered options, and a map with no file yet goes through the Save dialog; <code>saveAs</code> always opens it. <code>copy</code> writes a copy and leaves the document&#39;s name and clean state alone. Resolve <code>true</code> once written, <code>false</code> when the user dismissed a dialog or the write failed.</td>
+</tr>
+<tr>
+<td><code>close(id?)</code></td>
+<td>File ▸ Close: the map in front, or the open map <code>id</code> names (brought to the front first, so the question is about what the user sees), through the same unsaved-changes gate as <code>open</code>. <code>true</code> once the map is gone — another open map is then in front, or <code>isOpen()</code> is false.</td>
+</tr>
+<tr>
+<td><code>changeTileset({ tileset, terrainId?, keepTiles? })</code></td>
+<td>Map Properties&#39; tileset change: the terrain is laid again with <code>terrainId</code> (the new tileset&#39;s default when omitted) after the new graphics load, the doodads go, and everything else stays. <code>keepTiles</code> changes only the tileset id. Outside the undo model; drops both history stacks, like <code>resize</code>.</td>
+</tr>
+<tr>
+<td><code>renderImage({ pixelsPerTile?, … })</code></td>
+<td>A PNG <code>Blob</code> of the map as File ▸ Export ▸ Image draws it. 32 pixels per tile is the game&#39;s art, 1 is a minimap. Needs the tileset graphics; null without them or without a map.</td>
+</tr>
+<tr>
+<td><code>resize({ width, height, anchor?, terrainId?, clampLocations? })</code></td>
+<td>Scenario ▸ Resize / Crop Map: content keeps its place relative to the anchor (a 3 × 3 grid, 4 = centre), new ground is <code>terrainId</code> or the tileset&#39;s default, objects outside the new bounds are dropped and locations clamped. Outside the undo model; <strong>drops both history stacks</strong>, as the dialog does. Returns the <code>ResizeResult</code> (what was dropped), null with no map.</td>
+</tr>
+<tr>
+<td><code>extras</code></td>
+<td>The files stored in the archive next to <code>staredit\scenario.chk</code>: custom sounds, and anything a plugin wants to keep with the map. <code>list()</code>, <code>get(name)</code>, <code>set(name, bytes)</code>, <code>remove(name)</code>. Names are archive paths with backslashes; keep yours under a folder of your own (<code>my-plugin\notes.json</code>). <code>set</code> and <code>remove</code> mark the map modified, and the members are written on the next Save.</td>
+</tr>
+<tr>
+<td><code>sections</code></td>
+<td>The scenario at the byte level. See the next section.</td>
+</tr>
+</tbody></table>
+<h2 id="apidocumentsections"><code>api.document.sections</code><a class="anchor" href="#apidocumentsections" aria-label="Link to this section">#</a></h2>
+<p>The map file as a list of sections, the way the game reads it and Save writes it, with
+unsaved edits already encoded. Section Explorer is built on the reads and writes; Repair
+on the helpers.</p>
+<p><strong>Reading.</strong> <code>list()</code> gives every occurrence in file order as a <code>SectionInfo</code>: <code>index</code>,
+the four-character <code>name</code>, <code>offset</code>, <code>size</code>, <code>declaredSize</code> and <code>truncated</code> for a file
+that ended early, <code>occurrence</code> / <code>occurrences</code> for a repeated name, <code>dirty</code> when the
+editor holds changes it will encode there, and <code>spec</code>, which is what the editor knows
+about that name (<code>what</code>, the combine <code>mode</code> on repeat, the fixed <code>size</code> the game reads for
+this map or null, the record <code>stride</code> of a list, and <code>modelled</code>, whether the editor
+decodes it). <code>bytes(index)</code> is a copy of one occurrence&#39;s payload, <code>combined(name)</code> the
+bytes the game acts on with repeats folded the way the game folds them, <code>file()</code> the whole
+file, and <code>spec(name)</code> / <code>known()</code> the section table.</p>
+<p><strong>Writing.</strong> <code>write(index, bytes)</code>, <code>rename(index, name)</code>, <code>insert(index, name, bytes)</code>,
+<code>remove(index)</code>, <code>move(from, to)</code> and <code>replaceFile(bytes)</code> are a different kind of
+transaction from <code>edit</code>. The edited file is parsed again from scratch and installed as the
+open document, so the change reaches every part of the editor whether or not it models the
+section. As with Resize, the undo history is dropped and every selection cleared; the map
+is marked modified and the <code>&quot;document&quot;</code> event fires with reason <code>&quot;replace&quot;</code>. Each returns
+<code>{ warnings }</code>, what the parser said of the result. A bad index or a name longer than four
+characters throws, and so does any write without a map. Indices shift when a section is
+inserted or removed before them, so take a fresh <code>list()</code> after every edit.</p>
+<p><strong>Helpers for a repair.</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>trailing()</code></td>
+<td>The bytes after the last chunk the reader could act on (what follows a header with a negative length, say). Save writes them back as they are; a <code>replaceFile</code> without them drops them.</td>
+</tr>
+<tr>
+<td><code>required()</code></td>
+<td>The section names a file of the open map&#39;s revision must carry to load, as Check Map tests them (<code>STRx</code> in place of <code>STR </code> on a Remastered file).</td>
+</tr>
+<tr>
+<td><code>defaults(name)</code></td>
+<td>The bytes File ▸ New would write for that section on a map of this size, tileset and revision: StarEdit&#39;s defaults for a settings table, the fixed VCOD, an empty list, null terrain. Null for a name the editor cannot produce.</td>
+</tr>
+<tr>
+<td><code>rebuild(names?)</code></td>
+<td>Re-encode sections from the editor&#39;s model, the way Save writes a dirty one, and install the result like any other raw edit. Repeated occurrences collapse into one, a truncated or oversized section comes back at the size the model encodes to, and a string table whose offsets point nowhere is rewritten with every string the editor could read. Names the editor does not model, and modelled ones whose model is absent (no ISOM, no settings table), are left alone and missing from the result&#39;s <code>rebuilt</code>. Omit <code>names</code> for every modelled section the map has a model for.</td>
+</tr>
+</tbody></table>
+<h2 id="edittransaction"><code>EditTransaction</code><a class="anchor" href="#edittransaction" aria-label="Link to this section">#</a></h2>
+<p>What <code>document.edit</code> hands its builder. <code>tx</code> applies each operation immediately, so a
+later operation sees the state the previous one left: a <code>tileAt</code> after a <code>setTile</code> reads
+the new tile. When <code>build</code> returns, the transaction lifts the doodads the terrain edit
+broke, removes the units the new ground cannot hold (when <em>Remove stranded units</em> is on,
+as for a stroke), commits, and repaints.</p>
+<table>
+<thead>
+<tr>
+<th>Terrain</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tileAt(x, y)</code> / <code>groundAt(x, y)</code></td>
+<td>MTXM / TILE at a cell.</td>
+</tr>
+<tr>
+<td><code>setTile(x, y, id)</code></td>
+<td>One tile, both sections.</td>
+</tr>
+<tr>
+<td><code>setTiles(cells, id)</code></td>
+<td>Many. <code>cells</code> is a <code>Rect</code> or cell indices (<code>y * width + x</code>).</td>
+</tr>
+<tr>
+<td><code>stampTerrain(cells, terrainId, variation?)</code></td>
+<td>The Rect brush: flat pairs by column parity, one random variation per pair. Needs the tileset graphics. Returns tiles changed.</td>
+</tr>
+<tr>
+<td><code>fillFlat(rect, terrainId)</code></td>
+<td>Lay terrain the way a new map is laid, ISOM lattice included.</td>
+</tr>
+<tr>
+<td><code>rebuildIsom()</code></td>
+<td>Reconstruct the ISOM from the tiles, for a map that arrived without one or whose lattice no longer matches after Rect / Tile edits. Exact for terrain laid down isometrically, a best guess under doodads and for hand-placed tiles. A missing or wrongly sized ISOM is created (undo removes it again); an existing one gets only the diamonds that differ. Needs the tileset graphics; null without them, else <code>{ created, changed, diamonds, unresolved }</code>.</td>
+</tr>
+<tr>
+<td><code>paintIsom(diamond, terrainId, extent = 1)</code></td>
+<td>The isometric brush on one diamond: sets the ISOM and generates the cliff and shore tiles around it. Needs ISOM and the tileset.</td>
+</tr>
+<tr>
+<td><code>tilesFromIsom()</code></td>
+<td>The reverse of <code>rebuildIsom</code>: every tile regenerated from the lattice, what StarEdit does after an isometric edit. Needs ISOM and the tileset. Tiles changed, or null.</td>
+</tr>
+<tr>
+<td><code>replaceTerrain(from, to, rect?)</code></td>
+<td>Tools ▸ Replace Terrain: every tile matching <code>from</code> (<code>{ kind: &quot;terrain&quot;, id }</code> for a flat terrain by ISOM id, <code>{ kind: &quot;tile&quot;, id }</code> for one exact tile) becomes <code>to</code>, over <code>rect</code> or the whole map, pairs laid as the Rect brush lays them. Returns tiles changed.</td>
+</tr>
+<tr>
+<td><code>fillArea(x, y, { terrainId } | { tileId }, match?)</code></td>
+<td>The bucket fill: the connected area of the same terrain type (<code>&quot;terrain&quot;</code>, the Rect fill&#39;s reading; needs the graphics) or the same exact tile (<code>&quot;tile&quot;</code>), mirrored under the symmetry mode, laid with a terrain or set to a tile.</td>
+</tr>
+<tr>
+<td><code>placeBlend(x, y, side, id)</code></td>
+<td>The Blend brush: <code>id</code> on the cell beside the anchor on <code>side</code>. <code>terrain.blendCandidates</code> says what fits.</td>
+</tr>
+<tr>
+<td><code>mirror(cells)</code> / <code>mirrorPoint(px, py)</code></td>
+<td>The cells&#39; (or the pixel&#39;s) images under Tools ▸ Symmetry, the way the built-in brushes and palettes take them.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Objects</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>makeUnit(unitId, owner, x, y)</code></td>
+<td>A StarEdit-style record (serial, masks) at map pixels.</td>
+</tr>
+<tr>
+<td><code>addUnits(records)</code> / <code>removeUnits(indices)</code> / <code>updateUnits(indices, patch)</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>moveUnits(indices, dx, dy, snap?)</code></td>
+<td>Shift by a pixel delta. With <code>snap</code> (the palette&#39;s option by default) the <em>destination</em> is snapped: a building to the tile grid by its placement box, anything else to the nearest tile centre. A unit that sits off the grid is brought onto it.</td>
+</tr>
+<tr>
+<td><code>placeStartLocations({ players, layout?, margin?, replace? })</code></td>
+<td>Tools ▸ Auto-place Start Locations: one per player (from 1) on a <code>&quot;ring&quot;</code> or in the <code>&quot;corners&quot;</code>, each moved to the nearest spot the placement checks accept. <code>replace</code> removes the existing ones first. Returns <code>{ changes, placed, removed }</code>; <code>placed</code> is null for a player nothing within reach fit.</td>
+</tr>
+<tr>
+<td><code>placeUnit(unitId, owner, x, y)</code></td>
+<td>A unit the way the Units palette places one: with its <em>Snap to grid</em> on, a building&#39;s placement box goes on the tile grid and anything else on the nearest tile centre; nothing leaves the map. Returns the index. Makes no checks.</td>
+</tr>
+<tr>
+<td><code>canPlaceUnit(unitId, x, y)</code></td>
+<td>The palette&#39;s collision and terrain checks with its current options. Ask this before <code>placeUnit</code> if you want them.</td>
+</tr>
+<tr>
+<td><code>makeSprite(kind, id, owner, x, y, opts?)</code> / <code>addSprites</code> / <code>removeSprites</code> / <code>placeSprite(...)</code></td>
+<td><code>placeSprite</code> is make + add, kept on the map. Returns the index.</td>
+</tr>
+<tr>
+<td><code>updateSprites(indices, patch)</code> / <code>moveSprites(indices, dx, dy)</code></td>
+<td>Owner, flags, position, in place, so indices hold.</td>
+</tr>
+<tr>
+<td><code>placeDoodad(doodadId, tx, ty, owner)</code> / <code>removeDoodads(indices)</code> / <code>updateDoodads(indices, { owner?, disabled? })</code></td>
+<td>Doodads stamp tiles and may carry an overlay sprite. All three keep the tiles, the record and the overlay together.</td>
+</tr>
+<tr>
+<td><code>convertDoodads(indices)</code></td>
+<td>The Doodads layer&#39;s <em>Convert to Terrain</em>: the records go, the tiles stay as plain ground (in both tile sections), an overlay stays as an ordinary sprite. Returns records converted.</td>
+</tr>
+<tr>
+<td><code>paste(clip, tx, ty, { parts?, mode? })</code></td>
+<td>A <code>Clip</code> laid down with its top-left at a tile, inside this transaction: the clipboard&#39;s paste without the clipboard, so the user&#39;s clip is left alone and several stamps (or a stamp and the strokes around it) are one undo step. Every part the clip carries goes down unless <code>parts</code> narrows it; <code>mode</code> is <code>&quot;merge&quot;</code> unless given. Returns the <code>PasteResult</code>. Stamp Library is the worked example.</td>
+</tr>
+<tr>
+<td><code>addLocation(bounds, name?, elevationFlags?)</code> / <code>editLocation(index, patch)</code> / <code>removeLocations(indices)</code></td>
+<td>Slot 63 (Anywhere) and unused slots are refused by <code>editLocation</code>. <code>addLocation</code> also puts Anywhere back if it was missing.</td>
+</tr>
+<tr>
+<td><code>restoreAnywhere()</code></td>
+<td>Anywhere back to the whole map. <code>true</code> when it had to move.</td>
+</tr>
+<tr>
+<td><code>setFog(cells, players, &quot;fog&quot; | &quot;clear&quot;)</code></td>
+<td><code>players</code> is a bit mask. Creates MASK on first use.</td>
+</tr>
+<tr>
+<td><code>invertFog(players)</code> / <code>copyFog(from, toMask)</code> / <code>floodFog(x, y, player, players, mode)</code></td>
+<td>The Fog palette&#39;s other three: flip the bits, copy one player&#39;s fog onto the players in a mask, fill the connected area that shares one player&#39;s state.</td>
+</tr>
+<tr>
+<td><code>note(text)</code></td>
+<td>A line for the status bar, alongside the label.</td>
+</tr>
+</tbody></table>
+<h2 id="updatetransaction"><code>UpdateTransaction</code><a class="anchor" href="#updatetransaction" aria-label="Link to this section">#</a></h2>
+<p>What <code>document.update</code> hands its builder: the second kind of write. Operations apply
+immediately (a string interned on one line is in the table for the trigger added on the
+next), and the commit at the end marks the map modified and tells the chrome to re-read.
+The result is <code>{ changed, sections, notes }</code>: <code>sections</code> lists the file sections actually
+touched (<code>[&quot;TRIG&quot;, &quot;STR &quot;]</code>), so <code>changed</code> is false when every operation was a no-op.</p>
+<table>
+<thead>
+<tr>
+<th>Triggers</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tx.triggers</code></td>
+<td>TRIG as a list: <code>list()</code>, <code>count()</code>, <code>set(list)</code>, <code>add(trigger, at?)</code>, <code>replace(index, trigger)</code>, <code>remove(indices)</code>, <code>move(from, to)</code>, <code>fromText(source, { replace? })</code>.</td>
+</tr>
+<tr>
+<td><code>tx.briefing</code></td>
+<td>MBRF, the same shape.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Tables</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tx.strings</code></td>
+<td><code>list()</code>; <code>intern(text)</code> (an identical entry, else a new one; it <strong>never</strong> overwrites, because the old index may be shared with a trigger); <code>set(index, text)</code> (overwrite one slot, so everything pointing at it sees the new text; slot 0 is refused); <code>apply(list)</code> (a whole table; unreferenced trailing blanks are dropped, every other index keeps its place); <code>import(text)</code> (File ▸ Import ▸ Strings&#39; <code>index&lt;TAB&gt;text</code> form, see <code>api.exchange</code>).</td>
+</tr>
+<tr>
+<td><code>tx.switches</code></td>
+<td><code>names()</code> (256 entries, <code>&quot;&quot;</code> where a switch has none) and <code>setName(index, name)</code>. Creates SWNM on the first name.</td>
+</tr>
+<tr>
+<td><code>tx.properties({ name?, description? })</code></td>
+<td>The scenario&#39;s name and description. <code>&quot;&quot;</code> restores the file-name default.</td>
+</tr>
+<tr>
+<td><code>tx.note(text)</code></td>
+<td>A line for the status bar.</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Settings</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tx.players</code></td>
+<td><code>list()</code> gives the 12 slots as <code>PlayerSlotView</code>s: 0-based <code>slot</code>, <code>type</code> / <code>typeName</code>, <code>race</code> / <code>raceName</code>, and for the eight playable slots <code>color</code> (COLR index), <code>colorHex</code>, <code>rgb</code> (the Remastered custom colour in effect, else null), <code>force</code> (0-based) / <code>forceName</code>. <code>set(slot, { type?, race?, color?, rgb?, force? })</code> writes one. <code>rgb: [r, g, b]</code> sets a custom colour, <code>rgb: null</code> puts the slot back on its palette colour; the custom-colour section is dropped again when every slot is back. OWNR is always written with IOWN.</td>
+</tr>
+<tr>
+<td><code>tx.forces</code></td>
+<td><code>list()</code> gives four <code>ForceView</code>s (<code>name</code>, <code>flags</code> and the <code>allied</code> / <code>alliedVictory</code> / <code>sharedVision</code> / <code>randomStart</code> booleans, <code>players</code>: the 0-based slots in the force). <code>set(force, { name?, allied?, alliedVictory?, sharedVision?, randomStart?, flags?, players? })</code>; <code>players</code> moves those slots into the force.</td>
+</tr>
+<tr>
+<td><code>tx.unitTypes</code></td>
+<td><code>get(unitId)</code> gives a <code>UnitTypeView</code> with the <em>effective</em> numbers (units.dat&#39;s where the type is on &quot;use default&quot;; hit points in whole points), the type&#39;s weapons with their effective damage, <code>defaults</code> (the dat&#39;s numbers, null without the game data) and <code>availability</code> (<code>defaultAvailable</code> and per player <code>true</code> / <code>false</code> / <code>&quot;default&quot;</code>). <code>set(unitId, patch)</code>: setting any number turns &quot;use default&quot; off for the type and seeds its untouched columns from the dat, as the dialog does; <code>useDefault: true</code> puts it back; <code>name</code> is the custom name (<code>&quot;&quot;</code> restores the default; the string is interned); <code>weapons: [{ id, damage?, bonus? }]</code>; <code>available: [{ player: 0-based or &quot;default&quot;, value: true / false / &quot;default&quot; }]</code>. Which of UNIS / UNIx is written follows the file&#39;s revision.</td>
+</tr>
+<tr>
+<td><code>tx.upgrades</code></td>
+<td><code>get(upgradeId)</code> gives an <code>UpgradeView</code> (effective costs and factors, <code>defaults</code>, <code>levels</code>: the default start and cap and each player&#39;s effective <code>{ start, max, usesDefault }</code>). <code>set(upgradeId, { useDefault?, mineralCost?, mineralFactor?, gasCost?, gasFactor?, timeCost?, timeFactor?, levels? })</code> with <code>levels: [{ player: 0-based or &quot;default&quot;, start?, max?, useDefault? }]</code>.</td>
+</tr>
+<tr>
+<td><code>tx.techs</code></td>
+<td><code>get(techId)</code> gives a <code>TechView</code> (effective costs, <code>defaults</code>, <code>state</code>: the default column and each player&#39;s effective <code>{ available, researched, usesDefault }</code>). <code>set(techId, { useDefault?, mineralCost?, gasCost?, researchTime?, energyCost?, state? })</code> with <code>state: [{ player, available?, researched?, useDefault? }]</code>.</td>
+</tr>
+<tr>
+<td><code>tx.sounds</code></td>
+<td><code>list()</code> gives the WAV slots in use as <code>SoundRow</code>s (<code>slot</code>, <code>path</code>, <code>present</code>, <code>size</code>, <code>usedBy</code>). <code>add(path, bytes?)</code> takes the first free slot, or the slot the path already has; with <code>bytes</code> the file goes into the archive under <code>staredit\wav\</code>. <code>remove(slot, deleteFile?)</code>.</td>
+</tr>
+<tr>
+<td><code>tx.cuwp</code></td>
+<td>Triggers ▸ Unit Properties Slots. <code>list()</code> / <code>get(index)</code> give <code>CuwpSlotView</code>s: 0-based <code>index</code>; <code>hitPointsPercent</code>, <code>shieldsPercent</code>, <code>energyPercent</code>, <code>resources</code>, <code>hangar</code> as numbers, or null where the created units keep the type&#39;s default; <code>cloaked</code> … <code>invincible</code> as booleans or null; <code>used</code>, <code>references</code>, <code>summary</code>. <code>set(index, patch, used?)</code>: a number sets the field and its &quot;applied&quot; bit, null clears it; a boolean forces a state, null leaves it. <code>clear(index)</code>. The <em>Create Unit with Properties</em> action stores the slot 1-based in <code>target</code>.</td>
+</tr>
+<tr>
+<td><code>tx.setVersion(version, extendedStrings?)</code></td>
+<td>Scenario ▸ Map Revision: <code>&quot;original&quot;</code>, <code>&quot;hybrid&quot;</code>, <code>&quot;broodwar&quot;</code> or <code>&quot;remastered&quot;</code>. Sets VER and TYPE, and the string table&#39;s width (STR ↔ STRx) when moving to or from Remastered (the text becomes UTF-8 with STRx).</td>
+</tr>
+<tr>
+<td><code>tx.setTextEncoding(encoding)</code></td>
+<td>Scenario ▸ Map Revision&#39;s text encoding: <code>&quot;utf-8&quot;</code>, <code>&quot;euc-kr&quot;</code>, <code>&quot;shift_jis&quot;</code>, <code>&quot;gbk&quot;</code>, <code>&quot;big5&quot;</code>, <code>&quot;windows-1251&quot;</code> or <code>&quot;windows-1252&quot;</code> (<code>TextEncoding</code>). The file carries no note of it, so the editor guesses on open — <code>settings.version().textEncoding</code> — and this is the correction; the strings are unchanged and the table is re-encoded on save.</td>
+</tr>
+</tbody></table>
+<p>Ids are the game&#39;s: units.dat ids for <code>unitTypes</code>, upgrades.dat and techdata.dat ids for
+the other two (<code>api.names.units()</code> / <code>upgrades()</code> / <code>techs()</code> list them with their names).
+Players are 0-based here, as in the records; the chrome shows <code>slot + 1</code>.</p>
+<pre><code class="language-js">const { condition, action, comparison, player } = api.consts.triggers;
+
+api.document.update(&quot;Add a countdown&quot;, (tx) =&gt; {
+  const trigger = api.triggers.newTrigger([player.Player1]);
+  const timer = api.triggers.newCondition(condition.CountdownTimer);
+  timer.comparison = comparison.AtMost;
+  timer.amount = 30;
+  trigger.conditions[0] = timer;
+
+  const say = api.triggers.newAction(action.DisplayText);
+  say.text = tx.strings.intern(&quot;30 seconds remaining&quot;);   // interned above, readable here
+  trigger.actions[0] = say;
+  trigger.actions[1] = api.triggers.newAction(action.PreserveTrigger);
+  tx.triggers.add(trigger);
+});
+</code></pre>
+<p>There is no undo entry, so a plugin that wants one keeps its own copy of what it replaced:
+<code>api.triggers.list()</code> before, <code>tx.triggers.set(...)</code> to put it back.</p>
+<h2 id="apisettings"><code>api.settings</code><a class="anchor" href="#apisettings" aria-label="Link to this section">#</a></h2>
+<p>The same views as <code>tx.players</code>, <code>tx.forces</code> and the rest, for reading without a
+transaction: <code>players()</code> / <code>player(slot)</code>, <code>forces()</code>, <code>unitType(id)</code> / <code>unitTypes()</code>
+(every type with a name), <code>upgrade(id)</code> / <code>upgrades()</code>, <code>tech(id)</code> / <code>techs()</code>,
+<code>sounds()</code>, <code>unitAvailable(player, unitId)</code> (resolved against its default), <code>cuwpSlots()</code>
+/ <code>cuwpSlot(index)</code>, and <code>version()</code> (<code>{ version, label, fileVersion, type, extendedStrings, textEncoding, extension }</code>). Empty lists and nulls with no map. Writing goes through
+<code>document.update</code>.</p>
+<h2 id="apitriggers"><code>api.triggers</code><a class="anchor" href="#apitriggers" aria-label="Link to this section">#</a></h2>
+<p>Reading triggers, and everything needed to <em>show</em> one. Writing is <code>document.update</code>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>list()</code> / <code>briefing()</code></td>
+<td>TRIG / MBRF, cloned. A record is 16 conditions and 64 actions of plain numbers; the editor&#39;s codec knows no types.</td>
+</tr>
+<tr>
+<td><code>defs</code></td>
+<td>What each type means: <code>conditions()</code>, <code>condition(type)</code>, <code>actions(briefing?)</code>, <code>action(type, briefing?)</code>. Each def carries <code>args</code>, the argument list in the order StarEdit&#39;s TrigEdit shows it, each <code>{ kind, field, label }</code>: which record field holds the argument and what kind of value it is. The editor&#39;s own trigger dialogs and the text printer read this same table.</td>
+</tr>
+<tr>
+<td><code>defs.choices(kind)</code> / <code>choiceLabel(kind, value)</code> / <code>choiceValue(kind, text)</code></td>
+<td>The values an enumerated argument can take (comparisons, switch states, resource types, orders …), with their labels and aliases.</td>
+</tr>
+<tr>
+<td><code>text.print(list, { briefing? })</code> / <code>text.one(trigger)</code> / <code>text.parse(source)</code></td>
+<td>The text trigger format, resolved against the open map&#39;s names. <code>parse</code> throws a <code>TriggerTextError</code> carrying the line.</td>
+</tr>
+<tr>
+<td><code>names()</code></td>
+<td>The <code>TriggerNames</code> context those use: the map&#39;s locations, units, switches and strings, by name and by number.</td>
+</tr>
+<tr>
+<td><code>newTrigger(players?)</code> / <code>newCondition(type)</code> / <code>newAction(type, briefing?)</code></td>
+<td>Blank records with StarEdit&#39;s defaults.</td>
+</tr>
+<tr>
+<td><code>isPreserved(t)</code> / <code>setPreserved(t, on)</code></td>
+<td>The preserve-trigger flag.</td>
+</tr>
+<tr>
+<td><code>triggersFor(list, groups)</code></td>
+<td>Indices of the triggers any of those player groups own.</td>
+</tr>
+<tr>
+<td><code>summarize(t, briefing?)</code></td>
+<td>The three lines the trigger list shows: players, conditions, actions.</td>
+</tr>
+<tr>
+<td><code>comment(t)</code></td>
+<td>A trigger&#39;s <code>Comment</code> action text, if it has one.</td>
+</tr>
+<tr>
+<td><code>switchNames()</code> / <code>switchUsage()</code></td>
+<td>SWNM, and how many conditions and actions mention each switch.</td>
+</tr>
+<tr>
+<td><code>claim(spec)</code></td>
+<td>Mark a run of the trigger list as <em>generated</em> by this plugin. See below.</td>
+</tr>
+<tr>
+<td><code>claims(list?)</code></td>
+<td>Every plugin&#39;s claimed runs as located in <code>list</code> (the map&#39;s triggers when omitted): <code>{ pluginId, label, badge, start, count }</code>, first run first — what an editor of the trigger list needs to fence or lock them.</td>
+</tr>
+</tbody></table>
+<p><strong>Generating triggers.</strong> There is no fluent builder here on purpose, because
+<code>tx.triggers.fromText</code> already is one, and a better one. A record is 16 conditions and 64
+actions of bare numbers, so building one field by field means knowing which field each
+argument lives in (<code>defs.action(type).args</code> will tell you, but you have to ask). Writing
+the trigger in the text format instead means writing what the map maker would read in the
+Text Trigger Editor (the TrigEdit plugin), with the names resolved against the open map for free.</p>
+<pre><code class="language-ts">const source = `
+Trigger(&quot;Player 1&quot;){
+Conditions:
+  Bring(&quot;Current Player&quot;, &quot;Any unit&quot;, &quot;Beacon Alpha&quot;, At least, 1);
+Actions:
+  Display Text Message(Always Display, &quot;You found it!&quot;);
+  Preserve Trigger();
+}`;
+api.document.update(&quot;Add the beacon trigger&quot;, (tx) =&gt; {
+  tx.triggers.fromText(source);      // throws with the line number when it does not parse
+});
+</code></pre>
+<p><code>fromText</code> parses, interns the strings the text names, resolves <code>&quot;Beacon Alpha&quot;</code> against
+the map&#39;s own locations, and appends (or replaces the list with <code>{ replace: true }</code>).
+<code>triggers.text.parse</code> is the same parse without the write, for a plugin that wants the
+records first, and <code>text.print</code> goes the other way, so a plugin can read what it wrote.
+Reach for <code>newTrigger</code> / <code>newCondition</code> / <code>newAction</code> when editing one field of an
+existing record, not when producing a run of them.</p>
+<p><strong>Claiming generated triggers.</strong> <code>claim(spec)</code> tells the editor that a run of the trigger
+list is generated by this plugin. The Trigger Editor badges those rows (<code>spec.badge</code>, the
+plugin&#39;s id by default), locks them, and shows <code>spec.describe(index, list)</code> with a button
+that calls <code>spec.open(index, list)</code> (<code>spec.openLabel</code>, &quot;Open <plugin name>&quot; by default) in
+place of the form. The Text Trigger Editor fences the run in comments (through <code>claims</code>), and Import Triggers
+says what a replace would remove. The run is found by content: <code>spec.locate(list)</code> is asked
+with whatever list an editor holds (the map&#39;s, or a working copy with local inserts in
+it) and answers <code>{ start, count }</code>, or null when the records are not there because they
+were edited by hand or removed. So keep a hash of what you generated and look for it, as
+the TrigScript plugin does. <code>spec.label</code> is the words a sentence uses (&quot;the TrigScript
+block&quot;). The handle has <code>refresh()</code>, for after a rebuild so editors ask <code>locate</code> again,
+and <code>remove()</code>. The claim leaves with the plugin.</p>
+<h2 id="apiquery"><code>api.query</code><a class="anchor" href="#apiquery" aria-label="Link to this section">#</a></h2>
+<p>Reading the open map: what is where, and the analyses the editor already does. Nothing
+here writes, and everything answers empty without a map. A linter plugin is <code>validate()</code>
+plus <code>find()</code> plus <code>view.goTo</code> and nothing else.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>unitAt(px, py)</code> / <code>spriteAt(px, py)</code> / <code>doodadAt(tx, ty)</code> / <code>locationAt(px, py)</code></td>
+<td>The topmost thing under a point, or -1. The same hit-testing the layers use: a sprite&#39;s box comes from its loaded graphic, a unit&#39;s from units.dat. <code>locationAt</code> never picks Anywhere.</td>
+</tr>
+<tr>
+<td><code>unitsIn(rect)</code> / <code>spritesIn(rect)</code> / <code>locationsIn(rect)</code></td>
+<td>Units and sprites whose centre is in a tile rect; locations wholly inside it.</td>
+</tr>
+<tr>
+<td><code>unitsOf(owner)</code></td>
+<td>Every unit a player owns (0-based).</td>
+</tr>
+<tr>
+<td><code>startLocations()</code></td>
+<td><code>{ index, owner, x, y, tx, ty }</code> per start location, by player.</td>
+</tr>
+<tr>
+<td><code>placement(unitId, x, y)</code></td>
+<td>The Units palette&#39;s verdict: <code>{ problem: &quot;terrain&quot; | &quot;collision&quot; | null, blocker, reason }</code>. <code>reason</code> is the problem in words (&quot;the ground is unwalkable&quot;, &quot;it overlaps Terran Marine&quot;), null when it fits. Null with no map.</td>
+</tr>
+<tr>
+<td><code>doodadPlacement(doodadId, tx, ty)</code></td>
+<td>StarEdit&#39;s ground check for a doodad with its top-left tile there: <code>{ ok, outOfBounds, bad }</code>, <code>bad</code> the cells whose ground is not what the doodad requires. Reads the map as it is, inside a transaction too, so a plugin can paint a cliff and then find where a ramp fits. Null with no map or graphics.</td>
+</tr>
+<tr>
+<td><code>fogAt(tx, ty)</code></td>
+<td>The MASK bits at a tile (bit n = player n + 1 starts fogged; every bit when the map has no MASK).</td>
+</tr>
+<tr>
+<td><code>strings()</code></td>
+<td>The string table as it stands.</td>
+</tr>
+<tr>
+<td><code>validate()</code></td>
+<td>Check Map&#39;s <code>Issue[]</code>: <code>{ level, text, where, target? }</code>, where <code>target</code> is what <code>view.goTo</code> takes.</td>
+</tr>
+<tr>
+<td><code>statistics()</code></td>
+<td>Tools ▸ Statistics: tile, terrain, unit, resource and per-player counts, the briefing&#39;s too.</td>
+</tr>
+<tr>
+<td><code>find(options)</code></td>
+<td>The Ctrl+F search: <code>{ kind: &quot;units&quot; | &quot;locations&quot; | &quot;sprites&quot; | &quot;doodads&quot; | &quot;strings&quot; | &quot;triggers&quot; | &quot;briefing&quot;, query, matchCase?, limit? }</code> → <code>{ kind, index, label, detail, x?, y? }[]</code>.</td>
+</tr>
+<tr>
+<td><code>stringUsage()</code> / <code>unusedStrings()</code></td>
+<td>Which records refer to each string index, and which slots nothing refers to.</td>
+</tr>
+</tbody></table>
+<h2 id="apiview"><code>api.view</code><a class="anchor" href="#apiview" aria-label="Link to this section">#</a></h2>
+<p>Where the viewport is looking. A plugin that finds something needs this to show the user
+where it is.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>zoom()</code> / <code>setZoom(z)</code></td>
+<td>Clamped to 0.05…8 (the zoom control&#39;s own steps run 0.25…4).</td>
+</tr>
+<tr>
+<td><code>visible()</code></td>
+<td>The tiles on screen, as a <code>Rect</code>.</td>
+</tr>
+<tr>
+<td><code>center(x, y)</code></td>
+<td>Scroll so a tile is in the middle.</td>
+</tr>
+<tr>
+<td><code>reveal(rect, options?)</code></td>
+<td>Bring a tile rect on screen by the shortest move, gliding rather than jumping, and doing nothing when it is already visible. <code>{ fit: true }</code> zooms out to the zoom control&#39;s nearest step that holds it (never in); <code>{ animate: false }</code> jumps; <code>margin</code> (1) is the tiles kept clear of the edge. Resolves <code>true</code> once the view is there and <code>false</code> when the user, or another request, moved it first — a plugin that follows its own work around the map stops following on that.</td>
+</tr>
+<tr>
+<td><code>goTo(target)</code></td>
+<td><code>{ kind: &quot;tile&quot;, x, y }</code>, or <code>{ kind: &quot;unit&quot; | &quot;sprite&quot; | &quot;location&quot;, index }</code>: scrolls there and selects the object. An <code>Issue.target</code> from <code>query.validate()</code> is one of these.</td>
+</tr>
+<tr>
+<td><code>cursorTile()</code></td>
+<td>The tile under the pointer, as the status bar shows it.</td>
+</tr>
+<tr>
+<td><code>flags()</code> / <code>setFlags(patch)</code></td>
+<td>The View menu&#39;s ticks: <code>grid</code>, <code>locations</code>, <code>locationNames</code>, <code>units</code>, <code>sprites</code>, <code>doodads</code>, <code>fog</code>, <code>elevation</code>, <code>buildability</code>, <code>startLocations</code>, <code>animateWater</code>, <code>animateUnits</code>.</td>
+</tr>
+<tr>
+<td><code>gridSize()</code> / <code>setGridSize(8 | 16 | 32 | 64 | 128)</code></td>
+<td>Grid spacing in map pixels.</td>
+</tr>
+<tr>
+<td><code>flash(target)</code></td>
+<td>Highlight something on the map for a moment: <code>{ rect }</code> (tiles), <code>{ units: [i…] }</code>, <code>{ locations: [i…] }</code> or <code>{ tiles: [{ x, y }…] }</code>, each with an optional <code>kind</code> (<code>&quot;change&quot;</code>, gold, the default, or <code>&quot;attention&quot;</code>, teal) and <code>ms</code> (600). It swells a little and fades by itself, several may run at once, and it never takes the pointer. The shared way to say &quot;this just changed&quot; or &quot;look here&quot;, so every plugin&#39;s flash looks the same.</td>
+</tr>
+</tbody></table>
+<h2 id="apidata"><code>api.data</code><a class="anchor" href="#apidata" aria-label="Link to this section">#</a></h2>
+<p>The game&#39;s own tables as the editor decoded them (<code>units.dat</code> and its neighbours), for
+the numbers <code>api.names</code> only labels: hit points, costs, build times, armour, weapons,
+flags, and the sprite and image each unit draws through. <code>ready()</code>, <code>load()</code>, then
+<code>units()</code>, <code>weapons()</code>, <code>upgrades()</code>, <code>techs()</code>, <code>sprites()</code>, <code>flingy()</code>, <code>images()</code>,
+plus <code>race(unitId)</code> and <code>imagePath(imageId)</code>. Everything is null until the tables are
+loaded, and stays null when the game data was never extracted. Degrade, do not throw.</p>
+<h2 id="apigamedata"><code>api.gameData</code><a class="anchor" href="#apigamedata" aria-label="Link to this section">#</a></h2>
+<p>Which set of game files the editor draws from (the game&#39;s own, or a mod&#39;s that replaces
+them in the same formats), and installing, switching and removing sets. This is the
+plugin side of Help ▸ Game Data….</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>source()</code></td>
+<td>Where the files come from: <code>kind</code>, a <code>label</code>, the <code>profile</code> they belong to, <code>desktop</code> when the app extracted them. Null while startup is still resolving.</td>
+</tr>
+<tr>
+<td><code>profile()</code> / <code>profiles()</code></td>
+<td>The data set in use, and every set with a copy here (the game&#39;s own first).</td>
+</tr>
+<tr>
+<td><code>install(profile, files, progress?)</code></td>
+<td>Extract a set from its files and switch to it.</td>
+</tr>
+<tr>
+<td><code>select(id)</code></td>
+<td>Switch sets, dropping everything decoded from the previous one and redrawing. A set with no copy falls back to the game&#39;s own.</td>
+</tr>
+<tr>
+<td><code>remove(id)</code></td>
+<td>Drop a copy.</td>
+</tr>
+</tbody></table>
+<p>The <code>&quot;gameData&quot;</code> event fires on any of them. <code>files</code> is <code>{ archives, files? }</code>: the
+archives, with <code>StarDat.mpq</code> and <code>BrooDat.mpq</code> among them (a mod replaces files, it does
+not bring the rest; the game&#39;s own are read first, then the others in the order given,
+later winning), and loose files by member path (<code>arr/units.dat</code>), read before any archive.
+A <code>File</code> from <code>ui.pickFiles</code> or a <code>Uint8Array</code> both serve.</p>
+<p>A data set is a name over files in the game&#39;s own formats. The table sizes, the tileset
+formats and the map file&#39;s fixed-width sections are the game&#39;s, so a mod that extends
+them past 228 unit types or into an extended <code>.dat</code> layout is not covered. What <em>is</em>
+covered follows on its own: <code>data</code> decodes the set&#39;s tables, <code>tileset</code> and <code>graphics</code>
+draw its files, and <code>names</code> shows what it renamed. A plugin written for the game&#39;s own
+data can read <code>profile().id</code> (<code>&quot;starcraft&quot;</code> is the game&#39;s) and grey itself out under any
+other.</p>
+<h2 id="apiconsts"><code>api.consts</code><a class="anchor" href="#apiconsts" aria-label="Link to this section">#</a></h2>
+<p>The numbers a record is <em>written</em> in, so a plugin does not carry the hex itself. These are
+the editor&#39;s own tables, the very objects its codec encodes with, handed over at run time
+rather than copied.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tile</code></td>
+<td>32, map pixels to a tile. UNIT and THG2 store pixels; MTXM, MRGN and the brushes count tiles.</td>
+</tr>
+<tr>
+<td><code>unit.startLocation</code></td>
+<td>214, the Start Location marker.</td>
+</tr>
+<tr>
+<td><code>unit.mineralFields</code> / <code>unit.vespeneGeyser</code></td>
+<td><code>[176, 177, 178]</code> and 188. <code>isResource(unitId)</code> is either.</td>
+</tr>
+<tr>
+<td><code>unit.defaultMinerals</code> / <code>unit.defaultGas</code></td>
+<td>1500 and 5000, what StarEdit writes on a fresh resource.</td>
+</tr>
+<tr>
+<td><code>unit.valid</code> / <code>unit.used</code> / <code>unit.state</code> / <code>unit.relation</code></td>
+<td>The four UNIT bit masks: <code>validProperties</code> (which special-property fields the game reads), <code>validStates</code> (which of the record&#39;s fields are set at all), <code>stateFlags</code> (the properties themselves), <code>relationType</code> (<code>NydusLink</code>, <code>Addon</code>).</td>
+</tr>
+<tr>
+<td><code>sprite.flags</code></td>
+<td>THG2&#39;s <code>PureSprite</code> / <code>Flipped</code> / <code>Disabled</code>. <code>PureSprite</code> decides whether <code>spriteId</code> is a sprites.dat id the game only draws, or a units.dat id it creates the unit for.</td>
+</tr>
+<tr>
+<td><code>location.anywhere</code></td>
+<td>63. That slot is Anywhere, and the editor protects it everywhere: no builder returns it, <code>locationAt</code> never picks it, the viewport draws no box for it. <code>tx.restoreAnywhere()</code> puts it back.</td>
+</tr>
+<tr>
+<td><code>location.elevation</code></td>
+<td><code>elevationFlags</code>. A <strong>set</strong> bit <em>excludes</em> that elevation, so 0 means everywhere.</td>
+</tr>
+<tr>
+<td><code>triggers</code></td>
+<td>The numbers a TRIG / MBRF record is written in. See below.</td>
+</tr>
+</tbody></table>
+<p><strong><code>consts.triggers</code>.</strong> A trigger record is sixteen conditions and sixty-four actions of
+plain numbers, and <code>triggers.defs</code> only says which <em>field</em> each argument lives in. This
+says what to put in it. <code>condition</code> and <code>action</code> (and <code>briefingAction</code>, where the same
+byte means something else) are the type numbers; <code>player</code> holds the 27 player-group
+values, which are also the indices of a trigger&#39;s own <code>players</code> array; and the rest are
+the enumerated arguments: <code>comparison</code>, <code>switchState</code>, <code>switchAction</code>, <code>modifier</code>,
+<code>unitState</code> (Set Doodad State / Set Invincibility), <code>order</code>, <code>alliance</code>, <code>resource</code>,
+<code>score</code>, and <code>unitClass</code> for the four ids past units.dat (<em>Any unit</em>, <em>Men</em>, <em>Buildings</em>,
+<em>Factories</em>). <code>conditionFlags</code>, <code>actionFlags</code> and <code>triggerFlags</code> are the flag bits, and
+<code>deathsTable</code> is the address an EUD player value is counted from
+(<code>epd = (address - deathsTable) / 4 + 0x2000</code>).</p>
+<p>Those argument keys are <code>ArgDef.kind</code>, so a generic argument editor can look one up with
+the kind the def handed it:</p>
+<pre><code class="language-js">const arg = api.triggers.defs.action(record.type).args[0];
+const values = api.consts.triggers[arg.kind];      // e.g. { AtLeast: 0, AtMost: 1, Exactly: 10 }
+</code></pre>
+<p>For <em>generating</em> a run of triggers, <code>tx.triggers.fromText</code> is still the better tool: it
+resolves location and unit names against the open map, which no constant can. These are
+for editing a field of an existing record, and for reading one back
+(<code>record.type === api.consts.triggers.condition.Bring</code>).</p>
+<p>Why this is on <code>api</code> and not in the npm package: <code>@scm-js/plugin-api</code> is types only, and
+<code>import type</code> is erased before the loader sees the specifier, which is exactly what lets a
+plugin depend on a package at all. A <em>value</em> imported from it type-checks and is then
+undefined at run time. Anything you need while the plugin runs has to arrive on <code>api</code>.</p>
+<h2 id="apigraphics"><code>api.graphics</code><a class="anchor" href="#apigraphics" aria-label="Link to this section">#</a></h2>
+<p>The pictures the viewport draws, for a plugin&#39;s own lists and previews. Nothing is
+rendered anew: a unit or sprite frame comes out of the same cache the viewport blits
+from, so listing five hundred units costs about what the Units palette costs.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ready()</code> / <code>load()</code></td>
+<td><code>{ tileset, units }</code>: whether the graphics and the tables are in memory, and a fetch for both.</td>
+</tr>
+<tr>
+<td><code>unitImage(unitId, { owner? })</code></td>
+<td>A <code>{ image, width, height }</code> canvas in the player&#39;s colours, in the unit&#39;s editor pose.</td>
+</tr>
+<tr>
+<td><code>spriteImage(kind, id, { owner?, flipped? })</code></td>
+<td>The same for a THG2 sprite.</td>
+</tr>
+<tr>
+<td><code>tileImage(tileId)</code></td>
+<td>One 32 × 32 megatile of the open map&#39;s tileset.</td>
+</tr>
+<tr>
+<td><code>doodadImage(doodadId)</code></td>
+<td>A doodad drawn from the tiles it stamps.</td>
+</tr>
+<tr>
+<td><code>renderRect(rect, options?)</code></td>
+<td>Part of the map as File ▸ Export ▸ Image draws it, cropped to a tile rect, as a PNG <code>Blob</code>. <code>pixelsPerTile</code> defaults to 8 here.</td>
+</tr>
+<tr>
+<td><code>renderClip(clip, { pixelsPerTile?, parts? })</code></td>
+<td>A <code>Clip</code> as the paste ghost draws it — its tiles, then units, sprites and doodad overlays from the sprite cache, then location boxes — as a <code>{ image, width, height }</code> canvas, for a thumbnail or a ghost under the pointer. Drawn with the graphics of the clip&#39;s own tileset, so a clip from another tileset answers null (as does a missing tileset). Synchronous and uncached: keep the result while nothing changed.</td>
+</tr>
+<tr>
+<td><code>playerColor(owner)</code></td>
+<td><code>#rrggbb</code>.</td>
+</tr>
+<tr>
+<td><code>requestUnit(id)</code> / <code>requestSprite(kind, id)</code> / <code>onImageLoaded(fn)</code></td>
+<td>Graphics load lazily, so the first <code>unitImage</code> for a type is often null. Ask for it, redraw on <code>onImageLoaded</code>, and the list fills in.</td>
+</tr>
+</tbody></table>
+<h2 id="apicommands"><code>api.commands</code><a class="anchor" href="#apicommands" aria-label="Link to this section">#</a></h2>
+<p>Named things a plugin can do, so that a menu item, a hotkey, a context entry and another
+plugin all reach the same one.</p>
+<pre><code class="language-js">api.commands.register({ id: &quot;convert&quot;, title: &quot;Convert Image…&quot;, run: () =&gt; open() });
+api.menu.add(&quot;Tools&quot;, { label: &quot;Convert Image…&quot;, command: &quot;convert&quot; });
+api.hotkeys.add(&quot;Ctrl+Shift+I&quot;, { command: &quot;convert&quot; });
+</code></pre>
+<p><code>register(spec)</code> returns a <code>Disposable</code>. <code>run(id, ...args)</code> runs one, whoever registered
+it (<code>undefined</code> when there is no such command or its <code>enabled()</code> says no); <code>has(id)</code> and
+<code>list()</code> (<code>{ id, title, pluginId, enabled }[]</code>) see every plugin&#39;s. An id without a dot is
+namespaced under the plugin (<code>&quot;convert&quot;</code> → <code>&quot;image-to-terrain.convert&quot;</code>); one with a dot
+is taken as it is, so a plugin can publish a stable name for others to call.</p>
+<h2 id="apiservices"><code>api.services</code><a class="anchor" href="#apiservices" aria-label="Link to this section">#</a></h2>
+<p>A command is one thing to do; a service is a thing to <em>hold</em>: an account another plugin
+signs in through, a connection to a server, a catalogue. A plugin provides one live
+object under a name, and every other plugin reaches it by that name whatever order they
+were activated in.</p>
+<pre><code class="language-js">// The provider (the scmjs.dev plugin):
+api.services.provide(&quot;account&quot;, accountService);
+
+// A consumer (another plugin that talks to scmjs.dev):
+api.services.watch(&quot;scmjs-dev.account&quot;, (account) =&gt; {
+  if (account) useSessionFrom(account);
+  else useOwnSignIn();
+});
+</code></pre>
+<p><code>provide(name, object, { version? })</code> returns a <code>Disposable</code>; providing the same name
+again replaces the object, and the plugin&#39;s own deactivation withdraws it. <code>get(name)</code>
+answers the object or null, <code>has(name)</code> whether there is one, <code>list()</code> every service as
+<code>{ id, pluginId, version }</code>. <code>watch(name, fn)</code> calls <code>fn(object | null, info | null)</code> at
+once with what is there and again on every change of provider, so a consumer activated
+first still sees the provider arrive. Names follow the command rule: one without a dot is
+namespaced under the plugin (<code>&quot;account&quot;</code> → <code>&quot;scmjs-dev.account&quot;</code>), one with a dot is taken
+as it is.</p>
+<p>The object&#39;s shape is the provider&#39;s to publish and the editor never reads it: put a
+<code>contract.d.ts</code> in the provider&#39;s repository, let consumers take the repository as a dev
+dependency and import the types with <code>import type</code>, which is erased before the loader
+sees the specifier. <code>version</code> is the provider&#39;s version of that contract, for a consumer
+that needs a newer one. There is no sandbox between plugins here any more than
+elsewhere: a service is an ordinary object, and what a consumer does with it is up to
+the consumer.</p>
+<h2 id="apiterrain"><code>api.terrain</code><a class="anchor" href="#apiterrain" aria-label="Link to this section">#</a></h2>
+<p>Read-only helpers over the current tileset, plus the Terrain palette&#39;s own pick and the
+symmetry mode.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>types()</code></td>
+<td>The paintable flat terrains, with name, group, height and buildable.</td>
+</tr>
+<tr>
+<td><code>isomTypes()</code> / <code>hasIsom()</code></td>
+<td>The ids the isometric brush can paint, and whether the map has an ISOM section.</td>
+</tr>
+<tr>
+<td><code>tileInfo(id)</code></td>
+<td>What the tileset says about one tile.</td>
+</tr>
+<tr>
+<td><code>terrainAt(tx, ty)</code></td>
+<td>The terrain id (as <code>types()</code> lists them) a tile belongs to: its own group when it is flat ground, else what the ISOM lattice says there (under a cliff, one of the two terrains it joins). Null when neither tells.</td>
+</tr>
+<tr>
+<td><code>color(tileId)</code> / <code>terrainColor(terrainId)</code></td>
+<td>The tile&#39;s average colour (<code>0xRRGGBB</code>), and the mean of a terrain&#39;s common variations.</td>
+</tr>
+<tr>
+<td><code>heightOf(terrainId)</code></td>
+<td>0 low, 1 high, 2 higher. Null for anything that is not a flat terrain.</td>
+</tr>
+<tr>
+<td><code>flatGroupOf(terrainId)</code></td>
+<td>The even CV5 group of a flat pair.</td>
+</tr>
+<tr>
+<td><code>diamondAt(px, py)</code> / <code>isDiamond(d)</code> / <code>diamondsIn(rect)</code></td>
+<td>The ISOM lattice: the diamond under a pixel, whether a value is one, and every diamond whose centre tile is in the rect.</td>
+</tr>
+<tr>
+<td><code>floodRegion(x, y, match?)</code></td>
+<td>The bucket fill&#39;s area, by terrain type or exact tile.</td>
+</tr>
+<tr>
+<td><code>blendCandidates(anchorTileId, side, options?)</code></td>
+<td>The Blend palette&#39;s ranked list, with the pixel distance of each seam.</td>
+</tr>
+<tr>
+<td><code>active()</code> / <code>setActive(...)</code></td>
+<td>The palette&#39;s brush, terrain, tile, size and Rect variation.</td>
+</tr>
+<tr>
+<td><code>symmetry()</code> / <code>setSymmetry(mode)</code></td>
+<td>Tools ▸ Symmetry: <code>&quot;none&quot;</code>, <code>&quot;h&quot;</code>, <code>&quot;v&quot;</code>, <code>&quot;hv&quot;</code>, <code>&quot;rot180&quot;</code>, <code>&quot;rot90&quot;</code>, <code>&quot;diag&quot;</code>, <code>&quot;adiag&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>symmetryAvailable(mode)</code></td>
+<td>The last three need a square map.</td>
+</tr>
+<tr>
+<td><code>mirror(cells)</code> / <code>mirrorPoint(px, py)</code></td>
+<td>The images the built-in brushes paint and the palettes place on, so a plugin edit can honour the user&#39;s setting the way <code>tx.fillArea</code> does by itself.</td>
+</tr>
+<tr>
+<td><code>checkIsom()</code></td>
+<td>Asynchronous. Waits for the tileset graphics (rejecting when they are missing) and resolves with how well the ISOM describes the tiles and what rebuilding it would do about that: <code>rects</code> measured, <code>mismatched</code> among them, <code>inherent</code> of those a rebuild would leave behind, <code>wouldChange</code> lattice values, and <code>stale</code> when a rebuild would bring more than the palette&#39;s threshold back in step. Offer a rebuild on <code>stale</code>, not on <code>mismatched</code>: a rebuild converges in one pass and <code>inherent</code> — hand-placed tiles, blends, another editor&#39;s ground — never goes away. Null when the map has no ISOM or no map is open.</td>
+</tr>
+</tbody></table>
+<h2 id="apitileset"><code>api.tileset</code><a class="anchor" href="#apitileset" aria-label="Link to this section">#</a></h2>
+<p><code>id()</code>, <code>name()</code>, <code>isLoaded()</code>, <code>load()</code> (resolves <code>false</code> when the graphics were never
+extracted; that is a normal state, so degrade), and <code>raw()</code> for the decoded
+<code>LoadedTileset</code>.</p>
+<h2 id="apiselection"><code>api.selection</code><a class="anchor" href="#apiselection" aria-label="Link to this section">#</a></h2>
+<p><code>markedArea()</code> / <code>markArea(rect | null)</code> is the Cut / Copy / Paste layer&#39;s marked
+rectangle, the editor&#39;s one &quot;region&quot; concept. <code>units()</code>, <code>sprites()</code>, <code>doodads()</code> and
+<code>locations()</code> are indices, copied, so sort yours freely; each has a setter (<code>setUnits</code>,
+<code>setSprites</code>, <code>setDoodads</code>, <code>setLocations</code>). <code>layer()</code> / <code>setLayer()</code> is the active
+layer, and <code>lockedLayers()</code> / <code>setLayerLocked(layer, on)</code> the Layers panel&#39;s padlocks (a
+locked layer&#39;s tools refuse to change the map).</p>
+<h2 id="apiclipboard"><code>api.clipboard</code><a class="anchor" href="#apiclipboard" aria-label="Link to this section">#</a></h2>
+<p>The Cut / Copy / Paste layer, sharing the user&#39;s own clip.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>clip()</code> / <code>setClip(clip | null)</code></td>
+<td>What is on the clipboard. A <code>Clip</code> is self-contained: it outlives the map it came from and pastes into another, with terrain and doodads refused across tilesets.</td>
+</tr>
+<tr>
+<td><code>copy(source?)</code> / <code>cut(source?)</code></td>
+<td><code>source</code> is <code>{ rect }</code> for a tile rect or <code>{ units?, sprites?, doodads?, locations? }</code> for objects by index. Omitted, they take what Ctrl+C would: the object layer&#39;s selection, else the marked area, with the parts ticked in <code>parts()</code>.</td>
+</tr>
+<tr>
+<td><code>capture(source?, { parts? })</code></td>
+<td>The clip <code>copy</code> would take, handed back instead of put on the clipboard — for a plugin keeping clips of its own (Stamp Library) without disturbing the user&#39;s. <code>parts</code> overrides <code>parts()</code> for the one capture.</td>
+</tr>
+<tr>
+<td><code>paste(tx, ty, { parts?, mode? })</code></td>
+<td>The clip&#39;s top-left at a tile, as one undo step, with the pasted area marked afterwards. Returns the <code>PasteResult</code>: counts per list, and notes for what was skipped.</td>
+</tr>
+<tr>
+<td><code>parts()</code> / <code>setParts(patch)</code></td>
+<td>Which parts a copy takes and a paste lays down.</td>
+</tr>
+<tr>
+<td><code>mode()</code> / <code>setMode(&quot;merge&quot; | &quot;replace&quot;)</code></td>
+<td>Whether a paste clears the area first.</td>
+</tr>
+<tr>
+<td><code>pasting()</code> / <code>setPasting(on)</code></td>
+<td>Arm the layer so the next click stamps.</td>
+</tr>
+<tr>
+<td><code>summary(clip)</code></td>
+<td>The clip in words.</td>
+</tr>
+</tbody></table>
+<h2 id="apiexchange"><code>api.exchange</code><a class="anchor" href="#apiexchange" aria-label="Link to this section">#</a></h2>
+<p>The file formats behind File ▸ Import / Export. <code>encodeTrg(triggers)</code> / <code>decodeTrg(bytes)</code>
+are SCMDraft&#39;s raw <code>.trg</code> (2400-byte records; string indices are the map&#39;s own), and
+<code>formatStrings()</code> / <code>parseStrings(text)</code> the <code>index&lt;TAB&gt;text</code> strings file (control bytes
+as <code>&lt;XX&gt;</code>), which <code>tx.strings.import</code> applies.</p>
+<h2 id="apipalette"><code>api.palette</code><a class="anchor" href="#apipalette" aria-label="Link to this section">#</a></h2>
+<p>What the Units, Sprites, Doodads and Fog of War palettes have picked, and what they list,
+so a plugin can paint &quot;whatever the user chose&quot; without a picker of its own. Paint does
+exactly this: switch layers and its brush follows. The Terrain palette&#39;s pick is
+<code>terrain.active()</code>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>active()</code> / <code>setActive({...})</code></td>
+<td>A <code>PaletteChoice</code>: <code>unit</code> and <code>owner</code> (0-based; 0 is Player 1), <code>spriteKind</code> with <code>sprite</code> / <code>unitSprite</code>, <code>spriteFlipped</code> / <code>spriteDisabled</code>, <code>doodad</code> (-1 before one was picked), <code>fogPlayers</code> (a bit mask, bit n = player n + 1), <code>fogMode</code> and <code>fogViewPlayer</code> (whose fog the viewport draws).</td>
+</tr>
+<tr>
+<td><code>placementOptions()</code> / <code>setPlacementOptions(patch)</code></td>
+<td>The Units palette&#39;s rules: <code>checkCollision</code>, <code>checkTerrain</code>, <code>snapToGrid</code>, <code>removeStranded</code>. They govern <code>placeUnit</code>, <code>canPlaceUnit</code>, <code>query.placement</code> and whether an edit removes stranded units. Remembered in the browser, so a change outlives the session.</td>
+</tr>
+<tr>
+<td><code>doodadPlacement()</code> / <code>setDoodadPlacement(patch)</code></td>
+<td>The Doodads palette&#39;s <code>placeAnywhere</code>, <code>snapToGrid</code> (the two-tile isometric grid, not the View menu&#39;s grid spacing) and <code>asTerrain</code> (the palette lays doodads down as plain terrain; a transaction&#39;s <code>placeDoodad</code> does not read it — call <code>convertDoodads</code> after it). Remembered in the browser.</td>
+</tr>
+<tr>
+<td><code>locationSnap()</code> / <code>setLocationSnap(step)</code></td>
+<td>The Locations layer&#39;s snap step in pixels (0 off, 8, 16, 32, 64).</td>
+</tr>
+<tr>
+<td><code>playerColor(owner)</code></td>
+<td>The colour a player&#39;s units are shown in, <code>#rrggbb</code>, Remastered custom colours included.</td>
+</tr>
+<tr>
+<td><code>unitGroups()</code> / <code>unitName(id)</code> / <code>unitSize(id)</code></td>
+<td>The Units palette&#39;s grouping, StarEdit&#39;s names, and a type&#39;s placement box in pixels with <code>building</code> / <code>flyer</code> flags (a one-tile box without the unit tables).</td>
+</tr>
+<tr>
+<td><code>spriteGroups()</code> / <code>spriteName(kind, id)</code></td>
+<td>The Sprites palette&#39;s groups (empty until the unit tables are loaded) and names.</td>
+</tr>
+<tr>
+<td><code>doodadCategories()</code> / <code>doodadInfo(id)</code></td>
+<td>The open map&#39;s doodads by category, each with its footprint in tiles, whether it is a <code>ramp</code>, and <code>required</code> — per cell, the tile group that must lie under it, 0 for any (empty without the tileset graphics). Ramps carry no name; the flag and the requirements are how a plugin tells which ramp goes on which cliff.</td>
+</tr>
+</tbody></table>
+<h2 id="apinames"><code>api.names</code><a class="anchor" href="#apinames" aria-label="Link to this section">#</a></h2>
+<p>The names behind the numbers a map stores, so a plugin that shows raw values need not
+carry the game&#39;s tables.</p>
+<ul>
+<li>The game&#39;s tables: <code>unit(id)</code> / <code>units()</code> (StarEdit&#39;s names, plus <em>Any unit</em>, <em>Men</em>,
+<em>Buildings</em>, <em>Factories</em> for the trigger classes 228–231; under a mod&#39;s data set, the
+mod&#39;s own name for anything it renamed, by the rule in
+<a href="/game-data/data-sets/#names">docs/game-data.md</a>), <code>upgrade</code> / <code>upgrades</code>, <code>tech</code> / <code>techs</code>,
+<code>weapon</code> / <code>weapons</code>, <code>playerType</code> / <code>playerTypes</code> (OWNR controllers), <code>race</code> / <code>races</code>
+(SIDE), <code>playerGroup</code> / <code>playerGroups</code> (the 27 trigger groups), <code>condition</code> /
+<code>conditions</code> and <code>action(type, briefing?)</code> / <code>actions(briefing?)</code> (trigger and
+briefing types), and <code>aiScript(code)</code>. The list forms return <code>{ value, label }[]</code> for a
+drop-down.</li>
+<li>The open map&#39;s: <code>string(index)</code> (null for 0 or out of range), <code>location(index)</code>
+(0-based slot; 63 is Anywhere), <code>switch(index)</code>, <code>player(slot)</code>, and <code>tile(id)</code>, the
+terrain a tile id belongs to (null without the tileset graphics). Each answers a
+placeholder without a map.</li>
+</ul>
+<h2 id="apitext"><code>api.text</code><a class="anchor" href="#apitext" aria-label="Link to this section">#</a></h2>
+<p>StarCraft&#39;s <code>&lt;XX&gt;</code> text control codes: bytes 0x01–0x1F in a string, which set the colour,
+move the text or hide it. This is the editor&#39;s own table, the one the String Editor&#39;s
+buttons and preview are drawn from, so a plugin that shows or rewrites map text carries no
+copy of its own. Use it rather than reimplementing it: the numbering is easy to get wrong,
+and the editor&#39;s own table was wrong from 0x12 up until it was checked against the
+classic player palette.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>codes()</code> / <code>code(byte)</code></td>
+<td>Every byte the game gives a meaning, in order, or one of them (null for a byte it ignores). A <code>TextCode</code> is <code>{ byte, code, label, effect, rgb, player? }</code>. <code>effect</code> is <code>&quot;color&quot;</code>, <code>&quot;mimic&quot;</code>, <code>&quot;invisible&quot;</code>, <code>&quot;align&quot;</code>, <code>&quot;clip&quot;</code>, <code>&quot;nothing&quot;</code> or <code>&quot;space&quot;</code>; <code>rgb</code> is <code>#rrggbb</code> for the colours and null for the rest; the twelve that are a player colour carry <code>player</code>.</td>
+</tr>
+<tr>
+<td><code>insertable()</code></td>
+<td>The codes worth offering as buttons: everything but tab, the newlines and the byte that does nothing.</td>
+</tr>
+<tr>
+<td><code>defaultColor()</code></td>
+<td>What the game starts a string in.</td>
+</tr>
+<tr>
+<td><code>escape(byte)</code></td>
+<td><code>&lt;0E&gt;</code>, the way every StarCraft editor writes a control byte.</td>
+</tr>
+<tr>
+<td><code>runs(text, options?)</code></td>
+<td>The string split into lines of coloured runs, the way the game draws it: <code>TextLine { runs, align }</code>, <code>TextRun { text, color, invisible, clipped }</code>. <code>invisible</code> marks what an <code>&lt;0B&gt;</code> / <code>&lt;14&gt;</code> hides rather than dropping it, <code>clipped</code> what an <code>&lt;0C&gt;</code> cut off, and <code>align</code> reads <code>&lt;12&gt;</code> / <code>&lt;13&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>plain(text)</code></td>
+<td>The text with every control byte removed: what the string actually says.</td>
+</tr>
+<tr>
+<td><code>bleedingLines(text)</code> / <code>fixBleeding(text)</code></td>
+<td>See below.</td>
+</tr>
+<tr>
+<td><code>stackedLines(text)</code> / <code>flattenStacks(text)</code></td>
+<td>See below.</td>
+</tr>
+</tbody></table>
+<p><strong>The Remastered newline change.</strong> StarCraft 1.16.1 reset the text colour at every line
+break; Remastered carries it onto the next line of the same string. So a multi-line string
+written before the remaster (most map descriptions, objectives and briefing text) can be
+drawn today in colours its author never chose. <code>runs</code> models Remastered&#39;s rule; pass
+<code>{ resetPerLine: true }</code> to see the old rendering. <code>bleedingLines(text)</code> returns the lines
+that differ (<code>{ line, carried }</code>, <code>carried</code> being the whole <code>TextCode</code> inherited), and
+<code>fixBleeding(text)</code> writes the default colour at the head of each of them so both games
+draw the string alike. It is idempotent and never changes what the string says. The
+Repair plugin&#39;s string finding is exactly these two functions over <code>api.query.strings()</code>.</p>
+<p><strong>Stacked text.</strong> The other thing the old game did that nothing does now. <code>&lt;12&gt;</code> and
+<code>&lt;13&gt;</code> move the text after them to the right or the centre of the line they are on, and
+1.16.1 obeyed every one of them, so <code>Name&lt;12&gt;by Author</code> drew two pieces in two places at
+once — the trick behind classic lobby names, unit names and briefings. Remastered does
+not draw the overlap, and neither does <code>runs</code>: <code>TextLine.align</code> is one alignment for the
+whole line, the last the line sets, so every piece before it lands somewhere its author
+did not choose.</p>
+<p><code>stackedLines(text)</code> returns the lines drawn at more than one alignment (<code>{ line, pieces }</code>);
+a line whose only alignment code sits at its head is not one of them, since that code
+places the line rather than stacking it, and text the game never draws — past an <code>&lt;0B&gt;</code> /
+<code>&lt;14&gt;</code> or an <code>&lt;0C&gt;</code> — does not count. <code>flattenStacks(text)</code> lays those lines out left to
+right: the codes that split them dropped, the pieces joined in writing order with a space
+between two that would otherwise run together, every colour and every word kept. It is
+idempotent.</p>
+<p>Note what flattening cannot do: the intended picture <em>was</em> the overlap, so there is
+nothing to restore it to, and what the flat line loses is where each piece sat. That makes
+it a repair to offer rather than to recommend — the Repair plugin&#39;s stacked-text finding
+is these two functions over <code>api.query.strings()</code>, reported with the map name and unit
+names it affects (<code>api.query.stringUsage()</code>) and never ticked by default.</p>
+<h2 id="apiui"><code>api.ui</code><a class="anchor" href="#apiui" aria-label="Link to this section">#</a></h2>
+<p>Everything a plugin shows: the status bar and toasts, dialogs and floating panels, the
+two ways to draw on the map, and the pickers.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>status(text)</code> / <code>statusText()</code></td>
+<td>The status bar.</td>
+</tr>
+<tr>
+<td><code>toast({ kind?, title, detail?, ttl? })</code></td>
+<td>A notice over the map that leaves by itself, the way Save reports. <code>kind</code> is <code>&quot;ok&quot;</code>, <code>&quot;info&quot;</code>, <code>&quot;warn&quot;</code> or <code>&quot;error&quot;</code>; <code>ttl</code> 0 keeps it until dismissed.</td>
+</tr>
+<tr>
+<td><code>saveFile(data, fileName)</code></td>
+<td>Write bytes or a <code>Blob</code> to disk the way the editor&#39;s own exports do: through the browser&#39;s save dialog where it has one, else as a download. Resolves <code>{ route, fileName }</code>, or null when dismissed.</td>
+</tr>
+<tr>
+<td><code>dialog(spec)</code></td>
+<td>A dialog in the editor&#39;s chrome. See below.</td>
+</tr>
+<tr>
+<td><code>panel(spec)</code></td>
+<td>A panel that floats over the map and blocks nothing, or one docked at the right beside the built-in panels. See below.</td>
+</tr>
+<tr>
+<td><code>statusItem(spec)</code></td>
+<td>A cell of your own in the status bar: text, the plugin&#39;s icon, a spinner while <code>busy</code>, a click. See below.</td>
+</tr>
+<tr>
+<td><code>dialogSlot(dialogId, spec)</code></td>
+<td>Add a button or a row to a built-in dialog. See below.</td>
+</tr>
+<tr>
+<td><code>mapTool(spec)</code></td>
+<td>Take over the pointer on the map. See below.</td>
+</tr>
+<tr>
+<td><code>overlay(spec)</code></td>
+<td>A picture drawn over the map that the user can switch on and off. See below.</td>
+</tr>
+<tr>
+<td><code>pickFiles({ accept, multiple })</code></td>
+<td>The file picker, resolved with <code>File[]</code> (empty on cancel).</td>
+</tr>
+<tr>
+<td><code>pickArea({ prompt })</code></td>
+<td>The user drags a rectangle on the map. The viewport shows a crosshair and a marquee, the HUD shows your prompt, and the gesture goes to you ahead of the active layer&#39;s tools. Resolves with the tile <code>Rect</code> (exclusive <code>x1</code> / <code>y1</code>), or <code>null</code> on Esc or a right-click, when no map is open, when the map is replaced meanwhile, or when the plugin is disabled. One pick at a time; starting another cancels the first.</td>
+</tr>
+<tr>
+<td><code>pickTile({ prompt })</code></td>
+<td>The same for a single click. Resolves with <code>{ x, y }</code>.</td>
+</tr>
+<tr>
+<td><code>pickObject({ prompt, kinds })</code></td>
+<td>The same for an object: the user clicks a unit or a location, and the viewport outlines and names what is under the pointer as it moves. <code>kinds</code> limits it to <code>&quot;unit&quot;</code> or <code>&quot;location&quot;</code> (both when omitted; a unit wins over a location under the pointer). A click on nothing keeps picking. Resolves with <code>{ kind, index }</code>, the index into the scenario&#39;s <code>units</code> or <code>locations</code>.</td>
+</tr>
+<tr>
+<td><code>loadImage(source)</code></td>
+<td>Decode a <code>File</code> / <code>Blob</code>, a <code>data:</code> URL or an <code>http(s)</code> URL into an <code>ImageBitmap</code>. A remote URL is fetched with CORS and, failing that, loaded through an <code>&lt;img crossOrigin&gt;</code>; a site that allows neither rejects with a message that says to save the picture and choose the file.</td>
+</tr>
+<tr>
+<td><code>readClipboardImage()</code></td>
+<td>The picture on the system clipboard as a <code>Blob</code> (the browser may ask permission), or <code>null</code>. For Ctrl+V use a dialog&#39;s <code>onPaste</code> instead, which needs no permission.</td>
+</tr>
+<tr>
+<td><code>confirm(message, opts?)</code> / <code>alert(message, opts?)</code> / <code>prompt(message, opts?)</code></td>
+<td>A yes/no, a note, and a line of text, as dialogs in the editor&#39;s chrome rather than the browser&#39;s blocking boxes. <code>confirm</code> resolves <code>false</code> and <code>prompt</code> <code>null</code> on Cancel, Escape or the ×. Options: <code>title</code>, <code>confirmLabel</code>, <code>cancelLabel</code>, <code>danger</code> (a destructive primary button), and for <code>prompt</code> also <code>value</code>, <code>placeholder</code>, <code>multiline</code>.</td>
+</tr>
+<tr>
+<td><code>progress(label, { title?, cancellable? })</code></td>
+<td>A progress panel over the map for long work. It blocks nothing, so report often: <code>report(0…1, text?)</code>, <code>cancelled()</code> (check it in your loop; the × counts as cancelling, <code>done()</code> does not), <code>signal</code> (an <code>AbortSignal</code> with the same answer), <code>done()</code>, <code>isOpen()</code>. A modal dialog covers the map and dims the panel behind it, so start the work from a panel, a menu item, or after closing your dialog.</td>
+</tr>
+<tr>
+<td><code>el(tag, props?, ...children)</code></td>
+<td>The DOM helper the widgets are built from: <code>style</code> takes an object, <code>on*</code> keys take listeners, everything else is a property or an attribute.</td>
+</tr>
+<tr>
+<td><code>widgets</code></td>
+<td>Buttons, fields, forms and lists in the editor&#39;s own styles, as plain DOM: <code>button(label, { primary, danger, ghost, busy, onClick })</code> (the button carries <code>setBusy(on)</code>), <code>checkbox(label, { value, radio, name, onChange })</code> (the <code>&lt;label&gt;</code> carries its <code>input</code>), <code>text(...)</code>, <code>number({ min, max, step, ... })</code>, <code>select(items, ...)</code>, <code>form(rows)</code> (a two-column grid of <code>{ label, field }</code>), <code>group(title, ...children)</code>, <code>row(...)</code>, <code>column(...)</code>, <code>hint(text)</code>, <code>separator()</code>, <code>list(items, { selected, height, onPick })</code>, the five ways to wait: <code>spinner</code>, <code>progressBar</code>, <code>statusLine</code>, <code>skeleton</code>, <code>busy</code>, and <code>steps</code> / <code>fold</code> for work that goes in units (see below). Use them and a plugin&#39;s dialog looks like a built-in one; <code>el</code> is the escape hatch.</td>
+</tr>
+<tr>
+<td><code>open(dialogId, payload?)</code></td>
+<td>Any built-in dialog (<code>&quot;mapProperties&quot;</code>, <code>&quot;unitSettings&quot;</code>, …), fire and forget.</td>
+</tr>
+<tr>
+<td><code>ask(dialogId, payload?)</code></td>
+<td>A built-in dialog that answers (<code>&quot;saveAs&quot;</code>, <code>&quot;confirmClose&quot;</code>, <code>&quot;newMap&quot;</code>), resolving <code>true</code> when it went through and <code>false</code> when it was dismissed.</td>
+</tr>
+<tr>
+<td><code>repaint()</code></td>
+<td>Redraw the viewport when you changed something a transaction did not cover, such as an overlay&#39;s picture. Raises no event.</td>
+</tr>
+</tbody></table>
+<p><strong>Dialogs.</strong> <code>dialog(spec)</code> opens a dialog in the editor&#39;s chrome. <code>spec.mount(body, handle)</code> is called with an empty <code>&lt;div&gt;</code> inside the dialog body; return a cleanup
+function if you need one. <code>spec.buttons</code> draws the footer (<code>{ label, primary?, run?(handle), closes? }</code>); the default is a single Close. <code>spec.onPaste(transfer, handle)</code>
+fires for Ctrl+V anywhere in the dialog while it is the topmost one (a paste into one of
+your own text fields is left alone unless it carries files), and <code>spec.onDrop</code> for a drop
+on the body; a <code>DialogTransfer</code> is <code>{ files, text }</code>. Escape closes the dialog unless
+<code>spec.keepOpenOnEscape(target)</code> answers true for the element the key landed on, which is
+for something inside that handles Escape itself, such as a code editor dismissing its
+own popups. The handle has <code>close()</code>, <code>isOpen()</code>, <code>setTitle(text)</code> and
+<code>setBusy(label | false)</code>. <code>spec.slot = { id, fields?, payload? }</code> offers a slot of the
+dialog&#39;s own, so other plugins add to it with <code>dialogSlot(id, …)</code> exactly as they add to a
+built-in dialog (below); name it <code>&lt;plugin&gt;.&lt;name&gt;</code>, and lend the working copy as <code>fields</code>.</p>
+<p>A dialog is modal and covers the map. To pick something on the map from a dialog, close
+the dialog, pick, and reopen it with the result. Terrain from Image does exactly this
+with its <em>Pick on Map…</em> button.</p>
+<p><strong>Waiting.</strong> Anything a plugin fetches, decodes or counts leaves the user looking at a
+dialog that has not changed, and a dialog that does not say it is working reads as one
+that is broken. <code>ui.widgets</code> has one vocabulary for it, so a plugin waits the way the
+editor waits — and so a reduced-motion setting is honoured without your having to think
+about it:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>spinner({ size, label })</code></td>
+<td>The turning ring: on its own to put beside your own text, or with a <code>label</code> beside it. <code>size</code> is <code>&quot;sm&quot;</code>, <code>&quot;md&quot;</code> (the default) or <code>&quot;lg&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>progressBar({ value, label, percent, width })</code></td>
+<td>A bar with the percentage after it and a line under it. <code>set(0…1, label?)</code> moves it; <code>set(null)</code> gives the sliding bar for work whose length is not known. Cheap to call per chunk — it repaints only when the bar actually moves.</td>
+</tr>
+<tr>
+<td><code>statusLine({ text })</code></td>
+<td>The line along the bottom of a dialog, with <code>set(text, &quot;ok&quot; | &quot;warn&quot; | &quot;error&quot;)</code> (a <code>Node</code> in place of the text for a line that carries a link), <code>busy(text)</code>, <code>progress(text, 0…1 | null)</code>, <code>cancel(stop | null, label?)</code> (a Cancel beside the line — or a Stop, for a request that is running) and <code>clear()</code>.</td>
+</tr>
+<tr>
+<td><code>skeleton({ width, height, lines, block })</code></td>
+<td>A grey stand-in for content that has not arrived, in the shape it will take: a line, <code>lines</code> of them, or a <code>block</code> where a picture goes.</td>
+</tr>
+<tr>
+<td><code>busy(target, label | { label, dim })</code></td>
+<td>Cover a box while what is in it is being replaced: dimmed, deaf to clicks, a ring and a label over it. Returns <code>{ set(label), done() }</code>; <code>done()</code> uncovers it.</td>
+</tr>
+<tr>
+<td><code>button(label, { busy })</code> / <code>button.setBusy(on)</code></td>
+<td>A ring in front of a button&#39;s label, and the button disabled — so the press that started the work cannot be repeated.</td>
+</tr>
+<tr>
+<td><code>dialog.setBusy(label | false)</code></td>
+<td>The dialog itself is working: a ring and the label at the left of the footer, every footer button disabled. A button&#39;s own <code>run</code> already does this while its promise is pending; this is for work no button started.</td>
+</tr>
+<tr>
+<td><code>steps({ tail })</code></td>
+<td>A list of steps, for work that goes in units — a builder&#39;s stages, an assistant&#39;s tool calls. <code>add(label, { icon, title, running })</code> gives a row with <code>set(label)</code>, <code>start(detail)</code>, <code>done(detail)</code>, <code>fail(detail)</code>, <code>skip(detail)</code>, <code>detail(text)</code> (the detail alone, for a clock beside a running step) and <code>append(node)</code> (a thumbnail under the label); <code>note(text, at?)</code> puts a line between rows that is not a step; <code>running(on)</code> says whether work is under way, and while it is, <code>tail</code> shows only the last that many rows.</td>
+</tr>
+<tr>
+<td><code>fold({ text, open, busy })</code></td>
+<td>A block folded to one line: <code>set(...content)</code> changes the line, <code>mark(&quot;✓&quot; | &quot;✗&quot; | &quot;busy&quot; | null, kind)</code> the mark in front of it, <code>action(button)</code> puts a control at its end whose click does not fold the block, and <code>body</code> is where the content goes. A turn&#39;s work folded to &quot;7 steps · 2 edits · 6 s&quot; with an Undo, or a model&#39;s reasoning most readers skip.</td>
+</tr>
+</tbody></table>
+<p>Which to reach for: a <strong>spinner</strong> where the wait has no size, a <strong>progress bar</strong> where it
+does (a download, a pass over every trigger), <strong>skeletons</strong> for a list or a pane you are
+about to fill — they say more than an empty box, and nothing jumps when the answer lands
+— and <strong>busy</strong> for a list being replaced by a different one. Put the outcome, the error
+and the Cancel on one <strong>status line</strong> so a dialog has a single voice, and leave the field
+that started the work live: the user changing their mind should not have to wait for the
+answer they no longer want. Every long call is a good place for an <code>AbortSignal</code>, and
+<code>statusLine.cancel(stop)</code> is where the user reaches it.</p>
+<pre><code class="language-js">const status = api.ui.widgets.statusLine();
+const search = api.ui.widgets.button(&quot;Search&quot;, { onClick: () =&gt; void run() });
+
+async function run() {
+  const stop = new AbortController();
+  const cover = api.ui.widgets.busy(results, &quot;Searching…&quot;);
+  status.busy(&quot;Searching…&quot;);
+  status.cancel(() =&gt; stop.abort());
+  search.setBusy(true);
+  try {
+    const found = await fetch(url, { signal: stop.signal }).then((r) =&gt; r.json());
+    status.set(`${found.length} found.`, &quot;ok&quot;);
+    fill(results, found);
+  } catch (err) {
+    status.set(err.name === &quot;AbortError&quot; ? &quot;Stopped.&quot; : String(err), &quot;error&quot;);
+  } finally {
+    cover.done();
+    search.setBusy(false);
+    status.cancel(null);
+  }
+}
+</code></pre>
+<p><code>ui.progress(label)</code> is the other half of this: a panel over the <em>map</em> for work that runs
+while the user carries on editing. A dialog covers the map, so anything a dialog starts
+belongs on that dialog&#39;s own status line, not in a progress panel behind it.</p>
+<p><strong>Panels.</strong> <code>panel(spec)</code> floats over the map and blocks nothing: the user keeps drawing,
+scrolling and using hotkeys while it is open (except while typing in one of its fields).
+<code>spec.mount(body, handle)</code> fills an empty <code>&lt;div&gt;</code> as a dialog&#39;s does; <code>width</code> is in CSS
+pixels (260 by default) and the panel is as tall as its content, or <code>height</code> pixels tall;
+<code>onClose</code> fires however it closes. The user drags it by its title bar and closes it with
+the ×. It opens at the top-right of the map and remembers where it was left for the
+session. <code>resizable: true</code> adds a grip at the bottom-right corner and remembers the size
+too; the body is then a column, so a root element with <code>flex: 1; min-height: 0</code> fills it —
+what a code editor or a long list beside the map wants. The handle has <code>close()</code>,
+<code>isOpen()</code> and <code>setTitle()</code>. Open as many as you like; they all close with the plugin.</p>
+<p><code>dock: &quot;right&quot;</code> puts the panel in the right dock instead, under Minimap, Layers and
+Properties, with the same head and hide button the built-in panels have — the plugin&#39;s
+icon, the title, and the hide button as its close. That is the choice for anything the
+user keeps open while working: an assistant, a readout, a list they go back to. A docked
+panel keeps the dock on screen even when every built-in panel in it is hidden. <code>grow: true</code>
+lets it take the dock&#39;s spare height (a transcript wants that; a short readout does not).
+<code>width</code> is ignored when docked, since the dock has its own width.</p>
+<p><strong>Status items.</strong> <code>statusItem({ text, title?, busy?, warn?, onClick? })</code> is a cell in the
+status bar with the plugin&#39;s icon, for a plugin that works in the background and should
+stay visible without a panel — &quot;AI · working 12 s&quot;, &quot;3 problems&quot;, &quot;Synced&quot;. <code>busy</code> swaps
+the icon for a spinner, <code>warn</code> paints the cell as a warning, <code>onClick</code> makes it a button.
+Keep the handle and <code>set(patch)</code> it as things move; <code>remove()</code> takes it away, and so does
+disabling the plugin.</p>
+<p><strong>Dialog slots.</strong> <code>dialogSlot(dialogId, { mount })</code> adds to a built-in dialog — or to
+another plugin&#39;s dialog that offers a slot, by the id it names. Each time
+that dialog opens, <code>mount(body, host)</code> runs with an empty <code>&lt;span&gt;</code> at the left of the
+dialog&#39;s footer; fill it with the widgets and it reads as part of the dialog. <code>host</code> says
+which dialog (<code>host.dialog</code>), what it was opened with (<code>host.payload</code>), and lends the
+dialog&#39;s <strong>working copy</strong> as <code>host.fields</code> — the values in the form, not yet applied to
+the map — so a button can fill a field in and leave OK to the person. The dialogs and
+the fields each one lends:</p>
+<table>
+<thead>
+<tr>
+<th>Dialog id</th>
+<th>Fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mapProperties</code></td>
+<td><code>name</code>, <code>description</code></td>
+</tr>
+<tr>
+<td><code>triggerEditor</code>, <code>stringEditor</code>, <code>playerSettings</code>, <code>missionBriefing</code></td>
+<td>none — a slot only</td>
+</tr>
+<tr>
+<td><code>trigedit.text</code> (the TrigEdit plugin&#39;s Text Trigger Editor)</td>
+<td><code>text</code> (the whole editor); <code>payload.briefing</code> says which list is shown</td>
+</tr>
+</tbody></table>
+<p>A field is <code>{ get(), set(value) }</code>, read live: a slot mounted once sees every keystroke.
+<code>host.close()</code> closes the dialog. Return a cleanup from <code>mount</code> if you started anything;
+it runs when the dialog closes, and the registration itself leaves with <code>dispose()</code> or the
+plugin.</p>
+<p><strong>Map tools.</strong> <code>mapTool(spec)</code> takes over the pointer on the map. The viewport hands the
+tool every press, move and release ahead of the active layer&#39;s own tools (<code>onDown</code> /
+<code>onMove</code> / <code>onUp</code>, each with a <code>MapPointer</code>: map pixels, the tile, <code>inMap</code>, <code>down</code>, and
+the modifier keys, kept inside the map while a button is held, as the built-in brushes
+do). It hides the layer&#39;s brush ghost, shows <code>name</code> and <code>hint</code> in the HUD, and calls
+<code>draw(ctx, view)</code> last on every repaint so the tool can preview what it will do
+(<code>view.x(px)</code> / <code>view.y(py)</code> map to canvas pixels; <code>view.tilePx</code>, <code>view.zoom</code>,
+<code>view.visible</code>). <code>handle.redraw()</code> repaints now; call it from <code>onMove</code>. Esc or a
+right-click calls <code>onCancel</code>: return <code>true</code> to keep running (you dropped a gesture of your
+own), otherwise the tool stops. <code>onStop(reason)</code> is told once, whichever way it ends:
+<code>&quot;stopped&quot;</code> (your <code>stop()</code>), <code>&quot;cancelled&quot;</code>, <code>&quot;document&quot;</code> (the map closed or changed),
+<code>&quot;replaced&quot;</code> (another tool started; one runs at a time) or <code>&quot;disabled&quot;</code>. A <code>pickArea</code> /
+<code>pickTile</code> in progress is served first. Paint is the worked example.</p>
+<p><strong>Overlays.</strong> <code>overlay(spec)</code> is a picture over the map that the user can switch on and
+off, and that stays while they work on any layer. It is listed under View (after the
+built-in overlays) and in the Layers panel with an eye of its own. <code>draw(ctx, view)</code> runs
+at every repaint while visible, at the slot <code>above</code> names: <code>&quot;terrain&quot;</code> (under doodad
+footprints, units, sprites and locations; the default), <code>&quot;objects&quot;</code> (under fog of war) or
+<code>&quot;everything&quot;</code> (under a running map tool&#39;s drawing only), with the same <code>MapView</code> a map
+tool gets. <code>onHover(p)</code> hears the pointer on every layer, and while a map tool runs, with
+<code>null</code> once when it leaves the map. The overlay never takes the pointer, so clicks go to
+the active layer&#39;s tools. <code>onToggle(visible)</code> fires whichever way it was switched. The
+handle has <code>show()</code>, <code>hide()</code>, <code>toggle()</code>, <code>isVisible()</code>, <code>redraw()</code> and <code>remove()</code>.
+<code>visible</code> is the starting state (true by default); what the user last set an overlay of
+that name to wins for the session, so a reloaded plugin comes back as it was left.
+Register at activation and keep the handle; the overlay leaves with the plugin.
+Walkability is the worked example.</p>
+<h2 id="apimenu-apicontextmenu-apihotkeys"><code>api.menu</code> / <code>api.contextMenu</code> / <code>api.hotkeys</code><a class="anchor" href="#apimenu-apicontextmenu-apihotkeys" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><code>menu.add(path, item)</code>: <code>path</code> is a top-level menu (<code>&quot;File&quot;</code>, <code>&quot;Edit&quot;</code>, <code>&quot;View&quot;</code>,
+<code>&quot;Layer&quot;</code>, <code>&quot;Scenario&quot;</code>, <code>&quot;Triggers&quot;</code>, <code>&quot;Tools&quot;</code>, <code>&quot;Plugins&quot;</code>, <code>&quot;Help&quot;</code>) or a submenu
+by label (<code>&quot;File/Import&quot;</code>). Labels are the English ones whatever language the editor
+is showing — a label is an item&#39;s identity, and the menu translates it as it draws it,
+so a plugin&#39;s own label shows as written and a built-in&#39;s shows in the user&#39;s language.
+Plugin items appear after a separator at the end of that menu, unless <code>after</code> names a
+built-in item or submenu (<code>after: &quot;Open Recent&quot;</code>), in which case the item sits directly
+under it. A last segment that names no submenu gets
+one of the plugin&#39;s own at the end of the menu (<code>&quot;Tools/AI&quot;</code>), so a plugin with many
+items can keep them together, and a first segment that names no top-level menu gets
+one made for the plugin, placed before Help (<code>&quot;Account&quot;</code>); <code>separator: true</code> on an
+item draws a line above it (never two in a row). <code>item</code> is <code>{ label, shortcut?, icon?, after?, enabled?(), run() }</code>.
+<code>icon</code> puts a mark in front of the label: <code>&quot;plugin&quot;</code> for the plugin&#39;s own icon (the
+manifest&#39;s), or any <code>PluginIcon</code>. Use it for items that do something no built-in does,
+such as reaching a server, so the user can tell at a glance which entries are the
+plugin&#39;s.</li>
+<li><code>contextMenu.add(surface, item)</code>: surfaces are <code>&quot;viewport&quot;</code> (the map) and
+<code>&quot;terrainPalette&quot;</code>. <code>run(ctx)</code>, <code>enabled?(ctx)</code> and <code>visible?(ctx)</code> get a
+<code>ContextMenuContext</code>: the tile and pixel under the pointer (viewport), the active
+layer, terrain mode and terrain, and the marked area.</li>
+<li><code>hotkeys.add(&quot;Ctrl+Shift+I&quot;, run)</code>: modifiers in any order, then a key name. Plugin
+hotkeys are checked before the built-ins and never while typing in a field or while a
+dialog is open.</li>
+<li>All three take <code>{ command: &quot;id&quot; }</code> (or <code>command:</code> on the item) instead of a <code>run</code> of
+their own; see <code>api.commands</code>. A context item&#39;s command is called with the
+<code>ContextMenuContext</code> as its argument.</li>
+</ul>
+<h2 id="apii18n"><code>api.i18n</code><a class="anchor" href="#apii18n" aria-label="Link to this section">#</a></h2>
+<p>The plugin&#39;s words in the editor&#39;s language, done the way the editor&#39;s own chrome is:
+the English text is the key, a catalogue is a flat object per language, and an
+untranslated string is its own English. <code>register({ ko: {…} })</code> adds catalogues (a
+later one overrides earlier entries; the <code>Disposable</code> removes them), <code>t(text, params?)</code>
+gives the text in the current language with its placeholders filled, <code>tc(context, text, params?)</code> is the same with a context for the same English words meant differently in
+two places, and <code>language</code> is the current language&#39;s primary tag (<code>&quot;en&quot;</code>, <code>&quot;ko&quot;</code>). The
+<code>&quot;language&quot;</code> event fires when it changes, for relabelling what is already showing.</p>
+<p>Placeholders are a small subset of ICU MessageFormat: <code>{name}</code>; <code>{n, plural, one {# unit} other {# units}}</code>, with <code>=0</code>-style exact matches and <code>#</code> the number formatted for the
+language (Korean has one plural category and writes only <code>other</code>); <code>{x, select, a {…} other {…}}</code>. For Korean, <code>{name|을}</code> appends the particle that agrees with the value —
+을/를, 이/가, 은/는, 과/와, 으로/로 — so a translation never writes &quot;{name}(을)를&quot;.</p>
+<pre><code class="language-ts">api.i18n.register({ ko: { &quot;Count units…&quot;: &quot;유닛 세기…&quot;, &quot;{n, plural, one {# unit} other {# units}}&quot;: &quot;유닛 {n, plural, other {#개}}&quot; } });
+api.menu.add(&quot;Tools&quot;, { label: api.i18n.t(&quot;Count units…&quot;), run: () =&gt; api.ui.alert(api.i18n.t(&quot;{n, plural, one {# unit} other {# units}}&quot;, { n: api.query.unitsOf(0).length })) });
+</code></pre>
+<p>The editor&#39;s <code>scripts/i18n.mjs</code> extracts <code>t(&quot;…&quot;)</code> / <code>tc(&quot;…&quot;, &quot;…&quot;)</code> / <code>msg(&quot;…&quot;)</code> calls
+from a source tree and keeps a catalogue&#39;s key set equal to them; a plugin repository
+can run the same over its own <code>src/</code> (see <a href="/development/translations/">docs/development.md</a>).</p>
+<h2 id="apievents"><code>api.events</code><a class="anchor" href="#apievents" aria-label="Link to this section">#</a></h2>
+<p><code>on(event, fn)</code> returns a <code>Disposable</code>. Listeners are notifications, not a pipeline: they
+run after the change, in the order the plugins were activated, and cannot veto, delay or
+reorder one another. There is no plugin ordering and none is planned. A listener that
+rewrites the map in response (Repair does, through <code>document.sections</code>) raises a fresh
+<code>&quot;document&quot;</code> event with reason <code>&quot;replace&quot;</code>, which every other listener sees in turn, so
+whatever a plugin computed from the earlier state is recomputed from the later one.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&quot;document&quot;</code></td>
+<td>The map in front changed. The listener is handed a <code>DocumentEvent</code>: <code>reason</code> is <code>&quot;open&quot;</code> (File ▸ Open, a drop, <code>document.open</code> from any plugin), <code>&quot;new&quot;</code> (File ▸ New, the startup map included), <code>&quot;close&quot;</code>, <code>&quot;replace&quot;</code> (the open map parsed again from edited bytes, by a <code>document.sections</code> write from any plugin, yours included), or <code>&quot;switch&quot;</code> (another open map came to the front — a tab clicked, <code>document.activate</code>, or the map in front closed with others still open; nothing was read or written, and the map that was in front is still open behind); <code>fileName</code> is the file&#39;s name or null, and <code>id</code> is <code>document.id()</code> after the change. A plugin that acts on maps as they open listens for <code>&quot;open&quot;</code> and lets the rest pass; one that keeps something per map keys it on <code>id</code> and drops what <code>list()</code> no longer names. Every other event carries nothing.</td>
+</tr>
+<tr>
+<td><code>&quot;terrain&quot;</code></td>
+<td>Every committed edit, stroke, undo and redo, terrain or not, fog edits included. It is the &quot;something changed on the map&quot; event.</td>
+</tr>
+<tr>
+<td><code>&quot;units&quot;</code>, <code>&quot;doodads&quot;</code>, <code>&quot;locations&quot;</code></td>
+<td>Those lists changed.</td>
+</tr>
+<tr>
+<td><code>&quot;sprites&quot;</code></td>
+<td>The sprites changed (they share the doodads&#39; revision, since a doodad&#39;s overlay sprite is one).</td>
+</tr>
+<tr>
+<td><code>&quot;settings&quot;</code></td>
+<td>Every settings dialog&#39;s OK, Map Properties included.</td>
+</tr>
+<tr>
+<td><code>&quot;triggers&quot;</code></td>
+<td>The trigger or briefing list changed.</td>
+</tr>
+<tr>
+<td><code>&quot;layer&quot;</code>, <code>&quot;selection&quot;</code></td>
+<td>The active layer, or what is selected on it.</td>
+</tr>
+<tr>
+<td><code>&quot;clipboard&quot;</code></td>
+<td>The marked area or the clip changed.</td>
+</tr>
+<tr>
+<td><code>&quot;view&quot;</code></td>
+<td>Scrolled, zoomed, a View tick moved, or an overlay registered or toggled.</td>
+</tr>
+<tr>
+<td><code>&quot;tool&quot;</code></td>
+<td>A map tool or a pick started or stopped.</td>
+</tr>
+<tr>
+<td><code>&quot;modified&quot;</code></td>
+<td>The unsaved-changes flag.</td>
+</tr>
+<tr>
+<td><code>&quot;palette&quot;</code></td>
+<td>A palette&#39;s pick changed: terrain brush, unit and owner, sprite, doodad, fog players.</td>
+</tr>
+<tr>
+<td><code>&quot;options&quot;</code></td>
+<td>An editing option moved: symmetry, placement and doodad rules, location snap, the fog view player, clip parts and paste mode, locked layers, the grid look, Preferences.</td>
+</tr>
+<tr>
+<td><code>&quot;file&quot;</code></td>
+<td>The document&#39;s name or handle after a Save, its save options, the archive extras, or the recent list.</td>
+</tr>
+<tr>
+<td><code>&quot;commands&quot;</code></td>
+<td>A plugin registered or removed a command. This is how a plugin that calls another&#39;s by id learns it has arrived, since plugins activate in no fixed order; check <code>commands.has</code> in the listener.</td>
+</tr>
+<tr>
+<td><code>&quot;services&quot;</code></td>
+<td>A plugin provided or withdrew a service. <code>services.watch(name, fn)</code> is the usual way to hear this for one name.</td>
+</tr>
+<tr>
+<td><code>&quot;gameData&quot;</code></td>
+<td>The game data source changed: installed, switched to another data set, or a copy removed. <code>gameData.source()</code> says what it is now, and everything drawn or named from the data is worth redoing.</td>
+</tr>
+<tr>
+<td><code>&quot;language&quot;</code></td>
+<td>The editor&#39;s language changed (Preferences ▸ Display). <code>i18n.language</code> says what it is now; relabel what is showing through <code>i18n.t</code>.</td>
+</tr>
+</tbody></table>
+<h2 id="apistorage"><code>api.storage</code><a class="anchor" href="#apistorage" aria-label="Link to this section">#</a></h2>
+<p><code>get(key, fallback)</code>, <code>set(key, value)</code> and <code>remove(key)</code> keep JSON in the browser&#39;s
+storage under a per-plugin prefix (<code>scmjs.plugin.&lt;id&gt;.</code>), falling back to memory when
+storage is unavailable. <code>set</code> answers false when the browser refused the write — its quota
+is a few megabytes for the whole editor — so a plugin keeping something the user made
+(Stamp Library&#39;s stamps) can say so instead of losing it silently. The user can see and throw it away: Preferences ▸ General ▸
+Browser storage lists your keys as one row under your plugin&#39;s id, opening onto the
+values, with a Clear button of its own, and Clear all data sweeps every key the editor
+owns. So treat what you store as a convenience, never as the only copy of something, and
+keep it small and readable.</p>
+<h2 id="apiplugin-apiapiversion-apilog"><code>api.plugin</code>, <code>api.apiVersion</code>, <code>api.log(...)</code><a class="anchor" href="#apiplugin-apiapiversion-apilog" aria-label="Link to this section">#</a></h2>
+<p>Who you are (<code>id</code>, <code>name</code>, <code>source</code>), which API version you got, and a logger with the
+plugin&#39;s name in front. <code>log</code> writes to the browser&#39;s console <em>and</em> to the editor&#39;s own
+log, which the user reads in <strong>View ▸ Debug Console</strong> and copies into a bug report — so
+write the lines someone else would need to understand what your plugin did, and keep them
+short. Anything else the host notices about a plugin lands there too, with its name on it:
+it started and at which version, the edits it made and what they changed, a listener of
+yours that threw, and a call made after the plugin was turned off. With the console&#39;s
+<strong>Verbose</strong> tick on, every call a plugin makes into the API is recorded, which is how a
+user (or you) finds out which plugin did something to a map.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#asynchronous-calls-and-the-one-synchronous-builder">Asynchronous calls, and the one synchronous builder</a></li>
+<li><a href="#the-three-kinds-of-write">The three kinds of write</a></li>
+<li><a href="#apidocument">api.document</a></li>
+<li><a href="#apidocumentsections">api.document.sections</a></li>
+<li><a href="#edittransaction">EditTransaction</a></li>
+<li><a href="#updatetransaction">UpdateTransaction</a></li>
+<li><a href="#apisettings">api.settings</a></li>
+<li><a href="#apitriggers">api.triggers</a></li>
+<li><a href="#apiquery">api.query</a></li>
+<li><a href="#apiview">api.view</a></li>
+<li><a href="#apidata">api.data</a></li>
+<li><a href="#apigamedata">api.gameData</a></li>
+<li><a href="#apiconsts">api.consts</a></li>
+<li><a href="#apigraphics">api.graphics</a></li>
+<li><a href="#apicommands">api.commands</a></li>
+<li><a href="#apiservices">api.services</a></li>
+<li><a href="#apiterrain">api.terrain</a></li>
+<li><a href="#apitileset">api.tileset</a></li>
+<li><a href="#apiselection">api.selection</a></li>
+<li><a href="#apiclipboard">api.clipboard</a></li>
+<li><a href="#apiexchange">api.exchange</a></li>
+<li><a href="#apipalette">api.palette</a></li>
+<li><a href="#apinames">api.names</a></li>
+<li><a href="#apitext">api.text</a></li>
+<li><a href="#apiui">api.ui</a></li>
+<li><a href="#apimenu-apicontextmenu-apihotkeys">api.menu / api.contextMenu / api.hotkeys</a></li>
+<li><a href="#apii18n">api.i18n</a></li>
+<li><a href="#apievents">api.events</a></li>
+<li><a href="#apistorage">api.storage</a></li>
+<li><a href="#apiplugin-apiapiversion-apilog">api.plugin, api.apiVersion, api.log(...)</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

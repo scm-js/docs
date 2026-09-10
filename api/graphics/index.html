@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>api.graphics — scmJS documentation</title>
+<meta name="description" content="The pictures the viewport draws, for a plugin&#39;s own lists and previews: the same
+cached canvases, so asking for one costs nothing after the first time. Everything is
+null when the graphics it needs were never extracted — a plugin shows a name instead.">
+<meta property="og:title" content="api.graphics — scmJS documentation">
+<meta property="og:description" content="The pictures the viewport draws, for a plugin&#39;s own lists and previews: the same
+cached canvases, so asking for one costs nothing after the first time. Everything is
+null when the graphics it needs were never extracted — a plugin shows a name instead.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="here" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>api.graphics</h1>
+<p class="lede">GraphicsApi</p>
+<p>The pictures the viewport draws, for a plugin&#39;s own lists and previews: the same
+cached canvases, so asking for one costs nothing after the first time. Everything is
+null when the graphics it needs were never extracted — a plugin shows a name instead.</p>
+
+<ul class="chips"><li><a href="#ready">ready</a></li><li><a href="#load">load</a></li><li><a href="#unitimage">unitImage</a></li><li><a href="#spriteimage">spriteImage</a></li><li><a href="#tileimage">tileImage</a></li><li><a href="#doodadimage">doodadImage</a></li><li><a href="#renderrect">renderRect</a></li><li><a href="#renderclip">renderClip</a></li><li><a href="#playercolor">playerColor</a></li><li><a href="#requestunit">requestUnit</a></li><li><a href="#requestsprite">requestSprite</a></li><li><a href="#onimageloaded">onImageLoaded</a></li></ul>
+<h2 id="members">Members</h2>
+<div class="member" id="ready">
+  <h3><a class="anchor-name" href="#ready">ready</a></h3>
+  <pre class="code"><code>ready(): { tileset: <span class="k">boolean</span>; units: <span class="k">boolean</span>; };</code></pre>
+  <p>Whether the tileset graphics and the unit tables are in memory.</p>
+  
+  
+</div>
+<div class="member" id="load">
+  <h3><a class="anchor-name" href="#load">load</a></h3>
+  <pre class="code"><code>load(): <span class="k">Promise</span>&lt;{ tileset: <span class="k">boolean</span>; units: <span class="k">boolean</span>; }&gt;;</code></pre>
+  <p>Fetch both; resolves with what is available afterwards.</p>
+  
+  
+</div>
+<div class="member" id="unitimage">
+  <h3><a class="anchor-name" href="#unitimage">unitImage</a></h3>
+  <pre class="code"><code>unitImage(unitId: <span class="k">number</span>, options?: { owner?: <span class="k">number</span>; }): <a class="t" href="/api/graphics/#pluginimage">PluginImage</a> | <span class="k">null</span>;</code></pre>
+  <p>A unit type in its editor pose, in a player&#39;s colours (<code>owner</code> 0 by default).</p>
+  
+  
+</div>
+<div class="member" id="spriteimage">
+  <h3><a class="anchor-name" href="#spriteimage">spriteImage</a></h3>
+  <pre class="code"><code>spriteImage(kind: <a class="t" href="/api/types/#spritekind">SpriteKind</a>, id: <span class="k">number</span>, options?: { owner?: <span class="k">number</span>; flipped?: <span class="k">boolean</span>; }): <a class="t" href="/api/graphics/#pluginimage">PluginImage</a> | <span class="k">null</span>;</code></pre>
+  <p>A THG2 sprite: a sprites.dat image for <code>&quot;pure&quot;</code>, a unit for <code>&quot;unit&quot;</code>.</p>
+  
+  
+</div>
+<div class="member" id="tileimage">
+  <h3><a class="anchor-name" href="#tileimage">tileImage</a></h3>
+  <pre class="code"><code>tileImage(tileId: <span class="k">number</span>): <a class="t" href="/api/graphics/#pluginimage">PluginImage</a> | <span class="k">null</span>;</code></pre>
+  <p>One 32 × 32 megatile of the open map&#39;s tileset.</p>
+  
+  
+</div>
+<div class="member" id="doodadimage">
+  <h3><a class="anchor-name" href="#doodadimage">doodadImage</a></h3>
+  <pre class="code"><code>doodadImage(doodadId: <span class="k">number</span>): <a class="t" href="/api/graphics/#pluginimage">PluginImage</a> | <span class="k">null</span>;</code></pre>
+  <p>A doodad drawn from its own tiles.</p>
+  
+  
+</div>
+<div class="member" id="renderrect">
+  <h3><a class="anchor-name" href="#renderrect">renderRect</a></h3>
+  <pre class="code"><code>renderRect(rect: <a class="t" href="/api/types/#rect">Rect</a>, options?: <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#mapimageoptions">MapImageOptions</a>&gt;): <span class="k">Promise</span>&lt;Blob | <span class="k">null</span>&gt;;</code></pre>
+  <p>Part of the map as File ▸ Export ▸ Image draws it — the same render, cropped to a
+tile rect. Everything it needs is loaded first; null without a map or a canvas.</p>
+  
+  
+</div>
+<div class="member" id="renderclip">
+  <h3><a class="anchor-name" href="#renderclip">renderClip</a></h3>
+  <pre class="code"><code>renderClip(clip: <a class="t" href="/api/types/#clip">Clip</a>, options?: <a class="t" href="/api/graphics/#renderclipoptions">RenderClipOptions</a>): <a class="t" href="/api/graphics/#pluginimage">PluginImage</a> | <span class="k">null</span>;</code></pre>
+  <p>A <code>Clip</code> drawn as the clipboard layer&#39;s paste ghost draws it: the picture (its own
+tiles, or the catalogue&#39;s for a doodad-only clip), then units, sprites and doodad
+overlays with the viewport&#39;s own graphics, then location boxes — a thumbnail for a
+list of clips, or the ghost under the pointer while a plugin stamps one. It is drawn
+with the graphics of the clip&#39;s <em>own</em> tileset (<code>clip.era</code>), which are in memory for
+the open map once loaded and otherwise not, so a clip from another tileset answers
+null; so does a missing tileset or a page with no canvas. Synchronous and uncached:
+keep the result while the clip and the tileset stay the same.</p>
+  
+  
+</div>
+<div class="member" id="playercolor">
+  <h3><a class="anchor-name" href="#playercolor">playerColor</a></h3>
+  <pre class="code"><code>playerColor(owner: <span class="k">number</span>): <span class="k">string</span>;</code></pre>
+  <p>The colour a player&#39;s units are drawn in, <code>#rrggbb</code>.</p>
+  
+  
+</div>
+<div class="member" id="requestunit">
+  <h3><a class="anchor-name" href="#requestunit">requestUnit</a></h3>
+  <pre class="code"><code>requestUnit(unitId: <span class="k">number</span>): <span class="k">boolean</span>;</code></pre>
+  <p>Start fetching the GRPs a unit type needs, and say whether they are already in
+memory. Graphics load lazily, so the first <code>unitImage</code> for a type is often null —
+ask for it here, redraw on <code>onImageLoaded</code>, and the list fills in.</p>
+  
+  
+</div>
+<div class="member" id="requestsprite">
+  <h3><a class="anchor-name" href="#requestsprite">requestSprite</a></h3>
+  <pre class="code"><code>requestSprite(kind: <a class="t" href="/api/types/#spritekind">SpriteKind</a>, id: <span class="k">number</span>): <span class="k">boolean</span>;</code></pre>
+  
+  
+  
+</div>
+<div class="member" id="onimageloaded">
+  <h3><a class="anchor-name" href="#onimageloaded">onImageLoaded</a></h3>
+  <pre class="code"><code>onImageLoaded(listener: () =&gt; <span class="k">void</span>): <a class="t" href="/api/types/#disposable">Disposable</a>;</code></pre>
+  <p>A GRP finished loading: anything drawn from one may look different now.</p>
+  
+  
+</div>
+<h2 id="types">Types</h2>
+<p>Declarations only this group names.</p>
+<div class="type" id="pluginimage">
+  <h3><a class="anchor-name" href="#pluginimage">PluginImage</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/graphics/#pluginimage">PluginImage</a></code></pre>
+  <p>A picture the editor already has: the canvas it draws from, and its size in pixels.</p>
+  <table class="fields"><tbody><tr><th><code>image: HTMLCanvasElement</code></th><td></td></tr>
+<tr><th><code>width: <span class="k">number</span></code></th><td></td></tr>
+<tr><th><code>height: <span class="k">number</span></code></th><td></td></tr></tbody></table>
+  
+</div>
+<div class="type" id="renderclipoptions">
+  <h3><a class="anchor-name" href="#renderclipoptions">RenderClipOptions</a><span class="kind">interface</span></h3>
+  <pre class="code"><code><span class="k">interface</span> <a class="t" href="/api/graphics/#renderclipoptions">RenderClipOptions</a></code></pre>
+  
+  <table class="fields"><tbody><tr><th><code>pixelsPerTile?: <span class="k">number</span></code></th><td><p>Pixels per tile; 32 (the game&#39;s own) by default. A thumbnail wants 4–8.</p></td></tr>
+<tr><th><code>parts?: <span class="k">Partial</span>&lt;<a class="t" href="/api/types/#clipparts">ClipParts</a>&gt;</code></th><td><p>Which parts to draw; every part the clip carries by default.</p></td></tr></tbody></table>
+  
+</div>
+
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#ready">ready</a></li>
+<li><a href="#load">load</a></li>
+<li><a href="#unitimage">unitImage</a></li>
+<li><a href="#spriteimage">spriteImage</a></li>
+<li><a href="#tileimage">tileImage</a></li>
+<li><a href="#doodadimage">doodadImage</a></li>
+<li><a href="#renderrect">renderRect</a></li>
+<li><a href="#renderclip">renderClip</a></li>
+<li><a href="#playercolor">playerColor</a></li>
+<li><a href="#requestunit">requestUnit</a></li>
+<li><a href="#requestsprite">requestSprite</a></li>
+<li><a href="#onimageloaded">onImageLoaded</a></li>
+<li><a href="#pluginimage">PluginImage</a></li>
+<li><a href="#renderclipoptions">RenderClipOptions</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

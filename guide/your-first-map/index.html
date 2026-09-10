@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your first map — scmJS documentation</title>
+<meta name="description" content="A small melee map, start to finish.">
+<meta property="og:title" content="Your first map — scmJS documentation">
+<meta property="og:description" content="A small melee map, start to finish.">
+<meta property="og:type" content="website">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="here" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-works-and-what-does-not/">What works, and what does not</a></li>
+<li><a class="" href="/guide/documentation/">Documentation</a></li>
+<li><a class="" href="/guide/license/">License</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Map files</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Your first map</h1>
+<p>A small melee map, start to finish. Everything here is covered in more depth in the
+sections that follow.</p>
+<h2 id="1-make-the-map">1. Make the map<a class="anchor" href="#1-make-the-map" aria-label="Link to this section">#</a></h2>
+<p>Ctrl+N opens New Scenario. Pick a tileset — each is shown as its own ground — a size, and
+how many players. The terrain list under the size is what the whole map is filled with,
+and the preview shows the result at its real scale. <em>Place automatically</em> lays down one
+start location per player in a ring; leave it on.</p>
+<p><img src="/images/new-scenario.webp" alt="The New Scenario dialog"></p>
+<p>Give the map a name and a description — both are what players see in the game lobby —
+and press Create.</p>
+<h2 id="2-shape-the-ground">2. Shape the ground<a class="anchor" href="#2-shape-the-ground" aria-label="Link to this section">#</a></h2>
+<p>Stay on the Terrain layer and the <strong>Isometric</strong> tab. Pick <em>High Dirt</em> (Badlands; every
+tileset has a high ground of its own), set the brush to 3×3, and drag across the map.
+The cliffs around the high ground are laid for you, and where a stroke meets a terrain
+the new one cannot touch, the terrain in between is put in. Painting <em>Water</em> works the
+same way and gives you a shore.</p>
+<p><img src="/images/tutorial-terrain.webp" alt="A plateau and a lake painted with the isometric brush"></p>
+<p>The brush size keys are <code>[</code> and <code>]</code>. Alt+click picks the terrain under the cursor.
+Ctrl+Z takes back the whole stroke.</p>
+<p>Ramps are not terrain: they are on the <strong>Doodads</strong> layer. Type <code>ramp</code> in its search box
+to list them, click one, and click on a cliff edge; the ghost is red until the footprint
+sits on ground it fits.</p>
+<h2 id="3-place-the-bases">3. Place the bases<a class="anchor" href="#3-place-the-bases" aria-label="Link to this section">#</a></h2>
+<p>Switch to the <strong>Units</strong> layer (<code>U</code>). The start locations are already there. In the
+palette, <em>Special</em> holds <em>Start Location</em> and <em>Resources</em> holds the mineral fields and
+the Vespene Geyser, or type a name in the search box. Click a type to arm it, then click
+on the map to place; Esc or a right-click stops placing.</p>
+<p><img src="/images/tutorial-base.webp" alt="A start location with minerals and a geyser"></p>
+<p>A mineral field holds 1500 minerals and a geyser 5000 gas when placed; double-click one
+to change the amount, or select a whole line and set them all at once. Eight fields and
+one geyser is the usual main.</p>
+<p><em>Snap to grid</em> keeps buildings and resources on the tile grid where the game expects
+them. The two ticks above it are the game&#39;s own placement rules; a red ghost means the
+game would drop the unit when it loaded the map, and the status bar says why.</p>
+<p>For a symmetric map, Tools ▸ Symmetry mirrors what you paint and place across the axis
+you choose. The Melee Wizard plugin (Plugins ▸ Browse Plugins…) lays out whole bases with
+the mineral line at the distance the game mines fastest from.</p>
+<h2 id="4-check-the-players">4. Check the players<a class="anchor" href="#4-check-the-players" aria-label="Link to this section">#</a></h2>
+<p>Scenario ▸ Player Settings is where each slot&#39;s controller, race and colour live. A melee
+map needs <em>Human</em> and <em>User Selectable</em> on every slot that has a start location; that is
+what a new map is set to already. Force Settings groups them into teams for the lobby.</p>
+<h2 id="5-check-the-map">5. Check the map<a class="anchor" href="#5-check-the-map" aria-label="Link to this section">#</a></h2>
+<p>Tools ▸ Check Map lists what the game would object to: a start location with no player,
+a unit off the map, too many units, and so on. Double-click a line to go to it.</p>
+<p>View ▸ Walkability (Ctrl+Shift+W) draws the ground as a unit sees it: which areas
+connect, where the chokes are and how wide, and which pockets cannot be reached at all.
+It updates as you edit.</p>
+<h2 id="6-save-and-play">6. Save and play<a class="anchor" href="#6-save-and-play" aria-label="Link to this section">#</a></h2>
+<p>Ctrl+S saves. A new map opens the Save dialog the first time, where the name and the
+file format are chosen; <code>.scx</code> is a Brood War map. From then on Ctrl+S writes the file in
+place (Chrome, Edge, the desktop app) or downloads it (Firefox, Safari) — the notice at
+the bottom right says which.</p>
+<p>Ctrl+F5 is Test Map. Neither StarCraft build opens a map handed to it from the outside,
+so the editor writes the map into a <code>scmJS</code> folder under the game&#39;s <em>Maps</em> folder, where
+<strong>Single Player ▸ Custom Game</strong> lists it; the desktop app then starts the game as well.</p>
+<p>That is a playable melee map. Triggers, briefings, custom unit settings and everything a
+&quot;Use Map Settings&quot; map needs are in the sections below.</p>
+<footer class="page-foot">
+  <p>scmJS 0.3.1 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#1-make-the-map">1. Make the map</a></li>
+<li><a href="#2-shape-the-ground">2. Shape the ground</a></li>
+<li><a href="#3-place-the-bases">3. Place the bases</a></li>
+<li><a href="#4-check-the-players">4. Check the players</a></li>
+<li><a href="#5-check-the-map">5. Check the map</a></li>
+<li><a href="#6-save-and-play">6. Save and play</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>
