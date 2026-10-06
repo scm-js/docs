@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your first plugin — scmJS StarCraft map editor</title>
+<meta name="description" content="This part builds one small plugin from nothing to a published repository. The plugin is Base Check: it counts the mineral fields and geysers near each start location, lists them in a…">
+<meta property="og:title" content="Your first plugin — scmJS StarCraft map editor">
+<meta property="og:description" content="This part builds one small plugin from nothing to a published repository. The plugin is Base Check: it counts the mineral fields and geysers near each start location, lists them in a…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/plugins/your-first-plugin/">
+<meta property="og:url" content="https://docs.scmjs.dev/plugins/your-first-plugin/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/opening-the-script/">Opening the script</a></li>
+<li><a class="" href="/trigscript/tests/">Tests</a></li>
+<li><a class="" href="/trigscript/beside-the-map/">Beside the map</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript/examples/">Examples</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="here" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/accumulate/">Accumulate</a></li>
+<li><a class="" href="/triggers/always/">Always</a></li>
+<li><a class="" href="/triggers/bring/">Bring</a></li>
+<li><a class="" href="/triggers/command/">Command</a></li>
+<li><a class="" href="/triggers/command-the-least/">Command the Least</a></li>
+<li><a class="" href="/triggers/command-the-least-at/">Command the Least At</a></li>
+<li><a class="" href="/triggers/command-the-most/">Command the Most</a></li>
+<li><a class="" href="/triggers/command-the-most-at/">Command the Most At</a></li>
+<li><a class="" href="/triggers/countdown-timer/">Countdown Timer</a></li>
+<li><a class="" href="/triggers/deaths/">Deaths</a></li>
+<li><a class="" href="/triggers/elapsed-time/">Elapsed Time</a></li>
+<li><a class="" href="/triggers/highest-score/">Highest Score</a></li>
+<li><a class="" href="/triggers/kill/">Kill</a></li>
+<li><a class="" href="/triggers/least-kills/">Least Kills</a></li>
+<li><a class="" href="/triggers/least-resources/">Least Resources</a></li>
+<li><a class="" href="/triggers/lowest-score/">Lowest Score</a></li>
+<li><a class="" href="/triggers/mission-briefing/">Mission Briefing</a></li>
+<li><a class="" href="/triggers/most-kills/">Most Kills</a></li>
+<li><a class="" href="/triggers/most-resources/">Most Resources</a></li>
+<li><a class="" href="/triggers/never/">Never</a></li>
+<li><a class="" href="/triggers/opponents/">Opponents</a></li>
+<li><a class="" href="/triggers/score/">Score</a></li>
+<li><a class="" href="/triggers/switch/">Switch</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/center-view/">Center View</a></li>
+<li><a class="" href="/triggers/comment/">Comment</a></li>
+<li><a class="" href="/triggers/create-unit/">Create Unit</a></li>
+<li><a class="" href="/triggers/create-unit-with-properties/">Create Unit with Properties</a></li>
+<li><a class="" href="/triggers/defeat/">Defeat</a></li>
+<li><a class="" href="/triggers/display-text-message/">Display Text Message</a></li>
+<li><a class="" href="/triggers/draw/">Draw</a></li>
+<li><a class="" href="/triggers/give-units-to-player/">Give Units to Player</a></li>
+<li><a class="" href="/triggers/kill-unit/">Kill Unit</a></li>
+<li><a class="" href="/triggers/kill-unit-at-location/">Kill Unit At Location</a></li>
+<li><a class="" href="/triggers/leader-board-control/">Leader Board Control</a></li>
+<li><a class="" href="/triggers/leader-board-control-at-location/">Leader Board Control At Location</a></li>
+<li><a class="" href="/triggers/leader-board-greed/">Leader Board Greed</a></li>
+<li><a class="" href="/triggers/leader-board-kills/">Leader Board Kills</a></li>
+<li><a class="" href="/triggers/leader-board-points/">Leader Board Points</a></li>
+<li><a class="" href="/triggers/leader-board-resources/">Leader Board Resources</a></li>
+<li><a class="" href="/triggers/leaderboard-computer-players/">Leaderboard Computer Players</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control/">Leaderboard Goal Control</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control-at-location/">Leaderboard Goal Control At Location</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-kills/">Leaderboard Goal Kills</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-points/">Leaderboard Goal Points</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-resources/">Leaderboard Goal Resources</a></li>
+<li><a class="" href="/triggers/minimap-ping/">Minimap Ping</a></li>
+<li><a class="" href="/triggers/modify-unit-energy/">Modify Unit Energy</a></li>
+<li><a class="" href="/triggers/modify-unit-hanger-count/">Modify Unit Hanger Count</a></li>
+<li><a class="" href="/triggers/modify-unit-hit-points/">Modify Unit Hit Points</a></li>
+<li><a class="" href="/triggers/modify-unit-resource-amount/">Modify Unit Resource Amount</a></li>
+<li><a class="" href="/triggers/modify-unit-shield-points/">Modify Unit Shield Points</a></li>
+<li><a class="" href="/triggers/move-location/">Move Location</a></li>
+<li><a class="" href="/triggers/move-unit/">Move Unit</a></li>
+<li><a class="" href="/triggers/mute-unit-speech/">Mute Unit Speech</a></li>
+<li><a class="" href="/triggers/order/">Order</a></li>
+<li><a class="" href="/triggers/pause-game/">Pause Game</a></li>
+<li><a class="" href="/triggers/pause-timer/">Pause Timer</a></li>
+<li><a class="" href="/triggers/play-wav/">Play WAV</a></li>
+<li><a class="" href="/triggers/preserve-trigger/">Preserve Trigger</a></li>
+<li><a class="" href="/triggers/remove-unit/">Remove Unit</a></li>
+<li><a class="" href="/triggers/remove-unit-at-location/">Remove Unit At Location</a></li>
+<li><a class="" href="/triggers/run-ai-script/">Run AI Script</a></li>
+<li><a class="" href="/triggers/run-ai-script-at-location/">Run AI Script At Location</a></li>
+<li><a class="" href="/triggers/set-alliance-status/">Set Alliance Status</a></li>
+<li><a class="" href="/triggers/set-countdown-timer/">Set Countdown Timer</a></li>
+<li><a class="" href="/triggers/set-deaths/">Set Deaths</a></li>
+<li><a class="" href="/triggers/set-doodad-state/">Set Doodad State</a></li>
+<li><a class="" href="/triggers/set-invincibility/">Set Invincibility</a></li>
+<li><a class="" href="/triggers/set-mission-objectives/">Set Mission Objectives</a></li>
+<li><a class="" href="/triggers/set-next-scenario/">Set Next Scenario</a></li>
+<li><a class="" href="/triggers/set-resources/">Set Resources</a></li>
+<li><a class="" href="/triggers/set-score/">Set Score</a></li>
+<li><a class="" href="/triggers/set-switch/">Set Switch</a></li>
+<li><a class="" href="/triggers/talking-portrait/">Talking Portrait</a></li>
+<li><a class="" href="/triggers/transmission/">Transmission</a></li>
+<li><a class="" href="/triggers/unmute-unit-speech/">Unmute Unit Speech</a></li>
+<li><a class="" href="/triggers/unpause-game/">Unpause Game</a></li>
+<li><a class="" href="/triggers/unpause-timer/">Unpause Timer</a></li>
+<li><a class="" href="/triggers/victory/">Victory</a></li>
+<li><a class="" href="/triggers/wait/">Wait</a></li>
+<li><a class="" href="/triggers/disable-debug-mode/">Disable Debug Mode</a></li>
+<li><a class="" href="/triggers/enable-debug-mode/">Enable Debug Mode</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Your first plugin</h1>
+<p>This part builds one small plugin from nothing to a published repository. The plugin is
+<strong>Base Check</strong>: it counts the mineral fields and geysers near each start location, lists
+them in a panel, and can set every short mineral field back to the full amount. It is
+about sixty lines, and it uses the parts of the API most plugins use: reading the map,
+a panel, an edit with undo, events, storage, a menu item and a hotkey.</p>
+<p>You need nothing installed. The first three steps run in the editor&#39;s API Playground;
+the files come in step 4.</p>
+<h2 id="before-you-start">Before you start<a class="anchor" href="#before-you-start" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Open the editor and a melee map, or make a map with File ▸ New and a few start
+locations and mineral fields, so the plugin has something to count.</li>
+<li>Install the <a href="https://github.com/scm-js/plugin-api-playground">API Playground</a> from
+Plugins ▸ Browse Plugins…, and open Tools ▸ API Playground.</li>
+</ol>
+<p>The playground is a code editor in which <code>api</code> is already defined. Ctrl+Enter runs what
+you wrote against the open map. On the documentation site each step below has a <strong>Try
+it</strong> link that opens the editor with the code already in the playground.
+<a href="/plugins/writing-a-plugin/#trying-the-api-first">Trying the API first</a> describes the playground in full.</p>
+<p><img src="/images/api-playground.webp" alt="The API Playground beside the map: the &quot;Place units in a ring&quot; example has run, and the marines it placed are on the map"></p>
+<h2 id="step-1-read-the-map">Step 1: read the map<a class="anchor" href="#step-1-read-the-map" aria-label="Link to this section">#</a></h2>
+<p>Reading needs no setup. <code>api.document.scenario()</code> is the open map, <code>api.query</code> answers
+questions about it, and <code>api.consts</code> has the numbers the map file uses, so the code
+does not hard-code that a vespene geyser is unit 188.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> { tile, unit } = api.consts;
+<span class="k">const</span> radius = <span class="n">12</span> * tile; <span class="c">// unit positions are in pixels; a tile is 32 of them</span>
+
+<span class="k">function</span> census() {
+  <span class="k">const</span> units = api.document.scenario()?.units ?? [];
+  <span class="k">return</span> api.query.startLocations().map((start) =&gt; {
+    <span class="k">const</span> near = units.filter((u) =&gt; Math.hypot(u.x - start.x, u.y - start.y) &lt;= radius);
+    <span class="k">return</span> {
+      start,
+      minerals: near.filter((u) =&gt; api.consts.isResource(u.unitId) &amp;&amp; u.unitId !== unit.vespeneGeyser).length,
+      geysers: near.filter((u) =&gt; u.unitId === unit.vespeneGeyser).length,
+    };
+  });
+}
+
+<span class="k">for</span> (<span class="k">const</span> row <span class="k">of</span> census()) {
+  api.log(api.names.player(row.start.owner), <span class="s">`${row.minerals} mineral fields, ${row.geysers} geysers`</span>);
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1jVJNa9wwEL37V7xCCVJwFJLe4jp7DIX2kmsoRHjHuwJbcjRSd83i_x4k2SmUHnISM3p6HzPqnOWAC4IZqEa0JmBBCz0Z1aUrbqp8wuu9iYwWd_e4zvAGt7flxeTYBOMsQ3uCsZjMmQZuoDMQhvHtHq5HONJYVX20XYKjI8uRhcSlAopM4uPVwN51cSQbFHdktTdOyJ0qgN0OL7-bCvAUorcZ_hbJz4qD9uGn63Q2JKQa9SRE7kq0j1lqE7OkPdqiqXozBPJCxAz7pcNRHefJBRHVGTfIDOpcI6r5o5wlvrfraGSTmVdDRQYFV6_FaCx5PfBDVv5H8e_IleFnYhd9RyLmwD_2EldX2Ap8aYtr9Yd4IktPNDN5qQayh3Dc5A65-3-1D6r2E1RLirbIplqqqnceYv0S7pSWum2xrDHFGNxBpNPqkVhNg57JC-9OZTnKnSx5WeP16yU1t6ks23zQGxr2XKPcrzGWLc9rMvIO" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>Run it and the playground&#39;s output lists one line per start location. Two things to
+notice:</p>
+<ul>
+<li><strong>Nothing throws without a map.</strong> <code>scenario()</code> answers <code>null</code> and <code>startLocations()</code> an
+empty list, so the code above prints nothing instead of failing.</li>
+<li><strong>Players count from 0.</strong> <code>start.owner</code> 0 is Player 1, as in the map file.
+<code>api.names.player</code> turns the slot into the name the editor shows.</li>
+</ul>
+<h2 id="step-2-show-it-in-a-panel">Step 2: show it in a panel<a class="anchor" href="#step-2-show-it-in-a-panel" aria-label="Link to this section">#</a></h2>
+<p>A panel floats over the map without blocking it. Its <code>mount</code> function receives an empty
+element to fill, and <code>api.ui.widgets</code> builds lists, buttons and fields that look like the
+editor&#39;s own. The list is rebuilt whenever the units change, and clicking a row takes
+the view to that start location.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> { tile, unit } = api.consts;
+<span class="k">const</span> radius = <span class="n">12</span> * tile;
+
+<span class="k">function</span> census() {
+  <span class="k">const</span> units = api.document.scenario()?.units ?? [];
+  <span class="k">return</span> api.query.startLocations().map((start) =&gt; {
+    <span class="k">const</span> near = units.filter((u) =&gt; Math.hypot(u.x - start.x, u.y - start.y) &lt;= radius);
+    <span class="k">return</span> {
+      start,
+      minerals: near.filter((u) =&gt; api.consts.isResource(u.unitId) &amp;&amp; u.unitId !== unit.vespeneGeyser).length,
+      geysers: near.filter((u) =&gt; u.unitId === unit.vespeneGeyser).length,
+    };
+  });
+}
+
+api.ui.panel({
+  title: <span class="s">&quot;Base Check&quot;</span>,
+  width: <span class="n">280</span>,
+  mount(body) {
+    <span class="k">const</span> show = () =&gt; {
+      <span class="k">const</span> items = census().map((row) =&gt; ({
+        label: api.names.player(row.start.owner),
+        hint: <span class="s">`${row.minerals} minerals · ${row.geysers} gas`</span>,
+        value: row.start,
+      }));
+      body.replaceChildren(
+        items.length &gt; <span class="n">0</span>
+          ? api.ui.widgets.list(items, { onPick: (start) =&gt; api.view.goTo({ kind: <span class="s">&quot;unit&quot;</span>, index: start.index }) })
+          : api.ui.widgets.hint(<span class="s">&quot;This map has no start locations.&quot;</span>),
+      );
+    };
+    show();
+    <span class="k">const</span> subscriptions = [api.events.on(<span class="s">&quot;units&quot;</span>, show), api.events.on(<span class="s">&quot;document&quot;</span>, show)];
+    <span class="k">return</span> () =&gt; subscriptions.forEach((s) =&gt; s.dispose());
+  },
+});
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1jVTbatwwEH33V5yaEqTiijRPxVtnoaGUQgul5C0EotiTtYhXcnXZzbL4u_reLwuSL7nQhz6Z0Zw5RzNn5Npo53GEVx0VCFp5DKggeyXqmHKrLH1hZaOCQ4UPZ3iX4Kssuwu69spo1KRdcIzjmAFjQeRyE1Vj6rAl7YWrSUurDONrMQLWa1xdrzLAkg9WJ_jvQPYgnJfWfze1jAqOcbGVPWPplKM6T1KzmCZpUY2a4k51nixjIcF-SN-K9tAbz4J4wHskBvFQIIjDEh44PlVTk3yVmKcLjTIYccUUbJUmKztXJuVXik_DE8r9ImeCrYmF1PC3huPkBHOAN9V4a7Ej15Omr3RwZLnoSG98O8tt0um_1Raq6j-ohtjawFfZkGXxmkGJXmrqWOzSK99RifyzdISLlur7PFbtVePbEmcfT2O0NUF7dmuaA3_hgGvNHhXYM2vmlPK0jZswL8lopDX7hGUzGOjkLXVlmp-WW3Ki7-SBbISO2yDMXpPlxVLRKu1L3Lw9RshsyrDYg79_MOamCQ7YSHfzVL-TXaASi8CcGfi0BEBsVVjqO1nTRau6xpJmC0HqbRoxznG6JIA1pgnvVbMh70SnnGepoMARRv9U9X2JZxsd8TtFe7Exl4Ydca90UyKPpuYFlG7ooZz2NQUYOAb-TLJ8LRnnw_LLVjlsZY9WOmgzUqCbn5bIl4lOXQ_jJ3rKpqPJ5XDraqv6VIcKV1GPdqS9E0azdFWXF6mSF3iVnX8DM-D6xUMbV-eFgrgz9ousW8bcmBSNcr1xxEZ_hiIb-OoR" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>Place or delete a mineral field while the panel is open and the count follows. The
+function <code>mount</code> returns is its cleanup: it runs when the panel closes, and here it stops
+the two listeners. The <code>&quot;document&quot;</code> event covers opening another map or switching tabs.</p>
+<h2 id="step-3-change-the-map">Step 3: change the map<a class="anchor" href="#step-3-change-the-map" aria-label="Link to this section">#</a></h2>
+<p>Every change to terrain or objects goes through <code>api.document.edit</code>. It takes the label
+Edit ▸ Undo will show and a function, and everything the function does becomes one undo
+entry. Here the edit sets every mineral field holding less than the standard 1500 back
+to 1500, and flashes the ones it changed.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> { unit } = api.consts;
+<span class="k">const</span> units = api.document.scenario()?.units ?? [];
+<span class="k">const</span> short = units.flatMap((u, index) =&gt;
+  api.consts.isResource(u.unitId) &amp;&amp; u.unitId !== unit.vespeneGeyser &amp;&amp; u.resourceAmount &lt; unit.defaultMinerals ? [index] : [],
+);
+
+<span class="k">const</span> result = api.document.edit(<span class="s">&quot;Top up minerals&quot;</span>, (tx) =&gt;
+  tx.updateUnits(short, () =&gt; ({ resourceAmount: unit.defaultMinerals })),
+);
+<span class="k">if</span> (result.changed) api.view.flash({ units: short });
+api.ui.status(<span class="s">`${result.units} mineral fields topped up`</span>);
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bZHBasMwDIbveQqtjGJD8AM0y8JOY4dexnYqhZpYWQypbSK56yh59xE7gW3sZOz_169PcusdMdwgOsswQQ06WNXOj1QV6UwSLYrxbTyjY0UtOj1aL2SjsqFp4HBca6j3I0Oda1U3aN7rIEQswTqDVwn1YwE_eilLr0g-ji2KmAJfjITtFtYL3NU5TV2QAjp8xi_CMVvGpfTp7KNjeMhGg52OA--tw1EPBA0cUvMj7OBwLAtZFQvtiBQH_jsiGsti8-YDxADnJWVTguCVn68qBqMZ3-cxRRq6BDGrIG7wG2v3P9UkZUKxHYjModpeuw80MuFcLH7OC6Re5F-i3bLdSVbF7IhWEWuOJE73tyUiGaeVGjqLgyFgHwIaiOEkq28" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>Press Ctrl+Z in the editor and the amounts go back. You did not mark anything as
+modified, repaint the map or write the undo record: the transaction does all three.</p>
+<p>The function you pass must not be <code>async</code>. Fetch, load and ask the user before the call,
+then write in one go. <a href="/plugins/the-api-group-by-group/#asynchronous-calls-and-the-one-synchronous-builder">Asynchronous calls</a>
+has the reason.</p>
+<h2 id="step-4-make-it-a-plugin">Step 4: make it a plugin<a class="anchor" href="#step-4-make-it-a-plugin" aria-label="Link to this section">#</a></h2>
+<p>A plugin is two files in a folder: <code>plugin.json</code>, which describes it, and <code>plugin.ts</code>,
+which exports a function the editor calls with <code>api</code>.</p>
+<p>In the playground, <strong>Export as Plugin…</strong> saves a zip with both files and the typings and
+build setup already in place. Or make the folder by hand:</p>
+<p><code>plugin.json</code>:</p>
+<pre><code class="language-json">{
+  <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Base Check&quot;</span>,
+  <span class="s">&quot;version&quot;</span>: <span class="s">&quot;1.0.0&quot;</span>,
+  <span class="s">&quot;description&quot;</span>: <span class="s">&quot;Counts the resources at each start location and tops up short mineral fields.&quot;</span>,
+  <span class="s">&quot;entry&quot;</span>: <span class="s">&quot;plugin.ts&quot;</span>,
+  <span class="s">&quot;icon&quot;</span>: <span class="s">&quot;⛏️&quot;</span>,
+  <span class="s">&quot;api&quot;</span>: <span class="n">1</span>
+}
+</code></pre>
+<p><code>plugin.ts</code> is the three snippets above put together, with the setting for the radius
+kept in <code>api.storage</code>, a menu item and a hotkey:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">import</span> <span class="k">type</span> { <a class="t" href="/api/">PluginApi</a> } <span class="k">from</span> <span class="s">&quot;@scm-js/plugin-api&quot;</span>;
+
+<span class="k">export</span> <span class="k">default</span> <span class="k">function</span> activate(api: <a class="t" href="/api/">PluginApi</a>) {
+  <span class="k">const</span> { tile, unit } = api.consts;
+  <span class="k">const</span> w = api.ui.widgets;
+  <span class="k">let</span> radius = api.storage.get(<span class="s">&quot;radius&quot;</span>, <span class="n">12</span>); <span class="c">// in tiles</span>
+  <span class="k">let</span> panel: ReturnType&lt;<span class="k">typeof</span> api.ui.panel&gt; | <span class="k">null</span> = <span class="k">null</span>;
+
+  <span class="k">const</span> isMineral = (id: <span class="k">number</span>) =&gt; api.consts.isResource(id) &amp;&amp; id !== unit.vespeneGeyser;
+
+  <span class="k">function</span> census() {
+    <span class="k">const</span> units = api.document.scenario()?.units ?? [];
+    <span class="k">return</span> api.query.startLocations().map((start) =&gt; {
+      <span class="k">const</span> near = units.filter((u) =&gt; Math.hypot(u.x - start.x, u.y - start.y) &lt;= radius * tile);
+      <span class="k">return</span> {
+        start,
+        minerals: near.filter((u) =&gt; isMineral(u.unitId)).length,
+        geysers: near.filter((u) =&gt; u.unitId === unit.vespeneGeyser).length,
+      };
+    });
+  }
+
+  <span class="k">function</span> topUp() {
+    <span class="k">const</span> units = api.document.scenario()?.units ?? [];
+    <span class="k">const</span> short = units.flatMap((u, index) =&gt; (isMineral(u.unitId) &amp;&amp; u.resourceAmount &lt; unit.defaultMinerals ? [index] : []));
+    <span class="k">const</span> result = api.document.edit(<span class="s">&quot;Top up minerals&quot;</span>, (tx) =&gt;
+      tx.updateUnits(short, () =&gt; ({ resourceAmount: unit.defaultMinerals })),
+    );
+    <span class="k">if</span> (result.changed) api.view.flash({ units: short });
+    api.ui.status(<span class="s">`${result.units} mineral fields topped up`</span>);
+  }
+
+  <span class="k">function</span> open() {
+    <span class="k">if</span> (panel?.isOpen()) <span class="k">return</span>;
+    panel = api.ui.panel({
+      title: <span class="s">&quot;Base Check&quot;</span>,
+      width: <span class="n">280</span>,
+      mount(body) {
+        <span class="k">const</span> rows = api.ui.el(<span class="s">&quot;div&quot;</span>);
+        <span class="k">const</span> show = () =&gt; {
+          <span class="k">const</span> items = census().map((row) =&gt; ({
+            label: api.names.player(row.start.owner),
+            hint: <span class="s">`${row.minerals} minerals · ${row.geysers} gas`</span>,
+            value: row.start,
+          }));
+          rows.replaceChildren(
+            items.length &gt; <span class="n">0</span>
+              ? w.list(items, { onPick: (start) =&gt; api.view.goTo({ kind: <span class="s">&quot;unit&quot;</span>, index: start.index }) })
+              : w.hint(<span class="s">&quot;This map has no start locations.&quot;</span>),
+          );
+        };
+        <span class="k">const</span> field = w.<span class="k">number</span>({
+          value: radius,
+          min: <span class="n">4</span>,
+          max: <span class="n">40</span>,
+          onChange: (value) =&gt; {
+            radius = value;
+            api.storage.set(<span class="s">&quot;radius&quot;</span>, value);
+            show();
+          },
+        });
+        body.append(w.form([{ label: <span class="s">&quot;Radius (tiles)&quot;</span>, field }]), rows, w.button(<span class="s">&quot;Top up minerals&quot;</span>, { onClick: topUp }));
+        show();
+        <span class="k">const</span> subscriptions = [api.events.on(<span class="s">&quot;units&quot;</span>, show), api.events.on(<span class="s">&quot;document&quot;</span>, show)];
+        <span class="k">return</span> () =&gt; subscriptions.forEach((s) =&gt; s.dispose());
+      },
+    });
+  }
+
+  api.commands.register({ id: <span class="s">&quot;base-check.open&quot;</span>, title: <span class="s">&quot;Base Check&quot;</span>, run: open });
+  api.menu.add(<span class="s">&quot;Tools&quot;</span>, { label: <span class="s">&quot;Base Check…&quot;</span>, command: <span class="s">&quot;base-check.open&quot;</span>, enabled: () =&gt; api.document.isOpen() });
+  api.hotkeys.add(<span class="s">&quot;Ctrl+Alt+B&quot;</span>, { command: <span class="s">&quot;base-check.open&quot;</span> });
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1pVbbjts2EH3fr5gKRUA1WiYN8lDIcbbJoigCdNEg2DwtFggtjS12JZLlZbWGK6Bf01_oez-lX1LwIlly3ac-GeJw5pw5c6F5p6S2YPcK4QAfW7fj4p3iMMBWyw6y703VXf5iXqhguWSKZ6uLC3wKXjVumWstbJ2oLJcCWGX5I7NImOLlMVoOhwuASgpj4QCWt1iAE9zCAGtgitNgMqvpUp_OHac9r3cYbS1a0KzmziSzsVKzHdIdWpJFS1bAt6_yFbx4AVwEKJM8FRPYlvAJrdPidq_wjU9abkegYH8Lv4FwbQvr8LO6mChxc8MFauZNhNclCNdtUOewfjtLgXLzCY10ukLC6xyePQNew1frdciXPqJRKPBH3BvUIfgkXYXCOEOiVCOodxqTrWXlOhSWmgoF01yS_IrGC1dXcHe_Cn46pBccfnWo99RYpu1PsmIexZCcdkwREk4D9wg3AgpkGiJZQ7e8tagJceHiDbMNbfZKWuLoE1xCiEGfCnB0P33uc3izHqv0TShAvkoQiduICNGlmD67KLApA40T-El_4kLWH-o8py2KnW2OEXZB2PMBRjdYn63GabAhsh4C-2FRKivVZ_W_KxX9TOMHaVK8ZfbG18cVwEWNT4E5OZO77yxHdeq1d510wsKbmFcay-Rj4AruQrB7KOHuPs_n-BqNn-AT4lhzS7JbqcCpqSxZAcQGRkki-0SdqpnFz548CakUQCLnAyzJlee5DXkeFU-s-BZI5ESrhokd1nmg9six9_KYhhyiWGXSbkieaYyNZdYZ8uXrQwoTLg9jFrDl2NbG11BhDU59OVNgqVBM9fWMwm64otz8HCx5auUIHIzHhRU-ydjkltsWS8jeM4Nw3WD1kI0d1vPaNiW8-u7leBKEIhtZ7_PZlKRCyd4cQbAlWc0fs2m2Zv3klydZzPbRzC12Psy4beI20LJPRZs5ALRs4zemhxSsQ0NVy_ao_fW4VqjsBeq8WHg13Bfb6y97OvbOpL-Bv_6EaEvDOsCOmS_LGI-sdVjCBDS3DvksaQi6UI2qZRVeN7ytNQqyCBZyTtMNb-HlwghwBT1tubEk3CvgAFJ85NVDCbMtObXgTt5KcoAHLuoSMt9bWRrVMm3A8AFDDkN-glRCT706JLttuIGOKWiYASGjJ7TjlqbZQtNZvsNpvUM7wxp6Gt-jRQlHGcM2nkfsuCjh9eKEPZXw-uX8SIrrMIElkBDoXy0Fx9c4XFgtbPMH2iwe6Bhtedv3LVmcDUcuw8zgp4MypVDUpKdbqTtydxhbNfsUCZHw8OdZkfQZ7vMidEoBPd04a6U4t9586a_bUPuw45e9dkoxDZzbmEpzFQoHa7jzeeMjCmuoRwnrJyuCd17AiXXcuOOF-2P49FrGSV6g-Kx_YFVDiIlGWnOjpEFypJvUmz1f8U9K1zFR-4HZceMfxwP4_zLZhhm8rPx6on75ZcXZxQXaiTJsxxTYx-xQOMrq2gsqk4xjOY7Of__-R1ZAwj8LiIJtWqzLlPHiPRoX7wy2kfYB9yYiX1vdPn_X2ufvA_x_w4QAwz8" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p><img src="/images/plugin-base-check.webp" alt="Base Check running: its panel lists four players with seven mineral fields and one geyser each, over a map with a start location, a mineral line and a geyser"></p>
+<p>What changed from the snippets:</p>
+<ul>
+<li><strong><code>activate(api)</code> wraps everything.</strong> The editor calls it once when the plugin is
+turned on. The <code>import type</code> line is only for your code editor and the type-check; it is
+removed before the file runs.</li>
+<li><strong>Nothing is cleaned up by hand.</strong> The menu item, hotkey, command and panel are removed
+when the user turns the plugin off. Only the two listeners inside <code>mount</code> are disposed
+explicitly, because they should stop when the panel closes, not when the plugin does.</li>
+<li><strong>The command is registered once and used twice.</strong> The menu item and the hotkey both
+name it, and another plugin can run it with <code>api.commands.run(&quot;base-check.open&quot;)</code>. An id
+with a dot in it is used exactly as written; one without is prefixed with the plugin&#39;s
+id.</li>
+</ul>
+<p>The playground runs a whole <code>plugin.ts</code> too: paste it in and <code>activate</code> is called, so you
+can keep working there until the plugin is ready for its own folder.</p>
+<h2 id="step-5-load-it-from-your-machine">Step 5: load it from your machine<a class="anchor" href="#step-5-load-it-from-your-machine" aria-label="Link to this section">#</a></h2>
+<p>Serve the folder, with cross-origin requests allowed so the editor can fetch from it:</p>
+<pre><code class="language-sh">npx serve --cors .
+</code></pre>
+<p>In the editor open Plugins ▸ <strong>Manage Plugins…</strong>, paste <code>http://localhost:3000/</code> and
+confirm. Tools ▸ Base Check… is now in the menu. After each change to the files, press
+<strong>Reload</strong> on the plugin&#39;s row.</p>
+<p>For completion and type-checking in your own code editor, install the typings in the
+folder:</p>
+<pre><code class="language-sh">npm i -D @scm-js/plugin-api
+</code></pre>
+<p>If the plugin fails to load, the editor raises a notice and the plugin&#39;s row in Manage
+Plugins shows the error. View ▸ Debug Console has every <code>api.log</code> line, the edits the
+plugin made and any listener that threw. <a href="/plugins/writing-a-plugin/#when-something-goes-wrong">When something goes wrong</a>
+lists the usual mistakes.</p>
+<h2 id="step-6-publish-it">Step 6: publish it<a class="anchor" href="#step-6-publish-it" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Put the folder in a public GitHub repository.</li>
+<li>Tag a release (<code>git tag v1.0.0 &amp;&amp; git push --tags</code>). Tags are what the update check
+offers to people who already have the plugin.</li>
+<li>Anyone can now install it by pasting <code>github:you/your-repository</code> into Manage Plugins.</li>
+</ol>
+<p>To have it appear in Browse Plugins as well, see <a href="/plugins/writing-a-plugin/#getting-listed">Getting listed</a>.</p>
+<h2 id="where-to-go-next">Where to go next<a class="anchor" href="#where-to-go-next" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><a href="/plugins/writing-a-plugin/">Writing a plugin</a> covers each piece in more detail: the manifest,
+the icon, bundling npm dependencies, testing, CI, and what your users see when they
+install.</li>
+<li><a href="/plugins/recipes/">Recipes</a> has complete snippets for common jobs.</li>
+<li><a href="/plugins/the-api-group-by-group/">The API, group by group</a> has an example for every part of
+the API.</li>
+<li><a href="/plugins/plugins-to-read/">Plugins to read</a> lists the project&#39;s own plugins by what each one is
+a good example of. <a href="https://github.com/scm-js/plugin-hello-world">Hello World</a> is the
+smallest, with the build and CI already set up.</li>
+</ul>
+<footer class="page-foot">
+  <p>scmJS 0.6.2 + main@dd79a77 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#before-you-start">Before you start</a></li>
+<li><a href="#step-1-read-the-map">Step 1: read the map</a></li>
+<li><a href="#step-2-show-it-in-a-panel">Step 2: show it in a panel</a></li>
+<li><a href="#step-3-change-the-map">Step 3: change the map</a></li>
+<li><a href="#step-4-make-it-a-plugin">Step 4: make it a plugin</a></li>
+<li><a href="#step-5-load-it-from-your-machine">Step 5: load it from your machine</a></li>
+<li><a href="#step-6-publish-it">Step 6: publish it</a></li>
+<li><a href="#where-to-go-next">Where to go next</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

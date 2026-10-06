@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recipes — scmJS StarCraft map editor</title>
+<meta name="description" content="Complete snippets for common jobs, each using several parts of the API together. Every one runs in the playground as written; in a plugin, the same lines go inside activate(api).">
+<meta property="og:title" content="Recipes — scmJS StarCraft map editor">
+<meta property="og:description" content="Complete snippets for common jobs, each using several parts of the API together. Every one runs in the playground as written; in a plugin, the same lines go inside activate(api).">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/plugins/recipes/">
+<meta property="og:url" content="https://docs.scmjs.dev/plugins/recipes/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/opening-the-script/">Opening the script</a></li>
+<li><a class="" href="/trigscript/tests/">Tests</a></li>
+<li><a class="" href="/trigscript/beside-the-map/">Beside the map</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript/examples/">Examples</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="here" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/accumulate/">Accumulate</a></li>
+<li><a class="" href="/triggers/always/">Always</a></li>
+<li><a class="" href="/triggers/bring/">Bring</a></li>
+<li><a class="" href="/triggers/command/">Command</a></li>
+<li><a class="" href="/triggers/command-the-least/">Command the Least</a></li>
+<li><a class="" href="/triggers/command-the-least-at/">Command the Least At</a></li>
+<li><a class="" href="/triggers/command-the-most/">Command the Most</a></li>
+<li><a class="" href="/triggers/command-the-most-at/">Command the Most At</a></li>
+<li><a class="" href="/triggers/countdown-timer/">Countdown Timer</a></li>
+<li><a class="" href="/triggers/deaths/">Deaths</a></li>
+<li><a class="" href="/triggers/elapsed-time/">Elapsed Time</a></li>
+<li><a class="" href="/triggers/highest-score/">Highest Score</a></li>
+<li><a class="" href="/triggers/kill/">Kill</a></li>
+<li><a class="" href="/triggers/least-kills/">Least Kills</a></li>
+<li><a class="" href="/triggers/least-resources/">Least Resources</a></li>
+<li><a class="" href="/triggers/lowest-score/">Lowest Score</a></li>
+<li><a class="" href="/triggers/mission-briefing/">Mission Briefing</a></li>
+<li><a class="" href="/triggers/most-kills/">Most Kills</a></li>
+<li><a class="" href="/triggers/most-resources/">Most Resources</a></li>
+<li><a class="" href="/triggers/never/">Never</a></li>
+<li><a class="" href="/triggers/opponents/">Opponents</a></li>
+<li><a class="" href="/triggers/score/">Score</a></li>
+<li><a class="" href="/triggers/switch/">Switch</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/center-view/">Center View</a></li>
+<li><a class="" href="/triggers/comment/">Comment</a></li>
+<li><a class="" href="/triggers/create-unit/">Create Unit</a></li>
+<li><a class="" href="/triggers/create-unit-with-properties/">Create Unit with Properties</a></li>
+<li><a class="" href="/triggers/defeat/">Defeat</a></li>
+<li><a class="" href="/triggers/display-text-message/">Display Text Message</a></li>
+<li><a class="" href="/triggers/draw/">Draw</a></li>
+<li><a class="" href="/triggers/give-units-to-player/">Give Units to Player</a></li>
+<li><a class="" href="/triggers/kill-unit/">Kill Unit</a></li>
+<li><a class="" href="/triggers/kill-unit-at-location/">Kill Unit At Location</a></li>
+<li><a class="" href="/triggers/leader-board-control/">Leader Board Control</a></li>
+<li><a class="" href="/triggers/leader-board-control-at-location/">Leader Board Control At Location</a></li>
+<li><a class="" href="/triggers/leader-board-greed/">Leader Board Greed</a></li>
+<li><a class="" href="/triggers/leader-board-kills/">Leader Board Kills</a></li>
+<li><a class="" href="/triggers/leader-board-points/">Leader Board Points</a></li>
+<li><a class="" href="/triggers/leader-board-resources/">Leader Board Resources</a></li>
+<li><a class="" href="/triggers/leaderboard-computer-players/">Leaderboard Computer Players</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control/">Leaderboard Goal Control</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control-at-location/">Leaderboard Goal Control At Location</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-kills/">Leaderboard Goal Kills</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-points/">Leaderboard Goal Points</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-resources/">Leaderboard Goal Resources</a></li>
+<li><a class="" href="/triggers/minimap-ping/">Minimap Ping</a></li>
+<li><a class="" href="/triggers/modify-unit-energy/">Modify Unit Energy</a></li>
+<li><a class="" href="/triggers/modify-unit-hanger-count/">Modify Unit Hanger Count</a></li>
+<li><a class="" href="/triggers/modify-unit-hit-points/">Modify Unit Hit Points</a></li>
+<li><a class="" href="/triggers/modify-unit-resource-amount/">Modify Unit Resource Amount</a></li>
+<li><a class="" href="/triggers/modify-unit-shield-points/">Modify Unit Shield Points</a></li>
+<li><a class="" href="/triggers/move-location/">Move Location</a></li>
+<li><a class="" href="/triggers/move-unit/">Move Unit</a></li>
+<li><a class="" href="/triggers/mute-unit-speech/">Mute Unit Speech</a></li>
+<li><a class="" href="/triggers/order/">Order</a></li>
+<li><a class="" href="/triggers/pause-game/">Pause Game</a></li>
+<li><a class="" href="/triggers/pause-timer/">Pause Timer</a></li>
+<li><a class="" href="/triggers/play-wav/">Play WAV</a></li>
+<li><a class="" href="/triggers/preserve-trigger/">Preserve Trigger</a></li>
+<li><a class="" href="/triggers/remove-unit/">Remove Unit</a></li>
+<li><a class="" href="/triggers/remove-unit-at-location/">Remove Unit At Location</a></li>
+<li><a class="" href="/triggers/run-ai-script/">Run AI Script</a></li>
+<li><a class="" href="/triggers/run-ai-script-at-location/">Run AI Script At Location</a></li>
+<li><a class="" href="/triggers/set-alliance-status/">Set Alliance Status</a></li>
+<li><a class="" href="/triggers/set-countdown-timer/">Set Countdown Timer</a></li>
+<li><a class="" href="/triggers/set-deaths/">Set Deaths</a></li>
+<li><a class="" href="/triggers/set-doodad-state/">Set Doodad State</a></li>
+<li><a class="" href="/triggers/set-invincibility/">Set Invincibility</a></li>
+<li><a class="" href="/triggers/set-mission-objectives/">Set Mission Objectives</a></li>
+<li><a class="" href="/triggers/set-next-scenario/">Set Next Scenario</a></li>
+<li><a class="" href="/triggers/set-resources/">Set Resources</a></li>
+<li><a class="" href="/triggers/set-score/">Set Score</a></li>
+<li><a class="" href="/triggers/set-switch/">Set Switch</a></li>
+<li><a class="" href="/triggers/talking-portrait/">Talking Portrait</a></li>
+<li><a class="" href="/triggers/transmission/">Transmission</a></li>
+<li><a class="" href="/triggers/unmute-unit-speech/">Unmute Unit Speech</a></li>
+<li><a class="" href="/triggers/unpause-game/">Unpause Game</a></li>
+<li><a class="" href="/triggers/unpause-timer/">Unpause Timer</a></li>
+<li><a class="" href="/triggers/victory/">Victory</a></li>
+<li><a class="" href="/triggers/wait/">Wait</a></li>
+<li><a class="" href="/triggers/disable-debug-mode/">Disable Debug Mode</a></li>
+<li><a class="" href="/triggers/enable-debug-mode/">Enable Debug Mode</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Recipes</h1>
+<p>Complete snippets for common jobs, each using several parts of the API together. Every
+one runs in the playground as written; in a plugin, the same lines go inside
+<code>activate(api)</code>. <a href="/plugins/the-api-group-by-group/">The API, group by group</a> explains each call
+they use.</p>
+<h2 id="a-problems-panel-that-follows-the-map">A problems panel that follows the map<a class="anchor" href="#a-problems-panel-that-follows-the-map" aria-label="Link to this section">#</a></h2>
+<p>Check Map&#39;s findings in a docked panel, refreshed after every change. Clicking a row
+goes to the unit, location or trigger, or opens the settings dialog the problem is in.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> w = api.ui.widgets;
+
+api.ui.panel({
+  title: <span class="s">&quot;Problems&quot;</span>,
+  dock: <span class="s">&quot;right&quot;</span>,
+  grow: <span class="k">true</span>,
+  mount(body) {
+    <span class="k">const</span> show = () =&gt; {
+      <span class="k">const</span> issues = api.query.validate();
+      body.replaceChildren(
+        issues.length === <span class="n">0</span>
+          ? w.hint(<span class="s">&quot;Check Map finds nothing wrong.&quot;</span>)
+          : w.list(issues.map((issue) =&gt; ({ label: issue.text, title: <span class="s">`${issue.level}: ${issue.where}`</span>, value: issue.target })), {
+              onPick: (target) =&gt; {
+                <span class="k">if</span> (!target) <span class="k">return</span>;
+                <span class="k">if</span> (target.kind === <span class="s">&quot;dialog&quot;</span>) api.ui.open(target.id);
+                <span class="k">else</span> api.view.goTo(target);
+              },
+            }),
+      );
+    };
+    show();
+    <span class="k">const</span> subscriptions = [api.events.on(<span class="s">&quot;commit&quot;</span>, show), api.events.on(<span class="s">&quot;document&quot;</span>, show)];
+    <span class="k">return</span> () =&gt; subscriptions.forEach((s) =&gt; s.dispose());
+  },
+});
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bVLBjpwwDL3zFS7qIZFQ1DMj2sNqj5X20FtVaTPEA9aEmCYBuhrx7xWQTDvb5kLs9_xsXtyyCxEWaECPpCZSC5kOYzgVRUqM2qEVtwIgUrRYQ_ni-WxxCGVVABhurzWUnro-7onO81JD9BNu0cCTi-LM5k3CpgHQ7h1Dz1tTIaH5nIAMUQgThjTRzwn9m5q1JaMjCnlK1E1ReRytbvGpJ2s8OpEwSBLKoutiD03TwKc7BvAFFtWTi6J86rG9wlc9woWcCeA49uQ6WDy7TpXyr6IaFmUpRJG0Bz2K477_griB1We09dFbRfwVq-zY68fbkbU4o11ryPHSo8f1tYJZ2wnvtdp3GGGVsrpbkw-7F9oMFwfpwb4_hy4gPmSGxzh5d_ov6eCoKzmz21Qa0pa7UuZ14BFdZpGR_6qgDbiTZ8JFdfyN82jvuWv1kFhljhNzPT7bZuR3TrsynUPraYzEbtuL71s7nNHFoNiJsuVhoFhWe6ms4B1suJ0GdHfCj0P7sCVt4EMLdWH_rNteiHCAylAYOaCQ-1xrVazy9Bs" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="a-heat-map-of-where-the-units-are">A heat map of where the units are<a class="anchor" href="#a-heat-map-of-where-the-units-are" aria-label="Link to this section">#</a></h2>
+<p>An overlay drawn from the map&#39;s own data: units counted in blocks of four tiles, and each
+block tinted by how many it holds. The count is redone when the units change, not on
+every repaint, because <code>draw</code> runs each time the view moves.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> BLOCK = <span class="n">4</span>; <span class="c">// tiles</span>
+<span class="k">let</span> blocks = <span class="k">new</span> Map&lt;<span class="k">string</span>, <span class="k">number</span>&gt;();
+
+<span class="k">function</span> count() {
+  blocks = <span class="k">new</span> Map();
+  <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> api.document.scenario()?.units ?? []) {
+    <span class="k">const</span> key = <span class="s">`${Math.floor(u.x / api.consts.tile / BLOCK)},${Math.floor(u.y / api.consts.tile / BLOCK)}`</span>;
+    blocks.set(key, (blocks.get(key) ?? <span class="n">0</span>) + <span class="n">1</span>);
+  }
+}
+count();
+
+<span class="k">const</span> overlay = api.ui.overlay({
+  name: <span class="s">&quot;Unit density&quot;</span>,
+  draw(ctx, view) {
+    <span class="k">const</span> size = BLOCK * view.tilePx;
+    <span class="k">for</span> (<span class="k">const</span> [key, units] <span class="k">of</span> blocks) {
+      <span class="k">const</span> [bx, by] = key.split(<span class="s">&quot;,&quot;</span>).map(Number);
+      ctx.fillStyle = <span class="s">`rgba(255, 120, 40, ${Math.min(0.7, units * 0.12)})`</span>;
+      ctx.fillRect(view.x(bx * BLOCK * api.consts.tile), view.y(by * BLOCK * api.consts.tile), size, size);
+    }
+  },
+});
+
+<span class="k">for</span> (<span class="k">const</span> event <span class="k">of</span> [<span class="s">&quot;units&quot;</span>, <span class="s">&quot;document&quot;</span>] <span class="k">as</span> <span class="k">const</span>) {
+  api.events.on(event, () =&gt; {
+    count();
+    overlay.redraw();
+  });
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1fVJNi9swEL3rVzxMD1IqlA92KdT1Btpju21p6SkEYjtyKmJLwZITu4v_e5HkbNsU9mLk4c3M-5jSaOvw_tOXDx-R4S7FfA6namlJLR2K2pRHiwxaXvCYn95Z1yp94NBdU8j2gbKUkKrTpVNGozSddpThieC_To8EKtOClmFlB1MhPymxN2XXSO2ELaXOW2UoW4tOK2exXmOzjfOA2HaUAzLsXj095u6nqGpjWtqJHvMwK2Cs8AIwj6rYyG_Aw0vgXRqWRfrCSkePcuCgU-EQC8xTWzC8xjLoGslIJvUpIZGpOcu2zj1bv6xTYipQL0fnjXyL5IdWDnuprXJDwgmwb_MLLV3PcVby8q90q35JZFNWswAI5L_2kfNf5m4C6WDi1vsc2V_HXQduip6jGLbIvK3CnmrlaMITJpr8RD-HiFl6bXG9qFRdf3dD7Wns2kOR09X9PcdyteC4W3BMRjdK04V4MxHADAuxXLGR7W5nfZOlo0FHT4ses2dtN_GwaIcYaDG8iPIWxe_Ee_ThcDKGO_3jjzxL7bwxmyRwTDiS6x0mW-Q2OhQN82tCgxVG0_DioAzZw3M8U_L-Z0pZtDJkGc-DpWT8DQ" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p><img src="/images/plugin-recipes.webp" alt="A docked Problems panel listing Check Map&#39;s findings, and the Unit density overlay tinting the blocks of the map that hold units"></p>
+<h2 id="a-brush-of-your-own">A brush of your own<a class="anchor" href="#a-brush-of-your-own" aria-label="Link to this section">#</a></h2>
+<p>A map tool that paints the Terrain palette&#39;s current terrain while the button is held,
+and commits the whole drag as one undo entry when it is released. Collecting during the
+drag and writing once on release is what makes one stroke one Ctrl+Z.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">await</span> api.tileset.load();
+<span class="k">const</span> stroke = <span class="k">new</span> Map&lt;<span class="k">string</span>, { d: { x: <span class="k">number</span>; y: <span class="k">number</span> }; px: <span class="k">number</span>; py: <span class="k">number</span> }&gt;();
+
+<span class="k">function</span> add(px: <span class="k">number</span>, py: <span class="k">number</span>) {
+  <span class="k">const</span> d = api.terrain.diamondAt(px, py);
+  <span class="k">if</span> (api.terrain.isDiamond(d)) stroke.set(<span class="s">`${d.x},${d.y}`</span>, { d, px, py });
+  tool.redraw();
+}
+
+<span class="k">const</span> tool = api.ui.mapTool({
+  name: <span class="s">&quot;Terrain pencil&quot;</span>,
+  hint: <span class="s">&quot;drag to paint, Esc to stop&quot;</span>,
+  onDown(p) { add(p.px, p.py); },
+  onMove(p) { <span class="k">if</span> (p.down) add(p.px, p.py); },
+  onUp() {
+    <span class="k">const</span> terrain = api.terrain.active().terrain; <span class="c">// whatever the Terrain palette has picked</span>
+    <span class="k">const</span> diamonds = [...stroke.values()].map((s) =&gt; s.d);
+    stroke.clear();
+    api.document.edit(<span class="s">&quot;Terrain pencil&quot;</span>, (tx) =&gt; { <span class="k">for</span> (<span class="k">const</span> d <span class="k">of</span> diamonds) tx.paintIsom(d, terrain); });
+  },
+  draw(ctx, view) {
+    ctx.fillStyle = <span class="s">&quot;#ffd24a&quot;</span>;
+    <span class="k">for</span> (<span class="k">const</span> { px, py } <span class="k">of</span> stroke.values()) ctx.fillRect(view.x(px) - <span class="n">3</span>, view.y(py) - <span class="n">3</span>, <span class="n">6</span>, <span class="n">6</span>);
+  },
+});
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1dZJPb9QwEMXv-RRPCwdbCq4EqIcNWwmpHDj0AuWEkGriSddqYlvx7CarKN8dOX-WqIhT7PHLzHs_W3faMnSwim1NkVjVXhshi6z0LjIit_6FcICjDg86fIrcWvecY4DZY0C_hzs1v6ktcFmXGAuEzUHYnNyl1ll1ciVb76CNEX-l-UYqMWTAbMLgMFukttXWKWN14535zCL06R9ZZICtILYiG-9nmTBSLjlUJBZPbwej-jFPn8v4NEXJMXfCOPVi72vVkml1l_yO2UIj1RcvJ6saHR69r0Uy6nRDe-we5-EI5Epb7_IMOFrHe-xMq5_BHkFbxzm-xDLtIvswqby7950TQWKYoajJkErhMM6KB3-mWZGyBmV85-R_1T-CmBmuFBcwr1jqku2ZhFwLBW5u0B0105la8JFwzaRrYiYcdUSw5QuZTfPlSiIO-KmUWnCfdX2iKOSvxEqIKHG4Q1Rmgoz1UsqadCuWWvJmfHlqyLEiY1n8AxWC-6nTgMq3EOsj8dXVhgT3akL9NfpGmHxNn_hMkyZK0wWX3Oc4W-quuLhXla3r73yp09Pfvakq8_6j3s0ONzOH67NJw1-FltdG36hkkSaoXoRe4h0-zBPVRYTLsr_Ncbs6G2XxBw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="copies-of-the-selection-under-the-symmetry-setting">Copies of the selection under the symmetry setting<a class="anchor" href="#copies-of-the-selection-under-the-symmetry-setting" aria-label="Link to this section">#</a></h2>
+<p>Place a copy of every selected unit at each of its mirror positions, following whatever
+Tools ▸ Symmetry is set to, with the Units palette&#39;s placement checks.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> scn = api.document.scenario();
+<span class="k">const</span> selected = api.selection.units();
+
+<span class="k">if</span> (!scn || selected.length === <span class="n">0</span>) {
+  api.ui.status(<span class="s">&quot;Select some units first.&quot;</span>);
+} <span class="k">else</span> <span class="k">if</span> (api.terrain.symmetry() === <span class="s">&quot;none&quot;</span>) {
+  api.ui.status(<span class="s">&quot;Turn on Tools ▸ Symmetry first.&quot;</span>);
+} <span class="k">else</span> {
+  <span class="k">const</span> originals = selected.map((index) =&gt; scn.units[index]);
+  <span class="k">const</span> result = api.document.edit(<span class="s">&quot;Mirror units&quot;</span>, (tx) =&gt; {
+    <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> originals) {
+      <span class="c">// The first point is the unit&#39;s own position; the rest are its images.</span>
+      <span class="k">for</span> (<span class="k">const</span> p <span class="k">of</span> tx.mirrorPoint(u.x, u.y).slice(<span class="n">1</span>)) {
+        <span class="k">if</span> (tx.canPlaceUnit(u.unitId, p.x, p.y)) tx.placeUnit(u.unitId, u.owner, p.x, p.y);
+      }
+    }
+  });
+  api.ui.status(<span class="s">`${result.units} units placed`</span>);
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bZLBatwwEIbvfoqpKVSCRWnOxrnnEAhkeyqFCHt2d8AeGc2I7JLsa_RZ-jx9kiDJzaZtLgLL___NzD8aAouCDAw9-IXcGIY0I6uTAdlHCsZ2zVBFOOGgOK7K-kmBXWJSybqGdmA-ZdjLy5vcTch7PUDf9_DVwnMDxZ7IiXpNYtqHogQJM0JhwY6iqGtt15wBJ0HI4OxSjNETOznNM2o8GVu4LQfG9kP4NkWGwLANYRL4_fMXPKze_6tke501RNoT-0mgvwwy-8UY4hGPFvqbHFod_Xu5-2G7N3tESZP-GymOpKa9oxhDrIO2GzBaabk2wC5EMJWRIOwufdhVAHB1BdsD1uZhCcQKJKCHmt0XgfDEsAShvJuu_IgoCj4i5Gxp9nsUt9LeFVxyQT26uTR4n8kmueMGkjtZJxMNaK7tpREoW9GjGzzfT37Ab0zZkdu4HTewZO_iTtZm6vKBIrnwxBjfSbuVfW7-nOdy9_dSHz8_14Rr_uf11ZQS42Pe5ys" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="triggers-generated-from-a-table">Triggers generated from a table<a class="anchor" href="#triggers-generated-from-a-table" aria-label="Link to this section">#</a></h2>
+<p>Attack waves written as data and turned into triggers through the text format. The
+triggers name a location, so the snippet adds it first if the map does not have one.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> waves = [
+  { after: <span class="n">60</span>, unit: <span class="s">&quot;Zerg Zergling&quot;</span>, count: <span class="n">8</span> },
+  { after: <span class="n">180</span>, unit: <span class="s">&quot;Zerg Hydralisk&quot;</span>, count: <span class="n">6</span> },
+  { after: <span class="n">300</span>, unit: <span class="s">&quot;Zerg Ultralisk&quot;</span>, count: <span class="n">2</span> },
+];
+
+<span class="k">if</span> (api.triggers.names().locationByName(<span class="s">&quot;Spawn&quot;</span>) === <span class="k">undefined</span>) {
+  <span class="k">const</span> t = api.consts.tile;
+  api.document.edit(<span class="s">&quot;Add the Spawn location&quot;</span>, (tx) =&gt; {
+    tx.addLocation({ left: <span class="n">2</span> * t, top: <span class="n">2</span> * t, right: <span class="n">6</span> * t, bottom: <span class="n">6</span> * t }, <span class="s">&quot;Spawn&quot;</span>);
+  });
+}
+
+<span class="k">const</span> source = waves.map((wave) =&gt; <span class="s">`
+Trigger(&quot;Player 8&quot;){
+Conditions:
+  Elapsed Time(At least, ${wave.after});
+Actions:
+  Create Unit(&quot;Player 8&quot;, &quot;${wave.unit}&quot;, ${wave.count}, &quot;Spawn&quot;);
+}`</span>).join(<span class="s">&quot;\n&quot;</span>);
+
+<span class="k">try</span> {
+  <span class="k">let</span> added = <span class="n">0</span>;
+  api.document.update(<span class="s">&quot;Add the waves&quot;</span>, (tx) =&gt; { added = tx.triggers.fromText(source); });
+  api.ui.status(<span class="s">`${added} triggers added`</span>);
+} <span class="k">catch</span> (error) {
+  api.ui.status(String(error)); <span class="c">// a parse error names the line</span>
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1ZZJPi9swEMXv-hQPswe5GG_awhISXEiXQg-lFDZ72bYQ1Zo4am3JSONugvF3L5bzZze9CI3E7-nNG5XOBsaz-ksBBb4LoIfaMvkF7mYZOmt4geSJfIVxqY2tkgyl6ywvMMeQvSTezq-QzwftVW3Cnwtzd8W8n10xjzVfM-9G5udSCLOFVK3J2ZuqIh9yqxoKMs1rVyo2zn48fFUNyeShVc82SVEUBTqraWss6RS9AMrYMaPAqBSrkLOpaSkQj7Qru4Ys56QNy2SlNXhHiJI4PZRkkLxPUXyIogDvc6X1l-O17FHTNlp_A87Arj3vval2MYhY_XLMrjmWGDKcvI92hnQpBiEmy8F1viQU07TyRrVSjttoYiPWUyYy-VarA3nMk7QX985qMxoKCwF8qlUbSGNtGpIrRk0qcIabfpTJ40DGF1flmbj3pJjwaMckzsIZkiMzDm5IzhJxXq96GDZp_tsZK5MfsRbsDzGxmhhKa9IoMPsv-q7ViukSfmz5ZeZnlveX37D1rlnTnuUUVbqMAU7SnckDK-6C3Nz0ER5wAiexzWgXpeJyB0neOz99mNf0A3tjq-N9usTtLRRa5QMhniF-yWi6NpbE8A8" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>A plugin that regenerates its triggers should also <a href="/plugins/the-api-group-by-group/#apitriggers">claim them</a>, so the
+Trigger Editor shows them as generated and the user does not edit them by hand.</p>
+<h2 id="notes-kept-inside-the-map">Notes kept inside the map<a class="anchor" href="#notes-kept-inside-the-map" aria-label="Link to this section">#</a></h2>
+<p>A text box whose contents are stored as a file in the map archive, so they travel with
+the map and are written on the next Save. The write is delayed until typing pauses.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> FILE = <span class="s">&quot;my-plugin\\notes.txt&quot;</span>;
+
+<span class="k">function</span> read() {
+  <span class="k">const</span> bytes = api.document.extras.get(FILE);
+  <span class="k">return</span> bytes ? <span class="k">new</span> TextDecoder().decode(bytes) : <span class="s">&quot;&quot;</span>;
+}
+
+api.ui.panel({
+  title: <span class="s">&quot;Map notes&quot;</span>,
+  width: <span class="n">320</span>,
+  mount(body) {
+    <span class="k">const</span> area = api.ui.el(<span class="s">&quot;textarea&quot;</span>, { rows: <span class="n">10</span>, style: { width: <span class="s">&quot;100%&quot;</span> }, value: read() });
+    <span class="k">let</span> timer = <span class="n">0</span>;
+    area.addEventListener(<span class="s">&quot;input&quot;</span>, () =&gt; {
+      clearTimeout(timer);
+      timer = window.setTimeout(() =&gt; {
+        <span class="k">if</span> (api.document.isOpen()) api.document.extras.set(FILE, <span class="k">new</span> TextEncoder().encode(area.value));
+      }, <span class="n">400</span>);
+    });
+    <span class="c">// Another map opened, or came to the front: show its notes.</span>
+    <span class="k">const</span> subscription = api.events.on(<span class="s">&quot;document&quot;</span>, () =&gt; { area.value = read(); });
+    body.append(area, api.ui.widgets.hint(<span class="s">&quot;Stored in the map file on the next Save.&quot;</span>));
+    <span class="k">return</span> () =&gt; {
+      clearTimeout(timer);
+      subscription.dispose();
+    };
+  },
+});
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1jZJBi9swEIXv_hUPQUEGV-tte3JIS6EpFLb0sHvci9aaJAJbEtI4Tgj578WKnd2FHnqSRoye3ptPrXeJ8fPXwwZriP70MXTDzrrnZ-eZkuIji1VRbAfXsvUOkbSRJc4F0OabLyemhDV0sMr4dujJsaIjR53UjlhOyuWqACLxEN3c_w2ORjzRkX9Q6w1FWSqTdzI3lGggxKq4FMUkPFgVtKNOTu-y5Y4aiN86IJsUVQGM1vC-wedP9VT1fnAsX7w5Xb0ubnUkPZsdrKJOCqYjT6eiwhnRj6nBfV0h8Wl65Lzoivu6_iBwqXDQ3UDNMohLzgZ0xGDbU8Qa9fVoUlXamM2BHD_YxOQoSmFdGFhUkCXWX2dzQNuRjk-2Jz-wzEKzMG6yo3XGjyoRL33vJQC7hXzHwaY_gZwsy3_iSTOe6gZj4xYYlHcyZ8iJy5ufS4UvdT2XS_67O3x3nvcU0esAH8iRqeAjWt0T2IP3hG30jhukvR9hOV3xqTd80vCS2mhD_mtXTjSNLynvpFgCvE4PrwaxnpmsbqYm_kqHQM7kJNUCfrRmR5zU3jqW4pF9JAPrssfJ_tZ2BH-tHR0Zj_pASiwzmL_yfxN8m0oZm4JPJJcBTsulKi7l6i8" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="units-out-to-a-spreadsheet-and-back">Units out to a spreadsheet and back<a class="anchor" href="#units-out-to-a-spreadsheet-and-back" aria-label="Link to this section">#</a></h2>
+<p>Export every unit as a CSV file:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> scn = api.document.scenario();
+<span class="k">if</span> (scn) {
+  <span class="k">const</span> rows = scn.units.map((u) =&gt; [u.unitId, api.names.unit(u.unitId), u.owner + <span class="n">1</span>, u.x, u.y].join(<span class="s">&quot;,&quot;</span>));
+  <span class="k">const</span> csv = [<span class="s">&quot;id,name,player,x,y&quot;</span>, ...rows].join(<span class="s">&quot;\n&quot;</span>);
+  <span class="k">await</span> api.ui.saveFile(<span class="k">new</span> Blob([csv], { <span class="k">type</span>: <span class="s">&quot;text/csv&quot;</span> }), <span class="s">&quot;units.csv&quot;</span>);
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1PY_NasMwEITvfopBJ4kKlV5j3EMPgTyDk4Mqq6Bir4xX8g8h716kkF4WZpZvZtdF4gR2hA52DmaILk-ekmHnyS4hStU24QeSHSncG8BVYokboyugyRQSm8nOUmaF7hN9rt5l0DWS7OS5OvK1UBrZxI38gjd8FLGXcdzMbwwkhRZKtf9djld06EUYdMnS82gPv-hdH0LDGFNueZFXEpW0mw2p1udg2K7-HEYvyW_4GuO37B2vN4070jH7E0Tye3p3vAo8lIZ4vlS0apvHHw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>And place units from one, as a single undo entry. A row with anything that is not a
+number where a number belongs is skipped:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> [file] = <span class="k">await</span> api.ui.pickFiles({ accept: <span class="s">&quot;.csv&quot;</span> });
+<span class="k">if</span> (file) {
+  <span class="k">const</span> rows = (<span class="k">await</span> file.text()).split(<span class="s">&quot;\n&quot;</span>).slice(<span class="n">1</span>).map((line) =&gt; line.split(<span class="s">&quot;,&quot;</span>));
+  <span class="k">const</span> result = api.document.edit(<span class="s">&quot;Import units&quot;</span>, (tx) =&gt; {
+    <span class="k">for</span> (<span class="k">const</span> [id, , player, x, y] <span class="k">of</span> rows) {
+      <span class="k">const</span> values = [id, player, x, y].map(Number);
+      <span class="k">if</span> (values.every(Number.isFinite)) tx.placeUnit(values[<span class="n">0</span>], values[<span class="n">1</span>] - <span class="n">1</span>, values[<span class="n">2</span>], values[<span class="n">3</span>]);
+    }
+  });
+  api.ui.status(<span class="s">`${result.units} units placed`</span>);
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1VVE9a8MwEN3zKx6mgwSuaNqtIR0DXbp1cg1RlQsclW1hnROH4P9eJDsN1SRx7-ueXNdGQXVkTzW2sGfLAhvYDGwCu58de4rqCuscBXlFYVw8FZj0ZsVHqMTTuK4Al4X67hyxhZp10tQIjaK0NjF4FlV8tYU20bMjtdamsUEpzy1pbN-QLjdcWWi9uetSHLykgIHNoXNDQ60YOiTkexO6XjC0LLEooWTMYikUcOx6qFmj4kOJEsHbC_UlxhKXGt0xZ9YL_OZ3sn6gtEkm_aPkzB9D8019DphOqmKmGDpRf1nmhuOOWxbSGjKa4K2jz5ZlwVZPdbk4Vesaj1j_PZ_vk5d6sZlWyL3j9j9RrAxR7R-ucz0mVzDNTSC7HfZ6s5p-AQ" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="find-and-replace-in-every-string">Find and replace in every string<a class="anchor" href="#find-and-replace-in-every-string" aria-label="Link to this section">#</a></h2>
+<p><code>document.update</code> has no undo entry, so the snippet keeps the table as it was and puts an
+<strong>Undo replace</strong> cell in the status bar that restores it.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> find = <span class="k">await</span> api.ui.prompt(<span class="s">&quot;Find in every string&quot;</span>);
+<span class="k">const</span> replacement = find ? <span class="k">await</span> api.ui.prompt(<span class="s">`Replace &quot;${find}&quot; with`</span>) : <span class="k">null</span>;
+
+<span class="k">if</span> (find &amp;&amp; replacement !== <span class="k">null</span>) {
+  <span class="k">const</span> before = api.query.strings();
+  <span class="k">const</span> hits = before.flatMap((text, index) =&gt; (text?.includes(find) ? [index] : []));
+  <span class="k">if</span> (hits.length === <span class="n">0</span>) {
+    api.ui.status(<span class="s">&quot;Not found.&quot;</span>);
+  } <span class="k">else</span> <span class="k">if</span> (<span class="k">await</span> api.ui.confirm(<span class="s">`Replace in ${hits.length} strings?`</span>, { confirmLabel: <span class="s">&quot;Replace&quot;</span> })) {
+    api.document.update(<span class="s">&quot;Replace in strings&quot;</span>, (tx) =&gt; {
+      <span class="k">for</span> (<span class="k">const</span> index <span class="k">of</span> hits) tx.strings.set(index, (before[index] ?? <span class="s">&quot;&quot;</span>).split(find).join(replacement));
+    });
+    <span class="k">const</span> undo = api.ui.statusItem({
+      text: <span class="s">&quot;Undo replace&quot;</span>,
+      onClick: () =&gt; {
+        api.document.update(<span class="s">&quot;Undo replace&quot;</span>, (tx) =&gt; tx.strings.apply(before));
+        undo.remove();
+      },
+    });
+  }
+}
+</code></pre><a class="try-it" href="https://editor.scmjs.dev/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1dZFPa9wwEMXv-yleRQgSGNGzF9eHQqDQ9lDoKQRWseWsGllSLTnZZfF3L_rjrRdaXwyaN2_e_KazxgcMyvRoIN6FChBO8VlxN9nRBUoeYk0ZyDc5neHDpMwLYftdlzon6bTo5ChNQJN92n_6HH5kJcjdJcoWgncVjgeGGmbWer_bqQE0Odzf3_h-aJokYbjsgDz3WQ52kjGzU_z3LKczz9E8Zfur6qiCR1PEfNAifBOO0iBPoYIyvTwxNJ-QHlquTKfnXvoUgqHFY5I8ocbjE0u2MWI05Vqal3BE0zT4mHNhXdgHEWZPyXcbMNjZ9Jyk3gVSe5ksbgB11gxqGv8SUgZ3l82UpVD37aHCBUX_VTxLXYOULoKFbYP0tpsjPT67XgRJyca92JEKNGQCuQ8Y7ASa2aXdYYcEkSGcVsDcy0BTtQLNaFdQbQtCGPdOq5Ap8l9WGbq5ZuYILOWfh82mt-WYV4JfghzpGixeqAb5GXXFjVSlZs1nrbrXGvRml_9wuLW4EtjsJ5zT57LZGjd-MSSf5GjfJL0-L9VmnWW3_AE" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<footer class="page-foot">
+  <p>scmJS 0.6.2 + main@dd79a77 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#a-problems-panel-that-follows-the-map">A problems panel that follows the map</a></li>
+<li><a href="#a-heat-map-of-where-the-units-are">A heat map of where the units are</a></li>
+<li><a href="#a-brush-of-your-own">A brush of your own</a></li>
+<li><a href="#copies-of-the-selection-under-the-symmetry-setting">Copies of the selection under the symmetry setting</a></li>
+<li><a href="#triggers-generated-from-a-table">Triggers generated from a table</a></li>
+<li><a href="#notes-kept-inside-the-map">Notes kept inside the map</a></li>
+<li><a href="#units-out-to-a-spreadsheet-and-back">Units out to a spreadsheet and back</a></li>
+<li><a href="#find-and-replace-in-every-string">Find and replace in every string</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programs — TrigScript, StarCraft triggers as code</title>
+<meta name="description" content="Everything inside program(() =&gt; { … }) runs in the game: A program runs every frame, from where it left off. Its body runs until it reaches a sleep() or its end, all within one frame of…">
+<meta property="og:title" content="Programs — TrigScript, StarCraft triggers as code">
+<meta property="og:description" content="Everything inside program(() =&gt; { … }) runs in the game: A program runs every frame, from where it left off. Its body runs until it reaches a sleep() or its end, all within one frame of…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/trigscript/programs/">
+<meta property="og:url" content="https://docs.scmjs.dev/trigscript/programs/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://editor.scmjs.dev">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/opening-the-script/">Opening the script</a></li>
+<li><a class="" href="/trigscript/tests/">Tests</a></li>
+<li><a class="" href="/trigscript/beside-the-map/">Beside the map</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="here" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript/examples/">Examples</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/accumulate/">Accumulate</a></li>
+<li><a class="" href="/triggers/always/">Always</a></li>
+<li><a class="" href="/triggers/bring/">Bring</a></li>
+<li><a class="" href="/triggers/command/">Command</a></li>
+<li><a class="" href="/triggers/command-the-least/">Command the Least</a></li>
+<li><a class="" href="/triggers/command-the-least-at/">Command the Least At</a></li>
+<li><a class="" href="/triggers/command-the-most/">Command the Most</a></li>
+<li><a class="" href="/triggers/command-the-most-at/">Command the Most At</a></li>
+<li><a class="" href="/triggers/countdown-timer/">Countdown Timer</a></li>
+<li><a class="" href="/triggers/deaths/">Deaths</a></li>
+<li><a class="" href="/triggers/elapsed-time/">Elapsed Time</a></li>
+<li><a class="" href="/triggers/highest-score/">Highest Score</a></li>
+<li><a class="" href="/triggers/kill/">Kill</a></li>
+<li><a class="" href="/triggers/least-kills/">Least Kills</a></li>
+<li><a class="" href="/triggers/least-resources/">Least Resources</a></li>
+<li><a class="" href="/triggers/lowest-score/">Lowest Score</a></li>
+<li><a class="" href="/triggers/mission-briefing/">Mission Briefing</a></li>
+<li><a class="" href="/triggers/most-kills/">Most Kills</a></li>
+<li><a class="" href="/triggers/most-resources/">Most Resources</a></li>
+<li><a class="" href="/triggers/never/">Never</a></li>
+<li><a class="" href="/triggers/opponents/">Opponents</a></li>
+<li><a class="" href="/triggers/score/">Score</a></li>
+<li><a class="" href="/triggers/switch/">Switch</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/center-view/">Center View</a></li>
+<li><a class="" href="/triggers/comment/">Comment</a></li>
+<li><a class="" href="/triggers/create-unit/">Create Unit</a></li>
+<li><a class="" href="/triggers/create-unit-with-properties/">Create Unit with Properties</a></li>
+<li><a class="" href="/triggers/defeat/">Defeat</a></li>
+<li><a class="" href="/triggers/display-text-message/">Display Text Message</a></li>
+<li><a class="" href="/triggers/draw/">Draw</a></li>
+<li><a class="" href="/triggers/give-units-to-player/">Give Units to Player</a></li>
+<li><a class="" href="/triggers/kill-unit/">Kill Unit</a></li>
+<li><a class="" href="/triggers/kill-unit-at-location/">Kill Unit At Location</a></li>
+<li><a class="" href="/triggers/leader-board-control/">Leader Board Control</a></li>
+<li><a class="" href="/triggers/leader-board-control-at-location/">Leader Board Control At Location</a></li>
+<li><a class="" href="/triggers/leader-board-greed/">Leader Board Greed</a></li>
+<li><a class="" href="/triggers/leader-board-kills/">Leader Board Kills</a></li>
+<li><a class="" href="/triggers/leader-board-points/">Leader Board Points</a></li>
+<li><a class="" href="/triggers/leader-board-resources/">Leader Board Resources</a></li>
+<li><a class="" href="/triggers/leaderboard-computer-players/">Leaderboard Computer Players</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control/">Leaderboard Goal Control</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-control-at-location/">Leaderboard Goal Control At Location</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-kills/">Leaderboard Goal Kills</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-points/">Leaderboard Goal Points</a></li>
+<li><a class="" href="/triggers/leaderboard-goal-resources/">Leaderboard Goal Resources</a></li>
+<li><a class="" href="/triggers/minimap-ping/">Minimap Ping</a></li>
+<li><a class="" href="/triggers/modify-unit-energy/">Modify Unit Energy</a></li>
+<li><a class="" href="/triggers/modify-unit-hanger-count/">Modify Unit Hanger Count</a></li>
+<li><a class="" href="/triggers/modify-unit-hit-points/">Modify Unit Hit Points</a></li>
+<li><a class="" href="/triggers/modify-unit-resource-amount/">Modify Unit Resource Amount</a></li>
+<li><a class="" href="/triggers/modify-unit-shield-points/">Modify Unit Shield Points</a></li>
+<li><a class="" href="/triggers/move-location/">Move Location</a></li>
+<li><a class="" href="/triggers/move-unit/">Move Unit</a></li>
+<li><a class="" href="/triggers/mute-unit-speech/">Mute Unit Speech</a></li>
+<li><a class="" href="/triggers/order/">Order</a></li>
+<li><a class="" href="/triggers/pause-game/">Pause Game</a></li>
+<li><a class="" href="/triggers/pause-timer/">Pause Timer</a></li>
+<li><a class="" href="/triggers/play-wav/">Play WAV</a></li>
+<li><a class="" href="/triggers/preserve-trigger/">Preserve Trigger</a></li>
+<li><a class="" href="/triggers/remove-unit/">Remove Unit</a></li>
+<li><a class="" href="/triggers/remove-unit-at-location/">Remove Unit At Location</a></li>
+<li><a class="" href="/triggers/run-ai-script/">Run AI Script</a></li>
+<li><a class="" href="/triggers/run-ai-script-at-location/">Run AI Script At Location</a></li>
+<li><a class="" href="/triggers/set-alliance-status/">Set Alliance Status</a></li>
+<li><a class="" href="/triggers/set-countdown-timer/">Set Countdown Timer</a></li>
+<li><a class="" href="/triggers/set-deaths/">Set Deaths</a></li>
+<li><a class="" href="/triggers/set-doodad-state/">Set Doodad State</a></li>
+<li><a class="" href="/triggers/set-invincibility/">Set Invincibility</a></li>
+<li><a class="" href="/triggers/set-mission-objectives/">Set Mission Objectives</a></li>
+<li><a class="" href="/triggers/set-next-scenario/">Set Next Scenario</a></li>
+<li><a class="" href="/triggers/set-resources/">Set Resources</a></li>
+<li><a class="" href="/triggers/set-score/">Set Score</a></li>
+<li><a class="" href="/triggers/set-switch/">Set Switch</a></li>
+<li><a class="" href="/triggers/talking-portrait/">Talking Portrait</a></li>
+<li><a class="" href="/triggers/transmission/">Transmission</a></li>
+<li><a class="" href="/triggers/unmute-unit-speech/">Unmute Unit Speech</a></li>
+<li><a class="" href="/triggers/unpause-game/">Unpause Game</a></li>
+<li><a class="" href="/triggers/unpause-timer/">Unpause Timer</a></li>
+<li><a class="" href="/triggers/victory/">Victory</a></li>
+<li><a class="" href="/triggers/wait/">Wait</a></li>
+<li><a class="" href="/triggers/disable-debug-mode/">Disable Debug Mode</a></li>
+<li><a class="" href="/triggers/enable-debug-mode/">Enable Debug Mode</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/sections/">Sections</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/what-the-editor-needs/">What the editor needs</a></li>
+<li><a class="" href="/game-data/where-it-looks/">Where it looks</a></li>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/how-the-editor-is-put-together/">How the editor is put together</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/game-data/">Game data</a></li>
+<li><a class="" href="/development/desktop-build/">Desktop build</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/plugin-typings/">Plugin typings</a></li>
+<li><a class="" href="/development/releases/">Releases</a></li>
+<li><a class="" href="/development/the-documentation-site/">The documentation site</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+<li><a class="" href="/development/where-things-are-documented/">Where things are documented</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Programs</h1>
+<p>Everything inside <code>program(() =&gt; { … })</code> runs in the game:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">let</span> wave = <span class="n">0</span>;
+  <span class="k">let</span> alarm = <span class="k">false</span>;
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="k">if</span> (bring(P1, units.AnyUnit, locations.Beacon, <span class="s">&quot;&gt;=&quot;</span>, <span class="n">1</span>) &amp;&amp; !alarm) {
+      alarm = <span class="k">true</span>;
+      displayText(<span class="s">&quot;They are coming.&quot;</span>);
+    }
+    <span class="k">if</span> (alarm) {
+      createUnit(P8, units.ZergZergling, <span class="n">4</span>, locations.Spawn);
+      wave += <span class="n">1</span>;
+    }
+    <span class="k">if</span> (wave &gt;= <span class="n">10</span>) defeat();
+    sleep(seconds(<span class="n">20</span>));
+  }
+}, { owner: P1 });
+</code></pre>
+<p><strong>A program runs every frame, from where it left off.</strong> Its body runs until it reaches a
+<code>sleep()</code> or its end, all within one frame of the game, and the next frame it carries on
+from there. A body that ends stops for good. So the loop above is a game loop: it looks
+at the beacon, sends a wave if the alarm is up, and sleeps twenty seconds.</p>
+<p><strong>Variables</strong> hold numbers, booleans, texts and units of the game, and a
+<code>let p = { lives: 3, gold: 0 }</code> is a variable per field. They live in the game while the map is played and take nothing from
+the map: no death counters, no switches, no triggers in the list. Numbers are whole and
+signed, as in TypeScript: <code>a - b</code> is below zero when <code>b</code> is larger, <code>while (i &gt;= 0)</code> ends,
+and a number below zero is shown with its minus sign. A number runs from −2 147 483 648 to
+2 147 483 647 and wraps at either end. A <code>u8</code> or <code>u16</code> variable (<code>let lives: u8 = 3</code>) stays
+within 0 … 255 or 0 … 65 535 and stops at both ends, which is what lives and cooldowns
+want; a <code>u32</code> runs from 0 to 4 294 967 295, for bit masks and hashes, and is kept apart
+from a plain number in arithmetic unless <code>u32(x)</code> or <code>i32(x)</code> says which is meant. <code>+</code>,
+<code>-</code>, <code>*</code>, <code>/</code> and <code>%</code> work between variables, with <code>Math.min</code>, <code>Math.max</code>, <code>Math.abs</code> and
+<code>clamp()</code>, and so do the bitwise <code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code> and <code>&gt;&gt;&gt;</code>; division is whole and
+towards zero, and dividing by a variable that is 0 gives 0. Where the game takes nothing
+below zero — hit points, an amount, a unit count — a number below zero goes in as 0.</p>
+<p><strong>Arrays</strong> hold numbers, booleans, texts, units, records or other arrays: <code>let hp = [10, 20, 30]</code>, <code>new Array(12).fill(3)</code>, an
+index that is a constant or a variable (<code>hp[i] += 7</code>), <code>.length</code>, <code>for (const x of xs)</code>,
+<code>fill</code>, <code>includes</code> and <code>indexOf</code>. An array that something pushes to grows —
+<code>const queue: number[] = []; queue.push(x); queue.pop() ?? 0</code> — with no size to declare: the
+cells come from a pool the map&#39;s programs share, and the workspace&#39;s <strong>Settings</strong> view
+(Ctrl+,) sets how large it is, a setting kept in the map. An index past the end reads 0 and
+stores nothing, and Simulate says where. An array of records — <code>let waves = [{ count: 4, delay: 2 }]</code>, <code>waves[i].count += 1</code>, <code>waves.push({ … })</code> — hands out its records by
+reference, as TypeScript does, and an array of units (<code>const squad: Unit[] = []</code>,
+<code>squad.push(u)</code>) may be kept across a <code>sleep()</code>. A record in an array may hold a unit, a text, an array of its own
+(<code>squads[i].members.push(u)</code>) or another record. An array of arrays is a grid —
+<code>let grid = [[0, 0, 0], [0, 0, 0]]</code>, <code>grid[y][x] += 1</code> — or rows that each grow
+(<code>buckets[i].push(v)</code>), and <code>const names: string[] = []</code> is an array of texts. A list made
+outside the program — <code>const price = [50, 100, 150]</code>, or a wave table of records — can be
+looked up with a variable: <code>price[level]</code>, <code>waves[wave].count</code>.</p>
+<p><strong>The array methods that take a function</strong> are there, written as in TypeScript: <code>forEach</code>,
+<code>some</code>, <code>every</code>, <code>find</code>, <code>findIndex</code>, <code>reduce</code>, <code>map</code>, <code>filter</code>, <code>sort</code> and <code>reverse</code>, and
+chains of them. <code>filter</code> over the units of the game is how to keep some of them:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="c">// The three most hurt units at the base get 20 hit points, every two seconds.</span>
+    <span class="k">const</span> hurt = unitsAt(locations.Base, { owner: CurrentPlayer }).filter((u) =&gt; u.hp &lt; u.maxHp);
+    hurt.sort((a, b) =&gt; a.hp - b.hp);
+    <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> hurt.slice(<span class="n">0</span>, <span class="n">3</span>)) u.heal(<span class="n">20</span>);
+    sleep(seconds(<span class="n">2</span>));
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p>The function is written into the loop the method becomes, so it costs nothing and sees the
+program&#39;s variables — and for the same reason it cannot be kept in a variable: write it
+where it is used, or name a <code>function</code>. <code>sort</code> wants its function (<code>(a, b) =&gt; a - b</code>), runs
+within the frame, and is nothing for dozens of items and felt for hundreds every frame; the
+end of the line says <em>sorts in the frame</em>. <code>slice</code>, <code>concat</code>, <code>toSorted</code>, <code>toReversed</code> and
+<code>Array.from</code> make copies. Patterns and spread work as well: <code>const { x, y } = mouse(P1)</code>,
+<code>for (const { count, delay } of waves)</code>, <code>[a, b] = [b, a]</code>, <code>[...xs, 7]</code>,
+<code>waves.push({ ...w, count: 9 })</code>.</p>
+<p><strong>Tables keyed by an id of the game</strong> are arrays with a cell for every id, so a key of the
+game is one read: <code>const bounty: Record&lt;UnitType, number&gt; = { [units.ZergZergling]: 5 }</code> and
+<code>bounty[u.type]</code>, <code>new Map&lt;UnitType, number&gt;()</code> with <code>get</code> (<code>?? 0</code> for a key never set),
+<code>set</code>, <code>has</code>, <code>delete</code>, <code>clear</code> and <code>size</code>, <code>new Set&lt;UnitType&gt;()</code> with <code>add</code> and the same;
+<code>for (const [key, value] of lost)</code> goes through the keys that are there.
+The keys are unit types, players, locations, switches, weapons, upgrades or technologies.</p>
+<p><strong>A <code>Map</code> and a <code>Set</code> over any number, or over units</strong>, are for keys that are no id of the
+game: <code>new Map&lt;number, number&gt;()</code> for a tile packed into one number, <code>new Map&lt;Unit, number&gt;()</code> for a cooldown a unit, <code>new Set&lt;Unit&gt;()</code> for the units already dealt with. They
+go through their keys in the order the keys went in, as JavaScript&#39;s do. A key is looked
+for, a few steps where a table keyed by ids of the game is one read, and the values are
+numbers or booleans. A unit that died stays an entry until it is deleted; in a loop over
+the map it reads as no unit, which is the moment to delete it.</p>
+<p><strong>Control flow is what it says.</strong> <code>if</code>/<code>else</code>, <code>while</code>, <code>do</code>, <code>for</code>, <code>switch</code>, <code>break</code>,
+<code>continue</code> and <code>c ? a : b</code> all work. Conditions go in an <code>if</code> or a <code>while</code>; actions stand
+as statements. A loop runs all its rounds at once, within the frame, which has one
+consequence to keep in mind: a loop that never ends and never sleeps would freeze the
+game. The editor refuses one and says where to put <code>sleep(frames(1))</code>. A <code>for</code> whose
+bounds are known when the script is applied is unrolled, and the editor says so at the
+end of the line.</p>
+<p><strong>Time is <code>sleep</code>.</strong> <code>sleep(seconds(15))</code> gives the frame back and carries on that much
+later, while other programs and the map&#39;s triggers go on. <code>frames(n)</code> is the game&#39;s own
+clock, a second is twenty-four frames at Fastest, and <code>minutes()</code> is there too.
+Something that runs on its own clock is another program — one program per concurrent
+activity. The game&#39;s own <code>wait()</code> is allowed but is a different thing: it stalls every
+trigger of that player, so use it for a short pause (a text, then a sound) and <code>sleep</code>
+to pass time.</p>
+<p><strong>Edges.</strong> <code>if (rose(bring(…)))</code> is true on the frame the condition becomes true and not
+again until it has been false in between; <code>once(…)</code> is true the first time only.
+<code>random()</code> is a coin toss, and <code>random(n)</code> a whole number from 0 to n − 1.</p>
+<p><strong>Reads: what the game holds is a value.</strong> Every condition that compares a quantity is
+also a read of it when the comparison and the amount are left out, and a read goes
+wherever a number goes:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">let</span> price = <span class="n">50</span>;
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="k">if</span> (minerals(CurrentPlayer) &gt;= price * <span class="n">2</span> &amp;&amp; bring(CurrentPlayer, units.AnyUnit, locations.Beacon) &gt;= <span class="n">1</span>) {
+      setResources(CurrentPlayer, <span class="s">&quot;subtract&quot;</span>, price, <span class="s">&quot;ore&quot;</span>);
+      createUnit(CurrentPlayer, units.TerranMarine, <span class="n">1</span>, locations.Spawn);
+      price += deaths(CurrentPlayer, units.TerranMarine);
+    }
+    sleep(seconds(<span class="n">1</span>));
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p><code>deaths(p, unit)</code>, <code>kill(p, unit)</code>, <code>bring(p, unit, location)</code>, <code>command(p, unit)</code>,
+<code>accumulate(p, resource)</code>, <code>score(p, kind)</code>, <code>countdownTimer()</code> and <code>elapsedTime()</code> all
+read this way, and the common ones have plainer names: <code>minerals(p)</code>, <code>gas(p)</code>,
+<code>countUnits(p, unit, location?)</code>, <code>kills(p, unit)</code>, <code>countdown()</code>, <code>elapsed()</code> — those two
+in the game&#39;s own seconds, which at Fastest pass about one and a half times as fast as
+the seconds of <code>sleep</code>. A read means what its condition means — a force&#39;s minerals are the force&#39;s sum, <code>units.Men</code>
+counts what Bring counts — and it is taken when the line runs, so <code>let ore = minerals(P1)</code> keeps the number and <code>minerals(P1)</code> written twice reads twice. What to read
+— the player, the unit, the location — is fixed when the script is applied. About the
+players themselves there are <code>race(p)</code> (compare it with <code>races.Zerg</code>, <code>.Terran</code>,
+<code>.Protoss</code>), <code>slot(p)</code> (<code>slots.Human</code>, <code>.Computer</code>, <code>.Empty</code>), <code>isHuman(p)</code>,
+<code>hasLeft(p)</code> and <code>supply(p, &quot;used&quot; | &quot;max&quot; | &quot;provided&quot;)</code> as the top bar shows it.</p>
+<p><strong>The units on the map are objects.</strong> A loop runs over the ones that match, a pick finds
+one, and a unit has properties and things it can be told:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="c">// Everything Player 2 has on the hill is worn down to half health.</span>
+    <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> unitsAt(locations.Hill, { owner: P2 })) u.hp = u.maxHp / <span class="n">2</span>;
+
+    <span class="c">// The Marine nearest the beacon is sent to the base; nobody else moves.</span>
+    <span class="k">const</span> scout = nearest(units.TerranMarine, locations.Beacon, { owner: P1 });
+    <span class="k">if</span> (scout) scout.order(<span class="s">&quot;move&quot;</span>, locations.Base);
+
+    sleep(seconds(<span class="n">5</span>));
+  }
+});
+</code></pre>
+<p><code>unitsAt(location, filter?)</code>, <code>unitsOf(player, filter?)</code> and <code>allUnits(filter?)</code> are what
+a <code>for…of</code> runs over; <code>first(filter?)</code>, <code>nearest(type, location, filter?)</code> and
+<code>randomUnit(filter?)</code> give one unit, or <code>null</code> when nothing matches — so the <code>if (scout)</code>
+is required, and the editor says so when it is missing. A filter is <code>{ type, owner, at }</code>;
+<code>units.Men</code>, <code>units.Buildings</code> and <code>units.Factories</code> work as a type. A unit has <code>hp</code>,
+<code>shields</code> and <code>energy</code> in whole points, <code>maxHp</code> and <code>maxShields</code>, <code>owner</code>, <code>type</code>, <code>x</code>,
+<code>y</code>, <code>kills</code>, <code>cooldown</code>, <code>resources</code>, the spell timers (<code>stim</code>, <code>lockdown</code>, <code>stasis</code>, …)
+and <code>invincible</code>, <code>burrowed</code>, <code>cloaked</code>, <code>hallucinated</code>, <code>underAttack</code>. Hit points,
+shields, energy, kills, the cooldown, the timers and <code>invincible</code> can be written; the
+position, the owner and the rest are read only, and the editor marks a write to one as
+you type. A unit can be told <code>order(&quot;move&quot; | &quot;patrol&quot; | &quot;attack&quot;, location)</code>,
+<code>give(player)</code>, <code>kill()</code>, <code>remove()</code>, <code>damage(n)</code>, <code>heal(n)</code> — or <code>{ percent: 50 }</code> — and
+<code>locate(location)</code>, which centres a location on the unit so that the ordinary actions can
+happen where it stands.</p>
+<p>A variable can keep a unit across a <code>sleep</code>. Units die, and the game hands a dead unit&#39;s
+place to the next one made, so every use checks that the unit is still the same one:
+once it is gone its numbers read 0 and nothing written or told to it has any effect, and
+<code>if (u)</code> asks whether it is still there. A loop over units runs within one frame, so a
+<code>sleep</code> inside one is an error; to take units one at a time, find the next after each
+sleep. Each loop and each pick looks through all of the game&#39;s 1700 unit slots when its
+line runs, which is nothing a few times a second and worth a thought every frame: the
+editor writes <em>scans units</em> at the end of such a line.</p>
+<p><strong><code>stats()</code> reaches the game&#39;s own tables</strong>: what a unit type costs, what a weapon does,
+which upgrades a player has.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  stats(units.TerranMarine).minerals = <span class="n">25</span>;
+  stats(units.TerranMarine).speed = <span class="n">6.5</span>;               <span class="c">// pixels a frame; a Marine walks at 4</span>
+  stats(units.ZergZergling).name = <span class="s">&quot;Dog&quot;</span>;
+  stats(weapons.GaussRifle).damage += <span class="n">2</span>;
+  stats(P1).upgrades[upgrades.TerranInfantryWeapons] = <span class="n">3</span>;
+  stats(P3).color = <span class="s">&quot;teal&quot;</span>;
+});
+</code></pre>
+<p>A field reads as a number (or true / false) and takes <code>=</code> and <code>+=</code>. Unit types, weapons
+(<code>weapons.</code>), upgrades (<code>upgrades.</code>), technologies (<code>techs.</code>) and players each have their
+own fields, and the completion list after the dot is the list: only what was played and
+seen working in Remastered is offered, and the hover on each field says what it reaches —
+most unit-type fields apply to units made after the write, a weapon&#39;s to every unit
+using it, a colour at once. A write lasts for the game.</p>
+<p><strong>What the players do</strong> is there to read: a key, a mouse button, where the mouse is, and
+what a player types.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="k">if</span> (keyPressed(CurrentPlayer, <span class="s">&quot;F8&quot;</span>)) createUnit(CurrentPlayer, units.TerranMarine, <span class="n">1</span>, locations.Anywhere);
+
+    <span class="k">if</span> (clicked(CurrentPlayer, <span class="s">&quot;right&quot;</span>)) {
+      <span class="k">const</span> at = mouse(CurrentPlayer);
+      displayText(<span class="s">`You clicked at ${at.x}, ${at.y}.`</span>);
+    }
+
+    <span class="k">const</span> m = chatted(CurrentPlayer, <span class="s">&quot;-spawn {n} {what:unit}&quot;</span>);
+    <span class="k">if</span> (m) createUnit(CurrentPlayer, m.what, m.n, locations.Anywhere);
+
+    underMouse(CurrentPlayer, { owner: CurrentPlayer })?.heal(<span class="n">10</span>);
+    sleep(frames(<span class="n">1</span>));
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p>A key, a click and a typed line are true on the one frame they arrive, so look for them
+in a loop that sleeps one frame at a time. <code>keyPressed</code> is true once per press — not
+while the key is held, and not while the player is typing a message. <code>mouse(p)</code> is the
+place on the map under the player&#39;s cursor, in pixels (32 to a tile);
+<code>centerLocation(location, x, y)</code> moves a location there, so that a unit can be created
+under the cursor, and <code>underMouse(p)</code> is the unit nearest the cursor, or <code>null</code>.</p>
+<p><code>chatted(p, pattern)</code> is <code>null</code> until the player sends a line that fits the pattern, and
+then holds what the pattern read out of it. The pattern&#39;s own words are matched exactly
+and the whole line has to fit; <code>{n}</code> reads a whole number, <code>{what:unit}</code> a unit type by
+its name (the rest of the line, so it comes last) and <code>{kind:ore|gas}</code> one of the listed
+words, as its place in the list. The editor knows the names in the pattern: after <code>m.</code> it
+offers <code>n</code> and <code>what</code>, and nothing else. A pattern starts with a word of its own, such as
+<code>-spawn</code>, so ordinary talk is left alone. A game played in single player has no chat, so
+try typed lines in a multiplayer game — hosting one alone is enough.</p>
+<p>All of this reaches every player&#39;s computer in step, a few frames after it happens. It
+costs the map a little, and only when a program reads input: one free location among the
+first 63 (nine when the mouse is read; the script is told when there is no room), and
+the Valkyrie and Player 12, which carry the input between computers and must be left
+alone.</p>
+<p><strong>A text can hold the program&#39;s numbers.</strong> Write it as a template literal:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">let</span> wave = <span class="n">0</span>;
+  <span class="k">while</span> (<span class="k">true</span>) {
+    wave += <span class="n">1</span>;
+    displayText(<span class="s">`Wave ${wave}: you have ${minerals(CurrentPlayer)} ore, ${name(CurrentPlayer)}.`</span>);
+    print(<span class="s">`${color(P1)}${name(P1)}\x01 leads with ${kills(P1, units.AnyUnit)} kills`</span>, { to: AllPlayers, position: <span class="s">&quot;center&quot;</span> });
+    sleep(seconds(<span class="n">30</span>));
+  }
+}, { owner: AllPlayers });
+</code></pre>
+<p><code>name(p)</code> is the player&#39;s name and <code>color(p)</code> the colour code of their colour, filled in
+by the game. <code>displayText</code> shows the text to the current player, as it always has;
+<code>print(text, { to, position })</code> shows it to someone else — a player, <code>AllPlayers</code>, a
+force — or, with <code>position: &quot;center&quot;</code>, on the line in the middle of the screen where the
+game&#39;s own messages appear.</p>
+<p><strong>A text is a value.</strong> A <code>string</code> variable holds one, a function takes and returns one, a
+record has one for a field, and there is no length to declare:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">let</span> shown = <span class="s">&quot;&quot;</span>;
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="k">const</span> slain = kills(P1, units.AnyUnit);
+    <span class="k">const</span> rank = slain &gt;= <span class="n">50</span> ? <span class="s">&quot;Veteran&quot;</span> : slain &gt;= <span class="n">10</span> ? <span class="s">&quot;Soldier&quot;</span> : <span class="s">&quot;Recruit&quot;</span>;
+    <span class="k">const</span> line = <span class="s">`${rank}: ${slain} kills, ${Math.max(50 - slain, 0)} to go`</span>;
+    <span class="k">if</span> (line != shown) { setMissionObjectives(line); shown = line; }
+    sleep(seconds(<span class="n">1</span>));
+  }
+});
+</code></pre>
+<p>Texts take <code>+</code>, <code>+=</code>, templates, the comparisons, <code>length</code>, <code>s[i]</code>, <code>slice</code>, <code>indexOf</code>,
+<code>includes</code>, <code>startsWith</code>, <code>endsWith</code>, <code>padStart</code>, <code>padEnd</code>, <code>repeat</code> and
+<code>for (const ch of s)</code>; a character is a character, so <code>&quot;저글링&quot;.length</code> is 3. The
+objectives, a leaderboard&#39;s label, a transmission&#39;s line and a unit type&#39;s name
+(<code>stats(units.ZergZergling).name = …</code>) take a text the program made, up to 255 bytes; what
+is on the screen is the text as it was when the action ran, so run the action again when
+the text changes, as above. A made text holds 1 023 bytes and is cut off past that, which
+the game says once in red. <code>split</code>, <code>replace</code>, <code>trim</code> and <code>parseInt</code> are not there: keep a
+number beside the text it was made into.</p>
+<p><strong>Functions</strong> declared inside the program, or made with <code>game()</code> in any file, run in the
+game too. Arguments pass by value, they may return a number, a boolean, a text or a unit —
+<code>function canAfford(price: number) { return gold &gt;= price; }</code> — and they may sleep. A
+function used once is written into the program where it is called; one used more than
+once is a single copy in the built map that every call runs, which keeps a script with
+helpers small. The end of the function&#39;s line says which it got (<em>called ×3</em>, <em>inlined
+×2</em>), and hovering it says why: a function that sleeps, or whose parameter has to be
+known when the map is built (the player of <code>setResources(p, …)</code>), stays inlined. A
+function may call itself — <code>fib(n - 1) + fib(n - 2)</code>, a flood fill over an array — as long
+as it does not sleep: each run has its own parameters and locals, as in TypeScript. It may
+go 1 024 calls deep unless the workspace&#39;s Settings says otherwise; a call past that stops
+the program, and the game says where. Thousands of such calls within one frame make the
+game pause, since each keeps its function&#39;s variables while it runs.</p>
+<p><strong>Classes</strong> are TypeScript&#39;s, declared inside the program: fields, a constructor, methods,
+<code>get</code> and <code>set</code>, <code>static</code>, <code>private</code>, <code>extends</code> with <code>super</code>.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">class</span> Wave {
+    left: <span class="k">number</span>;
+    constructor(public unit: UnitType, count: <span class="k">number</span>) { <span class="k">this</span>.left = count; }
+    get done() { <span class="k">return</span> <span class="k">this</span>.left == <span class="n">0</span>; }
+    send() {
+      createUnit(P8, <span class="k">this</span>.unit, <span class="n">1</span>, locations.Spawn);
+      <span class="k">this</span>.left--;
+    }
+  }
+  <span class="k">const</span> waves = [<span class="k">new</span> Wave(units.ZergZergling, <span class="n">12</span>), <span class="k">new</span> Wave(units.ZergHydralisk, <span class="n">6</span>)];
+  <span class="k">for</span> (<span class="k">const</span> w <span class="k">of</span> waves) {
+    print(<span class="s">`${w.left} are on their way`</span>, { to: AllPlayers });
+    <span class="k">while</span> (!w.done) { w.send(); sleep(seconds(<span class="n">1</span>)); }
+    sleep(seconds(<span class="n">30</span>));
+  }
+  victory();
+});
+</code></pre>
+<p>An instance is a record and a method a function handed the instance, so what holds for
+functions holds for methods. Which class an instance is, is settled when the script is
+applied — nothing of a class is left in the game — and the limits follow from that: an
+array of instances holds one class, a function can give back an instance only when every
+<code>return</code> gives the same one (<code>return this</code>, so calls chain, or <code>return new Wave(…)</code>), and a
+class a program writes to is declared inside it.</p>
+<p><strong>A program runs for its owner</strong> (Player 1 unless <code>{ owner: … }</code> says otherwise), as that
+player, while that player is in the game. <code>AllPlayers</code>, a force or a list of players
+makes a <strong>per-player program</strong>: the same code runs for each of those players who is in
+the game, computers included, <code>CurrentPlayer</code> is that player, and every variable is per
+player, each with their own copy — which is how lives, scores and cooldowns are written
+once. <code>let total = shared(0)</code> is one value they all share.</p>
+<p><strong>Everything the body reads from outside is computed when the script is applied.</strong> A
+constant, a helper, a condition, an action: each is worked out once, when the script
+runs, and the editor underlines those parts with dots so the boundary is visible as you
+type. That is what lets a helper written outside the program supply actions inside it.
+It is also the one rule to keep in mind: a program variable cannot reach a condition, an
+action or a helper, because those were computed before the game started. The exceptions
+are the amount of <code>setResources</code>, <code>setDeaths</code>, <code>setScore</code> and <code>setCountdownTimer</code>, the
+unit count of <code>createUnit</code>, <code>killUnitAt</code>, <code>removeUnitAt</code> and <code>giveUnits</code> and an action&#39;s
+unit type, which can be variables or expressions over them, and a text: <code>displayText</code> and
+<code>print</code> take any text the program made, and so do the objectives, a leaderboard&#39;s label, a
+transmission and a unit type&#39;s name.</p>
+<footer class="page-foot">
+  <p>scmJS 0.6.2 + main@dd79a77 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>
