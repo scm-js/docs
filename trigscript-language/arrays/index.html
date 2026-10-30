@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arrays — TrigScript language for StarCraft programs</title>
+<meta name="description" content="Arrays hold numbers, booleans, texts, units, records, instances of a class, functions or other arrays. let hp = [10, 20, 30], let xs = [a, a  2, 0], let lives:">
+<meta property="og:title" content="Arrays — TrigScript language for StarCraft programs">
+<meta property="og:description" content="Arrays hold numbers, booleans, texts, units, records, instances of a class, functions or other arrays. let hp = [10, 20, 30], let xs = [a, a  2, 0], let lives:">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/trigscript-language/arrays/">
+<meta property="og:url" content="https://docs.scmjs.dev/trigscript-language/arrays/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="here" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Arrays</h1>
+<p>Arrays hold numbers, booleans, texts, units, records, instances of a class, functions or
+other arrays. <code>let hp = [10, 20, 30]</code>, <code>let xs = [a, a * 2, 0]</code>,
+<code>let lives: u8[] = new Array(12).fill(3)</code>. An index is a constant or a variable
+(<code>hp[i] += 7</code>). <code>.length</code>, <code>for (const x of xs)</code> with <code>break</code> and <code>continue</code>, <code>fill</code>,
+<code>includes</code>, <code>indexOf</code> and <code>lastIndexOf</code> (−1 when there is none), <code>at(i)</code> (from the end
+when <code>i</code> is below zero) and <code>join(&quot;, &quot;)</code> all run within the frame. Cells keep their type:
+a <code>u8[]</code> stops at both ends. An array handed to a function is the same array.</p>
+<p>Two things are not JavaScript&#39;s:</p>
+<ul>
+<li><strong>An index past the end reads 0 and stores nothing.</strong> A constant index past the end is
+an error. A variable one is passed over in the game without a word, and Simulate says
+where it happened, since it is always a mistake.</li>
+<li><strong><code>const b = a</code> is a copy</strong>, where JavaScript would give the same array a second name.</li>
+</ul>
+<p>In a program of every player, each player has their own copy of an array;
+<code>shared([0, 0, 0])</code> is one for everybody.</p>
+<h2 id="arrays-that-grow">Arrays that grow<a class="anchor" href="#arrays-that-grow" aria-label="Link to this section">#</a></h2>
+<p><strong>An array that something pushes to grows</strong>, with no size to declare.
+<code>const queue: number[] = []</code>, <code>queue.push(x)</code>, <code>queue.pop()</code>, <code>queue.length = 0</code>,
+<code>shift()</code>, <code>unshift(v)</code> and <code>splice(i, n, …)</code> all work. <code>pop()</code> of an empty array is 0
+here, where TypeScript says <code>undefined</code>, so write <code>?? 0</code> or <code>!</code> after it. An empty array
+wants its type said: <code>let xs: number[] = []</code>.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> hp = [<span class="n">10</span>, <span class="n">20</span>, <span class="n">30</span>];                  <span class="c">// three cells, for good</span>
+  <span class="k">const</span> queue: <span class="k">number</span>[] = [];               <span class="c">// starts empty and grows as it is pushed to</span>
+  <span class="k">let</span> total = <span class="n">0</span>;
+  <span class="k">for</span> (<span class="k">const</span> h <span class="k">of</span> hp) total += h;
+  <span class="k">for</span> (<span class="k">let</span> i = <span class="n">0</span>; i &lt; hp.length; i++) <span class="k">if</span> (hp[i] &gt; <span class="n">15</span>) queue.push(i);
+  <span class="k">while</span> (queue.length &gt; <span class="n">0</span>) {
+    <span class="k">const</span> i = queue.pop()!;
+    hp[i] -= <span class="n">5</span>;
+    print(<span class="s">`cell ${i} is now ${hp[i]} of ${total}`</span>);
+  }
+});
+</code></pre>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> queue = [<span class="n">5</span>, <span class="n">6</span>, <span class="n">7</span>];
+  queue.unshift(<span class="n">4</span>);
+  <span class="k">const</span> head = queue.shift() ?? <span class="n">0</span>;
+  queue.splice(<span class="n">1</span>, <span class="n">1</span>, <span class="n">60</span>, <span class="n">61</span>);
+  print(<span class="s">`${head} ${queue.join(&quot;,&quot;)} ${queue.at(-1) ?? 0} ${queue.lastIndexOf(61)}`</span>);   <span class="c">// 4 5,60,61,7 7 2</span>
+});
+</code></pre>
+<p>The cells of every growing array come from one pool that the map&#39;s programs share: 16 384
+cells, unless the workspace&#39;s <strong>Settings</strong> view (Ctrl+,) says otherwise. An array that
+fills its block is moved to one twice the size, and a block given back serves the next
+array that wants that size. An array declared again, in a loop or in a function called
+again, first gives back the block it held, so a scratch array made every round holds one
+block at a time. A single array can reach between a quarter and a half of the pool. When
+the pool has no block left, nothing more is pushed and the game says so once, in red.
+Simulate counts blocks as the game does, so it runs out at the same push.</p>
+<h2 id="arrays-of-records-units-and-texts">Arrays of records, units and texts<a class="anchor" href="#arrays-of-records-units-and-texts" aria-label="Link to this section">#</a></h2>
+<p><strong>An array of records</strong> is an array per field, all growing together:
+<code>let waves = [{ count: 4, delay: 2 }]</code>, <code>waves[i].count += 1</code>,
+<code>waves.push({ count: 6, delay: 1 })</code>. A record taken out of one (<code>const w = waves[i]</code>, the
+variable of a <code>for…of</code>, a record handed to a function) is the array&#39;s own, as an object in
+a TypeScript array is a reference: <code>w.delay = 9</code> writes the array. A field is a number, a
+boolean, a unit, a text, an array of numbers, booleans or units, or a record of the same:
+<code>squads[i].seen.push(4)</code>, <code>squads[i].name += &quot;!&quot;</code>. The hint at the end of the line says
+how many cells a row comes to.</p>
+<p><strong>An array of units</strong> keeps the units themselves: <code>const squad: Unit[] = []</code>,
+<code>squad.push(u)</code>, <code>squad[i].hp = 10</code>, <code>squad.pop()?.kill()</code>. Unlike a loop over the game&#39;s
+units, it may be kept across a <code>sleep()</code>. A unit in it that has died since reads 0, takes
+no order, and is false in an <code>if</code>.</p>
+<p><strong>An array of texts</strong> is <code>const names: string[] = []</code>, with <code>push</code>, <code>pop()</code> (<code>?? &quot;&quot;</code>),
+<code>names[i]</code> read, written and added to, <code>length</code>, <code>for…of</code>, <code>forEach</code>, <code>includes</code>,
+<code>indexOf</code> and <code>join</code>.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> log: <span class="k">string</span>[] = [];
+  <span class="k">let</span> wave = <span class="n">3</span>;
+  log.push(<span class="s">`wave ${wave} began`</span>);
+  log.push(<span class="s">&quot;boss down&quot;</span>);
+  print(log.join(<span class="s">&quot; / &quot;</span>));                   <span class="c">// wave 3 began / boss down</span>
+});
+</code></pre>
+<h2 id="the-methods-that-take-a-function">The methods that take a function<a class="anchor" href="#the-methods-that-take-a-function" aria-label="Link to this section">#</a></h2>
+<p><code>forEach</code>, <code>some</code>, <code>every</code>, <code>find</code>, <code>findLast</code>, <code>findIndex</code>, <code>findLastIndex</code>, <code>reduce</code>,
+<code>map</code>, <code>filter</code>, <code>sort</code> and <code>reverse</code> work on every kind of array, and chains of them do
+too. The function is written as in TypeScript and is handed the item, its place and the
+array. An arrow written there is copied into the loop the method becomes, so it costs
+nothing to write one, and it sees the program&#39;s variables.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> scores = [<span class="n">12</span>, <span class="n">7</span>, <span class="n">30</span>, <span class="n">7</span>];
+  <span class="k">let</span> bonus = <span class="n">5</span>;
+  <span class="k">const</span> raised = scores.map((s) =&gt; s + bonus);
+  <span class="k">const</span> best = raised.reduce((m, s) =&gt; Math.max(m, s), <span class="n">0</span>);
+  <span class="k">const</span> below = raised.filter((s) =&gt; s &lt; best);
+  below.sort((a, b) =&gt; b - a);
+  print(<span class="s">`best ${best}, ${below.length} below it, the next is ${below[0]}`</span>);   <span class="c">// best 35, 3 below it, the next is 17</span>
+});
+</code></pre>
+<ul>
+<li><code>map</code> makes an array of numbers or booleans. <code>filter</code> makes one that grows, of whatever
+it ran over: records stay whole, units stay units. Neither can stand in a loop&#39;s
+condition, which is worked out again every round: make the array before the loop.</li>
+<li><code>find</code> gives a unit or <code>null</code> from an array of units, and a number or <code>undefined</code> from
+an array of numbers. For records, take the place with <code>findIndex</code> and read <code>waves[i]</code>.</li>
+<li><code>reduce</code> wants the value it starts from.</li>
+<li><code>sort</code> wants its function: without one, JavaScript sorts numbers as text, 10 before 9.
+It sorts in place, within the frame, and keeps equal items in order. Dozens of items
+cost nothing. Hundreds every frame will be felt, and the line&#39;s hint says <em>sorts in the
+frame</em>.</li>
+<li>A function handed to a method cannot <code>sleep()</code>: the method is one loop within the frame.
+A <code>for…of</code> over the same array can sleep between its rounds.</li>
+</ul>
+<p>The game&#39;s units take these methods too: <code>unitsOf(P1).forEach((u) =&gt; u.heal(10))</code>, <code>some</code>,
+<code>every</code>, <code>reduce</code>, <code>map</code>, <code>find</code> and <code>filter</code>. <code>filter</code> is how to keep some of them, as an
+array that can be sorted and kept across a <code>sleep()</code>:</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> squad = unitsOf(P1, { <span class="k">type</span>: units.TerranMarine }).filter((u) =&gt; u.hp &lt; <span class="n">20</span>);
+  squad.sort((a, b) =&gt; a.hp - b.hp);
+  <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> squad) { u.heal(<span class="n">10</span>); sleep(frames(<span class="n">4</span>)); }    <span class="c">// the weakest first, one every four frames</span>
+});
+</code></pre>
+<p>A list the script made takes them as well. With a variable of the program in the function,
+<code>prices.map((p) =&gt; p + bonus)</code> is an array of the program. With nothing of the program in
+it, <code>[1, 2, 3].map((x) =&gt; x * 2)</code> is the script&#39;s own arithmetic, done when the script is
+built.</p>
+<h2 id="patterns-and-spread">Patterns and spread<a class="anchor" href="#patterns-and-spread" aria-label="Link to this section">#</a></h2>
+<p>Destructuring and spread are TypeScript&#39;s: <code>const { x, y } = mouse(P1)</code>,
+<code>const [first, , third = 0, ...tail] = xs</code>, <code>for (const { count, delay } of waves)</code>, and
+in a function&#39;s parameters. A name in a pattern holds a copy of a number, so changing <code>x</code>
+does not change <code>p.x</code>. A record or an array inside what is taken apart stays itself.
+Assigned, a pattern is a swap: <code>[a, b] = [b, a]</code>, <code>[hp[i], hp[j]] = [hp[j], hp[i]]</code>.
+<code>[...xs, v]</code> and <code>{ ...p, y: 9 }</code> copy into a new array or record.
+<code>function sum(...ns: number[])</code> takes the rest of a call&#39;s arguments as an array.</p>
+<pre><code class="language-ts">program(() =&gt; {
+  <span class="k">const</span> waves = [{ count: <span class="n">4</span>, delay: <span class="n">2</span> }, { count: <span class="n">6</span>, delay: <span class="n">1</span> }];
+  <span class="k">let</span> a = <span class="n">1</span>;
+  <span class="k">let</span> b = <span class="n">2</span>;
+  [a, b] = [b, a];
+  <span class="k">for</span> (<span class="k">const</span> { count, delay } <span class="k">of</span> waves) print(<span class="s">`${count} every ${delay}`</span>);
+  <span class="k">const</span> xs = [a, b, <span class="n">3</span>];
+  <span class="k">const</span> [head, ...rest] = xs;
+  waves.push({ ...waves[<span class="n">0</span>], count: <span class="n">9</span> });
+  print(<span class="s">`${head}, then ${rest.length} more; ${waves.length} waves`</span>);   <span class="c">// 2, then 2 more; 3 waves</span>
+});
+</code></pre>
+<h2 id="arrays-inside-arrays">Arrays inside arrays<a class="anchor" href="#arrays-inside-arrays" aria-label="Link to this section">#</a></h2>
+<p><code>let grid = [[0, 0, 0], [0, 0, 0]]</code>,
+<code>new Array(8).fill(0).map(() =&gt; new Array(8).fill(0))</code> or
+<code>Array.from({ length: h }, () =&gt; …)</code> make a grid: <code>grid[y][x] += 1</code>, <code>grid[y].length</code>,
+<code>for (const row of grid)</code>. A row is an array like any other, and <code>const row = grid[y]</code> is
+the grid&#39;s own cells, as in TypeScript. An array inside a record works the same way:
+<code>p.path[i]</code>, <code>p.seen.push(v)</code>.</p>
+<p>The compiler chooses how to keep it, and the line&#39;s hint says which:</p>
+<ul>
+<li><strong>Every row the same length, and no row growing</strong>, is one flat array, no slower to read
+than a plain one. A row past its own end reads 0 and never reaches into the next row.
+The outer array may still grow by whole rows.</li>
+<li><strong>Rows of different lengths, or a row something pushes to</strong> (<code>buckets[i].push(v)</code>), are
+rows that grow, each a block of the pool. A row that goes gives its block back, so
+nothing leaks. Two levels deep; not three.</li>
+</ul>
+<p>One thing is not JavaScript&#39;s: a row of rows that grow, kept in a <code>const</code>, is that <em>place</em>
+in the outer array, not the array that was there. After
+<code>const last = buckets[2]; buckets.pop(); buckets.push([7])</code>, <code>last</code> reads <code>[7]</code>. And
+<code>filter</code> of rows gives copies, so a change through the rows it made does not reach the
+rows it took them from.</p>
+<h2 id="copies">Copies<a class="anchor" href="#copies" aria-label="Link to this section">#</a></h2>
+<p><code>xs.slice(1)</code>, <code>xs.concat(ys, 7)</code>, <code>xs.toSorted(f)</code>, <code>xs.toReversed()</code> and
+<code>Array.from(xs)</code> give a new array that grows. <code>[...m.keys()]</code> and <code>[...set]</code> give a
+<code>Map</code>&#39;s or a <code>Set</code>&#39;s as one. <code>f(...xs)</code> spreads an array into a call when the script knows
+how many there are: a list it has, or a tuple
+(<code>let box: [number, number, number] = [1, 1, 1]</code>).</p>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#arrays-that-grow">Arrays that grow</a></li>
+<li><a href="#arrays-of-records-units-and-texts">Arrays of records, units and texts</a></li>
+<li><a href="#the-methods-that-take-a-function">The methods that take a function</a></li>
+<li><a href="#patterns-and-spread">Patterns and spread</a></li>
+<li><a href="#arrays-inside-arrays">Arrays inside arrays</a></li>
+<li><a href="#copies">Copies</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

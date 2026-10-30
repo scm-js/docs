@@ -1,0 +1,2262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Actions — StarCraft trigger reference</title>
+<meta name="description" content="An action is what a trigger does once its conditions hold. These are all of them: Actions are carried out in order, for the player the trigger is running for.">
+<meta property="og:title" content="Actions — StarCraft trigger reference">
+<meta property="og:description" content="An action is what a trigger does once its conditions hold. These are all of them: Actions are carried out in order, for the player the trigger is running for.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/triggers/actions/">
+<meta property="og:url" content="https://docs.scmjs.dev/triggers/actions/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="here" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Actions</h1>
+<p>An action is what a trigger does once its conditions hold. These are all of them:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/triggers/actions/#center-view">Center View</a></td>
+<td>moves the player&#39;s screen to a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#comment">Comment</a></td>
+<td>nothing in the game; names the trigger in an editor</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#create-unit">Create Unit</a></td>
+<td>creates units at a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#create-unit-with-properties">Create Unit with Properties</a></td>
+<td>creates units with hit points, energy and other properties set</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#defeat">Defeat</a></td>
+<td>the player loses</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#display-text-message">Display Text Message</a></td>
+<td>shows text on the player&#39;s screen</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#draw">Draw</a></td>
+<td>the player draws</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#give-units-to-player">Give Units to Player</a></td>
+<td>hands units at a location to another player</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#kill-unit">Kill Unit</a></td>
+<td>kills every unit of a type a player owns</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#kill-unit-at-location">Kill Unit At Location</a></td>
+<td>kills units in a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-control">Leader Board Control</a></td>
+<td>a leaderboard of units owned</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-control-at-location">Leader Board Control At Location</a></td>
+<td>a leaderboard of units owned in a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-greed">Leader Board Greed</a></td>
+<td>a leaderboard of ore and gas towards a goal</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-kills">Leader Board Kills</a></td>
+<td>a leaderboard of kills</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-points">Leader Board Points</a></td>
+<td>a leaderboard of a score</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leader-board-resources">Leader Board Resources</a></td>
+<td>a leaderboard of ore or gas</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-computer-players">Leaderboard Computer Players</a></td>
+<td>whether computer players are on leaderboards</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-goal-control">Leaderboard Goal Control</a></td>
+<td>a leaderboard of units owned, towards a goal</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-goal-control-at-location">Leaderboard Goal Control At Location</a></td>
+<td>the same, in a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-goal-kills">Leaderboard Goal Kills</a></td>
+<td>a leaderboard of kills, towards a goal</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-goal-points">Leaderboard Goal Points</a></td>
+<td>a leaderboard of a score, towards a goal</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#leaderboard-goal-resources">Leaderboard Goal Resources</a></td>
+<td>a leaderboard of ore or gas, towards a goal</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#minimap-ping">Minimap Ping</a></td>
+<td>pings a location on the player&#39;s minimap</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#modify-unit-energy">Modify Unit Energy</a></td>
+<td>sets units&#39; energy to a percentage</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#modify-unit-hanger-count">Modify Unit Hanger Count</a></td>
+<td>adds interceptors or scarabs</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#modify-unit-hit-points">Modify Unit Hit Points</a></td>
+<td>sets units&#39; hit points to a percentage</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#modify-unit-resource-amount">Modify Unit Resource Amount</a></td>
+<td>sets how much a mineral field or geyser holds</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#modify-unit-shield-points">Modify Unit Shield Points</a></td>
+<td>sets units&#39; shields to a percentage</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#move-location">Move Location</a></td>
+<td>centres a location on a unit</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#move-unit">Move Unit</a></td>
+<td>moves units from one location to another instantly</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#mute-unit-speech">Mute Unit Speech</a></td>
+<td>silences unit voices</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#order">Order</a></td>
+<td>orders units to move, patrol or attack</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#pause-game">Pause Game</a></td>
+<td>pauses the game, in single player</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#pause-timer">Pause Timer</a></td>
+<td>stops the countdown timer</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#play-wav">Play WAV</a></td>
+<td>plays a sound</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#preserve-trigger">Preserve Trigger</a></td>
+<td>keeps the trigger so it can run again</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#remove-unit">Remove Unit</a></td>
+<td>removes every unit of a type a player owns</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#remove-unit-at-location">Remove Unit At Location</a></td>
+<td>removes units in a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#run-ai-script">Run AI Script</a></td>
+<td>starts a computer player&#39;s AI script</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#run-ai-script-at-location">Run AI Script At Location</a></td>
+<td>starts an AI script that uses a location</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-alliance-status">Set Alliance Status</a></td>
+<td>makes the player an enemy or ally of another</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-countdown-timer">Set Countdown Timer</a></td>
+<td>sets the countdown timer</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-deaths">Set Deaths</a></td>
+<td>changes a death count</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-doodad-state">Set Doodad State</a></td>
+<td>turns doors and traps on or off</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-invincibility">Set Invincibility</a></td>
+<td>makes units invincible, or not</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-mission-objectives">Set Mission Objectives</a></td>
+<td>sets the text of the objectives screen</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-next-scenario">Set Next Scenario</a></td>
+<td>chooses the map that follows a win</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-resources">Set Resources</a></td>
+<td>changes a player&#39;s ore or gas</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-score">Set Score</a></td>
+<td>changes a player&#39;s score</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#set-switch">Set Switch</a></td>
+<td>sets, clears, toggles or randomizes a switch</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#talking-portrait">Talking Portrait</a></td>
+<td>shows a unit&#39;s portrait talking</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#transmission">Transmission</a></td>
+<td>a message with a portrait, a sound and a minimap ping</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#unmute-unit-speech">Unmute Unit Speech</a></td>
+<td>lets unit voices play again</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#unpause-game">Unpause Game</a></td>
+<td>resumes a game Pause Game stopped</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#unpause-timer">Unpause Timer</a></td>
+<td>restarts the countdown timer</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#victory">Victory</a></td>
+<td>the player wins</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#wait">Wait</a></td>
+<td>holds the rest of the trigger for a time</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#disable-debug-mode">Disable Debug Mode</a></td>
+<td>stops the Esc key from skipping the trigger</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#enable-debug-mode">Enable Debug Mode</a></td>
+<td>lets the Esc key skip the trigger again</td>
+</tr>
+</tbody></table>
+<p>Actions are carried out in order, for the player the trigger is running for. Actions that
+act on &quot;the player&quot; — showing text, moving the screen, winning — act on that player.</p>
+<h2 id="center-view">Center View<a class="anchor" href="#center-view" aria-label="Link to this section">#</a></h2>
+<p>Moves the player&#39;s screen so the location is in the middle of it. In a single-player game
+the screen scrolls there and the trigger is held, like a <a href="/triggers/actions/#wait">Wait</a>, until it arrives;
+in a multiplayer game it jumps at once. It does nothing for a computer player, while the
+game is paused, or with no location.</p>
+<!-- generated: action 10 -->
+<p><strong>Action 10</strong> · <code>Center View(Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Center View</span>(<span class="s">&quot;Base&quot;</span>);
+</code></pre>
+<h2 id="comment">Comment<a class="anchor" href="#comment" aria-label="Link to this section">#</a></h2>
+<p>Does nothing in the game. Editors show the text as the trigger&#39;s name in the trigger list,
+which is what it is for.</p>
+<!-- generated: action 47 -->
+<p><strong>Action 47</strong> · <code>Comment(Text);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Comment</span>(<span class="s">&quot;Wave 3 spawns&quot;</span>);
+</code></pre>
+<h2 id="create-unit">Create Unit<a class="anchor" href="#create-unit" aria-label="Link to this section">#</a></h2>
+<p>Creates the number of units of the type for the player, at the middle of the location. A
+unit that does not fit there is placed at the nearest spot it fits, up to 128 pixels away;
+a unit with no room that close is not created. A building is not moved: it is not created
+on ground it cannot stand on, or where something is in the way. Mineral fields and geysers
+are always created for Player 12. A count of 0 creates one unit, although the text form
+writes it as All.</p>
+<p>Not every unit can be created:</p>
+<ul>
+<li><strong>Only Players 1 to 8.</strong> Create Unit makes nothing for Players 9 to 12 or None, and with
+All Players it makes units only for Players 1 to 8. (Run in 1.16.1 and found playing
+Remastered.)</li>
+<li><strong>Not a class.</strong> Any unit, Men, Buildings and Factories make nothing; it needs a unit
+type.</li>
+<li><strong>Only the types StarEdit&#39;s unit palette offers.</strong> With the game&#39;s own unit data that is
+168 of the 228 types. The rest make nothing: larvae, eggs and cocoons, the tank and
+Goliath turrets, interceptors, scarabs, the nuclear missile, Scanner Sweep, Disruption
+Web, Dark Swarm, the doors and traps, start locations, the race markers, the minerals
+and gas a worker carries, the four heroes Arcturus Mengsk (Battlecruiser), Aldaris,
+Raszagal and Gerard DuGalle, and the unused types. (Measured in 1.16.1; Remastered&#39;s
+code makes the same check.)</li>
+<li><strong>A Map Revealer</strong> is created and at once removed as unplaceable in 1.16.1. Remastered
+keeps it. (Found playing Remastered.)</li>
+</ul>
+<p>The scmJS Trigger Editor&#39;s unit list for Create Unit shows only the types that can be
+created, once the game data is installed.</p>
+<p>The action has a properties field, bytes 20–23, like <a href="/triggers/actions/#create-unit-with-properties">Create Unit with
+Properties</a>. The game reads it for Create Unit too: a value
+from 1 to 64 creates the units with that properties slot. Editors write 0 there.</p>
+<!-- generated: action 44 -->
+<p><strong>Action 44</strong> · <code>Create Unit(Player, Unit, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type a trigger can make; the <a href="/triggers/argument-values/#unit-classes">unit classes</a> make nothing</td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255 (0 makes one)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Create Unit</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Zerg Zergling&quot;</span>, <span class="n">6</span>, <span class="s">&quot;Spawn&quot;</span>);
+</code></pre>
+<h2 id="create-unit-with-properties">Create Unit with Properties<a class="anchor" href="#create-unit-with-properties" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#create-unit">Create Unit</a>, and the new units take the properties of one of the map&#39;s
+64 <em>unit properties slots</em>: hit points, shields and energy as percentages, resources,
+hangar count, and states such as cloaked, burrowed, lifted or hallucinated. The slots are
+stored in the map&#39;s <code>UPRP</code> section; the editor&#39;s Triggers ▸ Unit Properties Slots… edits
+them. A unit is created cloaked or burrowed only if its owner has the technology that lets
+it, and resources are kept to 16 bits. It can create the same units, for the same players,
+as Create Unit.</p>
+<!-- generated: action 11 -->
+<p><strong>Action 11</strong> · <code>Create Unit with Properties(Player, Unit, Count, Location, Properties);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type a trigger can make; the <a href="/triggers/argument-values/#unit-classes">unit classes</a> make nothing</td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255 (0 makes one)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>Properties</td>
+<td>a <a href="/triggers/actions/#create-unit-with-properties">unit properties slot</a></td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Create Unit with Properties</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Zerg Hydralisk&quot;</span>, <span class="n">4</span>, <span class="s">&quot;Spawn&quot;</span>, <span class="n">1</span>);
+</code></pre>
+<h2 id="defeat">Defeat<a class="anchor" href="#defeat" aria-label="Link to this section">#</a></h2>
+<p>The player loses. Nobody else is affected. In a Use Map Settings game the player&#39;s units
+stay on the map, idle, and the player stops running triggers and drops out of every group.
+A Defeat that comes after a <a href="/triggers/actions/#victory">Victory</a> for the same player in the same pass
+waits, and so never takes effect. See <a href="/triggers/how-triggers-run/#winning-and-losing">Winning and losing</a>.</p>
+<!-- generated: action 2 -->
+<p><strong>Action 2</strong> · <code>Defeat();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Defeat</span>();
+</code></pre>
+<h2 id="display-text-message">Display Text Message<a class="anchor" href="#display-text-message" aria-label="Link to this section">#</a></h2>
+<p>Shows the text on the player&#39;s screen. <em>Always Display</em> shows it even to a player who has
+turned subtitles off; <em>Don&#39;t Always Display</em> follows that setting. The text can carry the
+game&#39;s colour codes. Only the player the trigger runs for sees it: a computer player&#39;s
+Display Text shows on nobody&#39;s screen. The text stays for 4 seconds, or 50 milliseconds
+for each character of a longer text, in real time.</p>
+<!-- generated: action 9 -->
+<p><strong>Action 9</strong> · <code>Display Text Message(Display, Text);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Display</td>
+<td>Always Display or Don&#39;t Always Display</td>
+<td>bit 0x04 of byte 28</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Display Text Message</span>(Always Display, <span class="s">&quot;Defend the base until help arrives.&quot;</span>);
+</code></pre>
+<h2 id="draw">Draw<a class="anchor" href="#draw" aria-label="Link to this section">#</a></h2>
+<p>Gives the player a draw. It is a draw for everyone only when every player in the game
+draws or wins in the same pass; otherwise every other player still in the game with no
+result is defeated. See <a href="/triggers/how-triggers-run/#winning-and-losing">Winning and losing</a>.</p>
+<!-- generated: action 56 -->
+<p><strong>Action 56</strong> · <code>Draw();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Draw</span>();
+</code></pre>
+<h2 id="give-units-to-player">Give Units to Player<a class="anchor" href="#give-units-to-player" aria-label="Link to this section">#</a></h2>
+<p>Hands the number of units of the type in the location from one player to another. With a
+group as the player, the count is for the whole group. A transport takes its cargo along
+to the new owner; a unit inside a transport is not given on its own.</p>
+<!-- generated: action 48 -->
+<p><strong>Action 48</strong> · <code>Give Units to Player(From, To, Unit, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>From</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>To</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Give Units to Player</span>(<span class="s">&quot;Player 12&quot;</span>, <span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Any unit&quot;</span>, All, <span class="s">&quot;Rescue&quot;</span>);
+</code></pre>
+<h2 id="kill-unit">Kill Unit<a class="anchor" href="#kill-unit" aria-label="Link to this section">#</a></h2>
+<p>Kills every unit of the type the player owns, anywhere on the map, with their death
+animation. A unit killed this way adds nothing to anyone&#39;s <a href="/triggers/conditions/#deaths">death count</a>, kills
+or score: only a unit that dies in the game, shot or killed by a spell, does. A death
+counter meant to see a unit die therefore never sees Kill Unit. <em>Any unit</em> means every
+unit the player owns, mineral fields included.</p>
+<!-- generated: action 22 -->
+<p><strong>Action 22</strong> · <code>Kill Unit(Player, Unit);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Kill Unit</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Zerg Larva&quot;</span>);
+</code></pre>
+<h2 id="kill-unit-at-location">Kill Unit At Location<a class="anchor" href="#kill-unit-at-location" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#kill-unit">Kill Unit</a>, for the number of units of the type in the location, units
+loaded in transports there included. With a group as the player, the count is for each
+player in it.</p>
+<!-- generated: action 23 -->
+<p><strong>Action 23</strong> · <code>Kill Unit At Location(Player, Unit, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Kill Unit At Location</span>(<span class="s">&quot;All Players&quot;</span>, <span class="s">&quot;Men&quot;</span>, All, <span class="s">&quot;Lava&quot;</span>);
+</code></pre>
+<h2 id="leader-board-control">Leader Board Control<a class="anchor" href="#leader-board-control" aria-label="Link to this section">#</a></h2>
+<p>Shows a leaderboard of how many units of the type each player owns. A map shows one
+leaderboard at a time: showing another replaces it. It is one leaderboard for everyone,
+whichever player&#39;s trigger shows it, and the last one shown wins.</p>
+<!-- generated: action 17 -->
+<p><strong>Action 17</strong> · <code>Leader Board Control(Label, Unit);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Control</span>(<span class="s">&quot;Marines&quot;</span>, <span class="s">&quot;Terran Marine&quot;</span>);
+</code></pre>
+<h2 id="leader-board-control-at-location">Leader Board Control At Location<a class="anchor" href="#leader-board-control-at-location" aria-label="Link to this section">#</a></h2>
+<p>A leaderboard of how many units of the type each player has in the location.</p>
+<!-- generated: action 18 -->
+<p><strong>Action 18</strong> · <code>Leader Board Control At Location(Label, Unit, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Control At Location</span>(<span class="s">&quot;On the hill&quot;</span>, <span class="s">&quot;Men&quot;</span>, <span class="s">&quot;Hill&quot;</span>);
+</code></pre>
+<h2 id="leader-board-greed">Leader Board Greed<a class="anchor" href="#leader-board-greed" aria-label="Link to this section">#</a></h2>
+<p>A leaderboard of each player&#39;s ore and gas together, towards the goal.</p>
+<!-- generated: action 40 -->
+<p><strong>Action 40</strong> · <code>Leader Board Greed(Goal);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Greed</span>(<span class="n">5000</span>);
+</code></pre>
+<h2 id="leader-board-kills">Leader Board Kills<a class="anchor" href="#leader-board-kills" aria-label="Link to this section">#</a></h2>
+<p>A leaderboard of how many units of the type each player has killed.</p>
+<!-- generated: action 20 -->
+<p><strong>Action 20</strong> · <code>Leader Board Kills(Label, Unit);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Kills</span>(<span class="s">&quot;Kills&quot;</span>, <span class="s">&quot;Men&quot;</span>);
+</code></pre>
+<h2 id="leader-board-points">Leader Board Points<a class="anchor" href="#leader-board-points" aria-label="Link to this section">#</a></h2>
+<p>A leaderboard of each player&#39;s score of the <a href="/triggers/argument-values/#scores">kind</a>. With Custom, the numbers are
+whatever <a href="/triggers/actions/#set-score">Set Score</a> has made them.</p>
+<!-- generated: action 21 -->
+<p><strong>Action 21</strong> · <code>Leader Board Points(Label, Score);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>a <a href="/triggers/argument-values/#scores">score type</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Points</span>(<span class="s">&quot;Points&quot;</span>, Custom);
+</code></pre>
+<h2 id="leader-board-resources">Leader Board Resources<a class="anchor" href="#leader-board-resources" aria-label="Link to this section">#</a></h2>
+<p>A leaderboard of each player&#39;s ore, gas, or ore and gas.</p>
+<!-- generated: action 19 -->
+<p><strong>Action 19</strong> · <code>Leader Board Resources(Label, Resource);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Resource</td>
+<td><a href="/triggers/argument-values/#resources">ore, gas, or ore and gas</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leader Board Resources</span>(<span class="s">&quot;Minerals&quot;</span>, ore);
+</code></pre>
+<h2 id="leaderboard-computer-players">Leaderboard Computer Players<a class="anchor" href="#leaderboard-computer-players" aria-label="Link to this section">#</a></h2>
+<p>Whether computer players appear on leaderboards: enable, disable or toggle.</p>
+<!-- generated: action 32 -->
+<p><strong>Action 32</strong> · <code>Leaderboard Computer Players(State);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>State</td>
+<td><a href="/triggers/argument-values/#states">enable, disable or toggle</a></td>
+<td>byte 27</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Computer Players</span>(disable);
+</code></pre>
+<h2 id="leaderboard-goal-control">Leaderboard Goal Control<a class="anchor" href="#leaderboard-goal-control" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#leader-board-control">Leader Board Control</a>, counting towards the goal.</p>
+<!-- generated: action 33 -->
+<p><strong>Action 33</strong> · <code>Leaderboard Goal Control(Label, Unit, Goal);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Goal Control</span>(<span class="s">&quot;Build 10&quot;</span>, <span class="s">&quot;Terran Marine&quot;</span>, <span class="n">10</span>);
+</code></pre>
+<h2 id="leaderboard-goal-control-at-location">Leaderboard Goal Control At Location<a class="anchor" href="#leaderboard-goal-control-at-location" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#leader-board-control-at-location">Leader Board Control At Location</a>, counting towards
+the goal.</p>
+<!-- generated: action 34 -->
+<p><strong>Action 34</strong> · <code>Leaderboard Goal Control At Location(Label, Unit, Goal, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Goal Control At Location</span>(<span class="s">&quot;Hold the hill&quot;</span>, <span class="s">&quot;Men&quot;</span>, <span class="n">5</span>, <span class="s">&quot;Hill&quot;</span>);
+</code></pre>
+<h2 id="leaderboard-goal-kills">Leaderboard Goal Kills<a class="anchor" href="#leaderboard-goal-kills" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#leader-board-kills">Leader Board Kills</a>, counting towards the goal.</p>
+<!-- generated: action 36 -->
+<p><strong>Action 36</strong> · <code>Leaderboard Goal Kills(Label, Unit, Goal);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Goal Kills</span>(<span class="s">&quot;First to 50&quot;</span>, <span class="s">&quot;Men&quot;</span>, <span class="n">50</span>);
+</code></pre>
+<h2 id="leaderboard-goal-points">Leaderboard Goal Points<a class="anchor" href="#leaderboard-goal-points" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#leader-board-points">Leader Board Points</a>, counting towards the goal.</p>
+<!-- generated: action 37 -->
+<p><strong>Action 37</strong> · <code>Leaderboard Goal Points(Label, Score, Goal);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>a <a href="/triggers/argument-values/#scores">score type</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Goal Points</span>(<span class="s">&quot;Points&quot;</span>, Custom, <span class="n">100</span>);
+</code></pre>
+<h2 id="leaderboard-goal-resources">Leaderboard Goal Resources<a class="anchor" href="#leaderboard-goal-resources" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#leader-board-resources">Leader Board Resources</a>, counting towards the goal.</p>
+<!-- generated: action 35 -->
+<p><strong>Action 35</strong> · <code>Leaderboard Goal Resources(Label, Goal, Resource);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Label</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Resource</td>
+<td><a href="/triggers/argument-values/#resources">ore, gas, or ore and gas</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Leaderboard Goal Resources</span>(<span class="s">&quot;Mine 1000&quot;</span>, <span class="n">1000</span>, ore);
+</code></pre>
+<h2 id="minimap-ping">Minimap Ping<a class="anchor" href="#minimap-ping" aria-label="Link to this section">#</a></h2>
+<p>Pings the middle of the location on the player&#39;s minimap. Only the player the trigger runs
+for sees it.</p>
+<!-- generated: action 28 -->
+<p><strong>Action 28</strong> · <code>Minimap Ping(Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Minimap Ping</span>(<span class="s">&quot;Enemy base&quot;</span>);
+</code></pre>
+<h2 id="modify-unit-energy">Modify Unit Energy<a class="anchor" href="#modify-unit-energy" aria-label="Link to this section">#</a></h2>
+<p>Sets the energy of the number of units of the type in the location to the percentage of
+their maximum. Only units that use energy are changed, and the count passes over the
+others. Units inside a transport are not reached.</p>
+<!-- generated: action 50 -->
+<p><strong>Action 50</strong> · <code>Modify Unit Energy(Player, Unit, Percent, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Percent</td>
+<td>a percentage, 0 to 100</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Modify Unit Energy</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Terran Ghost&quot;</span>, <span class="n">100</span>, All, <span class="s">&quot;Anywhere&quot;</span>);
+</code></pre>
+<h2 id="modify-unit-hanger-count">Modify Unit Hanger Count<a class="anchor" href="#modify-unit-hanger-count" aria-label="Link to this section">#</a></h2>
+<p>Adds the amount of interceptors to carriers, or scarabs to reavers, for the number of
+units of the type in the location, up to the most each can hold. A unit that has no room
+for more does not use up the count.</p>
+<!-- generated: action 53 -->
+<p><strong>Action 53</strong> · <code>Modify Unit Hanger Count(Player, Unit, Amount, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Modify Unit Hanger Count</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Protoss Carrier&quot;</span>, <span class="n">8</span>, All, <span class="s">&quot;Anywhere&quot;</span>);
+</code></pre>
+<h2 id="modify-unit-hit-points">Modify Unit Hit Points<a class="anchor" href="#modify-unit-hit-points" aria-label="Link to this section">#</a></h2>
+<p>Sets the hit points of the number of units of the type in the location to the percentage
+of their maximum. A unit is never left below 1/256 of a hit point, so 0% does not kill it.
+Units inside a transport are not reached.</p>
+<!-- generated: action 49 -->
+<p><strong>Action 49</strong> · <code>Modify Unit Hit Points(Player, Unit, Percent, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Percent</td>
+<td>a percentage, 0 to 100</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Modify Unit Hit Points</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Men&quot;</span>, <span class="n">50</span>, All, <span class="s">&quot;Anywhere&quot;</span>);
+</code></pre>
+<h2 id="modify-unit-resource-amount">Modify Unit Resource Amount<a class="anchor" href="#modify-unit-resource-amount" aria-label="Link to this section">#</a></h2>
+<p>Sets how much ore or gas the mineral fields and geysers of the player in the location
+hold. There is no unit argument: it applies to every resource the player owns there. The
+amount is kept to 16 bits, so 100,000 becomes 34,464.</p>
+<!-- generated: action 52 -->
+<p><strong>Action 52</strong> · <code>Modify Unit Resource Amount(Player, Amount, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Modify Unit Resource Amount</span>(<span class="s">&quot;Player 12&quot;</span>, <span class="n">1500</span>, All, <span class="s">&quot;Main&quot;</span>);
+</code></pre>
+<h2 id="modify-unit-shield-points">Modify Unit Shield Points<a class="anchor" href="#modify-unit-shield-points" aria-label="Link to this section">#</a></h2>
+<p>Sets the shields of the number of units of the type in the location to the percentage of
+their maximum.</p>
+<!-- generated: action 51 -->
+<p><strong>Action 51</strong> · <code>Modify Unit Shield Points(Player, Unit, Percent, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Percent</td>
+<td>a percentage, 0 to 100</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Modify Unit Shield Points</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Protoss Zealot&quot;</span>, <span class="n">100</span>, All, <span class="s">&quot;Anywhere&quot;</span>);
+</code></pre>
+<h2 id="move-location">Move Location<a class="anchor" href="#move-location" aria-label="Link to this section">#</a></h2>
+<p>Centres the second location (<em>Move</em>) on a unit of the type owned by the player inside the
+first (<em>Unit at</em>). Following a unit with a location, so that other triggers can act around
+it, is done with this. With no such unit, the second location is centred on the first. The
+moved location keeps its size and is kept inside the map. Anywhere can be moved too.</p>
+<!-- generated: action 38 -->
+<p><strong>Action 38</strong> · <code>Move Location(Player, Unit, Unit at, Move);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Unit at</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>Move</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Move Location</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Terran Marine&quot;</span>, <span class="s">&quot;Anywhere&quot;</span>, <span class="s">&quot;Hero&quot;</span>);
+</code></pre>
+<h2 id="move-unit">Move Unit<a class="anchor" href="#move-unit" aria-label="Link to this section">#</a></h2>
+<p>Moves the number of units of the type from one location to the middle of another, at once.
+With a group as the player, the count is for the whole group. A unit that does not fit
+there goes to the nearest spot it fits.</p>
+<!-- generated: action 39 -->
+<p><strong>Action 39</strong> · <code>Move Unit(Player, Unit, Count, From, To);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>From</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>To</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Move Unit</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Men&quot;</span>, All, <span class="s">&quot;Teleporter&quot;</span>, <span class="s">&quot;Exit&quot;</span>);
+</code></pre>
+<h2 id="mute-unit-speech">Mute Unit Speech<a class="anchor" href="#mute-unit-speech" aria-label="Link to this section">#</a></h2>
+<p>Silences the voices of units, so that a transmission or a sound can be heard over them.
+<a href="/triggers/actions/#unmute-unit-speech">Unmute Unit Speech</a> turns them back on.</p>
+<!-- generated: action 30 -->
+<p><strong>Action 30</strong> · <code>Mute Unit Speech();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Mute Unit Speech</span>();
+</code></pre>
+<h2 id="order">Order<a class="anchor" href="#order" aria-label="Link to this section">#</a></h2>
+<p>Orders the player&#39;s units of the type in one location to move, patrol or attack towards
+the middle of another. It orders all of them; there is no count.</p>
+<!-- generated: action 46 -->
+<p><strong>Action 46</strong> · <code>Order(Player, Unit, From, To, Order);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>From</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>To</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Order</td>
+<td><a href="/triggers/argument-values/#orders">move, patrol or attack</a></td>
+<td>byte 27</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Order</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Men&quot;</span>, <span class="s">&quot;Spawn&quot;</span>, <span class="s">&quot;Base&quot;</span>, attack);
+</code></pre>
+<h2 id="pause-game">Pause Game<a class="anchor" href="#pause-game" aria-label="Link to this section">#</a></h2>
+<p>Pauses the game. It works in single player only, and only for a person&#39;s trigger; in a
+multiplayer game it does nothing. The triggers keep running while the game is paused:
+waits count down and passes go on, but the game clock and the countdown stop. The game is
+unpaused when the trigger that paused it finishes.</p>
+<!-- generated: action 5 -->
+<p><strong>Action 5</strong> · <code>Pause Game();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Pause Game</span>();
+</code></pre>
+<h2 id="pause-timer">Pause Timer<a class="anchor" href="#pause-timer" aria-label="Link to this section">#</a></h2>
+<p>Stops the countdown timer where it is.</p>
+<!-- generated: action 54 -->
+<p><strong>Action 54</strong> · <code>Pause Timer();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Pause Timer</span>();
+</code></pre>
+<h2 id="play-wav">Play WAV<a class="anchor" href="#play-wav" aria-label="Link to this section">#</a></h2>
+<p>Plays a sound for the player. The file is one stored in the map archive, which the
+editor&#39;s Sound Editor adds, or one of the game&#39;s own sounds by its path, such as
+<code>sound\Terran\Marine\TMaYes00.wav</code>. A sound of the game&#39;s needs no file in the map; the
+Trigger Editor&#39;s <strong>Browse…</strong> lists them. Duration is the sound&#39;s length in milliseconds,
+which editors fill in from the file. The game does not use it: Play WAV never holds the
+trigger, so the next action runs while the sound plays. Only the player the trigger runs
+for hears it.</p>
+<!-- generated: action 8 -->
+<p><strong>Action 8</strong> · <code>Play WAV(WAV, Duration);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WAV</td>
+<td>the name of a sound file in the map, stored as a string-table entry</td>
+<td>bytes 8–11</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>a time in milliseconds</td>
+<td>bytes 12–15</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Play WAV</span>(<span class="s">&quot;staredit\\wav\\alarm.wav&quot;</span>, <span class="n">1500</span>);
+</code></pre>
+<h2 id="preserve-trigger">Preserve Trigger<a class="anchor" href="#preserve-trigger" aria-label="Link to this section">#</a></h2>
+<p>Keeps the trigger after it runs, so it runs again on every cycle its conditions hold.
+Without it a trigger runs once for each player it runs for. The trigger&#39;s Preserved flag
+(0x04) does the same.</p>
+<!-- generated: action 3 -->
+<p><strong>Action 3</strong> · <code>Preserve Trigger();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Preserve Trigger</span>();
+</code></pre>
+<h2 id="remove-unit">Remove Unit<a class="anchor" href="#remove-unit" aria-label="Link to this section">#</a></h2>
+<p>Removes every unit of the type the player owns, anywhere on the map, without a death
+animation. Like <a href="/triggers/actions/#kill-unit">Kill Unit</a>, it adds nothing to death counts, kills or score.</p>
+<!-- generated: action 24 -->
+<p><strong>Action 24</strong> · <code>Remove Unit(Player, Unit);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Remove Unit</span>(<span class="s">&quot;Player 12&quot;</span>, <span class="s">&quot;Map Revealer&quot;</span>);
+</code></pre>
+<h2 id="remove-unit-at-location">Remove Unit At Location<a class="anchor" href="#remove-unit-at-location" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#remove-unit">Remove Unit</a>, for the number of units of the type in the location.</p>
+<!-- generated: action 25 -->
+<p><strong>Action 25</strong> · <code>Remove Unit At Location(Player, Unit, Count, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Count</td>
+<td>a number of units, 1 to 255, or All (stored as 0)</td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Remove Unit At Location</span>(<span class="s">&quot;All Players&quot;</span>, <span class="s">&quot;Men&quot;</span>, All, <span class="s">&quot;Void&quot;</span>);
+</code></pre>
+<h2 id="run-ai-script">Run AI Script<a class="anchor" href="#run-ai-script" aria-label="Link to this section">#</a></h2>
+<p>Starts an <a href="/triggers/argument-values/#ai-scripts">AI script</a> for the player, which is normally a computer player:
+the custom-level scripts that make it play a normal game, or one of the small scripts that
+change its behaviour. For anyone but a computer player (a person, a rescuable slot or a
+neutral slot) the game runs only the scripts that make sense for them: the bunker,
+transport and web scripts (EnBk, EnTr, ExTr, DWHe, PB3F) and the shared-vision ones (+Vi
+and −Vi), and for a neutral slot also Rscu. It ignores any other.</p>
+<!-- generated: action 15 -->
+<p><strong>Action 15</strong> · <code>Run AI Script(Script);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Script</td>
+<td>an <a href="/triggers/argument-values/#ai-scripts">AI script</a>, stored as its four-letter code</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Run AI Script</span>(<span class="s">&quot;Terran Expansion Custom Level&quot;</span>);
+</code></pre>
+<h2 id="run-ai-script-at-location">Run AI Script At Location<a class="anchor" href="#run-ai-script-at-location" aria-label="Link to this section">#</a></h2>
+<p>As <a href="/triggers/actions/#run-ai-script">Run AI Script</a>, for the scripts that act on a place, such as <em>Value
+This Area Higher</em> or <em>Make These Units Patrol</em>.</p>
+<!-- generated: action 16 -->
+<p><strong>Action 16</strong> · <code>Run AI Script At Location(Script, Location);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Script</td>
+<td>an <a href="/triggers/argument-values/#ai-scripts">AI script</a>, stored as its four-letter code</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Run AI Script At Location</span>(<span class="s">&quot;Value This Area Higher&quot;</span>, <span class="s">&quot;Expansion&quot;</span>);
+</code></pre>
+<h2 id="set-alliance-status">Set Alliance Status<a class="anchor" href="#set-alliance-status" aria-label="Link to this section">#</a></h2>
+<p>Sets how the player the trigger runs for stands towards the Player argument: enemy, ally,
+or ally for victory. Any status value other than ally and allied victory makes them
+enemies.</p>
+<p>Making a player an ally, or an ally for victory, also changes every other player the
+trigger&#39;s player was already allied with to the same kind of alliance.</p>
+<!-- generated: action 57 -->
+<p><strong>Action 57</strong> · <code>Set Alliance Status(Player, Status);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Status</td>
+<td><a href="/triggers/argument-values/#alliances">Enemy, Ally or Allied Victory</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Alliance Status</span>(<span class="s">&quot;Force 1&quot;</span>, Allied Victory);
+</code></pre>
+<h2 id="set-countdown-timer">Set Countdown Timer<a class="anchor" href="#set-countdown-timer" aria-label="Link to this section">#</a></h2>
+<p>Sets the countdown timer shown at the top of the screen, adds to it or takes from it, in
+seconds. <a href="/triggers/conditions/#countdown-timer">Countdown Timer</a> tests it. The timer stays between 0 and
+359,999 seconds. When it reaches 0 the game goes through the triggers on the next frame.</p>
+<!-- generated: action 14 -->
+<p><strong>Action 14</strong> · <code>Set Countdown Timer(Modifier, Seconds);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Modifier</td>
+<td><a href="/triggers/argument-values/#modifiers">Set To, Add or Subtract</a></td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Seconds</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 12–15</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Countdown Timer</span>(Set To, <span class="n">300</span>);
+</code></pre>
+<h2 id="set-deaths">Set Deaths<a class="anchor" href="#set-deaths" aria-label="Link to this section">#</a></h2>
+<p>Changes the player&#39;s <a href="/triggers/conditions/#deaths">death count</a> for the unit type. It is how maps keep
+numbers: nothing but Set Deaths and units dying in the game changes a death count, so the
+counts of unit types a map never uses can hold anything.</p>
+<p>Add past 4,294,967,295 wraps around to 0, and Subtract stops at 0. It writes nothing for a
+player above Player 8 or a unit number above 232, so in 1.16.1 it cannot reach memory
+outside the table (see <a href="/triggers/eud/">EUD</a>). Remastered is the same unless the map uses EUD
+triggers.</p>
+<p>The unit classes do not work as counters. Set Deaths of Any unit writes nothing. Men,
+Buildings and Factories change the player&#39;s real counts of those lost, the ones the game
+adds to whenever such a unit dies, so a number kept there is mixed with real deaths (see
+<a href="/triggers/how-triggers-run/#deaths-and-kills">Deaths and kills</a>).</p>
+<!-- generated: action 45 -->
+<p><strong>Action 45</strong> · <code>Set Deaths(Player, Unit, Modifier, Amount);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><a href="/triggers/argument-values/#modifiers">Set To, Add or Subtract</a></td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Deaths</span>(<span class="s">&quot;Current Player&quot;</span>, <span class="s">&quot;Cave (Unused)&quot;</span>, Add, <span class="n">1</span>);
+</code></pre>
+<h2 id="set-doodad-state">Set Doodad State<a class="anchor" href="#set-doodad-state" aria-label="Link to this section">#</a></h2>
+<p>Turns doodad units in the location on or off: the doors and traps of the Installation and
+other tilesets, which the map places as units. It changes only the first such unit it
+finds in the location, not all of them.</p>
+<!-- generated: action 42 -->
+<p><strong>Action 42</strong> · <code>Set Doodad State(Player, Unit, Location, State);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>State</td>
+<td><a href="/triggers/argument-values/#states">enable, disable or toggle</a></td>
+<td>byte 27</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Doodad State</span>(<span class="s">&quot;All Players&quot;</span>, <span class="s">&quot;Right Upper Level Door&quot;</span>, <span class="s">&quot;Door&quot;</span>, disable);
+</code></pre>
+<h2 id="set-invincibility">Set Invincibility<a class="anchor" href="#set-invincibility" aria-label="Link to this section">#</a></h2>
+<p>Makes the player&#39;s units of the type in the location invincible, or takes it away. Units
+aboard the player&#39;s transports there are changed too. A unit type that is invincible in
+the game&#39;s own data stays invincible.</p>
+<!-- generated: action 43 -->
+<p><strong>Action 43</strong> · <code>Set Invincibility(Player, Unit, Location, State);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>State</td>
+<td><a href="/triggers/argument-values/#states">enable, disable or toggle</a></td>
+<td>byte 27</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Invincibility</span>(<span class="s">&quot;Player 8&quot;</span>, <span class="s">&quot;Buildings&quot;</span>, <span class="s">&quot;Anywhere&quot;</span>, enable);
+</code></pre>
+<h2 id="set-mission-objectives">Set Mission Objectives<a class="anchor" href="#set-mission-objectives" aria-label="Link to this section">#</a></h2>
+<p>Sets the text of the player&#39;s mission objectives screen.</p>
+<!-- generated: action 12 -->
+<p><strong>Action 12</strong> · <code>Set Mission Objectives(Text);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Text</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Mission Objectives</span>(<span class="s">&quot;Destroy the Zerg hive.&quot;</span>);
+</code></pre>
+<h2 id="set-next-scenario">Set Next Scenario<a class="anchor" href="#set-next-scenario" aria-label="Link to this section">#</a></h2>
+<p>Chooses the map that follows when the player wins, as a campaign does. The text is the
+scenario&#39;s name.</p>
+<!-- generated: action 41 -->
+<p><strong>Action 41</strong> · <code>Set Next Scenario(Scenario);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Scenario</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Next Scenario</span>(<span class="s">&quot;Episode 2&quot;</span>);
+</code></pre>
+<h2 id="set-resources">Set Resources<a class="anchor" href="#set-resources" aria-label="Link to this section">#</a></h2>
+<p>Sets the player&#39;s ore, gas, or both, adds to it or takes from it. With <em>ore and gas</em>, each
+gets the whole amount. Add past 4,294,967,295 wraps around to 0, and Subtract stops at 0.
+Blizzard&#39;s melee maps give every player their starting minerals with it, when they are
+played as Use Map Settings.</p>
+<!-- generated: action 26 -->
+<p><strong>Action 26</strong> · <code>Set Resources(Player, Modifier, Amount, Resource);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><a href="/triggers/argument-values/#modifiers">Set To, Add or Subtract</a></td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Resource</td>
+<td><a href="/triggers/argument-values/#resources">ore, gas, or ore and gas</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Resources</span>(<span class="s">&quot;Current Player&quot;</span>, Set To, <span class="n">50</span>, ore);
+</code></pre>
+<h2 id="set-score">Set Score<a class="anchor" href="#set-score" aria-label="Link to this section">#</a></h2>
+<p>Sets the player&#39;s score of the <a href="/triggers/argument-values/#scores">kind</a>, adds to it or takes from it. Custom is the
+score maps keep for themselves, often shown with <a href="/triggers/actions/#leader-board-points">Leader Board
+Points</a>. A kind that is a sum of others is shared out between them:
+Total adds or takes a quarter of the amount, rounded up, to each of units, buildings,
+kills and razings (Custom is left alone), and the two kinds that are pairs half to each.</p>
+<!-- generated: action 27 -->
+<p><strong>Action 27</strong> · <code>Set Score(Player, Modifier, Amount, Score);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>a <a href="/triggers/players-and-groups/">player or group</a></td>
+<td>bytes 16–19</td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><a href="/triggers/argument-values/#modifiers">Set To, Add or Subtract</a></td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Amount</td>
+<td>a whole number, 0 to 4,294,967,295</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Score</td>
+<td>a <a href="/triggers/argument-values/#scores">score type</a></td>
+<td>bytes 24–25</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Score</span>(<span class="s">&quot;Current Player&quot;</span>, Add, <span class="n">10</span>, Custom);
+</code></pre>
+<h2 id="set-switch">Set Switch<a class="anchor" href="#set-switch" aria-label="Link to this section">#</a></h2>
+<p>Sets, clears, toggles or randomizes the <a href="/triggers/argument-values/#switches">switch</a>. Randomize sets or clears it
+at random, with one draw of the game&#39;s random numbers, the same on every machine.</p>
+<!-- generated: action 13 -->
+<p><strong>Action 13</strong> · <code>Set Switch(Switch, Action);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Switch</td>
+<td>one of the 256 <a href="/triggers/argument-values/#switches">switches</a></td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>Action</td>
+<td><a href="/triggers/argument-values/#switches">set, clear, toggle or randomize</a></td>
+<td>byte 27</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Set Switch</span>(<span class="s">&quot;Switch 1&quot;</span>, set);
+</code></pre>
+<h2 id="talking-portrait">Talking Portrait<a class="anchor" href="#talking-portrait" aria-label="Link to this section">#</a></h2>
+<p>Shows the unit type&#39;s portrait talking in the player&#39;s portrait box for the time. It does
+not hold the trigger. Only the player the trigger runs for sees it.</p>
+<!-- generated: action 29 -->
+<p><strong>Action 29</strong> · <code>Talking Portrait(Unit, Duration);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>a time in milliseconds</td>
+<td>bytes 12–15</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Talking Portrait</span>(<span class="s">&quot;Jim Raynor (Marine)&quot;</span>, <span class="n">3000</span>);
+</code></pre>
+<h2 id="transmission">Transmission<a class="anchor" href="#transmission" aria-label="Link to this section">#</a></h2>
+<p>A message from a unit: the unit type&#39;s portrait talks, the text is shown and the sound
+plays. The first unit of the type in the location, whoever owns it, blinks and is pinged
+on the minimap; with none there, nothing is pinged. Like a <a href="/triggers/actions/#wait">Wait</a>, it holds the
+rest of the trigger until it is over, in the player&#39;s wait slot. How long that is starts
+from the sound&#39;s length (<em>WAV duration</em>) and is changed by the modifier and <em>Duration</em>:
+Set To replaces it, Add and Subtract change it.</p>
+<p>In a single-player game it holds until the portrait has finished talking; in a multiplayer
+game for that time, in milliseconds of game speed. For a computer player it shows nothing
+and holds nothing, and without a location it does nothing at all.</p>
+<!-- generated: action 7 -->
+<p><strong>Action 7</strong> · <code>Transmission(Display, Text, Unit, Location, Modifier, Duration, WAV, WAV duration);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Display</td>
+<td>Always Display or Don&#39;t Always Display</td>
+<td>bit 0x04 of byte 28</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>text, stored as a string-table entry</td>
+<td>bytes 4–7</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>a unit type, or one of the <a href="/triggers/argument-values/#unit-classes">unit classes</a></td>
+<td>bytes 24–25</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>a location (Anywhere is location 64)</td>
+<td>bytes 0–3</td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><a href="/triggers/argument-values/#modifiers">Set To, Add or Subtract</a></td>
+<td>byte 27</td>
+</tr>
+<tr>
+<td>Duration</td>
+<td>a time in milliseconds</td>
+<td>bytes 20–23</td>
+</tr>
+<tr>
+<td>WAV</td>
+<td>the name of a sound file in the map, stored as a string-table entry</td>
+<td>bytes 8–11</td>
+</tr>
+<tr>
+<td>WAV duration</td>
+<td>a time in milliseconds</td>
+<td>bytes 12–15</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Transmission</span>(Always Display, <span class="s">&quot;Hold this position.&quot;</span>, <span class="s">&quot;Jim Raynor (Marine)&quot;</span>, <span class="s">&quot;Base&quot;</span>, Add, <span class="n">0</span>, <span class="s">&quot;staredit\\wav\\raynor.wav&quot;</span>, <span class="n">2400</span>);
+</code></pre>
+<h2 id="unmute-unit-speech">Unmute Unit Speech<a class="anchor" href="#unmute-unit-speech" aria-label="Link to this section">#</a></h2>
+<p>Lets unit voices play again after <a href="/triggers/actions/#mute-unit-speech">Mute Unit Speech</a>.</p>
+<!-- generated: action 31 -->
+<p><strong>Action 31</strong> · <code>Unmute Unit Speech();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Unmute Unit Speech</span>();
+</code></pre>
+<h2 id="unpause-game">Unpause Game<a class="anchor" href="#unpause-game" aria-label="Link to this section">#</a></h2>
+<p>Resumes a game that <a href="/triggers/actions/#pause-game">Pause Game</a> stopped. Single player only.</p>
+<!-- generated: action 6 -->
+<p><strong>Action 6</strong> · <code>Unpause Game();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Unpause Game</span>();
+</code></pre>
+<h2 id="unpause-timer">Unpause Timer<a class="anchor" href="#unpause-timer" aria-label="Link to this section">#</a></h2>
+<p>Restarts the countdown timer after <a href="/triggers/actions/#pause-timer">Pause Timer</a>.</p>
+<!-- generated: action 55 -->
+<p><strong>Action 55</strong> · <code>Unpause Timer();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Unpause Timer</span>();
+</code></pre>
+<h2 id="victory">Victory<a class="anchor" href="#victory" aria-label="Link to this section">#</a></h2>
+<p>The player wins. Every other player still in the game who has no result in the same pass
+is defeated, and if every player wins in the same pass it is a draw for all. See <a href="/triggers/how-triggers-run/#winning-and-losing">Winning
+and losing</a>.</p>
+<!-- generated: action 1 -->
+<p><strong>Action 1</strong> · <code>Victory();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Victory</span>();
+</code></pre>
+<h2 id="wait">Wait<a class="anchor" href="#wait" aria-label="Link to this section">#</a></h2>
+<p>Holds the rest of the trigger&#39;s actions for the time, in milliseconds at the game&#39;s speed:
+Wait(1000) is 25 frames at Fastest and 16 at Normal. See <a href="/triggers/how-triggers-run/#waits">Waits</a> for the frames at
+every speed and how a player&#39;s waits hold each other up, and <a href="/triggers/how-triggers-run/#hyper-triggers">Hyper
+triggers</a> for Wait(0).</p>
+<!-- generated: action 4 -->
+<p><strong>Action 4</strong> · <code>Wait(Milliseconds);</code></p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Takes</th>
+<th>Stored in the action</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Milliseconds</td>
+<td>a time in milliseconds</td>
+<td>bytes 12–15</td>
+</tr>
+</tbody></table>
+<!-- /generated --><pre><code class="language-trigedit"><span class="f">Wait</span>(<span class="n">1000</span>);
+</code></pre>
+<h2 id="disable-debug-mode">Disable Debug Mode<a class="anchor" href="#disable-debug-mode" aria-label="Link to this section">#</a></h2>
+<p>In the game&#39;s list of actions, but StarEdit does not offer it. It stops the Esc key from
+skipping this trigger: in a single-player game Esc normally skips the person&#39;s running
+triggers through their Waits, transmissions, text and sounds, as for a cinematic. <a href="/triggers/actions/#enable-debug-mode">Enable
+Debug Mode</a> allows it again.</p>
+<!-- generated: action 58 -->
+<p><strong>Action 58</strong> · <code>Disable Debug Mode();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated --><h2 id="enable-debug-mode">Enable Debug Mode<a class="anchor" href="#enable-debug-mode" aria-label="Link to this section">#</a></h2>
+<p>Lets the Esc key skip this trigger again after <a href="/triggers/actions/#disable-debug-mode">Disable Debug Mode</a>.
+Not offered by StarEdit.</p>
+<!-- generated: action 59 -->
+<p><strong>Action 59</strong> · <code>Enable Debug Mode();</code></p>
+<p>It takes no arguments.</p>
+<!-- /generated -->
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#center-view">Center View</a></li>
+<li><a href="#comment">Comment</a></li>
+<li><a href="#create-unit">Create Unit</a></li>
+<li><a href="#create-unit-with-properties">Create Unit with Properties</a></li>
+<li><a href="#defeat">Defeat</a></li>
+<li><a href="#display-text-message">Display Text Message</a></li>
+<li><a href="#draw">Draw</a></li>
+<li><a href="#give-units-to-player">Give Units to Player</a></li>
+<li><a href="#kill-unit">Kill Unit</a></li>
+<li><a href="#kill-unit-at-location">Kill Unit At Location</a></li>
+<li><a href="#leader-board-control">Leader Board Control</a></li>
+<li><a href="#leader-board-control-at-location">Leader Board Control At Location</a></li>
+<li><a href="#leader-board-greed">Leader Board Greed</a></li>
+<li><a href="#leader-board-kills">Leader Board Kills</a></li>
+<li><a href="#leader-board-points">Leader Board Points</a></li>
+<li><a href="#leader-board-resources">Leader Board Resources</a></li>
+<li><a href="#leaderboard-computer-players">Leaderboard Computer Players</a></li>
+<li><a href="#leaderboard-goal-control">Leaderboard Goal Control</a></li>
+<li><a href="#leaderboard-goal-control-at-location">Leaderboard Goal Control At Location</a></li>
+<li><a href="#leaderboard-goal-kills">Leaderboard Goal Kills</a></li>
+<li><a href="#leaderboard-goal-points">Leaderboard Goal Points</a></li>
+<li><a href="#leaderboard-goal-resources">Leaderboard Goal Resources</a></li>
+<li><a href="#minimap-ping">Minimap Ping</a></li>
+<li><a href="#modify-unit-energy">Modify Unit Energy</a></li>
+<li><a href="#modify-unit-hanger-count">Modify Unit Hanger Count</a></li>
+<li><a href="#modify-unit-hit-points">Modify Unit Hit Points</a></li>
+<li><a href="#modify-unit-resource-amount">Modify Unit Resource Amount</a></li>
+<li><a href="#modify-unit-shield-points">Modify Unit Shield Points</a></li>
+<li><a href="#move-location">Move Location</a></li>
+<li><a href="#move-unit">Move Unit</a></li>
+<li><a href="#mute-unit-speech">Mute Unit Speech</a></li>
+<li><a href="#order">Order</a></li>
+<li><a href="#pause-game">Pause Game</a></li>
+<li><a href="#pause-timer">Pause Timer</a></li>
+<li><a href="#play-wav">Play WAV</a></li>
+<li><a href="#preserve-trigger">Preserve Trigger</a></li>
+<li><a href="#remove-unit">Remove Unit</a></li>
+<li><a href="#remove-unit-at-location">Remove Unit At Location</a></li>
+<li><a href="#run-ai-script">Run AI Script</a></li>
+<li><a href="#run-ai-script-at-location">Run AI Script At Location</a></li>
+<li><a href="#set-alliance-status">Set Alliance Status</a></li>
+<li><a href="#set-countdown-timer">Set Countdown Timer</a></li>
+<li><a href="#set-deaths">Set Deaths</a></li>
+<li><a href="#set-doodad-state">Set Doodad State</a></li>
+<li><a href="#set-invincibility">Set Invincibility</a></li>
+<li><a href="#set-mission-objectives">Set Mission Objectives</a></li>
+<li><a href="#set-next-scenario">Set Next Scenario</a></li>
+<li><a href="#set-resources">Set Resources</a></li>
+<li><a href="#set-score">Set Score</a></li>
+<li><a href="#set-switch">Set Switch</a></li>
+<li><a href="#talking-portrait">Talking Portrait</a></li>
+<li><a href="#transmission">Transmission</a></li>
+<li><a href="#unmute-unit-speech">Unmute Unit Speech</a></li>
+<li><a href="#unpause-game">Unpause Game</a></li>
+<li><a href="#unpause-timer">Unpause Timer</a></li>
+<li><a href="#victory">Victory</a></li>
+<li><a href="#wait">Wait</a></li>
+<li><a href="#disable-debug-mode">Disable Debug Mode</a></li>
+<li><a href="#enable-debug-mode">Enable Debug Mode</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Testing and Simulate — TrigScript, StarCraft triggers as code</title>
+<meta name="description" content="TrigScript can run a script without starting the game, in a simulator built into the editor. Simulate shows what the script does in its first twenty seconds.">
+<meta property="og:title" content="Testing and Simulate — TrigScript, StarCraft triggers as code">
+<meta property="og:description" content="TrigScript can run a script without starting the game, in a simulator built into the editor. Simulate shows what the script does in its first twenty seconds.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/trigscript/testing-and-simulate/">
+<meta property="og:url" content="https://docs.scmjs.dev/trigscript/testing-and-simulate/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="here" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Testing and Simulate</h1>
+<p>TrigScript can run a script without starting the game, in a simulator built into the
+editor. <strong>Simulate</strong> shows what the script does in its first twenty seconds. <strong>Tests</strong> are
+checks you write that run after every change. Neither adds anything to the map.</p>
+<p>The simulator models death counts, switches, preserve, the order of the trigger list, the
+game&#39;s arithmetic and the map&#39;s players. It has units: the ones placed on the map, then
+whatever <code>createUnit</code> makes, <code>giveUnits</code> hands over, <code>moveUnit</code> moves and <code>killUnitAt</code>
+kills, which <code>bring</code> and <code>command</code> count. It leaves out what it cannot know without the
+game: nothing walks, nothing fights and nothing is built, so no unit dies unless the
+script (or a test) kills it. Scores and the countdown read 0, and keys, clicks, the mouse
+and chat read as nothing. The picture sets the two lists side by side.</p>
+<p><img src="/images/trigscript-simulator.svg" alt="What Simulate and the tests see, and what only the game has"></p>
+<p>The simulator keeps the game&#39;s time, so the frames it lists are the frames the game would
+act on: the first pass on frame 2, then one every 31 frames, or every frame in a map with
+a program. A Wait holds its trigger for its time at Fastest. See <a href="/triggers/how-triggers-run/">How triggers
+run</a>.</p>
+<h2 id="simulate">Simulate<a class="anchor" href="#simulate" aria-label="Link to this section">#</a></h2>
+<p><strong>Simulate</strong> (Ctrl+F5 in the TrigScript window) runs the script for 480 frames, twenty
+seconds of the game at Fastest. It lists, under the code, every action that ran with its
+frame and its line in the script, and the final value of every program variable. Triggers
+and programs run side by side, so a death count a program sets is seen by a trigger. A
+program or a trigger of a force runs for each of its players, and each line says whose it
+is.</p>
+<p><img src="/images/trigscript-simulate.webp" alt="Simulate: the script&#39;s actions, each with its frame and line"></p>
+<p>Simulate is a check on the logic. A script that waits for the enemy to die waits for ever
+here; for the fight, write a <a href="/trigscript/testing-and-simulate/#tests">test</a> that kills the units, or play the map.</p>
+<h2 id="tests">Tests<a class="anchor" href="#tests" aria-label="Link to this section">#</a></h2>
+<p>A test is ordinary TypeScript that runs in the simulator after every change that compiles.
+It never runs in the game and adds nothing to the map. If you have used Vitest or Jest,
+the names are the same: <code>test</code>, <code>describe</code>, <code>beforeEach</code>, <code>test.only</code>, <code>test.skip</code>,
+<code>test.each</code> and <code>expect</code>, imported from <code>&quot;trigscript&quot;</code>.</p>
+<p>A test of a trigger:</p>
+<pre><code class="language-ts"><span class="k">import</span> { test, expect } <span class="k">from</span> <span class="s">&quot;trigscript&quot;</span>;
+
+trigger(P1, [bring(P1, units.TerranCivilian, locations.Shop, <span class="s">&quot;&gt;=&quot;</span>, <span class="n">1</span>)], [
+  moveUnit(P1, units.TerranCivilian, <span class="n">1</span>, locations.Shop, locations.Spawn),
+  createUnit(P1, units.TerranMarine, <span class="n">4</span>, locations.Spawn),
+], { preserve: <span class="k">true</span> });
+
+test(<span class="s">&quot;a civilian at the shop buys four marines&quot;</span>, (sim) =&gt; {
+  sim.place(P1, units.TerranCivilian, locations.Shop);
+  sim.seconds(<span class="n">3</span>);
+  expect(sim.count(P1, units.TerranMarine, locations.Spawn)).toBe(<span class="n">4</span>);
+});
+</code></pre>
+<p>A test of a program, which reads the program&#39;s variables by name:</p>
+<pre><code class="language-ts"><span class="k">import</span> { test, expect } <span class="k">from</span> <span class="s">&quot;trigscript&quot;</span>;
+
+<span class="c">// A Marine on the beacon calls the next wave, each bigger than the last.</span>
+program(() =&gt; {
+  <span class="k">let</span> wave = <span class="n">0</span>;
+  <span class="k">while</span> (<span class="k">true</span>) {
+    <span class="k">if</span> (countUnits(P1, units.TerranMarine, locations.Beacon) &gt; <span class="n">0</span>) {
+      wave += <span class="n">1</span>;
+      createUnit(P8, units.ZergZergling, wave * <span class="n">4</span>, locations.Spawn);
+      print(<span class="s">`Wave ${wave}`</span>);
+      killUnitAt(P1, units.TerranMarine, <span class="s">&quot;All&quot;</span>, locations.Beacon);
+    }
+    sleep(frames(<span class="n">1</span>));
+  }
+}, { name: <span class="s">&quot;waves&quot;</span> });
+
+test(<span class="s">&quot;the second wave is bigger&quot;</span>, (sim) =&gt; {
+  sim.place(P1, units.TerranMarine, locations.Beacon);
+  sim.until(() =&gt; sim.program(<span class="s">&quot;waves&quot;</span>).wave === <span class="n">1</span>);
+  sim.place(P1, units.TerranMarine, locations.Beacon);
+  sim.until(() =&gt; sim.program(<span class="s">&quot;waves&quot;</span>).wave === <span class="n">2</span>);
+  expect(sim.count(P8, units.ZergZergling, locations.Spawn)).toBe(<span class="n">12</span>);
+  expect(sim).toHavePrinted(<span class="s">&quot;Wave 2&quot;</span>);
+});
+</code></pre>
+<p>Every test gets <code>sim</code>, a world of its own: the map&#39;s placed units, locations and players,
+the script&#39;s programs and triggers, and the same <code>random()</code> results every run. Time in a
+test is the game&#39;s: nothing runs on frame 1, the first pass is on frame 2, and
+<code>sim.frames(3)</code> gives a program two runs.</p>
+<table>
+<thead>
+<tr>
+<th>What a test does</th>
+<th>With</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Change the world</td>
+<td><code>sim.place(player, type, location, count?)</code>, <code>sim.kill(unit)</code>, <code>sim.remove(unit)</code>, <code>sim.give(unit, to)</code>, <code>sim.move(unit, to)</code></td>
+</tr>
+<tr>
+<td>Let time pass</td>
+<td><code>sim.frames(n)</code>, <code>sim.seconds(n)</code>, <code>sim.until(() =&gt; …)</code></td>
+</tr>
+<tr>
+<td>Act as a player</td>
+<td><code>sim.press(&quot;F2&quot;)</code>, <code>sim.click()</code>, <code>sim.type(&quot;-give 100&quot;)</code>, <code>sim.moveMouse(x, y)</code></td>
+</tr>
+<tr>
+<td>Read the world</td>
+<td><code>sim.count(player, type, location?)</code>, <code>sim.units(filter?)</code>, <code>sim.resources(player)</code>, <code>sim.deaths(player, type)</code>, <code>sim.switch(n)</code></td>
+</tr>
+<tr>
+<td>Read a program</td>
+<td><code>sim.program(&quot;waves&quot;).wave</code></td>
+</tr>
+<tr>
+<td>See what was shown</td>
+<td><code>sim.printed()</code>, <code>expect(sim).toHavePrinted(&quot;Wave 2&quot;)</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>place</code> gives the new units back, and <code>kill</code> stands in for a fight.</li>
+<li><code>until</code> fails the test if its condition is still not true after 2400 frames, so no test
+hangs.</li>
+<li>What a player does is found by the program on the next frame.</li>
+<li><code>sim.program(…)</code> gives a program&#39;s variables by their names in the code: numbers, texts,
+arrays, and a record as an object. Name the program in its options
+(<code>{ name: &quot;waves&quot; }</code>), or give its place in the script, counting from 0:
+<code>sim.program(0)</code>. For a per-player program, name the player too:
+<code>sim.program(&quot;lives&quot;, P2)</code>.</li>
+</ul>
+<p>A test fails when an <code>expect</code> does not hold, when it throws, and when a program does
+something that is always a mistake and that the game would pass over in silence, such as
+reading past the end of an array. A test that means to check for that says
+<code>expect(sim).toHaveFaulted()</code>.</p>
+<p>Tests live beside what they test, as above, or in files whose names end in <code>.test.ts</code>, in
+any folder. A test file can <code>import</code> the script&#39;s own functions and test them as plain
+TypeScript. A test file is never part of the map: <code>main.ts</code> cannot import one, and a
+<code>trigger()</code> or a <code>program()</code> inside one is an error.</p>
+<p><img src="/images/trigscript-tests.webp" alt="A failing test: the mark in the margin, what was expected at the end of the line, and the Testing view"></p>
+<p>In the editor, every <code>test(</code> has a mark in the margin (passed, failed or not run), and a
+click on the mark runs that test. A failure is shown where it happened, as
+<code>expected 7, got 6</code> at the end of the line.</p>
+<ul>
+<li>The <strong>Testing</strong> view, from the strip at the far left, lists the tests by folder, file
+and <code>describe</code>. It runs all of them, one of them or the ones that failed, and can show
+only the failing ones.</li>
+<li>The status bar keeps the count.</li>
+<li><strong>Test Results</strong>, under the code, has the chosen test&#39;s message, what it printed and
+what happened frame by frame.</li>
+</ul>
+<p>A failing test is a warning, not an error: the map still saves and builds. The <strong>Tests</strong>
+setting in the workspace&#39;s Settings view, kept in the map, makes a failing test stop the
+build instead.</p>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#simulate">Simulate</a></li>
+<li><a href="#tests">Tests</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The AI — StarCraft map editor guide</title>
+<meta name="description" content="Tools ▸ AI holds an assistant that reads and edits the open map with you, and tools that lay out maps, write triggers, names and briefings, review a map and rewrite its strings.">
+<meta property="og:title" content="The AI — StarCraft map editor guide">
+<meta property="og:description" content="Tools ▸ AI holds an assistant that reads and edits the open map with you, and tools that lay out maps, write triggers, names and briefings, review a map and rewrite its strings.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/guide/the-ai/">
+<meta property="og:url" content="https://docs.scmjs.dev/guide/the-ai/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="here" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The AI</h1>
+<p><img src="/images/ai-menu.webp" alt="The Tools ▸ AI menu"></p>
+<p><strong>Tools ▸ AI</strong> holds an assistant that reads and edits the open map with you, and tools
+that lay out maps, write triggers, names and briefings, review a map and rewrite its
+strings. They come with the scmjs.dev plugin and run on your own Anthropic API key.</p>
+<h2 id="adding-your-key">Adding your key<a class="anchor" href="#adding-your-key" aria-label="Link to this section">#</a></h2>
+<ol>
+<li>Make an API key at <a href="https://console.anthropic.com">console.anthropic.com</a>.</li>
+<li>Open <strong>Edit ▸ Preferences ▸ Plugins ▸ scmjs.dev</strong> (or <em>Add your key…</em> in the Account
+dialog), paste the key under <strong>Your Anthropic key</strong> and press <strong>Check and use</strong>.</li>
+<li>The key is checked with Anthropic first, which costs nothing. When it passes, the
+<strong>Tools ▸ AI</strong> menu, the assistant and the AI buttons in the editor&#39;s dialogs appear.</li>
+</ol>
+<p>No scmjs.dev account is needed for this. Anthropic bills each request to your Anthropic
+account. The key stays in your browser: scmjs.dev passes it on with each AI request and
+keeps no copy. <strong>Forget the key</strong> on the same page removes it, and the AI features with
+it.</p>
+<p>A few things are the same for every feature:</p>
+<ul>
+<li><strong>What is sent.</strong> Only what the feature needs: what you typed and the map&#39;s facts (size,
+tileset, players, what is where), and for some features a picture of the map, the
+strings or the triggers. The map file itself is never sent.</li>
+<li><strong>Undo.</strong> Every change the AI makes is one undo step, labelled &quot;AI: …&quot;, including what
+it writes to the name and description, strings, triggers, players and unit settings.</li>
+<li><strong>Cost.</strong> Every AI dialog shows its progress while you wait, and what the request cost
+when it finishes.</li>
+</ul>
+<h2 id="where-your-key-goes">Where your key goes<a class="anchor" href="#where-your-key-goes" aria-label="Link to this section">#</a></h2>
+<p>Each AI request goes from your browser to the scmjs.dev server with your key attached. The
+server passes it to Anthropic and sends the answer back. It keeps nothing of the request:
+not what you typed, not the answer, not your key or your address. To hold everyone to 30
+requests a minute, 1,000 a day and 4 at once, it counts requests per address, in memory
+only: the counts are never written to disk. What Anthropic keeps is set by Anthropic&#39;s own
+terms for the API.</p>
+<p>What the model is told, and what the editor does with its answer, is public in
+<a href="https://github.com/scm-js/ai-engine">scm-js/ai-engine</a>. Each AI feature is one file
+there. The server&#39;s sign-in, accounts and limits are not public.</p>
+<p>If a feature gives you a bad result, open an issue on
+<a href="https://github.com/scm-js/ai-engine/issues">ai-engine</a> with what you asked, what came
+back, and the map if you can share it.</p>
+<h2 id="the-assistant">The assistant<a class="anchor" href="#the-assistant" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/assistant.webp" alt="The assistant placing a squad for Player 1 on Big Game Hunters"></p>
+<p><strong>Assistant</strong> (Ctrl+Shift+A, or the <em>AI</em> cell in the status bar) opens a conversation
+about the open map. Ask a question or say what to change, and the assistant reads the map
+and edits it with the editor&#39;s own tools while you watch.</p>
+<ul>
+<li><strong>What it reads:</strong> everything — units and their properties, doodads, sprites, locations,
+strings, switches, sounds, triggers and the trigger script, unit, upgrade and technology
+settings, fog, terrain, Check Map results, your selection, and a screenshot of any area.</li>
+<li><strong>What it changes:</strong> nearly everything the editor can, from terrain and units to
+triggers, players and forces, settings and the map&#39;s size. It draws terrain as shapes —
+a plateau with a ramp that fits, a lane that stays walkable, a river with a bridge — and
+can tell you whether units can walk from one place to another.</li>
+</ul>
+<p>Each turn is folded into one block under your message. While it runs, the block shows the
+latest steps (<strong>▸</strong> a read, <strong>✎</strong> a change), and the map outlines what is about to change
+and follows the work, zooming out but never in. Scroll or zoom yourself and the view stays
+where you put it for the rest of the turn. When the turn ends, the block shows the steps,
+the time and the cost, with an <strong>Undo</strong> button that reverses the whole turn. Escape stops
+a turn.</p>
+<p>To start a message, use the suggestion chips above the input, or right-click the map and
+choose <em>Ask AI about this spot / the selection / this area…</em>. Tick <em>Picture</em> to send a
+screenshot of the visible area. Player Settings has a <em>Set up with AI…</em> button that sets
+up players and forces from one sentence. After 24 rounds of tool calls the assistant stops
+and offers to continue.</p>
+<h2 id="make-scenario">Make Scenario<a class="anchor" href="#make-scenario" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/make-scenario.webp" alt="Make Scenario: the design document for a four-player madness map"></p>
+<p><strong>Make Scenario…</strong> builds a whole scenario from a sentence, such as &quot;a madness map&quot; or &quot;a
+two-lane tower defense&quot;. Set the size, tileset and number of players and press <strong>Design</strong>.</p>
+<ol>
+<li><strong>The design.</strong> The model writes a design document first: the premise, the players and
+forces, each trigger system and its settings, the layout and its locations, the
+objectives and the briefing. Edit it directly, or describe what should change and press
+<strong>Design again</strong>. A location name can include <code>{p}</code>, as in &quot;Spawn {p}&quot;, to build that
+system once per player.</li>
+<li><strong>The build.</strong> <strong>Build</strong> works through the design one step at a time, each step a row
+that passes or fails on its own: the terrain and locations, players and forces, each
+system, the objectives and briefing, the name, and a Check Map at the end. Common
+layouts (corner camps, lanes, arenas, a bound&#39;s course, a town) are laid out by the
+editor itself; others are drawn from the model&#39;s shapes. Common systems — spawns,
+income, waves, lives, shops, leaderboards and the like — are built by the editor and
+shown in green; anything else is written in <a href="/guide/trigscript/">TrigScript</a> and shown in
+gold.</li>
+</ol>
+<p>When it finishes, <strong>Review it…</strong> or <strong>Open the assistant</strong> to keep going.</p>
+<h2 id="generate-map-and-redo-area">Generate Map and Redo Area<a class="anchor" href="#generate-map-and-redo-area" aria-label="Link to this section">#</a></h2>
+<p><img src="/images/generate-map.webp" alt="Generate Map: the plan as a coloured grid, with the designer&#39;s notes"></p>
+<p><strong>Generate Map…</strong> lays out a melee map from a description: the number of players, the kind
+of terrain, where the bases go and the symmetry. It shows a <em>plan</em> first — a rough grid of
+terrain, the bases with their resources, ramps, a name and the designer&#39;s notes. <strong>Apply</strong>
+paints it with the isometric brush onto a new map, or onto the open map if it is the same
+size. <strong>Refine</strong> sends the plan back with your changes (&quot;more room around the naturals&quot;)
+and a picture of the result. Treat the result as a starting point, and check the ramps
+against the cliffs before you play.</p>
+<p><strong>Redo Area…</strong> does the same for part of an existing map. Mark an area (or right-click it
+and choose <em>Redo this area with AI…</em>) and describe what should be there; the new ground
+joins the old at the edges.</p>
+<h2 id="triggers-names-and-strings">Triggers, names and strings<a class="anchor" href="#triggers-names-and-strings" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>Write Triggers…</strong> turns a description into <a href="/guide/trigscript/">TrigScript</a> and applies it,
+keeping the script with the map. It can add to the map&#39;s triggers or replace them.</li>
+<li><strong>Explain Triggers…</strong> describes what the triggers do in play: all of them, a range, the
+mission briefing, or an answer to a question. The Trigger Editor and Mission Briefing
+Editor have the same <em>Explain</em>, <em>Write…</em> and <em>Ask</em> buttons.</li>
+<li><strong>Name and Describe…</strong> suggests three names with descriptions from what is on the map.
+Map Properties has the same as a <em>Suggest a name</em> button.</li>
+<li><strong>Write Briefing…</strong> writes objectives and narration and creates a mission briefing for
+each player.</li>
+<li><strong>Review Map…</strong> critiques the map from a picture, its statistics and Check Map, with a
+<strong>Go to</strong> button on each finding that has a place.</li>
+<li><strong>Rewrite Strings…</strong> translates, corrects or shortens the map&#39;s strings, showing a
+before-and-after table to tick. It is also the String Editor&#39;s <em>Rewrite with AI…</em>
+button.</li>
+</ul>
+<p><img src="/images/review-map.webp" alt="Review Map on Big Game Hunters"></p>
+<h2 id="options">Options<a class="anchor" href="#options" aria-label="Link to this section">#</a></h2>
+<p><strong>Tools ▸ AI ▸ Options…</strong> opens the same Preferences page as the key:</p>
+<ul>
+<li><strong>Quality</strong>: <em>Quick</em>, <em>Standard</em> (each feature at the level it was tuned for) or
+<em>Thorough</em>. Higher quality takes longer and costs more.</li>
+<li><strong>Spending</strong>: a ceiling for one assistant message and for one Make Scenario run. At the
+ceiling the work stops with the map as edited so far. 0 means no ceiling.</li>
+<li><strong>Assistant</strong>: rounds per message, the picture tick, following the work on the map,
+docking the panel on the right, and showing the model&#39;s reasoning summary.</li>
+<li><strong>Use the AI features</strong>: unticked, it removes the menu, the assistant, the status-bar
+cell and the AI buttons, and keeps your key.</li>
+</ul>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#adding-your-key">Adding your key</a></li>
+<li><a href="#where-your-key-goes">Where your key goes</a></li>
+<li><a href="#the-assistant">The assistant</a></li>
+<li><a href="#make-scenario">Make Scenario</a></li>
+<li><a href="#generate-map-and-redo-area">Generate Map and Redo Area</a></li>
+<li><a href="#triggers-names-and-strings">Triggers, names and strings</a></li>
+<li><a href="#options">Options</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

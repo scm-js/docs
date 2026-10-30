@@ -1,0 +1,1037 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The API, group by group — scmJS StarCraft map editor</title>
+<meta name="description" content="This part covers what each group is for and the rules that matter when using it. Each section links to its page in the API reference, which has every call&#39;s signature, options and…">
+<meta property="og:title" content="The API, group by group — scmJS StarCraft map editor">
+<meta property="og:description" content="This part covers what each group is for and the rules that matter when using it. Each section links to its page in the API reference, which has every call&#39;s signature, options and…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/plugins/the-api-group-by-group/">
+<meta property="og:url" content="https://docs.scmjs.dev/plugins/the-api-group-by-group/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="here" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The API, group by group</h1>
+<p>This part covers what each group is for and the rules that matter when using it. Each
+section links to its page in the <a href="https://docs.scmjs.dev/api/">API reference</a>, which has
+every call&#39;s signature, options and further examples; the examples here are the ones the
+reference does not have.</p>
+<p>The examples are written as playground snippets, with <code>api</code> already defined. In a plugin
+the same lines go inside <code>activate(api)</code>. <a href="/plugins/core-concepts/">Core concepts</a> has the rules
+that hold for every group.</p>
+<h2 id="apidocument"><code>api.document</code><a class="anchor" href="#apidocument" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/document/">Reference</a></p>
+<p>The open map as a whole.</p>
+<ul>
+<li><strong>Reading:</strong> <code>isOpen()</code>, <code>info()</code> (name, size, tileset, whether modified or view-only),
+<code>history()</code> (the undo and redo labels), and <code>scenario()</code> for the whole parsed map,
+read-only.</li>
+<li><strong>Writing:</strong> <a href="https://docs.scmjs.dev/api/document/#edit"><code>edit</code></a> and
+<a href="https://docs.scmjs.dev/api/document/#update"><code>update</code></a> (see <a href="/plugins/core-concepts/#the-three-kinds-of-write">The three kinds of
+write</a>), and <code>undo()</code> / <code>redo()</code>.</li>
+<li><strong>Files:</strong> <code>open</code>, <code>create</code>, <code>save</code>, <code>saveAs</code>, <code>close</code>, <code>export</code> (the map as a <code>File</code>,
+the way Save writes it, ready to upload) and <code>renderImage</code> (a PNG).</li>
+<li><strong>Testing a built map:</strong> <code>test(bytes, fileName, { launch })</code> hands bytes of your own,
+such as a map your plugin built, to Tools ▸ Test Map. On the desktop the game is started
+when <code>launch</code> is true (the user&#39;s preference when left out). In a browser the file goes
+into the test folder the user picked; with none picked it answers null and never
+downloads.</li>
+<li><strong>Whole-map changes:</strong> <code>resize</code> and <code>changeTileset</code>. Both clear the undo history, as the
+editor&#39;s own dialogs do.</li>
+<li><strong>Several open maps:</strong> <code>id()</code>, <code>list()</code> and <code>activate(id)</code>; see <a href="/plugins/core-concepts/#several-maps-and-maps-to-look-at-only">Several
+maps</a>.</li>
+<li><strong>Files inside the archive:</strong> <code>extras</code> lists, reads and writes files stored next to the
+scenario (<code>list</code>, <code>get</code>, <code>set</code>, <code>remove</code>). Keep yours in a folder of your own
+(<code>my-plugin\notes.json</code>); they are written on the next Save.</li>
+</ul>
+<p>Reading, and a file of the plugin&#39;s own that travels with the map:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> info = api.document.info();
+<span class="k">if</span> (info) api.log(<span class="s">`${info.name}: ${info.width} × ${info.height}, ${info.tileset}${info.modified ? &quot;, unsaved changes&quot; : &quot;&quot;}`</span>);
+
+<span class="k">const</span> name = <span class="s">&quot;my-plugin\\notes.json&quot;</span>;
+<span class="k">const</span> stored = api.document.extras.get(name);
+<span class="k">const</span> notes = stored ? JSON.parse(<span class="k">new</span> TextDecoder().decode(stored)) : { opened: <span class="n">0</span> };
+notes.opened++;
+api.document.extras.set(name, <span class="k">new</span> TextEncoder().encode(JSON.stringify(notes)));
+api.log(<span class="s">`runs of this snippet on this map: ${notes.opened}`</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bVFBTsMwELznFauIg60Wi3Oiqhe4cIADHHuoFW8So2YdZTe0VZV38CA-huwkEkLcdsbjmfG6CsQCnuoAO7C9Ny5UY4ckJnJKl5mvQcVZp-NTaNTx7hYJQ7bDqYAFnb2TdoLvr5Vo0TetTNsViz8ho0wL7ILztUcHe8i3MBLbT3RQtZYa5BwKyPPpqMssq1LFGAY7yLvrfX8aG0-HAwVBNh8cKC8XFUsY0P19Cl5ksGwaFBVt9KpOBrBbb-3h-e31xfR2YFSEZ3jHizxiFRwOShuXJjWLtYYCbhB6JHQFPMBUZnOfmdpsyuy_Drx02MIa8ERrAKZJpRIsg6fG11eVXLXWs1_a_zASQ6hBWs_A5PseBQLNuLN9_JPfZeIefwA" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>A new map beside the open one, and a picture of it:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">if</span> (<span class="k">await</span> api.document.create({ width: <span class="n">96</span>, height: <span class="n">96</span>, tileset: <span class="s">&quot;jungle&quot;</span>, name: <span class="s">&quot;Sketch&quot;</span>, startLocations: <span class="n">2</span>, into: <span class="s">&quot;new&quot;</span> })) {
+  <span class="k">const</span> png = <span class="k">await</span> api.document.renderImage({ pixelsPerTile: <span class="n">4</span> });
+  <span class="k">if</span> (png) <span class="k">await</span> api.ui.saveFile(png, <span class="s">&quot;sketch.png&quot;</span>);
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bc7BSsQwFIXhfZ_ikFUDoQsRwQxuBcGFoC8Q0jvp1fQmJLdWGPruMrpx4e7AD4ePzxjDHlgRKk9zidtKolNsFJTGC3aedfG4v3NYiNOiv1s5Uyf1MO-bpEzGQcJKHub1gzQuxqFraPpcYlAu0j1uHFi0eBih3eCwFpcBiEW6okrCA_6BNJKZ2tMa0lVT-Ytyf6H2xpk8bnHY0wDwGWOVZP8cbDz18EmPnOmaHEz_gU1VkrGn4fgG" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>The open map, written as Save would write it, sent to Test Map:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> file = <span class="k">await</span> api.document.<span class="k">export</span>();
+<span class="k">const</span> outcome = file &amp;&amp; (<span class="k">await</span> api.document.test(<span class="k">new</span> Uint8Array(<span class="k">await</span> file.arrayBuffer()), file.name, { launch: <span class="k">false</span> }));
+api.ui.status(outcome ? <span class="s">`Written to ${outcome.path}`</span> : <span class="s">&quot;No test folder chosen yet.&quot;</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bY7LqgIxEAX3fsVBRBKQrMVBxPsBdydubWKHCcykh6SDivjvEh87t0XV4XhJRRHiwNiCLhQVNEV3Fl9HTur4OklWY7uZf5lS1cvY5FezXML8qJSLmsQXHGLS9T5nun20Vjlq4K-GwNlYu3rDRCOvcMdANfl-g0BDYTys7WZtu0ZXlLQW872ww-mYoyonqGBx_3A3kfaPEzaY_wvaEwQZzpzheymccGN1c9s9AQ" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apidocumentsections"><code>api.document.sections</code><a class="anchor" href="#apidocumentsections" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/document/#sectionsapi">Reference</a></p>
+<p>The map file as a list of sections, as the game reads it and Save writes it, with unsaved
+edits already included. Section Explorer is built on it, and Repair uses its helpers.</p>
+<p><strong>Reading.</strong> <code>list()</code> gives each section&#39;s name, offset, size and what the editor knows
+about it. <code>bytes(index)</code> is one section&#39;s payload, <code>combined(name)</code> what the game uses
+when a name is repeated, and <code>file()</code> the whole file.</p>
+<p><strong>Writing.</strong> <code>write</code>, <code>rename</code>, <code>insert</code>, <code>remove</code>, <code>move</code> and <code>replaceFile</code>. After each:</p>
+<ul>
+<li>The file is parsed again from scratch and becomes the open map, so the change reaches
+every part of the editor, even for sections it does not understand.</li>
+<li>The undo history and selections are cleared, and the <code>&quot;document&quot;</code> event fires with
+reason <code>&quot;replace&quot;</code>.</li>
+<li>The call returns the parser&#39;s <code>warnings</code>.</li>
+<li>Indices shift after an insert or remove, so call <code>list()</code> again.</li>
+<li>The map is marked modified. The exception is <code>replaceFile(bytes, { asOpened: true })</code>,
+which takes the bytes as the file that was opened. Use it for a repair made right after
+<code>&quot;open&quot;</code>, so the map does not ask to be saved when nothing the user did changed it. Save
+still writes the bytes.</li>
+</ul>
+<p><strong>Helpers for repairs.</strong> <code>required()</code> (the sections this map&#39;s revision must have),
+<code>defaults(name)</code> (what File ▸ New would write), <code>trailing()</code> (bytes after the last
+readable section), <code>chkOf(file)</code> (the scenario inside an <code>.scx</code> / <code>.scm</code>) and
+<code>rebuild(names?)</code> (re-encode sections from the editor&#39;s model, fixing sizes, repeats and
+broken string offsets).</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Sections the map must have and does not, and sections that appear more than once.</span>
+<span class="k">const</span> sections = api.document.sections.list();
+<span class="k">const</span> present = <span class="k">new</span> Set(sections.map((s) =&gt; s.name));
+api.log(<span class="s">&quot;missing:&quot;</span>, api.document.sections.required().filter((name) =&gt; !present.has(name)));
+api.log(<span class="s">&quot;repeated:&quot;</span>, [...<span class="k">new</span> Set(sections.filter((s) =&gt; s.occurrences &gt; <span class="n">1</span>).map((s) =&gt; s.name))]);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1dY7BTsMwEETv_YqlJ1uqXHElSn-iR8RhZQ-NpXhtvBv4fZTSUCHgOKOnN3M80hnRchUlm0CFG5VFjSZ-B7EkShVKUu1wTXqH2YhbA3cqtWMthKpEhF2sonZHR-KWQ6pxKRALWx_mrOb8cMNbh0KMRhJ80BnmvsHCzTn1NJ5Ig3CB98Nudc714vYlq2a5PO0P_-x0vC25IzkfXvNs6M5dJavv4TYbJtav9oe7o4ENaZU_hxB-XduE27sa49I7JELpRI_-r-8vfvgE" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apidocumentbuildsteps"><code>api.document.buildSteps</code><a class="anchor" href="#apidocumentbuildsteps" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/document/#buildstepsapi">Reference</a></p>
+<p>For a plugin that compiles something into the map, such as a script turned into triggers.
+A build step runs whenever the map leaves the editor (Save, Test Map and
+<code>document.export</code>), so the user keeps one file and keeps editing the unbuilt map.</p>
+<div class="code-try"><pre><code class="language-ts">api.document.buildSteps.add({
+  id: <span class="s">&quot;compile&quot;</span>,
+  label: <span class="s">&quot;My Compiler&quot;</span>,
+  <span class="c">// Only maps that carry the plugin&#39;s source file are built.</span>
+  applies: () =&gt; api.document.extras.get(<span class="s">&quot;my-plugin\\main.txt&quot;</span>) !== <span class="k">null</span>,
+  <span class="k">async</span> run({ map, fileName, purpose }) {
+    api.log(<span class="s">`building ${fileName} (${map.length} bytes) for ${purpose}`</span>);
+    <span class="k">return</span> map; <span class="c">// an .scx in, an .scx out: return your compiled map here</span>
+  },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1TVC7asNAEOz1FRNhiATKuZdxmtRJirQuvJbW0sG9uAf4EPr3cLId0i3D7LzISTHaIWk2UVySVONPZBcEjWOzVIAce9SD1U4qrrsKUHRh1aP-zPi4w37D93t8G5WhyQXEmSIG8j4jzgyn0iTNa0CwyQ-Mq1QM8oxiGEUFkHNKcujRtDi-g_6n4lv0FMTEsal1fruLnU6apBHxFusWL8cjTFKq5KCQzQCfTLOULN1m9kWaO7jknQ2MtUWphs1G2ak5b8WlmbBbnvQVzW7R5IRiM8V5xSVHDi2u1mO3PKTWc3vYlDzH5E0xPJQlyECE4QZpur_bptg_edkmj8eqY_nCzJ4rYO2qtT38Ag" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<ul>
+<li><code>applies()</code> is asked on every save and must be cheap. While it is false, Save is
+unchanged.</li>
+<li><code>run</code> gets the map as Save would write it and returns the built map. Steps from several
+plugins run one after another, in activation order. <code>purpose</code> is <code>&quot;save&quot;</code>, <code>&quot;test&quot;</code> or
+<code>&quot;export&quot;</code>.</li>
+<li>The editor keeps the unbuilt scenario inside the file and shows that one when the map is
+opened again, so generated triggers never appear in the trigger list. See <a href="/map-files/the-archive/#built-maps">Opening and
+saving maps</a>.</li>
+<li><strong>A step cannot cost the user a save.</strong> If <code>run</code> throws, the map is saved unbuilt and a
+notice shows your error message, so write it for the user. Throw a plain <code>Error</code> for
+that: the editor&#39;s log keeps it as a warning, since the step worked as meant. Anything
+else thrown, such as a <code>TypeError</code> or an error class of your own, is logged as an error,
+as a bug in the step would be. A <em>Save without it</em> button aborts the <code>signal</code> that <code>run</code>
+is also given. Test Map stops on an error instead.</li>
+<li><code>before({ id, label, applies?, run })</code> runs earlier, on the open map rather than on the
+bytes, and may use <code>document.update</code> and <code>document.edit</code>. TrigScript uses it to write
+its triggers into the trigger list before every save.</li>
+<li><code>builtBy()</code> says which steps built the file the open map came from.</li>
+</ul>
+<p>A bare <code>.chk</code> is never built, since it has nowhere to keep the unbuilt copy.</p>
+<h2 id="edittransaction"><code>EditTransaction</code><a class="anchor" href="#edittransaction" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/document/#edittransaction">Reference</a></p>
+<p>What <code>document.edit</code> passes to its function. When the function returns, the transaction
+removes doodads the terrain change broke and units the new ground cannot hold (if the
+Units palette&#39;s <em>Remove stranded units</em> is on), commits and repaints.</p>
+<ul>
+<li><strong>Terrain:</strong> read and set tiles (<code>tileAt</code>, <code>setTile</code>, <code>setTiles</code>), the editor&#39;s brushes
+(<code>stampTerrain</code>, <code>paintIsom</code>, <code>fillArea</code>, <code>placeBlend</code>, <code>replaceTerrain</code>, <code>fillFlat</code>),
+and the ISOM lattice (<code>rebuildIsom</code>, <code>tilesFromIsom</code>). Most brushes need the tileset
+graphics.</li>
+<li><strong>Objects:</strong> units (<code>placeUnit</code>, <code>canPlaceUnit</code>, <code>addUnits</code>, <code>moveUnits</code>, <code>updateUnits</code>,
+<code>placeStartLocations</code>, …), sprites, doodads (<code>placeDoodad</code>, <code>convertDoodads</code>), locations
+(<code>addLocation</code>, <code>editLocation</code>; slot 63, Anywhere, is protected), fog (<code>setFog</code>,
+<code>floodFog</code>, …) and <code>paste</code> for a whole <code>Clip</code>.</li>
+<li><strong>Symmetry:</strong> <code>mirror</code> and <code>mirrorPoint</code> give the positions Tools ▸ Symmetry would also
+paint, so your edit can follow the user&#39;s setting.</li>
+<li><code>note(text)</code> adds a line to the status bar message.</li>
+</ul>
+<p><code>placeUnit</code> places the way the Units palette does but makes no checks; ask <code>canPlaceUnit</code>
+first if you want them.</p>
+<p>Several operations, one undo entry: a ring of eight marines round the middle of the map,
+with a location over them.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> info = api.document.info();
+<span class="k">if</span> (info) {
+  <span class="k">const</span> t = api.consts.tile;
+  <span class="k">const</span> cx = (info.width * t) / <span class="n">2</span>;
+  <span class="k">const</span> cy = (info.height * t) / <span class="n">2</span>;
+  <span class="k">const</span> result = api.document.edit(<span class="s">&quot;Ring of marines&quot;</span>, (tx) =&gt; {
+    <span class="k">for</span> (<span class="k">let</span> i = <span class="n">0</span>; i &lt; <span class="n">8</span>; i++) {
+      <span class="k">const</span> x = cx + Math.cos((i * Math.PI) / <span class="n">4</span>) * <span class="n">3</span> * t;
+      <span class="k">const</span> y = cy + Math.sin((i * Math.PI) / <span class="n">4</span>) * <span class="n">3</span> * t;
+      <span class="k">if</span> (tx.canPlaceUnit(<span class="n">0</span>, x, y)) tx.placeUnit(<span class="n">0</span>, <span class="n">0</span>, x, y);
+    }
+    tx.addLocation({ left: cx - <span class="n">4</span> * t, top: cy - <span class="n">4</span> * t, right: cx + <span class="n">4</span> * t, bottom: cy + <span class="n">4</span> * t }, <span class="s">&quot;The Ring&quot;</span>);
+  });
+  api.ui.status(<span class="s">`${result.units} marines, ${result.locations} location`</span>);
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1jVFNS8NAEL33VzyCh902rkV7kMR4FxSK6N242TQD6W7JTjCl5L_L5qNU8eBlmHnzHvNmRjvrGWRLhwz5gVThdLs3llXAhEwXVEKEXOK0APTA54k8VF4x1SY9N3WHbJSoLyq4whIscYPbC8rxTKkM7Sr-g9MY39b825UpiEX0SnYHV2KfN2SNj2II7iSyx8EjULoGojYMQoZ1CsID7lPQaiUnxjwleNUdVnjJuVLaeSEIy7HaPgVLG4kl7oLB9IcyrKCPs9KT_Ycy3JI7pXO7rXNt3i2xWMfoYhylBHfqcAnPnVHdD5E7lRfFs9M5k7PihNqUnIQVrrEJo2KwOyTB2RlowoWTcc0J-nTMbp-MCwwY-hjRW2UQbhsNM_shhvO3pDzn3HrxcXUaH6NaS-z7-QUxzo16Mud7zOmHTBf9Nw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="updatetransaction"><code>UpdateTransaction</code><a class="anchor" href="#updatetransaction" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/document/#updatetransaction">Reference</a></p>
+<p>What <code>document.update</code> passes to its function. The result&#39;s <code>sections</code> lists the file
+sections actually changed, and <code>changed</code> is false when nothing was.</p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>What it covers</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>tx.triggers</code>, <code>tx.briefing</code></td>
+<td>The trigger and briefing lists: <code>list</code>, <code>add</code>, <code>replace</code>, <code>remove</code>, <code>move</code>, <code>set</code>, <code>fromText</code>.</td>
+</tr>
+<tr>
+<td><code>tx.strings</code></td>
+<td>The string table. <code>intern(text)</code> reuses an identical string or adds one and never overwrites, since an index may be shared. <code>set(index, text)</code> overwrites a slot.</td>
+</tr>
+<tr>
+<td><code>tx.switches</code></td>
+<td>Switch names.</td>
+</tr>
+<tr>
+<td><code>tx.properties</code></td>
+<td>The scenario&#39;s name and description.</td>
+</tr>
+<tr>
+<td><code>tx.players</code>, <code>tx.forces</code></td>
+<td>Player slots (type, race, colour, force) and the four forces.</td>
+</tr>
+<tr>
+<td><code>tx.unitTypes</code>, <code>tx.upgrades</code>, <code>tx.techs</code></td>
+<td>Unit, upgrade and technology settings, with the game&#39;s defaults alongside.</td>
+</tr>
+<tr>
+<td><code>tx.sounds</code>, <code>tx.cuwp</code></td>
+<td>WAV slots, and the unit property slots used by <em>Create Unit with Properties</em>.</td>
+</tr>
+<tr>
+<td><code>tx.setVersion</code>, <code>tx.setTextEncoding</code></td>
+<td>The map revision and the text encoding.</td>
+</tr>
+</tbody></table>
+<p>A settings change, the way a dialog&#39;s OK makes one:</p>
+<div class="code-try"><pre><code class="language-ts">api.document.update(<span class="s">&quot;Set up the scenario&quot;</span>, (tx) =&gt; {
+  tx.properties({ name: <span class="s">&quot;Last Stand&quot;</span>, description: <span class="s">&quot;Hold the ring for ten minutes.&quot;</span> });
+  tx.unitTypes.set(<span class="n">0</span>, { hitPoints: <span class="n">80</span>, name: <span class="s">&quot;Veteran Marine&quot;</span> });
+  tx.switches.setName(<span class="n">0</span>, <span class="s">&quot;Gate is open&quot;</span>);
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1Tc3BSsNAEAbge5_iZ08JhKXHkqBXPVQpVLwP2dEMmNllZxYroe8uWgRf4PuoSEx5biurx1YSOXfhzI5W4AvDZlaqksOAzi897u6x7QC_xFJz4erC1m1QWnlEOJI5zk6awoDENlcpLllHhMf8kX7FKvqOt1zhrFhFm7PFgGs_3dym4i9fhS0ae7cfsGERP2VRtxGH_fCXvbJzJcUTVVH-J9in-LzcgGda-QcJD-QMMeTCGvppd-2nbw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>A trigger built record by record:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> { condition, action, comparison, player } = api.consts.triggers;
+
+api.document.update(<span class="s">&quot;Add a countdown&quot;</span>, (tx) =&gt; {
+  <span class="k">const</span> trigger = api.triggers.newTrigger([player.Player1]);
+  <span class="k">const</span> timer = api.triggers.newCondition(condition.CountdownTimer);
+  timer.comparison = comparison.AtMost;
+  timer.amount = <span class="n">30</span>;
+  trigger.conditions[<span class="n">0</span>] = timer;
+
+  <span class="k">const</span> say = api.triggers.newAction(action.DisplayText);
+  say.text = tx.strings.intern(<span class="s">&quot;30 seconds remaining&quot;</span>);
+  trigger.actions[<span class="n">0</span>] = say;
+  trigger.actions[<span class="n">1</span>] = api.triggers.newAction(action.PreserveTrigger);
+  tx.triggers.add(trigger);
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1hVG9isMwDN7zFCKTA8WkdAw5KO160KFb6WBsEQwXO1jqNaH03Q_badKhcJOFpO9P1t4RwwO0d8ay9W4DSudX-35QwVKshx81YYAntKAGK3VEkeRguw4DNUURu8brW4-O5W0wilGUe2NAgfY3x8bfXbkBwWMF7Rc8CoBEAjPHTPxilA7v51yLSxaXp_Rsr1Wzgm3_EXp4pRFLLnl42ThHUCJJcLnmhPYttNzztyde91QfGaCFXZ2aWU8uCnSpr9Dm5aZYPJKaPjjcpyOLfGt5tBRDnnHkZIzUJBnHKMajJA7WdSStYwxOlLsaCKMsQcBeWWddV1bvnjLtbIjU9Gm2vf5r6xSQMPzi_BNZYlwByhjBy-xZNX8" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apisettings"><code>api.settings</code><a class="anchor" href="#apisettings" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/settings/">Reference</a></p>
+<p>The same views as the <code>UpdateTransaction</code> parts, for reading without a transaction:
+players, forces, unit types, upgrades, techs, sounds, unit property slots, whether a unit
+is available to a player (<code>unitAvailable</code>), and <code>version()</code> (revision and text encoding).
+Write through <code>document.update</code>.</p>
+<h2 id="apitriggers"><code>api.triggers</code><a class="anchor" href="#apitriggers" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/triggers/">Reference</a></p>
+<p>Reading triggers and everything needed to show one. Writing is <code>document.update</code>.</p>
+<ul>
+<li><strong>The lists.</strong> <code>list()</code> and <code>briefing()</code> return copies. A record is 16 conditions and 64
+actions of plain numbers.</li>
+<li><strong>Showing a trigger.</strong> <code>summarize</code> gives the three lines the trigger list shows,
+<code>comment</code> a trigger&#39;s Comment text, and <code>text</code> prints and parses the text trigger
+format. <code>defs</code> says what each condition and action type means and which record field
+holds each argument.</li>
+<li><strong>Making records.</strong> <code>newTrigger</code>, <code>newCondition</code> and <code>newAction</code> make blank records.
+<code>isPreserved</code> and <code>setPreserved</code> read and set the Preserve Trigger action.
+<code>triggersFor(list, groups)</code> finds the triggers some player groups own.</li>
+<li><strong>Switches and counters.</strong> <code>switchNames()</code> gives every switch&#39;s name and <code>switchUsage()</code>
+how many conditions and actions mention each. <code>usage()</code> lists every death counter and
+switch the triggers use, for a plugin that needs counters of its own. <code>epd</code> and
+<code>addressOf</code> do EUD address arithmetic.</li>
+<li><strong>What depends on what.</strong>
+<a href="https://docs.scmjs.dev/api/triggers/#references"><code>references()</code></a> says what each trigger
+reads, writes and names: switches, death counters, memory addresses, locations, the
+timer, resources, scores, units, strings, sounds, AI scripts and Victory / Defeat /
+Draw. The Trigger Map plugin draws its whole graph from this one call.<ul>
+<li>A condition <em>reads</em>. An action <em>writes</em>, or <em>uses</em> something without changing it
+(the location units are created at, the text a message shows).</li>
+<li>Player groups come resolved to slots, with <code>approximate</code> set for groups the game
+settles only while it runs, such as <em>Foes</em>. <em>All Players</em> reaches Players 9–12 in
+conditions and the unit actions, as the game does, but not as a trigger&#39;s owner or in
+Create Unit, Set Deaths, Set Resources and Set Score, which refuse them.
+<code>resolvePlayers(group)</code> does that resolution on its own.</li>
+</ul>
+</li>
+</ul>
+<p><strong>To generate triggers, write text.</strong> <code>tx.triggers.fromText</code> parses the text format,
+interns its strings and resolves names against the open map. That is easier than filling
+records field by field:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> source = <span class="s">`
+Trigger(&quot;Player 1&quot;){
+Conditions:
+  Bring(&quot;Current Player&quot;, &quot;Any unit&quot;, &quot;Anywhere&quot;, At least, 1);
+Actions:
+  Display Text Message(Always Display, &quot;You have arrived.&quot;);
+  Preserve Trigger();
+}`</span>;
+<span class="k">try</span> {
+  api.document.update(<span class="s">&quot;Add the arrival trigger&quot;</span>, (tx) =&gt; { tx.triggers.fromText(source); });
+} <span class="k">catch</span> (error) {
+  api.ui.status(String(error)); <span class="c">// a parse error names the line</span>
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1PVDBasJAFLzvVwx72oUQ8dpgIbXXglAvvflIXpOFuAlv36pB_Pei0d4eM_NmhmnGmBRpzNIwNjiYvYSuY3F2N9DMgrX1V7MdYxs0jDG9GeBDQuyc3WYRjopFaAvYOs7IMejzPvcsbAvUioEpaYG1r0zd_Bt9hjQNNGPPF8UXp0Qdu3o405xeXAH7M2b0dGKQSDhxW1pfGWAnnFhOjFdjX5nboTIqM64GoCmU7djkI0ct89SSsrN120L7pxUN0OXXFnB68di84wq9lE84lb8yHu_t3LKQr3C7x6AhbXo4FhnF_8flUCYlzcl962OjhfcVVisQJpLEeGCIdOT0qDKEyOb2Bw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>A location or unit the text names has to exist in the map, or the parse fails with the
+line number. The <a href="/triggers/">trigger reference</a> lists every condition and action in this
+form. Use <code>newTrigger</code> / <code>newCondition</code> / <code>newAction</code> to change one field of an existing
+record.</p>
+<p><strong>Claiming generated triggers.</strong> <code>claim(spec)</code> marks a run of the trigger list as made by
+your plugin. The Trigger Editor badges and locks those rows and shows your description
+with a button that opens your plugin. The Text Trigger Editor fences them off, and Import
+Triggers warns before replacing them.</p>
+<p>The run is found by content: <code>spec.locate(list)</code> returns <code>{ start, count }</code>, or null when
+the triggers were edited or removed. Keep a fingerprint of each trigger you generated and
+search for them, as TrigScript does. Call <code>refresh()</code> on the handle after regenerating.
+<code>claims()</code> lists every plugin&#39;s claimed runs.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> mine = <span class="k">new</span> Set&lt;<span class="k">string</span>&gt;(); <span class="c">// fingerprints of the triggers this plugin generated</span>
+
+api.document.update(<span class="s">&quot;Generate&quot;</span>, (tx) =&gt; {
+  <span class="k">const</span> trigger = api.triggers.newTrigger();
+  trigger.actions[<span class="n">0</span>] = api.triggers.newAction(api.consts.triggers.action.PreserveTrigger);
+  mine.add(api.triggers.fingerprint(trigger));
+  tx.triggers.add(trigger);
+});
+
+api.triggers.claim({
+  label: <span class="s">&quot;the wave generator&quot;</span>,
+  badge: <span class="s">&quot;waves&quot;</span>,
+  locate(list) {
+    <span class="k">const</span> start = list.findIndex((t) =&gt; mine.has(api.triggers.fingerprint(t)));
+    <span class="k">if</span> (start &lt; <span class="n">0</span>) <span class="k">return</span> <span class="k">null</span>;
+    <span class="k">let</span> count = <span class="n">1</span>;
+    <span class="k">while</span> (start + count &lt; list.length &amp;&amp; mine.has(api.triggers.fingerprint(list[start + count]))) count++;
+    <span class="k">return</span> { start, count };
+  },
+  describe: () =&gt; <span class="s">&quot;Made by the wave generator. Change the waves there, not here.&quot;</span>,
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1jVJNi9swFLz7Vww-LBIx3u01Hwulh9JDodDelj0o1ossUJ6D9LxJWfLfiyw73aWl9PZ4o5k3M3Y3cBIcPRN2YDrjO8k2SfTsHpXe4P4eB8-O4il6loThAOkJEr1zFBOk9wmnMDrPcMQUjZCtKnPyrR268Ugs7XiyRkjVn2e8bqDkorF7xGsFdJOFWRE7ZO6i3zKdf5RZ6U2F5VlrOvEDp6eH578wPk6gyutJPP1GC6_9FilRfKFZe5LOJbTGWvVO7k16NS91cXJ5o2rtDdxUV70pDdzwLhh_VDlsMHsKa9S5xLN5oaW0IdZNBeyNdbRGnaE0bcLQ5fKCT6KnupbCkpgo2CEj2aX9wpYuSslU7BSmN-kfYXTJAfgDVFHb4kEjkoyRwWMIBQ8k6IaR87UPZXXufaCFtZrRbfESiJ30uLv7DxOZ8PRO5VlrXabVqtya_byWxM187JrBa27IUuqi39MaaopefzWWsP-JPztu8ak37OgG5R-YIjXgQZCntm7y9_sF" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>Open Triggers ▸ Trigger Editor… after running it: the new row carries the badge and is
+locked, and the form is replaced by your description.</p>
+<p><img src="/images/plugin-trigger-editor.webp" alt="The Trigger Editor with a claimed trigger: the row has a &quot;waves&quot; badge and the right-hand side shows the plugin&#39;s description in place of the form. An &quot;As text&quot; button added by a plugin is at the bottom left"></p>
+<p>The <em>As text</em> button at the bottom left of the picture is a <a href="/plugins/putting-things-on-screen/#dialog-slots">dialog slot</a>.</p>
+<h2 id="apiquery"><code>api.query</code><a class="anchor" href="#apiquery" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/query/">Reference</a></p>
+<p>Read-only questions about the open map.</p>
+<ul>
+<li><strong>What is where:</strong> <code>unitAt</code>, <code>spriteAt</code>, <code>doodadAt</code>, <code>locationAt</code>, <code>unitsIn</code>, <code>unitsOf</code>,
+<code>startLocations</code>, <code>fogAt</code>.</li>
+<li><strong>Placement:</strong> <code>placement(unitId, x, y)</code> gives the Units palette&#39;s verdict with a reason
+in words; <code>doodadPlacement</code> checks a doodad&#39;s ground.</li>
+<li><strong>The editor&#39;s own tools:</strong> <code>validate()</code> (Check Map&#39;s issues), <code>statistics()</code>,
+<code>find(options)</code> (the Ctrl+F search), <code>strings()</code>, <code>stringUsage()</code>, <code>unusedStrings()</code>.</li>
+</ul>
+<p>An issue&#39;s <code>target</code> from <code>validate()</code> is a unit, location or trigger that <code>view.goTo</code>
+accepts, or a settings dialog to open. The <a href="/plugins/recipes/#a-problems-panel-that-follows-the-map">problems
+panel</a> recipe uses both.</p>
+<p>Where a Command Center fits, asked the way the Units palette asks:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> at = <span class="k">await</span> api.ui.pickTile({ prompt: <span class="s">&quot;Click where the Command Center should go&quot;</span> });
+<span class="k">if</span> (at) {
+  <span class="k">const</span> t = api.consts.tile;
+  <span class="k">const</span> verdict = api.query.placement(<span class="n">106</span>, at.x * t, at.y * t); <span class="c">// 106 is the Terran Command Center</span>
+  api.ui.status(verdict?.problem ? <span class="s">`Blocked: ${verdict.reason}`</span> : <span class="s">&quot;It fits.&quot;</span>);
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1XY-9asNAEIR7PcUgUkghnO3GhYQxRFV6P4Avp3W06P5yt4pjhN49RNgp0s0wA9-MCT4LtOAAfdUs0JHVxCqyGU9sqZoRU3BRGpSdZTPiOlAiyEDognPa9-jICyXkIUy2x0cosdRtwRdUWmrMBWBWygqJrFaXlbCl9i_8otSzeVQ-J0o3Fa025MhLtdvuX6BFfeMZsqrbr6pbbDbYbffgvE46UUra_1tW4PEqi5YpV3fWUcUU3i05HHF-tcGM1Dd4mu-xSqRz8MsZDco3wYUlq7Jui-UH" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apiview"><code>api.view</code><a class="anchor" href="#apiview" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/view/">Reference</a></p>
+<p>Where the map view is looking, and showing the user something.</p>
+<ul>
+<li><code>zoom</code> / <code>setZoom</code>, <code>visible()</code>, <code>center(x, y)</code>, <code>cursorTile()</code>, the View menu&#39;s options
+(<code>flags</code> / <code>setFlags</code>) and grid size.</li>
+<li><code>goTo(target)</code> scrolls to a tile, unit, sprite or location and selects it, or opens the
+Trigger Editor on a trigger (<code>{ kind: &quot;trigger&quot;, index }</code>).</li>
+<li><code>reveal(rect)</code> glides the view to show an area, and resolves <code>false</code> if the user moved
+the view first. A plugin following its own work should stop following then.</li>
+<li><code>flash(target)</code> briefly highlights tiles, units or locations. Use it for &quot;this just
+changed&quot; so every plugin&#39;s highlight looks the same.</li>
+</ul>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Visit each start location in turn, until the user takes the view back.</span>
+<span class="k">for</span> (<span class="k">const</span> start <span class="k">of</span> api.query.startLocations()) {
+  <span class="k">const</span> area = { x0: start.tx - <span class="n">6</span>, y0: start.ty - <span class="n">6</span>, x1: start.tx + <span class="n">6</span>, y1: start.ty + <span class="n">6</span> };
+  <span class="k">if</span> (!(<span class="k">await</span> api.view.reveal(area))) <span class="k">break</span>;
+  api.view.flash({ units: [start.index], kind: <span class="s">&quot;attention&quot;</span> });
+  <span class="k">await</span> <span class="k">new</span> <span class="k">Promise</span>((next) =&gt; setTimeout(next, <span class="n">800</span>));
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1TY89bsJAEIV7n-KFalc4BhoUgcgJUqSI0kQpBjMWI5tdsjvGRhZ3j7xGCeU8fe9nFgt8ShQFU3lEVAqKxpek4h3EQdvgcrROpYEeGW3kAKWaYzovwh32VNZFVvkAU3oX9R7jK9BZip-Ww7VI0ts9OBprMWTAhFNgwg4D-uVm8hba4xnrHNd_5Top_eqBmSdm9cDMscZtmwFSwTwZ6kg0zRiXFoEvTI0ZC6212AemeoT_gKqheDQDWicaN_iacsUduP_OUYs7bDAjVXbjHzPcbLKnFscd3oM_SWRjHPdqsXtFZP2QE_tWk5bjZbm0dpvdfgE" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apidata"><code>api.data</code><a class="anchor" href="#apidata" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/data/">Reference</a></p>
+<p>The game&#39;s own tables (<code>units.dat</code> and the rest): hit points, costs, weapons, flags,
+graphics. Call <code>load()</code> first; <code>ready()</code> says whether they are already in memory.
+Everything is null when the game data was never installed, so degrade instead of throwing.
+Values are as the files store them: hit points, for one, are in 256ths.</p>
+<h2 id="apigamedata"><code>api.gameData</code><a class="anchor" href="#apigamedata" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/game-data/">Reference</a></p>
+<p>Which set of game files the editor uses, the game&#39;s own or a mod&#39;s, and the plugin side of
+Help ▸ Game Data…. The <code>&quot;gameData&quot;</code> event fires on every change.</p>
+<ul>
+<li><strong>Which set.</strong> <code>source()</code> says where the files in use came from, <code>profile()</code> which data
+set they belong to, and <code>profiles()</code> lists every set with a copy here.</li>
+<li><strong>Managing sets.</strong> <code>install(profile, files, progress)</code> extracts a set from its archives
+and switches to it, <code>select(id)</code> switches, and <code>remove(id)</code> deletes a set&#39;s copy. The
+game&#39;s own archives must be among a mod&#39;s files, since a mod only replaces files.</li>
+<li><strong>Reading files.</strong> <code>read(path)</code> hands over one of the extracted files as bytes, for a
+plugin that reads the game&#39;s formats itself: <code>arr/units.dat</code>, <code>tileset/jungle.cv5</code>,
+<code>unit/zerg/drone.grp</code>. Paths are the archive&#39;s, in lower case with forward slashes, and
+<code>tileset/manifest.json</code> and <code>unit/manifest.json</code> list what was extracted. It answers
+null for a file the copy does not have.</li>
+</ul>
+<p>A mod&#39;s files replace the game&#39;s in the same formats, so <code>data</code>, <code>tileset</code>, <code>graphics</code> and
+<code>names</code> follow them automatically. Mods that extend the game&#39;s table sizes are not
+covered. A plugin written only for the game&#39;s own data can check <code>profile().id</code>
+(<code>&quot;starcraft&quot;</code>) and turn itself off for anything else.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> source = api.gameData.source();
+api.log(source ? <span class="s">`${source.profile.name}: ${source.label}`</span> : <span class="s">&quot;still starting up&quot;</span>);
+<span class="k">for</span> (<span class="k">const</span> set <span class="k">of</span> <span class="k">await</span> api.gameData.profiles()) api.log(<span class="s">`data set ${set.id}: ${set.name}`</span>);
+
+<span class="k">const</span> dat = <span class="k">await</span> api.gameData.read(<span class="s">&quot;arr/units.dat&quot;</span>);
+api.log(dat ? <span class="s">`units.dat is ${dat.length} bytes`</span> : <span class="s">&quot;no game data installed&quot;</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1ZY_BasQwDETv-QphcrAv7n1D2Us_xNpYSQ1aO1gKSwn595J4u7T0Jkaa0ZuxZFGQstaR4B1wSX7GO32gom-qdUN3yFxm-7y7Qui3Nvullikx-Yx32i_w0hlvxHuACxjRxAyiWDXlGdbFuKGbSgU7tu-kUCbAByb9S_AMF-sc_DCEiIqnp9-E1KfY3pI2huCGrmvBEfXo9D-3EkZrsNa3NScVH1HNr5qH7wrhtYMk0G8R1TPlWT93uH0pyVkuFzhi4aRKWRSZKRo3fAM" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apiconsts"><code>api.consts</code><a class="anchor" href="#apiconsts" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/consts/">Reference</a></p>
+<p>The numbers the map file is written in, so a plugin does not hard-code them: pixels per
+tile, the start location and resource unit ids, the unit and sprite flag bits, the
+Anywhere location&#39;s slot, and <code>triggers</code>, which has every condition and action type,
+player group and argument value.</p>
+<p>For an argument that takes one of a fixed set of values, <code>api.triggers.defs.choices</code> gives
+the values with their labels:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// What each argument of a Set Switch action can be.</span>
+<span class="k">const</span> def = api.triggers.defs.action(api.consts.triggers.action.SetSwitch);
+<span class="k">for</span> (<span class="k">const</span> arg <span class="k">of</span> def?.args ?? []) {
+  api.log(arg.label, api.triggers.defs.choices(arg.kind).map((c) =&gt; <span class="s">`${c.label} = ${c.value}`</span>));
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bY2xDoIwFEV3vuIODm1iygcY5CMYHIwJz_JaGrElbdHB8O8GOrg4vpzz7qlrXEbKYNIjKNrlyT4jGBA6zujeLm9AZxc8NHncWVU6-JQxsEEDmp3K0VnLMamBTVJFFhvYxfTjBamOcxmWp8qECFEGKdqtPLBpFUWb0La43iQ-FfbMFKygaNVEd56Of8p6DE5z2qWH84NUT5qF0BLNGf3ho8vrigbb8aJp4bWX8lStXw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apigraphics"><code>api.graphics</code><a class="anchor" href="#apigraphics" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/graphics/">Reference</a></p>
+<p>The images the map view draws, for your own lists and previews.</p>
+<ul>
+<li><strong>Pictures:</strong> <code>unitImage</code>, <code>spriteImage</code>, <code>tileImage</code> and <code>doodadImage</code>, in a player&#39;s
+colours where that applies. <code>playerColor(owner)</code> is the colour a player&#39;s units are
+drawn in.</li>
+<li><strong>Renders:</strong> <code>renderRect</code> draws part of the map as a PNG, and <code>renderClip</code> draws a
+<code>Clip</code> as the paste preview does.</li>
+<li><strong>Icons:</strong> <code>icon(kind, id)</code> is the game&#39;s own button picture for a unit type, an upgrade
+or a technology, as its command card shows it: yellow, or grey or white with
+<code>{ look: &quot;disabled&quot; }</code> or <code>{ look: &quot;selected&quot; }</code>. It suits a list or a tooltip better
+than a unit&#39;s picture from the map.</li>
+</ul>
+<p>Rules for using them:</p>
+<ul>
+<li>Call <code>load()</code> first; <code>ready()</code> says what is already in memory.</li>
+<li>Unit and sprite images and the icons load lazily, so the first request often returns
+null. Call <code>requestUnit</code> / <code>requestSprite</code> / <code>requestIcons</code>, and redraw in
+<code>onImageLoaded</code>.</li>
+<li>An image is the editor&#39;s own cached canvas: draw from it onto a canvas of yours instead
+of moving it into your page.</li>
+<li>Images are always the classic game&#39;s size, even when the user has View ▸ Remastered
+Graphics on.</li>
+<li>With no game data there are no images. Show the name instead.</li>
+</ul>
+<h2 id="apicommands"><code>api.commands</code><a class="anchor" href="#apicommands" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/commands/">Reference</a></p>
+<p>Named actions, so a menu item, a hotkey, a context-menu entry and another plugin can all
+reach the same one.</p>
+<ul>
+<li>An id without a dot is prefixed with your plugin&#39;s id (<code>&quot;convert&quot;</code> becomes
+<code>&quot;image-to-terrain.convert&quot;</code>); one with a dot is used as is, for a name other plugins
+can rely on.</li>
+<li><code>run(id)</code> runs anyone&#39;s command and returns what it returns. <code>list()</code> gives every
+command registered by every plugin.</li>
+<li>Plugins start in no fixed order, so check <code>has(id)</code> or listen for the <code>&quot;commands&quot;</code> event
+before calling another plugin&#39;s.</li>
+</ul>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Every command other plugins offer.</span>
+<span class="k">for</span> (<span class="k">const</span> c <span class="k">of</span> api.commands.list()) <span class="k">if</span> (c.pluginId !== api.plugin.id) api.log(c.id, c.title, c.enabled ? <span class="s">&quot;&quot;</span> : <span class="s">&quot;(disabled)&quot;</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1LYtBDgIhEATvvqLlBImZvWs2njz4DGRgnYRlNoAm_t7IeuuuVE0Tbu9YPwi6rr4wtD9jxZZfi5QGTSlWOiStsEFL6wjQBL8J_YNGWVq3zkESbKC9vDOO8zy8HZCwGzfrYgMJnxCoS8_xN2LxjxwZVxiDM4xlaYM44y5f" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apiservices"><code>api.services</code><a class="anchor" href="#apiservices" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/services/">Reference</a></p>
+<p>A command is one action; a service is an object to share, such as an account, a server
+connection or a compiler. One plugin provides it by name and others reach it by that name,
+whichever starts first.</p>
+<ul>
+<li><code>provide(name, object, { version })</code> holds the object out. Names follow the command
+rule.</li>
+<li><code>watch(name, fn)</code> calls you at once with the object or null, and again whenever the
+provider arrives, changes or goes. Prefer it to <code>get(name)</code>, which answers only for now.
+<code>has(name)</code> and <code>list()</code> say what is provided.</li>
+<li>The object&#39;s shape is up to the provider. Publish a <code>contract.d.ts</code> in the provider&#39;s
+repository for consumers to import with <code>import type</code>, and pass a <code>version</code> so consumers
+can check it.</li>
+</ul>
+<p>The scmjs.dev plugin provides its account this way as <code>scmjs-dev.account</code>, and TrigScript
+its build as <code>trigscript.build</code>.</p>
+<h2 id="apisync"><code>api.sync</code><a class="anchor" href="#apisync" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/sync/">Reference</a></p>
+<p>Editing a map together. The editor turns each change to the map into an <em>op</em> (plain JSON)
+and applies other people&#39;s ops in the order a server gives. Your plugin carries them
+between the two. The scmjs.dev plugin&#39;s shared maps are built on this.</p>
+<p>This example needs a server of your own, so it has no Try it link:</p>
+<pre><code class="language-ts"><span class="k">const</span> session = api.sync.start({
+  send: (op) =&gt; socket.send(JSON.stringify({ <span class="k">type</span>: <span class="s">&quot;op&quot;</span>, op })),
+  onEnd: (reason) =&gt; leaveRoom(reason),
+  onApplied: (report) =&gt; { <span class="k">if</span> (report.dropped &gt; <span class="n">0</span>) showNotice(<span class="s">`${report.dropped} changes no longer applied`</span>); },
+});
+socket.onmessage = (m) =&gt; {
+  <span class="k">const</span> msg = JSON.parse(m.data);
+  <span class="k">if</span> (msg.<span class="k">type</span> === <span class="s">&quot;ack&quot;</span>) session?.confirm();      <span class="c">// the server accepted our oldest op</span>
+  <span class="k">if</span> (msg.<span class="k">type</span> === <span class="s">&quot;op&quot;</span>) session?.receive(msg.op); <span class="c">// someone else&#39;s, in the server&#39;s order</span>
+};
+</code></pre>
+<p><strong>The server&#39;s job is small:</strong> put everyone&#39;s ops in one order, confirm each to its
+sender, and pass it on to the others. It never needs to read the map.</p>
+<p><strong>The editor does the rest.</strong> Your own ops apply at once. If someone else&#39;s arrives before
+the server has confirmed yours, the editor undoes yours, applies theirs and reapplies
+yours, so every editor ends with the same map. Changes find their objects by content, so
+an edit to a unit someone else deleted is dropped; <code>onApplied</code> reports how many.</p>
+<ul>
+<li><code>start</code> answers null when no map is open or another session is already running.
+<code>current()</code> is the running session, whichever plugin started it.</li>
+<li>Incoming ops wait while the user holds a mouse button on the map, while a dialog that
+edits the map is open, or while another map is in front (<code>holding()</code> says which).</li>
+<li><code>snapshot()</code> is the map as a file for people joining. It is null while anything is
+pending.</li>
+<li>One session runs at a time. It ends on <code>stop()</code>, when the map closes, or when the plugin
+is turned off. If the server rejects one of your ops, end the session: your copy no
+longer matches.</li>
+</ul>
+<h2 id="apiterrain"><code>api.terrain</code><a class="anchor" href="#apiterrain" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/terrain/">Reference</a></p>
+<p>Read-only help with the current tileset: the terrains that can be painted (<code>types</code>,
+<code>isomTypes</code>), what a tile is (<code>tileInfo</code>, <code>terrainAt</code>, <code>color</code>, <code>heightOf</code>), the ISOM
+lattice (<code>diamondAt</code>, <code>diamondsIn</code>), <code>floodRegion</code> and <code>blendCandidates</code>. Also the Terrain
+palette&#39;s current brush (<code>active</code> / <code>setActive</code>) and Tools ▸ Symmetry (<code>symmetry</code> /
+<code>setSymmetry</code>, <code>mirror</code>).</p>
+<p><code>checkIsom()</code> measures how well the ISOM lattice matches the tiles. Offer a rebuild when
+it reports <code>stale</code>, not merely <code>mismatched</code>: some mismatch (hand-placed tiles, blends)
+never goes away.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> report = <span class="k">await</span> api.terrain.checkIsom();
+<span class="k">if</span> (report?.stale &amp;&amp; (<span class="k">await</span> api.ui.confirm(<span class="s">&quot;The isometric data is out of step with the tiles. Rebuild it?&quot;</span>))) {
+  api.document.edit(<span class="s">&quot;Rebuild ISOM&quot;</span>, (tx) =&gt; { tx.rebuildIsom(); });
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1RY5NCsIwGET3PcXQRUlAcgFR1y5EUC8Q06_0w7YpyZQKpXcX_MH1e2-YEIdMJBljInbws1fCj-ooKXkdXGglPI459sZuC21gPu7BZfpOUFUw_2hSF-LQaOpNeWsFmmMvTBpQe3poRpyI2CBTRszKFmwF1E6yw0Xuk3Y1lIfSWoulwHu1jmHqZaCTWmnKn3a8nk_lBoZPi90eC_h06cO-f7HabbG-AA" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apitileset"><code>api.tileset</code><a class="anchor" href="#apitileset" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/tileset/">Reference</a></p>
+<p>The open map&#39;s tileset: <code>id()</code>, <code>name()</code>, <code>isLoaded()</code>, <code>load()</code> and <code>raw()</code> for the
+decoded data. <code>load()</code> resolves <code>false</code> when the graphics were never installed, which is a
+normal state. <code>load(&quot;jungle&quot;)</code> fetches another tileset without changing the map, which
+<code>graphics.renderClip</code> needs to draw a clip from a map on that tileset.</p>
+<h2 id="apiselection"><code>api.selection</code><a class="anchor" href="#apiselection" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/selection/">Reference</a></p>
+<p>The marked area (<code>markedArea</code> / <code>markArea</code>), the selected units, sprites, doodads and
+locations (by index, with a setter for each), the active layer, and the Layers panel&#39;s
+locks. Listen for the <code>&quot;selection&quot;</code> event to follow what the user selects.</p>
+<h2 id="apiclipboard"><code>api.clipboard</code><a class="anchor" href="#apiclipboard" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/clipboard/">Reference</a></p>
+<p>The Cut / Copy / Paste layer, sharing the user&#39;s clipboard: <code>copy</code>, <code>cut</code>, <code>paste</code>, <code>clip</code>
+/ <code>setClip</code>, and the parts and paste mode. A <code>Clip</code> can be pasted into another map.
+<code>capture()</code> returns what <code>copy</code> would take without touching the user&#39;s clipboard, for a
+plugin that keeps its own clips, like Stamp Library.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Take the top-left 8 × 8 tiles without touching the user&#39;s clipboard,</span>
+<span class="c">// and stamp them twice in one undo entry.</span>
+<span class="k">const</span> clip = api.clipboard.capture({ rect: { x0: <span class="n">0</span>, y0: <span class="n">0</span>, x1: <span class="n">8</span>, y1: <span class="n">8</span> } });
+<span class="k">if</span> (clip) {
+  api.ui.status(api.clipboard.summary(clip));
+  api.document.edit(<span class="s">&quot;Stamp twice&quot;</span>, (tx) =&gt; {
+    tx.paste(clip, <span class="n">8</span>, <span class="n">0</span>);
+    tx.paste(clip, <span class="n">16</span>, <span class="n">0</span>);
+  });
+}
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1ZY9BTsMwEEX3OcVXNyRS6qQbFKUql4ALGGdKLBrbssdqoijn4EBcDNkBJMTqL_6bpz9Ngxf5TuCRwNYdb3RldPj8QAfWNwq4ax5tZLCNatTmLaMxkH8IUDftXq30Q100DaQZEFhOLiET-K4VQRtYQ4hmsCDDfhGFsiZwvsUF0mnxqxFKOo6eyhWeFPdYMbc92hrLHvOpR1djSYENW3Uu9BVlElRYC2Rd1CKw5BjKv_IQp0n6Zaer8zc9WBUnMixo0FwenvcH0vZDjZLnCpenrAZ4Fk4Gpmyo05A2a_41p8efKi3cvgA" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apiexchange"><code>api.exchange</code><a class="anchor" href="#apiexchange" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/exchange/">Reference</a></p>
+<p>The formats behind File ▸ Import / Export: SCMDraft&#39;s <code>.trg</code> trigger files (<code>encodeTrg</code> /
+<code>decodeTrg</code>) and the tab-separated strings file (<code>formatStrings</code> / <code>parseStrings</code>).</p>
+<h2 id="apipalette"><code>api.palette</code><a class="anchor" href="#apipalette" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/palette/">Reference</a></p>
+<p>What the Units, Sprites, Doodads and Fog palettes have picked and what they list, so a
+plugin can use &quot;whatever the user chose&quot; without a picker of its own. Paint does this. It
+also holds the placement rules (collision, terrain, snap to grid, remove stranded units)
+that <code>placeUnit</code>, <code>canPlaceUnit</code> and <code>query.placement</code> follow. The Terrain palette&#39;s pick
+is <code>terrain.active()</code>.</p>
+<h2 id="apinames"><code>api.names</code><a class="anchor" href="#apinames" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/names/">Reference</a></p>
+<p>The names behind the numbers in a map: units, upgrades, techs, weapons, player types,
+races, player groups, trigger types and AI scripts from the game (with a mod&#39;s own names
+under a mod&#39;s data set, see <a href="/game-data/data-sets/#names">docs/game-data.md</a>), and strings,
+locations, switches, players and tiles from the open map. The list forms return
+<code>{ value, label }[]</code> for a drop-down.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// How many of each unit type the map has, by name.</span>
+<span class="k">const</span> counts = <span class="k">new</span> Map&lt;<span class="k">string</span>, <span class="k">number</span>&gt;();
+<span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> api.document.scenario()?.units ?? []) {
+  <span class="k">const</span> name = api.names.unit(u.unitId);
+  counts.set(name, (counts.get(name) ?? <span class="n">0</span>) + <span class="n">1</span>);
+}
+api.log([...counts].sort((a, b) =&gt; b[<span class="n">1</span>] - a[<span class="n">1</span>]));
+
+<span class="c">// A list form, straight into a drop-down.</span>
+<span class="k">const</span> upgrade = api.ui.widgets.select(api.names.upgrades());
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1TZDBboQwDETv-Yo5Jiobume6i3prD_0CxMFAFiJBghJHCFX99yrQlXqyZT3PjF2W-PAbFnI7_AOG-gnJWQbvqwFPBgutmCgW6HY4WowWvXeR0fvkOOIGZzZ80foWOVg3FnBp6Uy4S1WJhw-QJ56yPK1WD75Pi3GsY28cBeulqnW2jKhrNK3CtwDOpeyH27GW23hwMh3lc1DVAeYYOhqWGSmy3zEZ_yYqy74qvOCqKvEjstjsR9lorU-01dEHlpIKdAq3O7rm2uICaq6tUpUQZYl3zDYyHj4sBSIHsuPEsI49CEPw62Xwm3v-Jq1joOEZPVm92WE0R8zZ9Cz_HXSSUSpV_QI" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apitext"><code>api.text</code><a class="anchor" href="#apitext" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/text/">Reference</a></p>
+<p>StarCraft&#39;s text control codes (bytes 0x01–0x1F, written <code>&lt;XX&gt;</code>), from the same table the
+String Editor uses. Use it rather than your own copy: the numbering is easy to get wrong.</p>
+<ul>
+<li><code>codes()</code> lists every code; <code>runs(text)</code> splits a string into coloured runs the way the
+game draws it; <code>plain(text)</code> removes the codes.</li>
+<li><strong>Colour carried across lines.</strong> The original game reset the colour at each line break;
+Remastered carries it on. <code>bleedingLines</code> finds lines that now draw in a colour their
+author did not choose, and <code>fixBleeding</code> fixes them without changing the text.</li>
+<li><strong>Stacked text.</strong> The original game drew <code>Name&lt;12&gt;by Author</code> as two pieces on one line;
+Remastered does not. <code>stackedLines</code> finds these lines and <code>flattenStacks</code> lays them out
+left to right. The original look cannot be restored, so offer this repair rather than
+applying it by default.</li>
+</ul>
+<p>Repair&#39;s string checks are these functions over <code>api.query.strings()</code>.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Every string in the map as the game would draw it, one coloured span per run.</span>
+<span class="k">const</span> lines = api.query.strings().flatMap((s) =&gt; (s ? api.text.runs(s) : []));
+api.ui.dialog({
+  title: <span class="s">&quot;Strings as the game draws them&quot;</span>,
+  mount(body) {
+    body.style.background = <span class="s">&quot;#000&quot;</span>;
+    <span class="k">for</span> (<span class="k">const</span> line <span class="k">of</span> lines.slice(<span class="n">0</span>, <span class="n">40</span>)) {
+      body.append(api.ui.el(<span class="s">&quot;div&quot;</span>, {}, ...line.runs.map((run) =&gt; api.ui.el(<span class="s">&quot;span&quot;</span>, { style: { color: run.color } }, run.text))));
+    }
+  },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1VVA9T8MwFNzzK05hsaXIzcCUqjAxMjEiBjd-DRaObfzREkX578huEbDd07t37-52OzydKSyIKWg7QVukd8IsPWSscJIz4eKyUVBBXqBTB2cJozMuB1KIXlp4CgjZimZ0NiYYbSniAOm1-MwUFnHVj4yLk5HpWXrGIsfhASzisfISfSURso1lMeD1jfN9UxZZC6WlcRNbGyDpZGhA-3IV_GezGKzj3HYNMLtsEzs6tXCUU6BgEdNiSBzl-DEFl63CAe1d3_ftvnJOLoD9xoA7XeOIaPRIrO9w3_MfwZuk9J6sYje3ZFir9LntsG4dhBDlvkYTcwkesq3R_9BLiYWPam7AWvsNQy21QmzYujqWojgv7ZT_WwNsXbPx_Tc" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="apiui"><code>api.ui</code><a class="anchor" href="#apiui" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/ui/">Reference</a></p>
+<p>Everything a plugin shows: messages and questions, dialogs, panels, status items, map
+buttons, preferences pages, dialog slots, map tools, overlays, picks, file types, map
+views, widgets and tooltips. <a href="/plugins/putting-things-on-screen/">Putting things on screen</a> covers
+each in turn. Two calls fit nowhere else:</p>
+<ul>
+<li><code>saveFile(data, fileName)</code> writes a file the way the editor&#39;s own exports do, and
+<code>loadImage</code> / <code>readClipboardImage</code> read pictures.</li>
+<li><code>repaint()</code> asks the map view to repaint, for a plugin that changes what its own drawing
+shows. A transaction repaints by itself.</li>
+</ul>
+<h2 id="apimenu-apicontextmenu-apihotkeys"><code>api.menu</code> / <code>api.contextMenu</code> / <code>api.hotkeys</code><a class="anchor" href="#apimenu-apicontextmenu-apihotkeys" aria-label="Link to this section">#</a></h2>
+<p>References: <a href="https://docs.scmjs.dev/api/menu/">menu</a>, <a href="https://docs.scmjs.dev/api/context-menu/">context
+menu</a>,
+<a href="https://docs.scmjs.dev/api/hotkeys/">hotkeys</a></p>
+<p>Menu items, right-click entries and keys. The rules are in <a href="/plugins/putting-things-on-screen/#menus-context-menus-and-hotkeys">Menus, context menus and
+hotkeys</a>.</p>
+<h2 id="apii18n"><code>api.i18n</code><a class="anchor" href="#apii18n" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/i18n/">Reference</a></p>
+<p>Translating your plugin the way the editor translates itself: <code>register</code> your catalogues,
+then <code>t(text, params)</code> translates. <a href="/plugins/writing-a-plugin/#translating">Translating</a> shows the pattern the
+project&#39;s plugins follow.</p>
+<ul>
+<li><code>tc(context, text, params)</code> translates identical English meant two ways.</li>
+<li>Placeholders are a subset of ICU MessageFormat: <code>{name}</code>, <code>plural</code> and <code>select</code>. For
+Korean, <code>{name|을}</code> picks the particle that agrees with the value (을/를, 이/가, 은/는, 과/와,
+으로/로).</li>
+<li><code>language</code> is the current language (<code>&quot;en&quot;</code>, <code>&quot;ko&quot;</code>). The <code>&quot;language&quot;</code> event fires when
+it changes, so you can relabel what is showing.</li>
+</ul>
+<h2 id="apievents"><code>api.events</code><a class="anchor" href="#apievents" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/events/">Reference</a></p>
+<p><code>on(event, fn)</code> listens for a change. <a href="/plugins/core-concepts/#events">Events</a> in Core concepts lists every event
+and the rules listeners follow.</p>
+<h2 id="apistorage"><code>api.storage</code><a class="anchor" href="#apistorage" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/storage/">Reference</a></p>
+<p><code>get(key, fallback)</code>, <code>set(key, value)</code> and <code>remove(key)</code> keep JSON in the browser under
+your plugin&#39;s id. <code>set</code> returns <code>false</code> when the browser refuses (the quota is a few
+megabytes for the whole editor), so a plugin storing the user&#39;s work can say so. Users can
+see and clear your keys in Preferences ▸ Storage, so never keep the only copy of something
+there.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> runs = api.storage.get(<span class="s">&quot;runs&quot;</span>, <span class="n">0</span>) + <span class="n">1</span>;
+<span class="k">const</span> kept = api.storage.set(<span class="s">&quot;runs&quot;</span>, runs);
+api.log(kept ? <span class="s">`run number ${runs}`</span> : <span class="s">&quot;the browser&#39;s storage is full&quot;</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1XczNCsIwEATge59iCEIblNJeDeKr9Ic1Lcak7G7wIL67pHgQTwMzHzOnKArOUXDBuK2taOLRU-tJG1N6c0JncUTvqnnHd9r0D8sPLmFdVeaQfLPrKwbOETE_JmIcXsW8B5xhdCFMnJ5CXAu-f1gFtxyCse4D" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>For data that belongs to one map, use <code>document.extras</code> instead, so it travels with the
+file.</p>
+<h2 id="apiscope"><code>api.scope()</code><a class="anchor" href="#apiscope" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/#root">Reference</a></p>
+<p>A child of your <code>api</code> that can be removed as a whole. Everything registered through
+<code>scope.api</code> (menu items, hotkeys, listeners, panels, dialogs, overlays, map tools,
+commands, services) is removed when you call <code>scope.dispose()</code>, and the plugin&#39;s own
+registrations stay. After the dispose, writes to the map through <code>scope.api</code> are refused,
+as they are for a plugin that has been turned off. Scopes can contain scopes, and turning
+the plugin off removes every scope it made.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// A mode the user turns on and off: its menu item and listener come and go together.</span>
+<span class="k">let</span> mode: ReturnType&lt;<span class="k">typeof</span> api.scope&gt; | <span class="k">null</span> = <span class="k">null</span>;
+
+api.menu.add(<span class="s">&quot;Tools&quot;</span>, {
+  label: <span class="s">&quot;Toggle Watch Mode&quot;</span>,
+  run: () =&gt; {
+    <span class="k">if</span> (mode) {
+      mode.dispose();
+      mode = <span class="k">null</span>;
+      <span class="k">return</span>;
+    }
+    mode = api.scope();
+    mode.api.menu.add(<span class="s">&quot;Tools&quot;</span>, { label: <span class="s">&quot;Watch Mode is on&quot;</span>, enabled: () =&gt; <span class="k">false</span> });
+    mode.api.events.on(<span class="s">&quot;commit&quot;</span>, (e) =&gt; api.log(<span class="s">&quot;changed:&quot;</span>, e.label));
+  },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1dZDBasMwEETv-opBJxmMc7ebQD-gl2DoWbHWskDWGksuhNb_XqQ0aSj0tOzs7sxjDwe8YmZDSBNhi7QibWuI4AAdDHgcW7gUMVPY4BLNRfYuJgq0YuCZimIZiS2lidZGeErFtMWZsl1_XeglXRfiEXpxTRx4oRO-EDbvcSylEyKPck6jjVGyZ_ZR1vgUgNcX8i1kz9Z6wrtOw4Q3NiRrAaxbaKEqHE9lGXAjVM6vfnoUmsa4uHAkVXVP6iP-Jq0F-Nbt4mnpwX0_L5b_ID-Af0nh8lNlDQr64snciUftI2H_a0ofFFJsOCg58Dy7JGsoKhd57NkqOUw6WDJtNm1KYlVs9lrsVfcN" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p>A scope uses the plugin&#39;s own id, storage and name in the log. The API Playground runs
+each snippet in one. Timers and sockets are not registrations, so clear them yourself.</p>
+<h2 id="apiplugin-apiapiversion-apilog"><code>api.plugin</code>, <code>api.apiVersion</code>, <code>api.log(...)</code><a class="anchor" href="#apiplugin-apiapiversion-apilog" aria-label="Link to this section">#</a></h2>
+<p><a href="https://docs.scmjs.dev/api/#root">Reference</a></p>
+<p>Your plugin&#39;s <code>id</code>, <code>name</code> and <code>source</code>, the API version, and a logger. <code>log</code> writes to
+the browser console and to the editor&#39;s View ▸ Debug Console, which users copy into bug
+reports, so write lines someone else could follow.</p>
+<div class="code-try"><pre><code class="language-ts">api.log(<span class="s">`${api.plugin.name} (${api.plugin.id}) from ${api.plugin.source}, API ${api.apiVersion}`</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1SyzI1MvJT9dIUKlOLMjUK8gpTc_M08tLzE2tVdBAEctMqdVUSCvKz1VAES7OLy1KTq3VUXAM8ITKJBZkhqUWFWfm59UmaFoDAA" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#apidocument">api.document</a></li>
+<li><a href="#apidocumentsections">api.document.sections</a></li>
+<li><a href="#apidocumentbuildsteps">api.document.buildSteps</a></li>
+<li><a href="#edittransaction">EditTransaction</a></li>
+<li><a href="#updatetransaction">UpdateTransaction</a></li>
+<li><a href="#apisettings">api.settings</a></li>
+<li><a href="#apitriggers">api.triggers</a></li>
+<li><a href="#apiquery">api.query</a></li>
+<li><a href="#apiview">api.view</a></li>
+<li><a href="#apidata">api.data</a></li>
+<li><a href="#apigamedata">api.gameData</a></li>
+<li><a href="#apiconsts">api.consts</a></li>
+<li><a href="#apigraphics">api.graphics</a></li>
+<li><a href="#apicommands">api.commands</a></li>
+<li><a href="#apiservices">api.services</a></li>
+<li><a href="#apisync">api.sync</a></li>
+<li><a href="#apiterrain">api.terrain</a></li>
+<li><a href="#apitileset">api.tileset</a></li>
+<li><a href="#apiselection">api.selection</a></li>
+<li><a href="#apiclipboard">api.clipboard</a></li>
+<li><a href="#apiexchange">api.exchange</a></li>
+<li><a href="#apipalette">api.palette</a></li>
+<li><a href="#apinames">api.names</a></li>
+<li><a href="#apitext">api.text</a></li>
+<li><a href="#apiui">api.ui</a></li>
+<li><a href="#apimenu-apicontextmenu-apihotkeys">api.menu / api.contextMenu / api.hotkeys</a></li>
+<li><a href="#apii18n">api.i18n</a></li>
+<li><a href="#apievents">api.events</a></li>
+<li><a href="#apistorage">api.storage</a></li>
+<li><a href="#apiscope">api.scope()</a></li>
+<li><a href="#apiplugin-apiapiversion-apilog">api.plugin, api.apiVersion, api.log(...)</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

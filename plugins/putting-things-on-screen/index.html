@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Putting things on screen — scmJS StarCraft map editor</title>
+<meta name="description" content="Everything a plugin shows goes through api.ui, plus the menu, context-menu and hotkey groups. There is no UI framework:">
+<meta property="og:title" content="Putting things on screen — scmJS StarCraft map editor">
+<meta property="og:description" content="Everything a plugin shows goes through api.ui, plus the menu, context-menu and hotkey groups. There is no UI framework:">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/plugins/putting-things-on-screen/">
+<meta property="og:url" content="https://docs.scmjs.dev/plugins/putting-things-on-screen/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="here" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Putting things on screen</h1>
+<p>Everything a plugin shows goes through <a href="https://docs.scmjs.dev/api/ui/"><code>api.ui</code></a>, plus
+the menu, context-menu and hotkey groups. There is no UI framework: a dialog or panel
+hands you an empty element, and you fill it with plain DOM, using <code>api.ui.widgets</code> for
+controls in the editor&#39;s own style.</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Call</th>
+<th>Use it for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/plugins/putting-things-on-screen/#messages-and-questions">Status line, notices, questions</a></td>
+<td><code>status</code>, <code>toast</code>, <code>confirm</code>, <code>alert</code>, <code>prompt</code></td>
+<td>A line of feedback, or a simple question.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#dialogs">Dialog</a></td>
+<td><code>dialog(spec)</code></td>
+<td>A form or workspace that covers the map until closed.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#panels">Panel</a></td>
+<td><code>panel(spec)</code></td>
+<td>Something kept open while the user works: floating, docked right, or in a strip under the map.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#status-items-and-map-buttons">Status item, map button</a></td>
+<td><code>statusItem(spec)</code>, <code>mapButton(spec)</code></td>
+<td>Something that stays visible without a panel.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#preferences-pages">Preferences page</a></td>
+<td><code>preferencesPage(spec)</code></td>
+<td>Your plugin&#39;s settings.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#dialog-slots">Dialog slot</a></td>
+<td><code>dialogSlot(id, spec)</code></td>
+<td>A button or row in a built-in dialog&#39;s footer.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#map-tools">Map tool</a></td>
+<td><code>mapTool(spec)</code></td>
+<td>Taking over the pointer on the map.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#overlays">Overlay</a></td>
+<td><code>overlay(spec)</code></td>
+<td>A drawing over the map the user switches on and off.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#picking-on-the-map">Picks</a></td>
+<td><code>pickArea</code>, <code>pickTile</code>, <code>pickObject</code>, <code>pickFiles</code></td>
+<td>Asking the user to choose something.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#file-types">File type</a></td>
+<td><code>fileType(spec)</code></td>
+<td>Opening a kind of file the editor does not.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#map-views">Map view</a></td>
+<td><code>mapView(spec)</code></td>
+<td>Another way to look at a map, in the map&#39;s place.</td>
+</tr>
+<tr>
+<td><a href="/plugins/putting-things-on-screen/#menus-context-menus-and-hotkeys">Menus and keys</a></td>
+<td><code>menu.add</code>, <code>contextMenu.add</code>, <code>hotkeys.add</code></td>
+<td>Reaching your plugin&#39;s commands.</td>
+</tr>
+</tbody></table>
+<p><img src="/images/plugin-surfaces.webp" alt="The editor with plugin UI in five places, numbered"></p>
+<p>Where the main pieces appear: a menu item (1), a floating panel (2), a docked panel (3), a
+status bar cell (4) and a map button (5). The icon beside each is the plugin&#39;s own.</p>
+<h2 id="messages-and-questions">Messages and questions<a class="anchor" href="#messages-and-questions" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong><code>status(text)</code></strong> sets the status bar line, and <code>statusText()</code> reads it back.</li>
+<li><strong><code>toast({ kind, title, detail })</code></strong> shows a notice over the map that goes away by
+itself. It is how Save reports.</li>
+<li><strong><code>confirm</code>, <code>alert</code> and <code>prompt</code></strong> ask simple questions in the editor&#39;s style.
+<code>confirm</code> resolves <code>false</code> and <code>prompt</code> resolves <code>null</code> when the user cancels.</li>
+<li><strong><code>open(id, payload)</code></strong> opens one of the editor&#39;s own dialogs, such as <code>&quot;preferences&quot;</code>
+or <code>&quot;validateMap&quot;</code>. <strong><code>ask(id)</code></strong> does the same for a dialog that answers (<code>&quot;newMap&quot;</code>,
+<code>&quot;saveAs&quot;</code>, <code>&quot;confirmClose&quot;</code>) and resolves <code>true</code> when the user went through with it.
+<code>openDialogs()</code> lists what is open now.</li>
+</ul>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// File ▸ New&#39;s own dialog, then a word about what came of it.</span>
+<span class="k">if</span> (<span class="k">await</span> api.ui.ask(<span class="s">&quot;newMap&quot;</span>)) api.ui.toast({ kind: <span class="s">&quot;ok&quot;</span>, title: <span class="s">&quot;New map&quot;</span>, detail: api.document.info()?.name });
+<span class="k">else</span> api.ui.status(<span class="s">&quot;No new map made.&quot;</span>);
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1NY2xbcMwEEV7T_HBxiQg0L1cpEsX7XAxT9ZBFE8IT2AReA3P4nk8iZEYah_w3jud8CmZ8bw_MHA7VmgrSEJZrx1s4gJC058E-tbN0CYyXGhh6AixeJARnhqJgVaJm0Sqs3eF2xetLoSdmlI1_4tZSurhdHYdTCxzDzdww0Kr65DYSHL_LyW9bAsXi1JG9eEjlr_rLZwPnCvv3WpkW_VuUJR3Bgslji6cXw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="building-content">Building content<a class="anchor" href="#building-content" aria-label="Link to this section">#</a></h2>
+<p><code>api.ui.widgets</code> builds controls that look like the editor&#39;s own, as plain DOM elements:</p>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>button</code>, <code>checkbox</code></td>
+<td>A button (with <code>primary</code> and <code>busy</code>), a labelled checkbox.</td>
+</tr>
+<tr>
+<td><code>text</code>, <code>number</code>, <code>select</code></td>
+<td>Input fields and a drop-down.</td>
+</tr>
+<tr>
+<td><code>segmented</code></td>
+<td>A few buttons of which one is on, for a short choice that should stay in view.</td>
+</tr>
+<tr>
+<td><code>tabs</code></td>
+<td>A row of tabs over a panel each. A tab is filled the first time it is shown and kept after.</td>
+</tr>
+<tr>
+<td><code>form</code></td>
+<td>A two-column grid of labelled fields.</td>
+</tr>
+<tr>
+<td><code>group</code>, <code>row</code>, <code>column</code>, <code>separator</code></td>
+<td>A titled box, and layout.</td>
+</tr>
+<tr>
+<td><code>hint</code></td>
+<td>Small dimmed explanatory text.</td>
+</tr>
+<tr>
+<td><code>list</code></td>
+<td>A list of rows with a label and hint, picked with a click.</td>
+</tr>
+<tr>
+<td><code>spinner</code>, <code>progressBar</code>, <code>skeleton</code>, <code>busy</code>, <code>statusLine</code>, <code>steps</code>, <code>fold</code></td>
+<td>Waiting and work in progress; see <a href="/plugins/putting-things-on-screen/#showing-that-work-is-in-progress">Showing that work is in progress</a>.</td>
+</tr>
+</tbody></table>
+<p><code>api.ui.el(tag, props, ...children)</code> makes any other element. The <a href="https://docs.scmjs.dev/api/ui/#widgetsapi"><code>WidgetsApi</code>
+reference</a> has each widget&#39;s options.</p>
+<p><strong>Tooltips.</strong> <code>api.ui.tooltip(element, content)</code> puts the editor&#39;s own tooltip on an
+element of yours. The content is a line of text, or a function that builds what to show
+where the pointer is. A function is called again as the pointer moves, so a chart can say
+what is under it; return null to show nothing at that spot. Leave out the element&#39;s
+<code>title</code>, or the browser&#39;s tooltip shows as well. See <a href="https://docs.scmjs.dev/api/ui/#tooltip">the example in the
+reference</a>.</p>
+<h2 id="dialogs">Dialogs<a class="anchor" href="#dialogs" aria-label="Link to this section">#</a></h2>
+<p>A dialog is modal and covers the map. <code>mount(body, handle)</code> fills an empty element; the
+rest of the spec is optional:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>size</code></td>
+<td><code>&quot;sm&quot;</code>, <code>&quot;md&quot;</code>, <code>&quot;lg&quot;</code>, <code>&quot;xl&quot;</code> or <code>&quot;full&quot;</code>.</td>
+</tr>
+<tr>
+<td><code>tall</code></td>
+<td>A fixed height instead of the content&#39;s own, for a body that scrolls or fills.</td>
+</tr>
+<tr>
+<td><code>buttons</code></td>
+<td>The footer, left to right. Left out, a single Close; an empty list removes the footer. A button&#39;s <code>run</code> may return <code>false</code> to keep the dialog open.</td>
+</tr>
+<tr>
+<td><code>flush</code></td>
+<td>The body runs edge to edge, for content that draws its own frame.</td>
+</tr>
+<tr>
+<td><code>onPaste</code>, <code>onDrop</code></td>
+<td>Files and text pasted into the dialog or dropped on it.</td>
+</tr>
+<tr>
+<td><code>keepOpenOnEscape</code></td>
+<td>Keep the dialog open when Esc was meant for something inside it, such as a code editor&#39;s popup.</td>
+</tr>
+<tr>
+<td><code>slot</code></td>
+<td>Offer a slot of your own for other plugins to add to; see <a href="/plugins/putting-things-on-screen/#dialog-slots">Dialog slots</a>.</td>
+</tr>
+</tbody></table>
+<p>The handle <code>mount</code> receives can <code>close()</code>, <code>setTitle()</code> and <code>setBusy(label)</code>.</p>
+<p>To pick something on the map from a dialog, close it, pick, and reopen it with the result,
+as Terrain from Image does. The dialog covers the map, so a pick cannot run while it is
+open.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> w = api.ui.widgets;
+<span class="k">const</span> owner = w.select(<span class="k">Array</span>.<span class="k">from</span>({ length: <span class="n">8</span> }, (_, slot) =&gt; ({ value: slot, label: api.names.player(slot) })));
+<span class="k">const</span> count = w.<span class="k">number</span>({ value: <span class="n">4</span>, min: <span class="n">1</span>, max: <span class="n">12</span> });
+
+api.ui.dialog({
+  title: <span class="s">&quot;Place marines&quot;</span>,
+  size: <span class="s">&quot;sm&quot;</span>,
+  mount: (body) =&gt; body.append(
+    w.form([{ label: <span class="s">&quot;Player&quot;</span>, field: owner }, { label: <span class="s">&quot;How many&quot;</span>, field: count }]),
+    w.hint(<span class="s">&quot;They are placed in a row from the middle of the view.&quot;</span>),
+  ),
+  buttons: [
+    { label: <span class="s">&quot;Cancel&quot;</span> },
+    {
+      label: <span class="s">&quot;Place&quot;</span>,
+      primary: <span class="k">true</span>,
+      run: () =&gt; {
+        <span class="k">const</span> view = api.view.visible();
+        <span class="k">const</span> t = api.consts.tile;
+        <span class="k">const</span> y = ((view.y0 + view.y1) / <span class="n">2</span>) * t;
+        <span class="k">const</span> x = ((view.x0 + view.x1) / <span class="n">2</span>) * t;
+        api.document.edit(<span class="s">&quot;Place marines&quot;</span>, (tx) =&gt; {
+          <span class="k">for</span> (<span class="k">let</span> i = <span class="n">0</span>; i &lt; Number(count.value); i++) tx.placeUnit(<span class="n">0</span>, Number(owner.value), x + i * t, y);
+        });
+      },
+    },
+  ],
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1bVJNi9swEL37Vzx8khqhJksPxW4KpZeeSg_taVmKYk8SgT6MLMd2g_97sexslrAXSTN6b-bNR-VdG9FjD9Vo2WnZ6_pEsS2zKv343lHAHr1syVAV2bcQ1CiPwVt2hSF3iucCnzEJsL8CrfGRY_8V7IqLMh0VySVg1IFMkZI4ZamVjVEjBbYQJs75LWPlOxdTRtfZA4V7pE8CVrsCOwGrhgK7J0y8zLJVea2V8Sd2zYCoo6EC-S-jKoJVQTtqc5EBrf43f7Q2WXbOVYAdfD0m2fNDqqYhV7MMAHp59MGy5-utgjnmSCEXOGoydbF2aBK4Q374Hla58Q5aippeuFijnrWLLP99phEqEJpZaA3toBB8j7m_iGeC1XVtCP6YrIumXuYpSDoOXYzetQWeU9i7gu_KVWRyTEu-azrxtoaKcrF6m6CtCmOBGDq6OUPnCrDUlBsbWCY0q1gXJgm66FYfDDFePgDjikpWK6M29AgZsQdjKcy4xWapcNxxfMQTxwfER8JwJwyvhOFdwpy69lVnyUVJtY7scSHA4vBQInD0AcxQhMYe2xIaX_BzWcU0RpnWkZfQmw1HHGQa3h-nI9uKGzJtxYoUGLCBnsUJjG-6NL2-1zml60VkEy__Aw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p><img src="/images/plugin-dialog.webp" alt="The Place marines dialog: a Player drop-down, a How many field, a hint, and Cancel and Place buttons"></p>
+<h2 id="panels">Panels<a class="anchor" href="#panels" aria-label="Link to this section">#</a></h2>
+<p>A panel blocks nothing: the user keeps editing while one is open. Its <code>mount</code> works as a
+dialog&#39;s does, and it closes with its × or <code>handle.close()</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>dock</code></td>
+<td><code>&quot;float&quot;</code> (the default) over the map; <code>&quot;right&quot;</code> in the dock under the built-in panels, for anything kept open while working; <code>&quot;bottom&quot;</code> in a strip under the map, as wide as the map, for a timeline or a console.</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>Floating only, in CSS pixels; 260 by default.</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>Floating: a fixed height, so the body scrolls. Bottom dock: the strip&#39;s starting height, which the user then drags.</td>
+</tr>
+<tr>
+<td><code>resizable</code></td>
+<td>Floating only: a grip at the bottom-right corner.</td>
+</tr>
+<tr>
+<td><code>maximizable</code></td>
+<td>Floating only: a button in the title strip, or a double-click on it, makes the panel fill the map&#39;s area and puts it back.</td>
+</tr>
+<tr>
+<td><code>grow</code></td>
+<td>Docked right: take the dock&#39;s spare height.</td>
+</tr>
+<tr>
+<td><code>flush</code></td>
+<td>Floating only: the body runs edge to edge.</td>
+</tr>
+<tr>
+<td><code>onClose</code></td>
+<td>Called when the panel closes, whichever way.</td>
+</tr>
+</tbody></table>
+<p>The handle has <code>isOpen()</code>, <code>setTitle()</code>, and <code>maximize()</code> / <code>isMaximized()</code> for a
+maximizable panel. <a href="/plugins/your-first-plugin/#step-2-show-it-in-a-panel">Step 2</a> of the tutorial and the <a href="/plugins/recipes/#a-problems-panel-that-follows-the-map">problems
+panel</a> recipe are worked examples.</p>
+<h2 id="status-items-and-map-buttons">Status items and map buttons<a class="anchor" href="#status-items-and-map-buttons" aria-label="Link to this section">#</a></h2>
+<p>These are for things that should stay visible without a panel, like a background job or an
+unread count.</p>
+<ul>
+<li><strong><code>statusItem(spec)</code></strong> is a cell of your own in the status bar: a line of text beside
+your plugin&#39;s icon, a spinner while <code>busy</code>, a warning colour with <code>warn</code>, and a click.</li>
+<li><strong><code>mapButton(spec)</code></strong> is a button in the row at the map&#39;s bottom-right corner, with an
+optional <code>badge</code> and <code>active</code> state. Use it sparingly; the row is small.</li>
+</ul>
+<p>Keep the handle and call <code>set(...)</code> as things change. See <a href="https://docs.scmjs.dev/api/ui/#statusitemspec">the status item
+example</a> in the reference.</p>
+<h2 id="preferences-pages">Preferences pages<a class="anchor" href="#preferences-pages" aria-label="Link to this section">#</a></h2>
+<p>A plugin&#39;s settings belong on a page of its own in Edit ▸ Preferences, listed under
+Plugins, rather than behind a menu item. One page per plugin.</p>
+<ul>
+<li><strong><code>mount(body)</code></strong> fills the page. It runs the first time the page is shown, and the page
+stays mounted until the dialog closes.</li>
+<li><strong><code>apply()</code></strong> is called on OK and Apply. Without it, write each setting to <code>api.storage</code>
+as it changes.</li>
+<li><strong><code>reset()</code></strong> is called by Reset to defaults while your page is the one showing.</li>
+</ul>
+<p><code>api.ui.open(&quot;preferences&quot;, { page: &quot;plugin:&lt;your id&gt;&quot; })</code> opens the dialog on your page.
+See <a href="https://docs.scmjs.dev/api/ui/#preferencespagespec">the example in the reference</a>.</p>
+<h2 id="dialog-slots">Dialog slots<a class="anchor" href="#dialog-slots" aria-label="Link to this section">#</a></h2>
+<p>A dialog slot adds a button or row to a built-in dialog&#39;s footer, or to another plugin&#39;s
+dialog that offers one. Your <code>mount</code> receives the dialog&#39;s fields: the form as the user
+sees it, not yet applied to the map. The slot can read a field and fill it in, and the
+user still presses OK.</p>
+<table>
+<thead>
+<tr>
+<th>Dialog id</th>
+<th>Fields it lends</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>mapProperties</code></td>
+<td><code>name</code>, <code>description</code></td>
+</tr>
+<tr>
+<td><code>triggerEditor</code>, <code>missionBriefing</code></td>
+<td><code>selected</code>, <code>modified</code></td>
+</tr>
+<tr>
+<td><code>stringEditor</code>, <code>playerSettings</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>trigedit.text</code> (TrigEdit&#39;s Text Trigger Editor)</td>
+<td><code>text</code></td>
+</tr>
+</tbody></table>
+<p><code>selected</code> is the index of the selected trigger as text (<code>&quot;&quot;</code> for none), and setting it
+selects a different row. <code>modified</code> is <code>&quot;1&quot;</code> while the dialog holds changes that have not
+been applied. Closing the dialog from a slot discards those changes, so ask first when it
+is set.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// A button in the Trigger Editor that shows the selected trigger as text.</span>
+api.ui.dialogSlot(<span class="s">&quot;triggerEditor&quot;</span>, {
+  mount(body, dlg) {
+    body.append(api.ui.widgets.button(<span class="s">&quot;As text&quot;</span>, { onClick: () =&gt; {
+      <span class="k">const</span> trigger = api.triggers.list()[Number(dlg.fields.selected.get())];
+      <span class="k">if</span> (trigger) <span class="k">void</span> api.ui.alert(api.triggers.text.one(trigger), { title: <span class="s">&quot;Trigger text&quot;</span> });
+    } }));
+  },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1VZDBasMwDIbveYqfnGwI7r2lgzJ27WW7jR2cWHXEXDvEyrox8u4jiVvYTZKlT5-12-GEdhJJERwhPeFtZO9pxItjSSOkt4Lcp1teXzMF6oQcpLTZDKFvMZUd2ExsHNuQ_GtIourSs5HqBr8VcE1TFNUm99PABa_XIrAUjB0Gik4V0o2dJ8lm01P1adu0cJDic-Ducw-lcXwqDKBLMctD7YiFVLJsAmdR-v08XVsalQveXJiCy-b-J-NJlNYfh0LjC1SZ1vhK7FDMbKBR1D_4eoMU6TGwWApLoD3q-0lXfcx6WzBj1ms4N9WsD38" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="map-tools">Map tools<a class="anchor" href="#map-tools" aria-label="Link to this section">#</a></h2>
+<p>A map tool receives every press, move and release on the map before the active layer does,
+and can draw a preview. Esc or a right-click stops it, and only one runs at a time. In
+<code>draw</code>, <code>view.x(px)</code> and <code>view.y(py)</code> turn map pixels into canvas pixels, and
+<code>view.tilePx</code> is the size of a tile on screen at the current zoom.</p>
+<p><img src="/images/plugin-map-tool.webp" alt="The Drop marines tool running: two marines placed, a ring under the pointer, and the tool&#39;s name and hint in the status bar"></p>
+<p>The picture shows <a href="https://docs.scmjs.dev/api/ui/#maptoolspec">the reference&#39;s example</a>
+running. <a href="/plugins/recipes/#a-brush-of-your-own">A brush of your own</a> is a fuller one, and Paint is the
+plugin to read.</p>
+<h2 id="overlays">Overlays<a class="anchor" href="#overlays" aria-label="Link to this section">#</a></h2>
+<p>An overlay draws over the map while the user works on any layer, and never takes the
+pointer. Each one is a tick in the View menu and a row in the Layers panel. <code>above</code> sets
+where it draws: over the terrain (the default) or over the objects. Call <code>redraw()</code> on the
+handle when what it shows changes.</p>
+<p><img src="/images/plugin-overlay.webp" alt="The Start rings overlay on a four-player map zoomed out: a ring round each start location, and a Start rings row under Overlays in the Layers panel"></p>
+<p>The picture shows <a href="https://docs.scmjs.dev/api/ui/#overlayspec">the reference&#39;s example</a>.
+<a href="/plugins/recipes/#a-heat-map-of-where-the-units-are">A heat map of where the units are</a> is a fuller one,
+and Walkability is the plugin to read.</p>
+<h2 id="picking-on-the-map">Picking on the map<a class="anchor" href="#picking-on-the-map" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong><code>pickArea</code></strong> lets the user drag a rectangle and resolves with it in tiles.</li>
+<li><strong><code>pickTile</code></strong> resolves with the tile clicked.</li>
+<li><strong><code>pickObject</code></strong> resolves with the unit or location clicked, outlining what is under the
+pointer as it moves.</li>
+<li><strong><code>pickFiles</code></strong> opens the browser&#39;s file picker and resolves with the files, or an empty
+list.</li>
+</ul>
+<p>The map picks resolve <code>null</code> on Esc or a right-click. Only one runs at a time, and a new
+one cancels the previous.</p>
+<h2 id="file-types">File types<a class="anchor" href="#file-types" aria-label="Link to this section">#</a></h2>
+<p><code>fileType(spec)</code> lets a plugin open a kind of file the editor doesn&#39;t. Once you claim an
+extension, a file with it that is dropped on the editor or picked in File ▸ Open comes to
+you instead of being read as a map. Several dropped together arrive in one call. The
+editor&#39;s own <code>.scm</code>, <code>.scx</code> and <code>.chk</code> can&#39;t be claimed, and the first plugin to claim an
+extension keeps it.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Replays dropped on the editor, or picked in File ▸ Open, come here.</span>
+api.ui.fileType({
+  name: <span class="s">&quot;StarCraft replay&quot;</span>,
+  extensions: [<span class="s">&quot;.rep&quot;</span>],
+  open: (files) =&gt; api.log(<span class="s">`${files.length} replays: ${files.map((f) =&gt; f.name).join(&quot;, &quot;)}`</span>),
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1NY1BSgQxEEX3fYpPmEUCIbNv0Y3gVtDZiTBhuno6mq4qkggOQ1_Ds3geTyLd6PZ9_nv7PZ5Ic7xUDEVUaYAw2kSgITUpHlKg6fROAxLjIWXCz9c3HpXY4yQzYaJCoYuawkcKY8p0uCjZawdwnKmHeW6x3Jc4NpQtZXwH0Gcjrkm49ngxoZCa15WLEvewq6c63N5hFWc52-PuusGQic9tWv5ktcf_MEe1dtxOY1jbLrxJYms8jFuOzneLu_kF" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<h2 id="map-views">Map views<a class="anchor" href="#map-views" aria-label="Link to this section">#</a></h2>
+<p>A map view shows something else where the map is drawn: a replay&#39;s game played out, or a
+picture of the map made another way. Aftermath&#39;s Replay view is one.</p>
+<p>You choose which maps offer the view: <code>offer(true, id)</code> on the handle offers it on a map
+(the one in front when the id is left out), and <code>show(true)</code> offers it and shows it. A map
+that offers a view has a small switch in the top-left corner of its area, <em>Map</em> first and
+then your view by its title, and each map stays on whichever the user left it on.
+<code>isShown()</code> says whether the map in front shows your view now, and <code>onChange</code> hears when
+that changes.</p>
+<p>The editor gives the view one element for its whole life and never moves it, so an iframe
+inside isn&#39;t loaded again when the user switches back and forth.</p>
+<pre><code class="language-ts"><span class="c">// A view of its own for the maps this plugin opens.</span>
+<span class="k">const</span> game = api.ui.mapView({
+  title: <span class="s">&quot;Game&quot;</span>,
+  mount(el) {
+    <span class="k">const</span> frame = document.createElement(<span class="s">&quot;iframe&quot;</span>);
+    frame.src = <span class="s">&quot;https://example.com/viewer/&quot;</span>;
+    frame.style.cssText = <span class="s">&quot;border: 0; width: 100%; height: 100%&quot;</span>;
+    el.append(frame);
+  },
+});
+game.onChange((shown) =&gt; api.log(shown ? <span class="s">&quot;the game is shown&quot;</span> : <span class="s">&quot;the map is shown&quot;</span>));
+
+<span class="c">// A map just opened is the one in front: offer the view there and show it.</span>
+<span class="k">if</span> (<span class="k">await</span> api.document.open(bytes, <span class="s">&quot;replay.scx&quot;</span>, { viewOnly: { label: <span class="s">&quot;Replay&quot;</span> } })) game.show(<span class="k">true</span>);
+</code></pre>
+<p>A view the user can move around should feel like the map itself. These hooks in the spec
+carry the editor&#39;s controls over to your view while it is shown:</p>
+<table>
+<thead>
+<tr>
+<th>Hook</th>
+<th>When it is called</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>onShow(look)</code></td>
+<td>The user switched to your view. <code>look</code> is where the map was looking.</td>
+<td>Look at the same place, at the same scale as near as you can.</td>
+</tr>
+<tr>
+<td><code>onZoom(look)</code></td>
+<td>The user zoomed: View ▸ Zoom In or Out, a zoom level, Zoom to Fit, the toolbar or their keys.</td>
+<td>Look at <code>look</code>, then report it with <code>setCamera</code>.</td>
+</tr>
+<tr>
+<td><code>minimap.draw(ctx, m)</code></td>
+<td>The minimap is drawn. The map&#39;s ground is already there.</td>
+<td>Draw your own units in place of the map&#39;s.</td>
+</tr>
+<tr>
+<td><code>minimap.press(x, y)</code></td>
+<td>A press or drag on the minimap, at a map pixel.</td>
+<td>Look there.</td>
+</tr>
+<tr>
+<td><code>onFog(on)</code></td>
+<td>View ▸ Fog of War or its button.</td>
+<td>Turn your view&#39;s own fog on or off.</td>
+</tr>
+<tr>
+<td><code>onRepaint()</code></td>
+<td>Something <code>paintOver</code> draws changed: a View toggle, the grid, a location, another overlay.</td>
+<td>Draw over your view again.</td>
+</tr>
+</tbody></table>
+<p>And these calls on the handle tell the editor about your view:</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>When to call it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>setCamera({ x, y, width, height })</code></td>
+<td>Whenever the view moves, in map pixels. The minimap draws its box there, the toolbar shows the zoom, and switching back to <em>Map</em> opens the map on the same place.</td>
+</tr>
+<tr>
+<td><code>wheel(w)</code></td>
+<td>Your view got the mouse wheel itself, as an iframe does. The editor zooms by the user&#39;s own wheel rule and calls <code>onZoom</code>.</td>
+</tr>
+<tr>
+<td><code>redrawMinimap()</code></td>
+<td>Your minimap drawing changed. Cheap; call it as often as you like.</td>
+</tr>
+<tr>
+<td><code>setFog(on)</code></td>
+<td>Your view&#39;s fog changed; <code>null</code> greys the toggle.</td>
+</tr>
+<tr>
+<td><code>setPointer(at)</code></td>
+<td>The pointer moved over your view, for the status bar&#39;s tile and position; <code>null</code> when it leaves.</td>
+</tr>
+<tr>
+<td><code>paintOver(ctx, view)</code></td>
+<td>From your own drawing, to draw the grid, locations and other plugins&#39; overlays onto a canvas over your view.</td>
+</tr>
+</tbody></table>
+<p>Without <code>onRepaint</code>, the Grid, Locations and Location Names toggles are greyed while your
+view is shown; without <code>onFog</code>, so is Fog of War. Everything else that belongs to the
+hidden map, such as its layers, selection, clipboard and Find, is off while your view is
+in front.</p>
+<pre><code class="language-ts"><span class="k">let</span> units: { x: <span class="k">number</span>; y: <span class="k">number</span>; colour: <span class="k">string</span> }[] = [];
+<span class="k">const</span> replay = api.ui.mapView({
+  title: <span class="s">&quot;Replay&quot;</span>,
+  mount: (el) =&gt; el.append(frame),
+  onShow: (look) =&gt; viewer.lookAt(look.x, look.y, look.height),
+  onZoom: (look) =&gt; viewer.lookAt(look.x, look.y, look.height),
+  minimap: {
+    draw(ctx, m) {
+      <span class="k">for</span> (<span class="k">const</span> u <span class="k">of</span> units) { ctx.fillStyle = u.colour; ctx.fillRect(m.x(u.x) - <span class="n">1</span>, m.y(u.y) - <span class="n">1</span>, <span class="n">2</span>, <span class="n">2</span>); }
+    },
+    press: (x, y) =&gt; viewer.lookAt(x, y),
+  },
+});
+viewer.onMove((c) =&gt; replay.setCamera({ x: c.x, y: c.y, width: c.width, height: c.height }));
+viewer.onWheel((w) =&gt; replay.wheel({ deltaY: w.deltaY, ctrlKey: w.ctrlKey, x: w.mapX, y: w.mapY }));
+viewer.onUnits((list) =&gt; { units = list; replay.redrawMinimap(); });
+</code></pre>
+<pre><code class="language-ts"><span class="c">// The grid, locations and other overlays over the game, its fog on the editor&#39;s toggle, the pointer in the status bar.</span>
+<span class="k">const</span> replay = api.ui.mapView({
+  title: <span class="s">&quot;Replay&quot;</span>,
+  mount: (el) =&gt; el.append(frame, canvas),
+  onRepaint: () =&gt; drawOver(),
+  onFog: (on) =&gt; viewer.fog(on),
+});
+<span class="k">function</span> drawOver() {
+  <span class="k">const</span> ctx = canvas.getContext(<span class="s">&quot;2d&quot;</span>)!;
+  ctx.clearRect(<span class="n">0</span>, <span class="n">0</span>, canvas.width, canvas.height);
+  replay.paintOver(ctx, viewer.mapView());
+  drawMyMarks(ctx);
+}
+viewer.onFogChange((on) =&gt; replay.setFog(on));
+viewer.onPointer((at) =&gt; replay.setPointer(at));
+</code></pre>
+<h2 id="showing-that-work-is-in-progress">Showing that work is in progress<a class="anchor" href="#showing-that-work-is-in-progress" aria-label="Link to this section">#</a></h2>
+<p>A dialog that does not change while it works looks broken. <code>ui.widgets</code> has one set of
+tools for this, so plugins look alike:</p>
+<table>
+<thead>
+<tr>
+<th>Widget</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>spinner</code></td>
+<td>Waiting for something of unknown length.</td>
+</tr>
+<tr>
+<td><code>progressBar</code></td>
+<td>Work whose length is known, such as a download.</td>
+</tr>
+<tr>
+<td><code>skeleton</code></td>
+<td>A grey placeholder in the shape of a list or picture that is coming.</td>
+</tr>
+<tr>
+<td><code>busy(target)</code></td>
+<td>Cover a box while its contents are replaced.</td>
+</tr>
+<tr>
+<td><code>button(label, { busy })</code></td>
+<td>Disable a button while the work it started runs.</td>
+</tr>
+<tr>
+<td><code>statusLine</code></td>
+<td>One line at the bottom of a dialog for progress, the result, errors and a Cancel.</td>
+</tr>
+<tr>
+<td><code>steps</code>, <code>fold</code></td>
+<td>Work in stages, and a block folded to one summary line.</td>
+</tr>
+</tbody></table>
+<p>A search dialog that uses four of them. The <code>wait</code> stands in for a request to a server:</p>
+<div class="code-try"><pre><code class="language-ts"><span class="k">const</span> w = api.ui.widgets;
+
+<span class="k">function</span> wait(ms: <span class="k">number</span>, signal: AbortSignal) {
+  <span class="k">return</span> <span class="k">new</span> <span class="k">Promise</span>&lt;<span class="k">void</span>&gt;((resolve, reject) =&gt; {
+    <span class="k">const</span> timer = setTimeout(resolve, ms);
+    signal.addEventListener(<span class="s">&quot;abort&quot;</span>, () =&gt; { clearTimeout(timer); reject(<span class="k">new</span> Error(<span class="s">&quot;stopped&quot;</span>)); });
+  });
+}
+
+api.ui.dialog({
+  title: <span class="s">&quot;Find units&quot;</span>,
+  mount(body) {
+    <span class="k">const</span> query = w.text({ placeholder: <span class="s">&quot;marine&quot;</span> });
+    <span class="k">const</span> results = api.ui.el(<span class="s">&quot;div&quot;</span>, { style: { minHeight: <span class="s">&quot;120px&quot;</span> } });
+    <span class="k">const</span> status = w.statusLine({ text: <span class="s">&quot;Type part of a unit&#39;s name.&quot;</span> });
+    <span class="k">const</span> search = w.button(<span class="s">&quot;Search&quot;</span>, { primary: <span class="k">true</span>, onClick: () =&gt; <span class="k">void</span> run() });
+    body.append(w.row(query, search), results, status);
+
+    <span class="k">async</span> <span class="k">function</span> run() {
+      <span class="k">const</span> stop = <span class="k">new</span> AbortController();
+      <span class="k">const</span> cover = w.busy(results, <span class="s">&quot;Searching…&quot;</span>);
+      status.busy(<span class="s">&quot;Searching…&quot;</span>);
+      status.cancel(() =&gt; stop.abort(), <span class="s">&quot;Stop&quot;</span>);
+      search.setBusy(<span class="k">true</span>);
+      <span class="k">try</span> {
+        <span class="k">await</span> wait(<span class="n">1500</span>, stop.signal); <span class="c">// your fetch goes here, with { signal: stop.signal }</span>
+        <span class="k">const</span> found = api.query.find({ kind: <span class="s">&quot;units&quot;</span>, query: query.value });
+        results.replaceChildren(w.list(found.map((f) =&gt; ({ label: f.label, hint: f.detail, value: f.index }))));
+        status.set(<span class="s">`${found.length} found.`</span>, <span class="s">&quot;ok&quot;</span>);
+      } <span class="k">catch</span> (error) {
+        status.set(stop.signal.aborted ? <span class="s">&quot;Stopped.&quot;</span> : String(error), stop.signal.aborted ? <span class="s">&quot;warn&quot;</span> : <span class="s">&quot;error&quot;</span>);
+      } <span class="k">finally</span> {
+        cover.done();
+        search.setBusy(<span class="k">false</span>);
+        status.cancel(<span class="k">null</span>);
+      }
+    }
+  },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1fVTBjts2EL37KwZEgVCAoGwK9CLHKZpFgh5yKLD5gNDiyGKXGirkyFrBENCv6Yf1SwqSsq1NgfogS_LMe2_ePLpxFBgmOIAaTDWaajL6hBz2u107UsPGEUzKsOxDDTT2R_QlBHMiZWv47eg8P6WHAi47AI88egLCCf7wrjcB35-d0R-k9BicPWMJHv_Ehgs4fEgdAE1SwKZHDwcIyF9Nj27ke0sfin0qzbyV0vrTGYm_mMBI6KVQUYgoQWZcaCwqf8VJ0MV-ZZZR3CfvnZcisBsG1KIo9rAkjnhddrvVC22UdScZdbJhizWIz4Y0jGQ4iHIH0LuRWB6dnotX43wf0c9wgKlifGF5gcGqBjtnNfoaRK-8IRQr6bXJYxgth_su0EqhzVmUcIHAcxRwgd7Q72hOHdcg3v38MLwIWH4ACqx4DIk-334xhPICUUsN4us8IAzKM7gWVJrmTQBSPVY_SgqofNMlpOPI7EiKp_QqaRq86ZWfa2A_YgmOHq1pnut1DXHz4EeSxQ00GlWpYUDScqq8m2Qyqlx5ivLqQbnOUOx3qVGFmRq4JTKjZsPvQ7sBDil7KZePjtg7a9HLlf1a2bhzylqcKczyRrmOZuj0z19_i1tTVpJr_7-kUdSglXn8qKdKwZRFxGY3bBoSTBWQP0bY6N_tN_bzbTQAFU9fPoLvfnl4KDNuPgnFHt6-hdmNHlrkpoOTwwAdeixhMtzF2KxHddMFyw08-9G6kfSaurSPqjWk5QWeDekaxBr3HOo6f1VnZUe8LTZ-Vh8rjynsj52x2iPJqbImsEwsVa8GKdtkkLyAVUe0NbRVuimhM8TxUSMrY0tIJPGFIY0vsBRFsSFcXQ_I8ttPl4xvkU7cLXmm6lsJwj3fbV-gUdEnifEPoNjYvMHaWJX3hxp-zQscUFcCanhib-i0orxaybZjUp5itUh1WxWtIWXtds0pk5V2hHI74euYtMoG_K8Ba-xotPbOsbtel3K3FPt_AQ" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<p><img src="/images/plugin-waiting.webp" alt="The Find units dialog while it searches: the Search button and the results box show a spinner, and the status line reads Searching… with a Stop button"></p>
+<p>Work started from a dialog belongs on that dialog&#39;s status line. <code>ui.progress</code> is for work
+that runs while the user carries on editing the map.</p>
+<h2 id="menus-context-menus-and-hotkeys">Menus, context menus and hotkeys<a class="anchor" href="#menus-context-menus-and-hotkeys" aria-label="Link to this section">#</a></h2>
+<p><strong><code>api.menu.add(path, item)</code></strong> adds a menu item.</p>
+<ul>
+<li><code>path</code> is a menu (<code>&quot;Tools&quot;</code>) or a submenu (<code>&quot;File/Import&quot;</code>), always in English.</li>
+<li>A path that names no existing submenu creates one for your plugin (<code>&quot;Tools/My Plugin&quot;</code>),
+and one that names no menu creates a top-level menu before Help (<code>&quot;Account&quot;</code>).</li>
+<li>The item&#39;s <code>label</code> is English too: labels are how items find each other, whatever
+language the menu shows. The editor translates it through your catalogues (see
+<a href="/plugins/writing-a-plugin/#translating">Translating</a>).</li>
+<li>Items go at the end of the menu unless <code>after</code> names an item to follow, by its English
+label.</li>
+<li><code>icon: &quot;plugin&quot;</code> marks the item with your plugin&#39;s icon, and <code>enabled</code> greys it out.</li>
+</ul>
+<p><strong><code>api.contextMenu.add(surface, item)</code></strong> adds to a right-click menu. The surfaces are
+<code>&quot;viewport&quot;</code> (the map) and <code>&quot;terrainPalette&quot;</code>. The item&#39;s functions receive what was under
+the pointer. A fixed <code>label</code> is English and translated like a menu label; a function label
+is called when the menu opens, so translate it there with <code>api.i18n.t</code>.</p>
+<p><strong><code>api.hotkeys.add(combo, run)</code></strong> adds a key such as <code>&quot;Ctrl+Shift+I&quot;</code>. Plugin hotkeys are
+tried before the editor&#39;s own, and never while the user is typing in a field or a dialog
+is open.</p>
+<p>All three accept a <code>command</code> id instead of <code>run</code>; see <a href="/plugins/the-api-group-by-group/#apicommands"><code>api.commands</code></a>.</p>
+<div class="code-try"><pre><code class="language-ts"><span class="c">// Right-click the map: copy the position of the tile under the pointer.</span>
+api.contextMenu.add(<span class="s">&quot;viewport&quot;</span>, {
+  label: (ctx) =&gt; (ctx.tile ? <span class="s">`Copy position (${ctx.tile.x}, ${ctx.tile.y})`</span> : <span class="s">&quot;Copy position&quot;</span>),
+  enabled: (ctx) =&gt; ctx.tile !== <span class="k">null</span>,
+  run: (ctx) =&gt; { <span class="k">if</span> (ctx.tile) <span class="k">void</span> navigator.clipboard.writeText(<span class="s">`${ctx.tile.x}, ${ctx.tile.y}`</span>); },
+});
+</code></pre><a class="try-it" href="https://scmjs.dev/editor/?plugin=github%3Ascm-js%2Fplugin-api-playground&amp;playground=1fY7BTsMwEETv-Yoh4hBLwb2nChw4c0F8QBx7264wtmU2aaoo_44aQQkXbjuamX2z2-GVjyd5sJ7tO-RE-DCpgY3psqoUP1k4BsTDqoU9YQiO8rfNQSjrwiTWNgahSV4oDNo4V5Uj0znFLGWNuQC86ck3qKxMCu3jeuj14RO65yvxRqvu5x9TT0uNjbwsqkOD8k-hVHUBUDC9J7dB3Ah3bYsweH-N5SFsIjP48DtFYYzsEMzIRyMxa-s59dFkp8-Zhd5okqr7b12n9ljqYlH7Lw" target="_blank" rel="noopener" title="Open this example in the editor's API Playground. Nothing runs until you press Run.">Try it</a></div>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#messages-and-questions">Messages and questions</a></li>
+<li><a href="#building-content">Building content</a></li>
+<li><a href="#dialogs">Dialogs</a></li>
+<li><a href="#panels">Panels</a></li>
+<li><a href="#status-items-and-map-buttons">Status items and map buttons</a></li>
+<li><a href="#preferences-pages">Preferences pages</a></li>
+<li><a href="#dialog-slots">Dialog slots</a></li>
+<li><a href="#map-tools">Map tools</a></li>
+<li><a href="#overlays">Overlays</a></li>
+<li><a href="#picking-on-the-map">Picking on the map</a></li>
+<li><a href="#file-types">File types</a></li>
+<li><a href="#map-views">Map views</a></li>
+<li><a href="#showing-that-work-is-in-progress">Showing that work is in progress</a></li>
+<li><a href="#menus-context-menus-and-hotkeys">Menus, context menus and hotkeys</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>

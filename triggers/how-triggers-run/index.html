@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How triggers run — StarCraft trigger reference</title>
+<meta name="description" content="A trigger is a list of up to 16 conditions and up to 64 actions, and the players it runs for. When every condition holds, the game carries out the actions in order.">
+<meta property="og:title" content="How triggers run — StarCraft trigger reference">
+<meta property="og:description" content="A trigger is a list of up to 16 conditions and up to 64 actions, and the players it runs for. When every condition holds, the game carries out the actions in order.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/triggers/how-triggers-run/">
+<meta property="og:url" content="https://docs.scmjs.dev/triggers/how-triggers-run/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="here" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>How triggers run</h1>
+<p>A trigger is a list of up to 16 conditions and up to 64 actions, and the players it runs
+for. When every condition holds, the game carries out the actions in order. A trigger that
+should run straight away has <a href="/triggers/conditions/#always">Always</a> as its condition; a trigger with no
+conditions at all runs straight away too.</p>
+<p><img src="/images/trig-cycle.svg" alt="When the game goes through the triggers: every 31 frames, every 2 with hyper triggers"></p>
+<h2 id="the-trigger-cycle">The trigger cycle<a class="anchor" href="#the-trigger-cycle" aria-label="Link to this section">#</a></h2>
+<p>The game does not check triggers continuously. It goes through them in <em>passes</em>, one every
+31 game frames: 1.3 seconds at Fastest, 2.1 seconds at Normal. The first pass is on the
+game&#39;s second frame, so an Always trigger runs at once. A pass comes after that frame&#39;s
+units have moved, fought and died, so a unit killed in a frame already counts in that
+frame&#39;s pass.</p>
+<p>In a pass the game takes the players in the game in order, Player 1 to Player 8, and for
+each goes through that player&#39;s triggers top to bottom, in the order of the list. It asks
+a trigger&#39;s conditions in order and stops at the first false one, so the conditions after
+it are not even asked. If they all hold, it carries out the actions in order. What one
+trigger does is seen by every trigger after it in the same pass, with one exception for
+counts of units (see <a href="/triggers/how-triggers-run/#counting-units">Counting units</a>).</p>
+<p>Two things bring the next pass forward to the very next frame, for every player: a
+<a href="/triggers/actions/#wait">Wait</a> running out, and the <a href="/triggers/conditions/#countdown-timer">countdown timer</a> reaching 0.</p>
+<p>Game speed does not change the 31-frame cycle or game time: a game second is 16 frames at
+every speed, for <a href="/triggers/conditions/#elapsed-time">Elapsed Time</a> and the countdown alike. It changes only
+how long a Wait lasts (<a href="/triggers/how-triggers-run/#waits">Waits</a>).</p>
+<h2 id="hyper-triggers">Hyper triggers<a class="anchor" href="#hyper-triggers" aria-label="Link to this section">#</a></h2>
+<p>A Wait of 0 runs out on the frame after it starts, and the pass it brings forward comes
+the frame after that. So the fastest the game goes through the triggers is once every <strong>2
+frames</strong>. It never manages every frame.</p>
+<p><em>Hyper triggers</em> use this: two or three preserved triggers of 62 or 63 Wait(0) actions
+each, owned by one player. Each pass starts another of their Waits, so the passes keep
+coming every 2 frames. A slow pass, 31 frames after the last, comes only when none of them
+has a Wait to start, and with that many Waits it comes so rarely that it does not matter
+in practice.</p>
+<p>The cycle is shared, so one player&#39;s hyper triggers speed up every player&#39;s triggers. A
+computer player can carry them. The waits must be one frame long or less: 42 milliseconds
+at Fastest.</p>
+<h2 id="who-a-trigger-runs-for">Who a trigger runs for<a class="anchor" href="#who-a-trigger-runs-for" aria-label="Link to this section">#</a></h2>
+<p>A trigger is owned by one or more of the <a href="/triggers/players-and-groups/">players and groups</a>: a
+player, a force, or All Players. A trigger owned by a group runs separately for each
+player in it, as if each had a copy of their own. Its conditions are checked and its
+actions carried out once per player, and inside it <strong>Current Player</strong> means whichever
+player that copy is running for.</p>
+<p>The copies are handed out when the game loads the map, and only to players in the game:
+human and computer players, and rescuable and neutral slots, which run their triggers like
+anyone else. Only these owners get copies:</p>
+<ul>
+<li>Players 1 to 8;</li>
+<li>Force 1 to Force 4;</li>
+<li>All Players.</li>
+</ul>
+<p>A trigger owned only by anything else (Players 9 to 12, Current Player, Foes, Allies,
+Neutral Players, Non-Allied Victory Players, None or the Unused groups) is dropped when
+the game loads and never runs. Other editors let you tick those owners, but the game
+ignores them. scmJS&#39;s Trigger Editor offers only the owners above; when a map&#39;s trigger
+already has another ticked, it is shown with a note so you can clear it.</p>
+<p>Only Use Map Settings games read a map&#39;s triggers at all. Melee and the other game types
+run triggers built into the game. (See <a href="/chk/trig/"><code>TRIG</code></a> in the CHK reference.)</p>
+<p>Each owner gets its own copies, so a player reached twice, as with both &quot;Player 1&quot; and
+&quot;Force 1&quot; ticked, has two copies of the trigger and runs it twice in every pass.</p>
+<p>A player who is defeated, or leaves, stops running triggers. In a single-player game a
+player who has won keeps running them until the victory screen stops the game.</p>
+<h2 id="once-or-every-time">Once, or every time<a class="anchor" href="#once-or-every-time" aria-label="Link to this section">#</a></h2>
+<p>A trigger runs once for each player it runs for and is then finished, unless it carries
+<a href="/triggers/actions/#preserve-trigger">Preserve Trigger</a>. Then, once its actions are done, the game asks its
+conditions again on the next pass. A preserved trigger whose conditions stay true keeps
+firing: one that adds a mineral adds one each pass. Preserve Trigger works wherever it
+stands in the list, even after a Wait: the game looks for it when the actions end.</p>
+<p>While a trigger is part way through its actions, held at a Wait, the game does not ask its
+conditions again. On each pass it carries on from the action it stopped at.</p>
+<h2 id="waits">Waits<a class="anchor" href="#waits" aria-label="Link to this section">#</a></h2>
+<p>Each player has one <em>wait slot</em>. A <a href="/triggers/actions/#wait">Wait</a> takes it and holds the rest of its
+trigger until its time has passed. While the slot is taken, another trigger of that player
+that reaches a Wait stops there without starting its time, and tries again on each pass
+until it finds the slot free. The player&#39;s triggers with no Wait in their way keep running
+every pass, and every player&#39;s slot is their own. A <a href="/triggers/actions/#transmission">Transmission</a> for a
+person, and <a href="/triggers/actions/#center-view">Center View</a> in a single-player game, take the same slot.</p>
+<p><img src="/images/trig-wait.svg" alt="One wait slot per player"></p>
+<p>A Wait&#39;s time is in milliseconds of the game&#39;s speed, close to real time, not game time.
+Each frame takes a fixed number of milliseconds at each speed, the Wait lasts its time in
+frames, rounded up and at least one, and the trigger goes on in the pass on the frame
+after:</p>
+<table>
+<thead>
+<tr>
+<th>Speed</th>
+<th>Milliseconds a frame</th>
+<th>Wait(0) goes on after</th>
+<th>Wait(1000) goes on after</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fastest</td>
+<td>42</td>
+<td>2 frames</td>
+<td>25 frames</td>
+</tr>
+<tr>
+<td>Faster</td>
+<td>48</td>
+<td>2 frames</td>
+<td>22 frames</td>
+</tr>
+<tr>
+<td>Fast</td>
+<td>56</td>
+<td>2 frames</td>
+<td>19 frames</td>
+</tr>
+<tr>
+<td>Normal</td>
+<td>67</td>
+<td>2 frames</td>
+<td>16 frames</td>
+</tr>
+<tr>
+<td>Slow</td>
+<td>83</td>
+<td>2 frames</td>
+<td>14 frames</td>
+</tr>
+<tr>
+<td>Slower</td>
+<td>111</td>
+<td>2 frames</td>
+<td>11 frames</td>
+</tr>
+<tr>
+<td>Slowest</td>
+<td>167</td>
+<td>2 frames</td>
+<td>7 frames</td>
+</tr>
+</tbody></table>
+<p>A Wait of 4,294,967,295 never runs out, and takes that player&#39;s wait slot for the rest of
+the game.</p>
+<p>On a map with hyper triggers, a Wait in another trigger below them in the list hardly ever
+gets the slot: it can start only in the one slow pass. A Wait above them takes the slot
+first, and while it runs no hyper Wait can start, so the passes fall back to every 31
+frames until it runs out. Check Map points this out.</p>
+<h2 id="timers-with-a-death-counter">Timers with a death counter<a class="anchor" href="#timers-with-a-death-counter" aria-label="Link to this section">#</a></h2>
+<p>A <a href="/triggers/conditions/#deaths">death count</a> of a unit type the map never uses makes a timer that needs no
+Wait, so it never holds up the player&#39;s other triggers or the hyper triggers. One
+preserved trigger adds 1 to the count every pass, and other triggers act when it reaches a
+number:</p>
+<pre><code class="language-text">Trigger(&quot;Player 1&quot;){
+Conditions:
+	Always();
+
+Actions:
+	Set Deaths(&quot;Player 1&quot;, &quot;Cave (Unused)&quot;, Add, 1);
+	Preserve Trigger();
+}
+
+Trigger(&quot;Player 1&quot;){
+Conditions:
+	Deaths(&quot;Player 1&quot;, &quot;Cave (Unused)&quot;, At least, 120);
+
+Actions:
+	Create Unit(&quot;Player 8&quot;, &quot;Zerg Zergling&quot;, 6, &quot;Spawn&quot;);
+	Set Deaths(&quot;Player 1&quot;, &quot;Cave (Unused)&quot;, Set To, 0);
+	Preserve Trigger();
+}
+</code></pre>
+<p>The count goes up once per pass, so its speed depends on how often the passes come: one
+every 31 frames normally, or one every 2 frames with hyper triggers, which is about 12 a
+second at Fastest. With hyper triggers, the second trigger above sends a wave about every
+ten seconds. Setting the count back to 0 starts the timer again. The trigger&#39;s owner has
+to be in the game, or neither trigger runs.</p>
+<h2 id="single-player-and-multiplayer">Single player and multiplayer<a class="anchor" href="#single-player-and-multiplayer" aria-label="Link to this section">#</a></h2>
+<p>The game runs every player&#39;s triggers on every machine, and only what reaches the screen
+is limited to the player the trigger runs for: text, sounds, portraits, pings and the
+view. A few actions behave differently in a single-player game:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>In a single-player game</th>
+<th>In a multiplayer game</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="/triggers/actions/#transmission">Transmission</a>, for a person</td>
+<td>holds the trigger until the portrait has finished talking</td>
+<td>holds the trigger for its duration, in milliseconds of game speed</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#center-view">Center View</a>, for a person</td>
+<td>scrolls the screen and holds the trigger until it gets there</td>
+<td>jumps the screen at once and does not hold</td>
+</tr>
+<tr>
+<td><a href="/triggers/actions/#pause-game">Pause Game</a> and <a href="/triggers/actions/#unpause-game">Unpause Game</a></td>
+<td>pause and unpause, for a person&#39;s trigger</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td>The Esc key</td>
+<td>skips the person&#39;s running triggers through their Waits, transmissions, text and sounds, unless <a href="/triggers/actions/#disable-debug-mode">Disable Debug Mode</a> protects them</td>
+<td>nothing</td>
+</tr>
+<tr>
+<td>A player who gets a result</td>
+<td>keeps their triggers</td>
+<td>loses their whole trigger list at once, winners and losers alike</td>
+</tr>
+</tbody></table>
+<p>For a computer, rescuable or neutral player, Transmission, Center View, Pause Game and the
+other actions that touch the screen do nothing at all, and do not hold the trigger.</p>
+<h2 id="winning-and-losing">Winning and losing<a class="anchor" href="#winning-and-losing" aria-label="Link to this section">#</a></h2>
+<p><a href="/triggers/actions/#victory">Victory</a>, <a href="/triggers/actions/#defeat">Defeat</a> and <a href="/triggers/actions/#draw">Draw</a> give the player the trigger runs
+for a result, and the game settles the results at the end of each pass:</p>
+<ul>
+<li>When any player won or drew in the pass, every other player still in the game with no
+result of their own is <strong>defeated</strong>.</li>
+<li>When every player in the game won or drew in the same pass, they all get a draw.</li>
+<li>The first result a player gets stays. A Defeat or Draw that comes after a Victory for
+the same player in the same pass waits, and by the next pass the player has already won.</li>
+</ul>
+<p>So in a single-player game, a Victory for the person ends the game for the computers too,
+and a Draw is a draw only when everyone draws.</p>
+<h2 id="counting-units">Counting units<a class="anchor" href="#counting-units" aria-label="Link to this section">#</a></h2>
+<p><a href="/triggers/conditions/#command">Command</a> and <a href="/triggers/conditions/#bring">Bring</a>, and the Most and Least conditions built on them,
+count units in ways that are easy to trip over:</p>
+<p><img src="/images/trig-bring.svg" alt="What Bring counts in a location"></p>
+<ul>
+<li><strong>At most counts differently from At least and Exactly.</strong> At least and Exactly count
+finished units. At most counts every unit that exists, finished or not: a building going
+up, an egg or cocoon (as Men), a unit whose training has begun. So the standard melee
+defeat rule, Command(Current Player, Buildings, At most, 0), does not defeat a player
+whose only building is still being built.</li>
+<li><strong>Units aboard</strong> a transport or bunker count for Bring only with At least and Exactly,
+at the place of what carries them, and so do the interceptors or scarabs in a carrier or
+reaver and a power-up a worker carries. With At most, Bring does not count them.</li>
+<li><strong>A unit is in a location</strong> when its box touches it, on the levels the location covers.
+Ground units count by the ground under them; air units by the air bits of the location&#39;s
+elevation settings.</li>
+<li><strong>Hallucinations never count</strong>, in Command or Bring, and neither do turrets.</li>
+<li><strong>The counts are taken once per pass.</strong> The first Command of a pass counts every
+player&#39;s units, and every later Command in that pass, for any player, reads the same
+counts.</li>
+</ul>
+<p>So a unit made by <a href="/triggers/actions/#create-unit">Create Unit</a> or handed over by <a href="/triggers/actions/#give-units-to-player">Give Units to
+Player</a> later in the pass is invisible to Command until the next
+pass. These take a new count straight away:</p>
+<ul>
+<li><a href="/triggers/actions/#kill-unit">Kill Unit</a> and <a href="/triggers/actions/#kill-unit-at-location">Kill Unit At Location</a>;</li>
+<li><a href="/triggers/actions/#remove-unit">Remove Unit</a> and <a href="/triggers/actions/#remove-unit-at-location">Remove Unit At Location</a>;</li>
+<li><a href="/triggers/actions/#move-unit">Move Unit</a> and <a href="/triggers/actions/#move-location">Move Location</a>;</li>
+<li>a <a href="/triggers/conditions/#bring">Bring</a> condition.</li>
+</ul>
+<p>Bring keeps a count of its own for one location, with the same blind spot. It counts again
+when another location is asked about, and after the same actions.</p>
+<h2 id="deaths-and-kills">Deaths and kills<a class="anchor" href="#deaths-and-kills" aria-label="Link to this section">#</a></h2>
+<p>A unit&#39;s death counts only when it dies in the game: shot, killed by a spell, or consumed.
+Then its owner&#39;s <a href="/triggers/conditions/#deaths">death count</a> for its type goes up by one, and the killer&#39;s
+<a href="/triggers/conditions/#kill">kills</a> and score, if the killer is another player still in the game. Killing your
+own units counts nothing as a kill; killing an ally&#39;s counts.</p>
+<p><a href="/triggers/actions/#kill-unit">Kill Unit</a>, <a href="/triggers/actions/#remove-unit">Remove Unit</a> and their At Location forms count
+nothing at all: no death, no kill, no score. Neither does a hallucination dying.</p>
+<p>The unit classes are counted apart. Deaths of Men, Buildings and Factories read the game&#39;s
+own counts of men, buildings and factories lost, which go up with each real death; Deaths
+of Any unit reads men and buildings lost together. They are not the sum of the per-type
+counts: <a href="/triggers/actions/#set-deaths">Set Deaths</a> on a Marine does not change Deaths of Men, while Set
+Deaths of Men changes the lost count itself.</p>
+<h2 id="disabled-conditions-and-actions">Disabled conditions and actions<a class="anchor" href="#disabled-conditions-and-actions" aria-label="Link to this section">#</a></h2>
+<p>A condition or action can be disabled without deleting it (a flag in its record). The game
+skips it: a disabled condition does not count, and a disabled action is not carried out.
+In text, a disabled line starts with <code>;</code>.</p>
+<h2 id="condition-and-action-numbers-the-game-does-not-have">Condition and action numbers the game does not have<a class="anchor" href="#condition-and-action-numbers-the-game-does-not-have" aria-label="Link to this section">#</a></h2>
+<p>Conditions are numbered up to 23, actions up to 59 and briefing actions up to 9. StarCraft
+1.16.1 does not check the number: when a trigger reaches a condition or action past the
+end, the game crashes. This was seen for a condition; for actions and briefing actions it
+is read from the game&#39;s code. Remastered checks: an unknown condition counts as false, so
+the trigger does not run, and an unknown action is skipped. The editor keeps such a record
+as it is, and Check Map reports it.</p>
+<h2 id="in-starcraft-remastered">In StarCraft: Remastered<a class="anchor" href="#in-starcraft-remastered" aria-label="Link to this section">#</a></h2>
+<p>Remastered&#39;s own code for running triggers has been read: how it goes through a trigger&#39;s
+conditions and actions, the trigger flag 0x02, how it settles results at the end of a
+pass, Victory, Defeat and Draw, and the conditions and actions named below. Those work as
+in 1.16.1, with these differences:</p>
+<ul>
+<li>An unknown condition or action number does not crash it (see above).</li>
+<li>A <a href="/triggers/actions/#create-unit">Map Revealer</a> made by Create Unit stays. 1.16.1 creates it and removes
+it straight away as unplaceable. (Found playing Remastered.)</li>
+<li><a href="/triggers/actions/#play-wav">Play WAV</a> plays Ogg Vorbis sounds as well as WAV, in a Brood War map as in a
+Remastered one. 1.16.1 plays only WAV. (Found playing Remastered.)</li>
+<li>A map whose triggers use <a href="/triggers/eud/">EUD</a> values makes Remastered run its triggers in an EUD
+mode, where Deaths conditions and Set Deaths actions reach the game&#39;s memory.</li>
+</ul>
+<p>These were read in its code and also played, with the same result as in 1.16.1: Create
+Unit makes nothing for Player 12, Set Deaths for Player 10 writes nothing in a map without
+EUD triggers, and Bring finds nothing in a location stored inverted.</p>
+<p>Two parts were not read: how Remastered hands out the copies of the triggers when the map
+loads, which is in a scrambled part of its code, and the timing of the passes. For those,
+and for the actions not named here, the page describes 1.16.1.</p>
+<footer class="page-foot">
+  <p>scmJS 0.8.4 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#the-trigger-cycle">The trigger cycle</a></li>
+<li><a href="#hyper-triggers">Hyper triggers</a></li>
+<li><a href="#who-a-trigger-runs-for">Who a trigger runs for</a></li>
+<li><a href="#once-or-every-time">Once, or every time</a></li>
+<li><a href="#waits">Waits</a></li>
+<li><a href="#timers-with-a-death-counter">Timers with a death counter</a></li>
+<li><a href="#single-player-and-multiplayer">Single player and multiplayer</a></li>
+<li><a href="#winning-and-losing">Winning and losing</a></li>
+<li><a href="#counting-units">Counting units</a></li>
+<li><a href="#deaths-and-kills">Deaths and kills</a></li>
+<li><a href="#disabled-conditions-and-actions">Disabled conditions and actions</a></li>
+<li><a href="#condition-and-action-numbers-the-game-does-not-have">Condition and action numbers the game does not have</a></li>
+<li><a href="#in-starcraft-remastered">In StarCraft: Remastered</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+</body>
+</html>
