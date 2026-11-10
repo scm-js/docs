@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The commands — StarCraft mods as text</title>
+<meta name="description" content="It takes a folder (the game&#39;s paths at its root or in a folder under it, as a release keeps them under mpq/), an .mpq, a mod&#39;s .exe or a .zip.">
+<meta property="og:title" content="The commands — StarCraft mods as text">
+<meta property="og:description" content="It takes a folder (the game&#39;s paths at its root or in a folder under it, as a release keeps them under mpq/), an .mpq, a mod&#39;s .exe or a .zip.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/mods/the-commands/">
+<meta property="og:url" content="https://docs.scmjs.dev/mods/the-commands/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="here" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The commands</h1>
+<h2 id="what-a-mod-is">What a mod is<a class="anchor" href="#what-a-mod-is" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod info <span class="s">&quot;Cosmonarchy BW&quot;</span>
+</code></pre>
+<pre><code>Cosmonarchy BW
+A mod for StarCraft 1.16.1, from a folder of the game&#39;s files
+
+  Files            7,769 · 931.1 MB
+  Kinds            11 tables (748 KB), 13 scripts (2.0 MB), 3,894 pictures (254.1 MB), 3,527 sounds (553.1 MB), …
+  Tables           flingy.datex, images.datex, mapdata.datex, orders.datex, portdata.datex, sfxdata.dat, …
+  Extended         flingy.datex: 1,000 entries (the game&#39;s 209), GPTP&#39;s .datex layout
+                   …
+                   units.datex: 3,000 entries (the game&#39;s 228), GPTP&#39;s .datex layout
+  Plugins          _qdp-hotloader.qdp (358 KB), aise.qdp (1.0 MB), gptp.qdp (5.9 MB), … — kept, not run
+  FireGraft        1161.fgd (555 KB), Cosmonarchy BW.fgp (98 KB) — kept, not applied
+  Exe              Cosmonarchy BW.exe: FireGraft&#39;s patcher with 1 plugin (id fc724f8c, 358 KB), its archive at byte 804,352
+  Layers           Cosmonarchy BW.exe then mpq
+  Hash             ac3f86533e4b5a31
+  Without plugins  b13e467fb5abb298 (a page that runs none of the plugins)
+</code></pre>
+<p>It takes a folder (the game&#39;s paths at its root or in a folder under it, as a release
+keeps them under <code class="nw">mpq/</code>), an <code class="nw">.mpq</code>, a mod&#39;s <code class="nw">.exe</code> or a <code class="nw">.zip</code>. A folder&#39;s own archives
+and exes are read too, archives first and loose files over them, the later winning, as the
+game lays its own archives. A self-executing exe is read for the archive appended to it,
+never run: MPQDraft&#39;s self-executing MPQ, or FireGraft&#39;s patcher with its plugins listed.
+A zip&#39;s stored and deflated members are read; a zip64 or encrypted zip is not. An
+archive&#39;s list of its files is taken as its files; an archive with no list is searched for
+the names the game reads. A name the list holds and the archive does not (Cosmonarchy&#39;s
+loader lists six tileset files it never packed) is left out and said.</p>
+<p>A copy of the game in the folder is not the mod. Some downloads carry the whole game the
+mod runs on beside the mod itself; a folder that holds a <code class="nw">StarDat.mpq</code> is taken for such a
+copy, and its own archives (<code class="nw">StarDat.mpq</code>, <code class="nw">BrooDat.mpq</code>, <code class="nw">patch_rt.mpq</code>, <code class="nw">StarCraft.mpq</code>,
+<code class="nw">BroodWar.mpq</code>) and everything under its <code class="nw">Maps</code> folder are left out; a ▲ line names the
+archives among them. Anything else in it, a mod&#39;s own archive or exe put there for one, is
+read as before. A folder that holds only a copy of the game is refused. A single
+<code class="nw">patch_rt.mpq</code> named by itself, the form some older mods ship in, opens as a mod.</p>
+<p>The last two lines are <a href="/mods/the-commands/#the-mods-hash">the mod&#39;s hash</a>. An <code>Older hash</code> line follows them
+when the mod holds files an operating system left in its folders (<code class="nw">desktop.ini</code>,
+<code class="nw">Thumbs.db</code>, <code class="nw">.DS_Store</code>): the hash it had while those counted.</p>
+<h2 id="a-folder-to-edit">A folder to edit<a class="anchor" href="#a-folder-to-edit" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod unpack MyMod.mpq mymod
+</code></pre>
+<pre><code>✔ My Mod: 1,018 files · 41.3 MB · → mymod
+  As text        11 tables, 6 string tables, 1 iscript, 2 AI scripts, 96 overlay files
+  As pictures    832 GRPs (the jungle palette)
+  As they are    70 other files
+  Names          from the mod&#39;s string tables
+</code></pre>
+<p><code>--palette badlands</code> draws the sheets in another tileset&#39;s palette. Unpacking over an
+earlier unpack replaces its folders and leaves anything you added beside them.</p>
+<h2 id="back-into-an-mpq">Back into an MPQ<a class="anchor" href="#back-into-an-mpq" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod pack mymod                    <span class="c"># mymod.mpq beside the folder</span>
+scmjs mod pack mymod -o MyMod.mpq --compression pkware
+scmjs mod pack mymod --folder samase/   <span class="c"># the files loose in the game&#39;s paths</span>
+</code></pre>
+<p>The MPQ has a file list and is compressed with zlib by default (<code class="nw">pkware</code> is what
+Blizzard&#39;s own tools wrote, <code class="nw">none</code> stores the files). The same folder packs into the same
+bytes every time. A sound under <code class="nw">sounds/</code> that is not a WAV (an Ogg, an MP3) is converted
+to one with ffmpeg, when ffmpeg is on your PATH. Files outside the known folders are left
+out and named.</p>
+<h2 id="looking-for-mistakes">Looking for mistakes<a class="anchor" href="#looking-for-mistakes" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod check mymod
+</code></pre>
+<pre><code>My Mod · ✖ 2 errors (over StarCraft 1.16.1 (2 archives))
+  ✖ units 1 (Terran Ghost) ground_weapon: points at weapons 200, past the 130 entries weapons.dat has
+  ✖ images 5 grp_file: names unit\custom\nothere.grp, which is in neither the mod nor the game: the game stops when it draws it
+</code></pre>
+<p>Errors are what makes the game stop or draw nothing: a reference past its table (a unit&#39;s
+weapon, flingy or subunit, a flingy&#39;s sprite, a sprite&#39;s image), a string past its string
+table, an image with no GRP or overlay file, an image whose animation script is missing, a
+button set or requirement for something the tables do not have. Warnings are what is
+probably a mistake: a weapon or animation script the mod added that nothing uses, a sound
+row the mod changed whose file is nowhere, units with the same name, tables in both
+DatExtend&#39;s and GPTP&#39;s layouts. What the mod leaves as the game had it is not judged; the
+game has leftovers of its own. The check runs over your copy of the game when it finds
+one; without one, references to the game&#39;s own files are not looked at, and it says so. It
+exits 1 when there is an error.</p>
+<h2 id="a-changelog">A changelog<a class="anchor" href="#a-changelog" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod diff mymod             <span class="c"># what the mod changes in the game</span>
+scmjs mod diff v1.mpq mymod      <span class="c"># what changed between two versions</span>
+</code></pre>
+<pre><code>StarCraft 1.16.1 (2 archives) → mymod · 6 changes
+
+Tables
+  Terran Marine: ground weapon damage 6 → 7
+  unit 228 added: Terran Maverick
+  sound 69 → Bullet\TGoFir00.wav
+
+Animation scripts
+  iscript: Terran Marine&#39;s GndAttkRpt animation changed
+
+Pictures
+  3 pictures changed, 1 added
+</code></pre>
+<p>A weapon&#39;s change is told through the units that carry it, a sound row&#39;s by the file it
+plays, an animation script&#39;s by the unit drawn with it and the animation that changed.
+With one mod, the other side is your copy of the game.</p>
+<h2 id="starting-a-mod">Starting a mod<a class="anchor" href="#starting-a-mod" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod new mymod --name <span class="s">&quot;My Mod&quot;</span>
+</code></pre>
+<p>writes <code class="nw">mod.json</code> and a README of one paragraph. Put the game&#39;s files you change under
+<code class="nw">files/</code> at their paths (<code class="nw">files/arr/units.dat</code>), or the texts in their folders, and pack.
+Starting from an existing mod is <code>mod unpack</code>.</p>
+<h2 id="check-then-pack">Check, then pack<a class="anchor" href="#check-then-pack" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod build mymod -o MyMod.mpq
+</code></pre>
+<p>runs <code>mod check</code> and, when it finds no error, <code>mod pack</code> with the same options. <code class="nw">--force</code>
+packs anyway.</p>
+<h2 id="playing-it">Playing it<a class="anchor" href="#playing-it" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod play mymod --map <span class="s">&quot;(2)Ridge.scx&quot;</span>
+</code></pre>
+<p>opens the play page in your browser and hands it every file of the mod, its plugins and
+FireGraft files with them, and <a href="/mods/the-commands/#the-mods-hash">the mod&#39;s hash</a>; the page keeps the files
+that differ from your copy of the game. With <code class="nw">--map</code> the map starts with the mod. The
+hand-over is described in the <a href="/cli/mods/">command line&#39;s guide</a>.</p>
+<pre><code class="language-sh">scmjs mod play <span class="s">&quot;Cosmonarchy BW&quot;</span> --map <span class="s">&quot;(4)Exodus 1.0.scx&quot;</span> --bot cosmonarchy-example
+</code></pre>
+<p><code class="nw">--bot</code> puts a community bot on the other side: one of the play page&#39;s bots by its key, or
+a <code class="nw">.scmbot</code> file you built. The map waits on the page&#39;s setup screen with the bot in the
+row beside yours, saying whether it was <a href="/mods/the-commands/#a-bot-for-your-mod">made for the mod</a>, and you
+press Start Game; <code class="nw">--start</code> starts it at once. <code class="nw">--race</code> sets the bot&#39;s race: zerg, terran,
+protoss or random, or a race the mod&#39;s <code class="nw">mod.json</code> <a href="/mods/a-mod-as-a-folder/#races-a-mod-adds">names</a>, by its name
+or its number. The page&#39;s own bots need a scmjs.dev account, and the page asks you to sign
+in; a file of your own does not.</p>
+<h2 id="the-mods-hash">The mod&#39;s hash<a class="anchor" href="#the-mods-hash" aria-label="Link to this section">#</a></h2>
+<p>A mod goes by a hash of sixteen hex digits, worked out the same way by the play page,
+<code>scmjs mod info</code>, the editor&#39;s data sets and the tools that read a replay of the mod, so
+one mod has one hash everywhere. It covers every file the mod provides: each file it lays
+over the game, loose under its game folders or inside its archives (an <code class="nw">.mpq</code>, or the
+archive inside a FireGraft or MPQDraft loader <code class="nw">.exe</code>), each plugin it carries as a file,
+and its FireGraft project (<code class="nw">.fgp</code>). It is never compared with anyone&#39;s copy of the game,
+so two people with different copies give the same mod the same hash, and a release
+unpacked into a folder and packed again keeps it. Left out are what is not the mod&#39;s
+files: a file an archive lists and does not hold, a folder&#39;s read-mes, programs and
+libraries, and FireGraft&#39;s database (<code class="nw">.fgd</code>). A page that does not run the plugins plays
+something else, so beside the hash there is one without the plugins; <code>mod info</code> prints
+both, and a page that runs none of them presents that one. Each file is a line, its name
+and the SHA-256 of its bytes, and the hash is over the sorted lines (<a href="/cli/mods/#playing-a-mod-on-the-play-page">the exact
+form</a>).</p>
+<p><strong>Files an operating system leaves in folders are not the mod&#39;s.</strong> Windows Explorer writes
+<code class="nw">desktop.ini</code> and <code class="nw">Thumbs.db</code> into folders it has shown, the macOS Finder <code class="nw">.DS_Store</code>, and
+a mod&#39;s loader that packs its folder into an archive packs them in too. The game never
+asks for them, and not every way of reading a folder hands them over: a browser&#39;s folder
+picker never shows <code class="nw">desktop.ini</code> or <code class="nw">Thumbs.db</code>, while a dropped folder and the command
+line do. So they have no line in the hash, wherever they lie, and the same mod has the
+same hash however it was read. They are, by name in any case:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>What leaves it</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">desktop.ini</code></td>
+<td>Windows Explorer, a folder&#39;s view and icon</td>
+</tr>
+<tr>
+<td><code class="nw">Thumbs.db</code>, <code class="nw">ehthumbs.db</code>, <code class="nw">ehthumbs_vista.db</code></td>
+<td>Windows Explorer and Media Center, thumbnails</td>
+</tr>
+<tr>
+<td><code class="nw">.DS_Store</code>, <code class="nw">Icon</code> followed by a carriage return</td>
+<td>the macOS Finder, a folder&#39;s view and icon</td>
+</tr>
+<tr>
+<td>a name that starts with <code class="nw">._</code>, and everything under a folder <code class="nw">__MACOSX</code></td>
+<td>macOS, the second half of a file on a disk that is not its own, and the folder its zips keep those in</td>
+</tr>
+<tr>
+<td><code class="nw">.directory</code></td>
+<td>KDE&#39;s file manager, a folder&#39;s view</td>
+</tr>
+</tbody></table>
+<p>A file whose name only holds one of these (<code class="nw">mydesktop.ini</code>, <code class="nw">thumbs.db.txt</code>) is a file of
+the mod like any other. So is every other file a browser&#39;s folder picker does not show.
+Chrome hides more than the two names above: shortcuts (<code class="nw">.lnk</code>, <code class="nw">.url</code>, <code class="nw">.scf</code>), names
+Windows keeps for devices (<code class="nw">aux.wav</code>, <code class="nw">con.grp</code>), and names that begin or end with a space
+or <code class="nw">~</code> or end with a dot; on Windows its list of file types it does not hand to a page
+adds <code class="nw">.ini</code>, <code class="nw">.cfg</code>, <code class="nw">.dll</code> and <code class="nw">.manifest</code>. Those may be a mod&#39;s own (a plugin&#39;s
+<code class="nw">config.ini</code>), so they keep their lines: a mod read through the folder picker is short of
+them, and its hash says so by being another. Read such a mod with <code class="nw">scmjs</code>, or drop its
+folder on the editor or the play page: a dropped folder is read whole.</p>
+<p><strong>The hash before 9 November 2026</strong> had lines for those files, so a mod whose folder holds
+any had another hash then: Cosmonarchy&#39;s release, with a <code class="nw">desktop.ini</code> in two of its sound
+folders, was <code class="nw">1c41a2d7701fe842</code> and is <code class="nw">20e1c6d89ae2af75</code>. A replay saved before that
+date, and a mod a browser kept, name the mod by the older hash. It is still taken wherever
+hashes are compared, where it can be worked out: <code>mod info</code> prints it as <code>Older hash</code>, the
+replay commands accept it, and the play page finds a mod it kept under the older hash by
+the new one and plays an older replay with it. It cannot be worked out by a route that
+never saw the files: a folder chosen with the browser&#39;s folder picker has no older hash,
+so a replay saved before the date is not matched to it. Drop the folder on the play page
+instead.</p>
+<h2 id="testing-with-it">Testing with it<a class="anchor" href="#testing-with-it" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod test mymod ridge.scx
+scmjs map test ridge.scx --mod mymod
+scmjs map trace ridge.scx --mod MyMod.mpq
+</code></pre>
+<p>The game engine&#39;s runners play a map with the mod&#39;s files laid over the game&#39;s, fetched
+from the play page once like any <a href="/cli/getting-started/#commands-that-need-starcraft">command that plays the
+game</a>. These three lay the mod&#39;s files only; its
+plugins and FireGraft project run beside a bot in <code>scmjs bot run</code> and <code>bot ladder</code> (<a href="/mods/the-commands/#a-bot-for-your-mod">a bot
+for your mod</a>). A scenario with a bot on the other side is not there
+yet.</p>
+<h2 id="replays-of-modded-games">Replays of modded games<a class="anchor" href="#replays-of-modded-games" aria-label="Link to this section">#</a></h2>
+<p>A replay holds the players&#39; commands, not the files the game read. Played back with other
+files, the same commands make another game: a unit costs something else, a building is
+somewhere else, and the replay goes its own way. So a replay of a mod says which mod it
+was. scmJS adds a short section at the end of the file, after what the game wrote, that
+holds the mod&#39;s name, <a href="/mods/the-commands/#the-mods-hash">its hash</a> (with its plugins, or without them when
+the page ran none), its makers&#39; link, the plugins that ran and the FireGraft patch
+applied. StarCraft itself does not read it: 1.16.1 plays the file as it would the same
+file without it, and Remastered steps over it as over any section it does not know. The
+<a href="https://github.com/scm-js/replay#mod-identity">replay package&#39;s</a> read-me has the bytes.</p>
+<p>What reads it:</p>
+<ul>
+<li><code>scmjs replay info</code> shows it on the <code class="nw">Mod</code> line. With <code class="nw">--builds</code> it lists what each
+player ordered, by id until <code class="nw">--mod</code> names the mod&#39;s folder, and then with the mod&#39;s
+names and costs. A mod whose data set is not the one the replay names is refused. A
+player of a race the mod adds is named by the section&#39;s <code class="nw">races</code> when it has them, else
+by the <a href="/mods/a-mod-as-a-folder/#races-a-mod-adds"><code class="nw">races</code> of the mod&#39;s <code class="nw">mod.json</code></a> with <code class="nw">--mod</code>, else <code class="nw">Race</code>
+and the number.</li>
+<li><code>scmjs map trace --replay</code> and <code>map cost --replay</code> need the mod named with <code class="nw">--mod</code> and
+check it the same way. A game the mod&#39;s plugins ran in is refused, as the engine&#39;s
+runners do not run plugins.</li>
+<li><code>scmjs replay watch</code>, <code>replay export</code>, <code>map heatmap</code>, <code>map coverage</code> and
+<code>map test record</code> refuse a mod&#39;s replay, or leave it out of a list, for now.</li>
+<li>The play page plays it with the mod it names, switching to that mod when your browser
+keeps it, or saying which mod it needs and where its makers publish it (<a href="/mods/on-the-play-page/">On the play
+page</a>).</li>
+<li>The Aftermath plugin, the editor&#39;s replay viewer, shows the mod and its link, plays the
+replay with the mod your browser keeps, and takes the names and costs from the mod&#39;s
+folder when you attach it (<a href="/guide/replays/#replays-of-a-mod">Replays of a mod</a>).</li>
+</ul>
+<p>The play page writes the section into every replay it saves of a game of a mod: Save
+Replay, and Watch the Replay and Analyse in the Editor at the end of a game. A replay
+StarCraft itself recorded with a mod has no such section. On the play page, choose the mod
+under Mods first; the page then asks whether to watch the replay with the mod or without
+it. Such replays are expected to play, but none has been checked yet.</p>
+<h2 id="a-bot-for-your-mod">A bot for your mod<a class="anchor" href="#a-bot-for-your-mod" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs mod header <span class="s">&quot;Cosmonarchy BW&quot;</span> --out mybot --bot
+</code></pre>
+<p>A <a href="https://github.com/scm-js/scmbot">community bot</a> made for a mod names the mod&#39;s units,
+weapons, upgrades and technologies, which BWAPI&#39;s own names (<code class="nw">Terran_SCV</code>) do not cover.
+<code>mod header</code> writes them for it: <code class="nw">&lt;Mod&gt;.h</code>, C++ for a bot built with scmbot
+(<code>Cosmonarchy_BW::UnitTypes::Terran_Mason</code> is a <code class="nw">BWAPI::UnitType</code>), and <code class="nw">&lt;Mod&gt;.ids.json</code>,
+the same ids and names for bots and tools in other languages. Every name the mod has is
+there, not only the ones it added, since a mod may rename everything. Both files carry the
+mod&#39;s name and <a href="/mods/the-commands/#the-mods-hash">its hash</a>. With <code class="nw">--bot</code>, <code class="nw">--out</code> is the bot&#39;s folder and
+its <code class="nw">scmbot.json</code> gains the mod; <code>scmbot build</code> writes it into the <code class="nw">.scmbot</code> file, and
+when the bot plays, the runners say &quot;made for&quot; the mod when the game&#39;s mod is that one,
+&quot;plays vanilla data&quot; for a bot made for no mod, and warn (the game still plays) for a bot
+made for another. The scmbot repository&#39;s <code class="nw">examples/cosmonarchy/</code> is a small bot for
+Cosmonarchy written against such a header. See <a href="/cli/mods/#a-bot-made-for-a-mod">the command</a>
+for the names&#39; rules. To try a bot on the mod without a page,
+<code>scmjs bot run mybot/out/mybot.scmbot &quot;(4)Exodus 1.0.scx&quot; --mod &quot;Cosmonarchy BW&quot;</code> plays it
+with the mod&#39;s plugins, and <code>scmjs bot ladder … --mod</code> plays a ladder on the mod (<a href="/cli/bots/#a-bot-on-a-mod">a bot
+on a mod</a>).</p>
+<h2 id="for-ai-tools">For AI tools<a class="anchor" href="#for-ai-tools" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs mcp</code> has the mod commands as tools: <code class="nw">mod_info</code>, <code class="nw">mod_check</code>, <code class="nw">mod_diff</code>,
+<code class="nw">mod_unpack</code>, <code class="nw">mod_pack</code>, <code class="nw">mod_new</code>, <code class="nw">mod_header</code> and <code class="nw">mod_play</code>. An AI tool can unpack a
+mod, change a table&#39;s text and pack it again, as you would, write the header for a bot,
+and hand the mod with a map and a bot to the play page in your browser, which it says the
+link to and what the page answered. <code class="nw">map_trace</code> and <code class="nw">map_cost</code> take a <code class="nw">mod</code>. See <a href="/cli/for-developers/#ai-tools">AI
+tools</a>.</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#what-a-mod-is">What a mod is</a></li>
+<li><a href="#a-folder-to-edit">A folder to edit</a></li>
+<li><a href="#back-into-an-mpq">Back into an MPQ</a></li>
+<li><a href="#looking-for-mistakes">Looking for mistakes</a></li>
+<li><a href="#a-changelog">A changelog</a></li>
+<li><a href="#starting-a-mod">Starting a mod</a></li>
+<li><a href="#check-then-pack">Check, then pack</a></li>
+<li><a href="#playing-it">Playing it</a></li>
+<li><a href="#the-mods-hash">The mod&#39;s hash</a></li>
+<li><a href="#testing-with-it">Testing with it</a></li>
+<li><a href="#replays-of-modded-games">Replays of modded games</a></li>
+<li><a href="#a-bot-for-your-mod">A bot for your mod</a></li>
+<li><a href="#for-ai-tools">For AI tools</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

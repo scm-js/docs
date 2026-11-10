@@ -1,0 +1,1221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Running a map in the game — StarCraft maps and replays on the command line</title>
+<meta name="description" content="These commands start the map in the game itself, the engine of the play page, with the game&#39;s files from your copy of StarCraft (what they need).">
+<meta property="og:title" content="Running a map in the game — StarCraft maps and replays on the command line">
+<meta property="og:description" content="These commands start the map in the game itself, the engine of the play page, with the game&#39;s files from your copy of StarCraft (what they need).">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/cli/running-a-map-in-the-game/">
+<meta property="og:url" content="https://docs.scmjs.dev/cli/running-a-map-in-the-game/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="here" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Running a map in the game</h1>
+<p>These commands start the map in the game itself, the engine of the play page, with the
+game&#39;s files from your copy of StarCraft (<a href="/cli/getting-started/#commands-that-need-starcraft">what they
+need</a>). Nobody has to play: the game runs as fast as the
+computer can run it. Or the players of a recorded game play it: <code class="nw">--replay</code> gives the game
+the commands from a replay, so the game in a bug report can be traced and tested. A map in
+the original StarCraft 1.00 form is run as Brood War, as the editor would convert it. The
+Blizzard campaign maps are not something the engine runs yet. Each command exits with 2
+when the game could not start.</p>
+<h2 id="which-triggers-fire">Which triggers fire<a class="anchor" href="#which-triggers-fire" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map trace</code> starts the map as a Use Map Settings game, with your seat left idle and
+the computers as the map sets them, runs it for a while, and records every condition the
+game checks and every action it runs. The report has a line per trigger, with how often it
+fired, when first and last, and whose it is. Then come the triggers that never fired, each
+with the condition that last said no.</p>
+<p><img src="/images/cli-map-trace.webp" alt="map trace on a test map: one trigger fired once, two never fired"></p>
+<p><em><code>scmjs map trace ums.scx</code>. Nobody brings a Marine to the middle, so the trigger waiting
+for one never fires.</em></p>
+<p>The game runs the triggers about every two seconds; each run is a pass, and a trigger that
+fires on every pass is a preserved one. A count with <code class="nw">+n</code> after it is a trigger whose Wait
+held it and then let it go on <code class="nw">n</code> times.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">--frames</code></td>
+<td>How long to run, at 24 frames a second. The default, 2,400, is 100 seconds of play; the game may end sooner if a trigger ends it</td>
+</tr>
+<tr>
+<td><code class="nw">--seed</code></td>
+<td>Fixes the game&#39;s luck, so the same map and seed give the same run</td>
+</tr>
+<tr>
+<td><code class="nw">--all</code></td>
+<td>Lists every trigger, when the map has more than forty</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>The same, per trigger, as data</td>
+</tr>
+</tbody></table>
+<p>Nobody plays, so nothing a player would do happens. A trigger waiting for a unit to be
+brought somewhere will say so, which is the point.</p>
+<h2 id="what-the-triggers-cost">What the triggers cost<a class="anchor" href="#what-the-triggers-cost" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map cost</code> runs the map the same way and weighs every trigger the game passes and
+every condition and action it runs, as StarCraft: Remastered charges for them. The model
+is the one TrigScript&#39;s editor uses, measured on the real game: a Deaths condition costs
+about five nanoseconds, and the game stays smooth up to about fifteen milliseconds of
+triggers a frame. The report says what a frame costs on average where triggers ran and at
+most, how that compares with what a frame can carry, and which triggers cost the most:</p>
+<pre><code>✔ trigscript-frame-cost.scx: triggers cost 0.025 ms a frame on average where they ran (599 of 601 frames), 1.10 ms at the most (frame 2: 83,787 records, 53,192 triggers)
+  Remastered on a fast computer: smooth to about 15 ms of triggers a frame, slows past 37 ms
+  83,787 of the records ran in no trigger of the map — a program&#39;s own (TrigScript, eudplib), 1.10 ms in all
+</code></pre>
+<p>A TrigScript or eudplib program runs its own records through the EUD trigger chain rather
+than through the map&#39;s trigger list. For such a map the cost is in the first lines, and
+the triggers listed are only the ones that start the program. TrigScript&#39;s editor shows a
+program&#39;s cost line by line.</p>
+<h2 id="triggers-in-a-replays-game">Triggers in a replay&#39;s game<a class="anchor" href="#triggers-in-a-replays-game" aria-label="Link to this section">#</a></h2>
+<p>When someone sends a replay of a game where the map went wrong, <code class="nw">--replay</code> plays that game
+with the trace on. The players&#39; own commands drive it, people and computers as they
+played, to the end of the replay.</p>
+<pre><code class="language-sh">scmjs map trace --replay report.rep --order
+</code></pre>
+<p>A replay of a mod needs that mod named with <code class="nw">--mod</code>, and the command checks that the mod&#39;s
+data set is the one the replay names before it plays. A game the mod&#39;s plugins ran in is
+refused: the engine&#39;s runners lay a mod&#39;s files over the game&#39;s and run no plugin.</p>
+<p>The report is the one above, with two differences. The first and last firings are given on
+the game&#39;s clock, <code class="nw">m:ss</code> at Fastest as the replay viewer counts it, and only the triggers
+owned by the players in the game are listed. <code class="nw">--order</code> adds every firing in the order the
+game ran them: the time, the frame, whose copy of the trigger it was, and the trigger.</p>
+<pre><code>$ scmjs map trace --replay 1631.rep --order
+1631.rep 128 × 128, jungle · 4 players · 10:16 · 1,713 triggers (12 copies in the game) · Remastered files
+
+✔ 1631.rep: 1,713 triggers (5 owned by the players) · 14,662 frames (10:16), Ever)Z(bOy won · 473 passes · 4 fired · 1 never · 6.2 s
+
+  #     Fired  First  Last   Players      Trigger
+  1709  2      0:00   0:00   P3 P4        Elapsed Time(At least, 0) → Set Resources(&quot;Current Player&quot;, S…
+  1710  2      0:00   0:00   P5 P6        Always() → Run AI Script(&quot;Turn ON Shared Vision for Player 1&quot;…
+  1711  0      –      –      P3 P4        Command(&quot;Current Player&quot;, &quot;Buildings&quot;, At most, 0) → Defeat()
+  1712  1      10:13  10:13  P3 P4        Command(&quot;Non Allied Victory Players&quot;, &quot;Buildings&quot;, At most, 0…
+  1713  4      0:00   0:00   P3 P4 P5 P6  Elapsed Time(Exactly, 0) → Display Text Message(Always Displa…
+
+  Never fired (1 of 5)
+  ▸ #1711  Command(&quot;Current Player&quot;, &quot;Buildings&quot;, At most, 0) → Defeat()
+      Command (condition 1) said no last, at frame 14,634
+
+  In the order they fired (9)
+  Clock  Frame   Player          #      Trigger
+  0:00   2       P3 ErOs_Class   #1709  Elapsed Time(At least, 0) → Set Resources(&quot;Current Player&quot;…
+  0:00   2       P3 ErOs_Class   #1713  Elapsed Time(Exactly, 0) → Display Text Message(Always Dis…
+  0:00   2       P4 Ever)Z(bOy   #1709  Elapsed Time(At least, 0) → Set Resources(&quot;Current Player&quot;…
+  0:00   2       P4 Ever)Z(bOy   #1713  Elapsed Time(Exactly, 0) → Display Text Message(Always Dis…
+  0:00   2       P5 ErOs_Kyoung  #1710  Always() → Run AI Script(&quot;Turn ON Shared Vision for Player…
+  0:00   2       P5 ErOs_Kyoung  #1713  Elapsed Time(Exactly, 0) → Display Text Message(Always Dis…
+  0:00   2       P6 iCoN`MisO    #1710  Always() → Run AI Script(&quot;Turn ON Shared Vision for Player…
+  0:00   2       P6 iCoN`MisO    #1713  Elapsed Time(Exactly, 0) → Display Text Message(Always Dis…
+  10:13  14,603  P4 Ever)Z(bOy   #1712  Command(&quot;Non Allied Victory Players&quot;, &quot;Buildings&quot;, At most…
+</code></pre>
+<p>With no map named, the game is played on the map inside the replay. Name a map as well to
+play the replay&#39;s commands on that map instead, such as the fixed version of the one in
+the bug report:</p>
+<pre><code class="language-sh">scmjs map trace fixed.scx --replay report.rep
+</code></pre>
+<p>The command says first how the map differs from the one in the replay. A replay is only
+the players&#39; commands, so a changed map can make the game go out of step. When a unit a
+player clicked is not there, or a building cannot be placed, the game plays on with
+commands meant for another game. Changes to triggers alone usually keep it in step.
+Changes to units, terrain or resources usually do not. The game checks each command
+against what it has, and the report says when and where the game parted from the replay.
+What fired before that point is what happened.</p>
+<p><code>scmjs map cost --replay</code> weighs the triggers of the replay&#39;s game in the same way.
+<code class="nw">--frames</code> stops the game sooner. Left out, the whole replay is played. In a game that is
+not Use Map Settings, the game runs its own melee triggers rather than the map&#39;s, and the
+report says so.</p>
+<h2 id="testing-a-maps-triggers">Testing a map&#39;s triggers<a class="anchor" href="#testing-a-maps-triggers" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map test</code> checks that a map&#39;s triggers do what you meant, in the game. You write
+scenarios in a tests file: what the game starts with, what happens at given times, how
+long to play, and what must be true at the end. Each scenario is one game. A scenario that
+fails says what did not hold and what was there instead, and keeps the game&#39;s replay so
+you can watch what happened.</p>
+<p><img src="/images/cli-map-test.webp" alt="map test on a test map: two scenarios pass, the third fails with five expectations listed"></p>
+<p><em><code>scmjs map test ums.scx</code>, with the tests file kept beside the test map.</em></p>
+<p>Here the third scenario found something real: the test map has no ground a Marine can
+stand on, so the Marine never appeared and the trigger waiting for it never fired. That is
+why a failed scenario lists the game&#39;s own warnings from its start.</p>
+<h2 id="the-tests-file">The tests file<a class="anchor" href="#the-tests-file" aria-label="Link to this section">#</a></h2>
+<p>The tests are read from <code class="nw">&lt;map&gt;.tests.json</code> beside the map (<code class="nw">ums.tests.json</code> for
+<code class="nw">ums.scx</code>), or from the files named after the map on the command line. The file is JSON:</p>
+<pre><code class="language-json">{
+  <span class="s">&quot;scenarios&quot;</span>: [
+    {
+      <span class="s">&quot;name&quot;</span>: <span class="s">&quot;the alarm wins the game&quot;</span>,
+      <span class="s">&quot;frames&quot;</span>: <span class="s">&quot;0:20&quot;</span>,
+      <span class="s">&quot;steps&quot;</span>: [
+        { <span class="s">&quot;at&quot;</span>: <span class="n">24</span>, <span class="s">&quot;chat&quot;</span>: <span class="s">&quot;glhf&quot;</span> },
+        { <span class="s">&quot;at&quot;</span>: <span class="s">&quot;0:02&quot;</span>, <span class="s">&quot;create&quot;</span>: <span class="s">&quot;Terran Wraith&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;location&quot;</span>: <span class="s">&quot;Middle&quot;</span> },
+        { <span class="s">&quot;at&quot;</span>: <span class="s">&quot;0:05&quot;</span>, <span class="s">&quot;switch&quot;</span>: <span class="s">&quot;Alarm raised&quot;</span>, <span class="s">&quot;state&quot;</span>: <span class="s">&quot;set&quot;</span> }
+      ],
+      <span class="s">&quot;expect&quot;</span>: [
+        { <span class="s">&quot;trigger&quot;</span>: <span class="s">&quot;Opening&quot;</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">1</span> },
+        { <span class="s">&quot;text&quot;</span>: <span class="s">&quot;Hold the base.&quot;</span> },
+        { <span class="s">&quot;units&quot;</span>: <span class="s">&quot;Terran Wraith&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;location&quot;</span>: <span class="s">&quot;Middle&quot;</span>, <span class="s">&quot;is&quot;</span>: <span class="n">1</span> },
+        { <span class="s">&quot;switch&quot;</span>: <span class="s">&quot;Alarm raised&quot;</span>, <span class="s">&quot;is&quot;</span>: <span class="s">&quot;set&quot;</span> },
+        { <span class="s">&quot;outcome&quot;</span>: <span class="s">&quot;victory&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span> },
+        { <span class="s">&quot;ended&quot;</span>: <span class="k">true</span> }
+      ]
+    },
+    {
+      <span class="s">&quot;name&quot;</span>: <span class="s">&quot;a Marine brought to the middle raises the alarm&quot;</span>,
+      <span class="s">&quot;frames&quot;</span>: <span class="s">&quot;0:25&quot;</span>,
+      <span class="s">&quot;setup&quot;</span>: [
+        { <span class="s">&quot;create&quot;</span>: <span class="s">&quot;Terran Marine&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;location&quot;</span>: <span class="s">&quot;Middle&quot;</span> }
+      ],
+      <span class="s">&quot;expect&quot;</span>: [
+        { <span class="s">&quot;trigger&quot;</span>: <span class="n">2</span> },
+        { <span class="s">&quot;switch&quot;</span>: <span class="s">&quot;Alarm raised&quot;</span>, <span class="s">&quot;is&quot;</span>: <span class="s">&quot;set&quot;</span> }
+      ]
+    }
+  ]
+}
+</code></pre>
+<p>A scenario has a <code class="nw">name</code>, and may have <code class="nw">frames</code>, <code class="nw">seed</code>, <code class="nw">setup</code>, <code class="nw">steps</code> and <code class="nw">expect</code>.
+<code class="nw">frames</code> is how long to play: a number of frames, 24 to a second at Fastest, or <code class="nw">&quot;m:ss&quot;</code>;
+2,400 unless the file or <code class="nw">--frames</code> says otherwise. <code class="nw">frames</code> and <code class="nw">seed</code> at the top of the
+file apply to every scenario that does not set its own.</p>
+<p>A scenario may name a <code class="nw">replay</code> instead of <code class="nw">setup</code> and <code class="nw">steps</code>. The replay&#39;s commands drive
+the game, played on the map being tested, and the scenario plays to the replay&#39;s end
+unless <code class="nw">frames</code> says otherwise:</p>
+<pre><code class="language-json">{
+  <span class="s">&quot;name&quot;</span>: <span class="s">&quot;the bunker fills at 7:30&quot;</span>,
+  <span class="s">&quot;replay&quot;</span>: <span class="s">&quot;reports/bunker.rep&quot;</span>,
+  <span class="s">&quot;expect&quot;</span>: [
+    { <span class="s">&quot;trigger&quot;</span>: <span class="s">&quot;Bunker full&quot;</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">1</span> },
+    { <span class="s">&quot;outcome&quot;</span>: <span class="s">&quot;victory&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span> }
+  ]
+}
+</code></pre>
+<p>The path is relative to the tests file&#39;s folder. <code class="nw">seed</code> does nothing here, because the
+game uses the replay&#39;s own. Such a scenario takes no <code class="nw">setup</code> or <code class="nw">steps</code>, since anything
+added to the game would take it out of step with the replay. <code>scmjs map test record</code>
+writes these scenarios for you (<a href="/cli/running-a-map-in-the-game/#a-test-from-a-replay">below</a>).</p>
+<p>Things are named as the trigger window names them:</p>
+<table>
+<thead>
+<tr>
+<th>Thing</th>
+<th>Written as</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Player</td>
+<td>A number from 1 to 12, or <code>&quot;Player 1&quot;</code>. Where a trigger would take a group, <code>&quot;All Players&quot;</code>, <code>&quot;Force 1&quot;</code>, <code class="nw">&quot;Foes&quot;</code> and <code class="nw">&quot;Allies&quot;</code> too</td>
+</tr>
+<tr>
+<td>Unit</td>
+<td>Its name (<code>&quot;Terran Marine&quot;</code>, or <code class="nw">&quot;Marine&quot;</code> when that is clear), a class (<code>&quot;Any unit&quot;</code>, <code class="nw">&quot;Men&quot;</code>, <code class="nw">&quot;Buildings&quot;</code>, <code class="nw">&quot;Factories&quot;</code>), or its number in units.dat</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>Its name, <code class="nw">&quot;Anywhere&quot;</code>, or its number</td>
+</tr>
+<tr>
+<td>Switch</td>
+<td>Its name, <code>&quot;Switch 3&quot;</code>, or a number from 1 to 256</td>
+</tr>
+<tr>
+<td>Trigger</td>
+<td>The number <code>scmjs map trace</code> prints for it, or the text of its Comment action</td>
+</tr>
+</tbody></table>
+<p>A name the map does not have is an error that lists the names it does have.</p>
+<p><code class="nw">setup</code> is what the game starts with. Each entry does one thing:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{ &quot;create&quot;: unit, &quot;player&quot;: p, &quot;count&quot;: n, &quot;location&quot;: l }</code></td>
+<td>Creates the units (one unless <code class="nw">count</code> says)</td>
+</tr>
+<tr>
+<td><code>{ &quot;kill&quot;: unit, &quot;player&quot;: p, &quot;count&quot;: n, &quot;location&quot;: l }</code></td>
+<td>Kills the units (all of them unless <code class="nw">count</code> says)</td>
+</tr>
+<tr>
+<td><code>{ &quot;remove&quot;: unit, &quot;player&quot;: p, &quot;count&quot;: n, &quot;location&quot;: l }</code></td>
+<td>Removes the units, as Remove Unit does</td>
+</tr>
+<tr>
+<td><code>{ &quot;give&quot;: unit, &quot;player&quot;: p, &quot;to&quot;: q, &quot;count&quot;: n, &quot;location&quot;: l }</code></td>
+<td>Gives the units to player <code class="nw">q</code></td>
+</tr>
+<tr>
+<td><code>{ &quot;switch&quot;: s, &quot;state&quot;: &quot;set&quot; }</code></td>
+<td>Sets the switch (<code class="nw">&quot;clear&quot;</code> and <code class="nw">&quot;toggle&quot;</code> too)</td>
+</tr>
+<tr>
+<td><code>{ &quot;minerals&quot;: n, &quot;player&quot;: p }</code>, <code>{ &quot;gas&quot;: n, &quot;player&quot;: p }</code></td>
+<td>Sets the player&#39;s minerals or gas; <code class="nw">&quot;+100&quot;</code> adds, <code class="nw">&quot;-100&quot;</code> takes away</td>
+</tr>
+<tr>
+<td><code>{ &quot;deaths&quot;: unit, &quot;player&quot;: p, &quot;count&quot;: n }</code></td>
+<td>Sets the death count, with the same <code class="nw">+</code> and <code class="nw">-</code></td>
+</tr>
+<tr>
+<td><code>{ &quot;action&quot;: &quot;Set Countdown Timer(Set To, 60)&quot; }</code></td>
+<td>Any action, in the trigger window&#39;s text form; a list of them works too</td>
+</tr>
+</tbody></table>
+<p><code class="nw">location</code> is Anywhere when left out.</p>
+<p><code class="nw">steps</code> happen during the game. Each has <code class="nw">at</code>, a frame or <code class="nw">&quot;m:ss&quot;</code>, and one of the entries
+above, or one of these, which are your own commands as a player would give them:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{ &quot;at&quot;: t, &quot;order&quot;: &quot;move&quot;, &quot;unit&quot;: u, &quot;location&quot;: l, &quot;to&quot;: m }</code></td>
+<td>Orders your units of that type in location <code class="nw">l</code> to location <code class="nw">m</code>: <code class="nw">&quot;move&quot;</code>, <code class="nw">&quot;attack&quot;</code> (attack-move) or <code class="nw">&quot;patrol&quot;</code>; <code class="nw">&quot;stop&quot;</code> and <code class="nw">&quot;hold&quot;</code> need no <code class="nw">to</code>. <code class="nw">unit</code> is Any unit and <code class="nw">location</code> Anywhere when left out</td>
+</tr>
+<tr>
+<td><code>{ &quot;at&quot;: t, &quot;chat&quot;: &quot;text&quot; }</code></td>
+<td>Sends a chat line, which shows on screen like any other</td>
+</tr>
+</tbody></table>
+<p>You play the map&#39;s first slot that is open to a person, as when you start the map alone,
+and the computers play as the map sets them. Your commands reach the game at the frame
+given. The other steps are carried out by the game&#39;s triggers, which run about every 31
+frames (1.3 seconds), so they happen at the first pass after the game&#39;s clock reaches
+their time.</p>
+<p><code class="nw">expect</code> is what must be true when the scenario ends:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>Holds when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>{ &quot;trigger&quot;: t, &quot;fired&quot;: n }</code></td>
+<td>The trigger fired that many times; <code class="nw">true</code> (the default) is at least once, <code class="nw">false</code> is never</td>
+</tr>
+<tr>
+<td><code>{ &quot;switch&quot;: s, &quot;is&quot;: &quot;set&quot; }</code></td>
+<td>The switch is set, or <code class="nw">&quot;clear&quot;</code></td>
+</tr>
+<tr>
+<td><code>{ &quot;deaths&quot;: unit, &quot;player&quot;: p, &quot;is&quot;: n }</code></td>
+<td>The player&#39;s death count for that unit</td>
+</tr>
+<tr>
+<td><code>{ &quot;minerals&quot;: n, &quot;player&quot;: p }</code>, <code>{ &quot;gas&quot;: n, &quot;player&quot;: p }</code></td>
+<td>The player&#39;s minerals or gas</td>
+</tr>
+<tr>
+<td><code>{ &quot;units&quot;: unit, &quot;player&quot;: p, &quot;location&quot;: l, &quot;is&quot;: n }</code></td>
+<td>How many of the units the player has there, counted as the Bring condition counts them (as Command counts them when there is no <code class="nw">location</code>; <code class="nw">player</code> is All Players when left out)</td>
+</tr>
+<tr>
+<td><code>{ &quot;text&quot;: &quot;words&quot; }</code></td>
+<td>The words were on your screen at some point: trigger text, transmissions, chat. <code>&quot;shown&quot;: false</code> for words that must not appear. In a replay&#39;s game, the screen is the replay viewer&#39;s</td>
+</tr>
+<tr>
+<td><code>{ &quot;outcome&quot;: &quot;victory&quot;, &quot;player&quot;: p }</code></td>
+<td>The player&#39;s game ended in victory (<code class="nw">&quot;defeat&quot;</code>, <code class="nw">&quot;draw&quot;</code>, or <code class="nw">&quot;none&quot;</code> for no outcome yet)</td>
+</tr>
+<tr>
+<td><code>{ &quot;ended&quot;: true }</code></td>
+<td>The game ended before the scenario&#39;s frames ran out (<code class="nw">false</code>: it was still going)</td>
+</tr>
+</tbody></table>
+<p>A count is a number, meaning exactly that many, or a comparison such as <code>&quot;&gt;= 2&quot;</code>, <code>&quot;&lt; 5&quot;</code>
+or <code>&quot;!= 0&quot;</code>. The text shown and how often a trigger fired cover the whole game; everything
+else is read when the scenario ends.</p>
+<h2 id="how-a-test-runs">How a test runs<a class="anchor" href="#how-a-test-runs" aria-label="Link to this section">#</a></h2>
+<p>The setup and the timed steps become triggers in a copy of the map. The setup is one
+trigger placed before the map&#39;s own, owned by the first player in the game, with the
+condition Always, so it runs first in the first pass. Each step is a trigger placed after
+the map&#39;s own with an Elapsed Time condition. Your map file is not changed, and the
+trigger numbers in the report are the map&#39;s own.</p>
+<p>Because these triggers are part of the copy, the replay holds them. A failed scenario&#39;s
+replay is kept in <code class="nw">&lt;map&gt;.tests/</code> beside the map (or where <code class="nw">--out</code> says) and plays back the
+scenario exactly as it ran. <code>scmjs replay open</code> opens it in the editor, where the test&#39;s
+own triggers show first and last among the map&#39;s.</p>
+<p><code class="nw">--clips</code> also keeps a clip of each failed scenario, to see what went wrong without
+opening the replay: the eight seconds of its game up to the moment it ended, and two more,
+as <a href="/cli/replays/#a-video-or-gif-of-a-replay"><code>replay export</code></a> draws them, the camera following your
+units. A clip is a GIF named after the tests file and the scenario, such as
+<code>ums.tests.a-marine-brought-to-the-middle-raises-the-alarm.gif</code>, in <code class="nw">&lt;map&gt;.clips/</code> beside
+the map, or in the folder <code class="nw">--clips</code> names. <code>--clips-format webm</code> makes WebM files instead.
+Each clip gets a line after the summary, <code class="nw">--json</code> lists them, and <code>--format github</code>,
+<code class="nw">junit</code> and <code class="nw">sarif</code> name a scenario&#39;s clip in its failure. The clips are drawn in a
+browser on your computer, as <code>replay export</code> draws, so they need Chrome, Chromium or Edge;
+without one the command says so once and the result of the tests stands. A scenario that
+plays a replay has no clip of its own, since its game is that replay.</p>
+<pre><code>$ scmjs map test ums.scx --clips
+…
+✖ 2 of 3 scenarios failed (10.0 s)
+  ✔ ums.clips/ums.tests.the-carrier-flies-to-the-middle-which-is-not-a-marine.gif · 228 KB · 0:08 · 0:32–0:40 of the game
+  ✔ ums.clips/ums.tests.a-marine-brought-to-the-middle-raises-the-alarm.gif · 254 KB · 0:08 · 0:17–0:25 of the game
+  2 clips of the failed scenarios in ums.clips
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--clips [folder]</code></td>
+<td>A GIF of the end of each failed scenario&#39;s game, in <code class="nw">&lt;map&gt;.clips/</code> or the folder named</td>
+</tr>
+<tr>
+<td><code>--clips-format webm</code></td>
+<td>The clips as WebM files rather than GIFs</td>
+</tr>
+<tr>
+<td><code class="nw">--seed</code></td>
+<td>The game&#39;s random seed for scenarios that do not set one; the same map, scenario and seed give the same game every time</td>
+</tr>
+<tr>
+<td><code class="nw">--frames</code></td>
+<td>How long to play, for scenarios and files that do not say</td>
+</tr>
+<tr>
+<td><code class="nw">--out</code></td>
+<td>Where the failed scenarios&#39; replays go</td>
+</tr>
+<tr>
+<td><code class="nw">-u</code>, <code class="nw">--update</code></td>
+<td>For scenarios that play a replay: the expectations that no longer hold are rewritten to what the game gives now</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>Every scenario with each expectation, whether it held and what the game had</td>
+</tr>
+<tr>
+<td><code>--format github</code>, <code class="nw">junit</code>, <code class="nw">sarif</code></td>
+<td>The failures in the forms CI tools read, as for <a href="/cli/looking-inside-a-map/#checking-a-map"><code>map check</code></a>, each placed on the scenario&#39;s line in the tests file</td>
+</tr>
+</tbody></table>
+<p>The command exits with 1 when a scenario fails, and with 2 when the tests file or the map
+cannot be read or the game could not start. It needs the game, so it does not run on
+GitHub&#39;s own runners; the workflow <code>scmjs init</code> writes leaves it out and says how to run
+it on a runner of your own that has the game.</p>
+<p>A test cannot yet have a player leave (you are the only person in the game) or give the
+computers&#39; own commands, except by playing a replay of a game where they did.</p>
+<h2 id="a-test-from-a-replay">A test from a replay<a class="anchor" href="#a-test-from-a-replay" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map test record</code> turns a replay into a test. It plays the replay on the map, as
+<a href="/cli/running-a-map-in-the-game/#triggers-in-a-replays-game"><code>map trace --replay</code></a> does, and writes a scenario into the
+map&#39;s tests file with everything the game ended with as expectations:</p>
+<pre><code>$ scmjs map test record 1631.scx 1631.rep --name &quot;2v2 to the end&quot;
+✔ Recorded &quot;2v2 to the end&quot; into 1631.tests.json · 14,662 frames (10:16) · 40 expectations · 6.5 s
+  5 triggers, 1 line shown, 4 outcomes, 1 end, 8 unit counts, 4 minerals, 4 gas, 13 death counts
+</code></pre>
+<p>The scenario it wrote begins:</p>
+<pre><code class="language-json">{
+  <span class="s">&quot;name&quot;</span>: <span class="s">&quot;2v2 to the end&quot;</span>,
+  <span class="s">&quot;replay&quot;</span>: <span class="s">&quot;1631.rep&quot;</span>,
+  <span class="s">&quot;frames&quot;</span>: <span class="n">14662</span>,
+  <span class="s">&quot;expect&quot;</span>: [
+    { <span class="s">&quot;trigger&quot;</span>: <span class="n">1709</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">2</span> },
+    { <span class="s">&quot;trigger&quot;</span>: <span class="n">1710</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">2</span> },
+    { <span class="s">&quot;trigger&quot;</span>: <span class="n">1711</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">0</span> },
+    { <span class="s">&quot;trigger&quot;</span>: <span class="n">1712</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">1</span> },
+    { <span class="s">&quot;trigger&quot;</span>: <span class="n">1713</span>, <span class="s">&quot;fired&quot;</span>: <span class="n">4</span> },
+    { <span class="s">&quot;text&quot;</span>: <span class="s">&quot;ErOs_Class has left the game.&quot;</span>, <span class="s">&quot;shown&quot;</span>: <span class="k">true</span> },
+    { <span class="s">&quot;outcome&quot;</span>: <span class="s">&quot;defeat&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">3</span> },
+    { <span class="s">&quot;outcome&quot;</span>: <span class="s">&quot;victory&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">4</span> },
+</code></pre>
+<p>The expectations are a snapshot of the end of the game: how often each trigger the players
+own fired (<code class="nw">0</code> for the ones that never did), the switches that are set and the named ones
+that are clear, the lines shown that were not chat, each player&#39;s outcome, whether the
+game ended, each player&#39;s men and buildings, minerals and gas, and every death count.
+Triggers, switches and units are named as the map names them, where the map has a name for
+them. Each expectation is one line of the file, so delete the lines you do not care about
+and keep the ones the test is for.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">--name</code></td>
+<td>The scenario&#39;s name; the replay&#39;s file name by default. A scenario with that name is replaced</td>
+</tr>
+<tr>
+<td><code class="nw">--tests</code></td>
+<td>The tests file to write into; <code class="nw">&lt;map&gt;.tests.json</code> beside the map by default, made if it is not there</td>
+</tr>
+<tr>
+<td><code class="nw">--frames</code></td>
+<td>How much of the replay to play; all of it by default</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>The scenario as written, with the game&#39;s end</td>
+</tr>
+</tbody></table>
+<p>From then on <code>scmjs map test</code> plays the replay against the map as it is now. After a
+change you meant to make, <code>scmjs map test map.scx -u</code> rewrites the expectations of
+replay-driven scenarios that no longer hold to what the game gives now. Only the values
+change. The expectations you deleted stay deleted, and a comparison such as <code>&quot;&gt;= 3&quot;</code> that
+still holds is left alone. Scenarios with steps are never rewritten. If the map changed so
+much that the game parted from the replay, the report says when, as <code>map trace --replay</code>
+does.</p>
+<h2 id="which-triggers-fired-across-many-games">Which triggers fired across many games<a class="anchor" href="#which-triggers-fired-across-many-games" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map coverage</code> plays a folder of replays on the map, each as
+<a href="/cli/running-a-map-in-the-game/#triggers-in-a-replays-game"><code>map trace --replay</code></a> plays one, and adds up what fired. It
+answers whether a trigger ever fires when people play the map. A trigger that never fired
+in any of the games is either one nobody reaches or one that is broken, so those are
+listed clearly.</p>
+<pre><code class="language-sh">scmjs map coverage td.scx replays/
+</code></pre>
+<p>Replays are files or folders, sub-folders included. Only replays of this map count: the
+same map, or one with the same name and size, as for
+<a href="/cli/replays/#where-things-happened-across-many-games"><code>map heatmap</code></a>. Only Use Map Settings games
+count too, since in the other game types the game runs its own melee triggers. Every
+replay left out is listed with the reason. Several games are played at once: half the
+processors, at most four, or <code class="nw">--parallel</code>.</p>
+<pre><code>$ scmjs map coverage fs.scx replays/ --force
+fs.scx · 4 triggers · 6 replays to play, 4 at a time
+1/6 ▲ 1570.rep  25:24 · 6 players · 2 triggers fired · parted at 0:00, counted to there · 6.6 s
+2/6 ▲ 1571.rep  31:59 · 6 players · 2 triggers fired · parted at 0:00, counted to there · 7.3 s
+3/6 ▲ 1544.rep  49:11 · 4 players · 2 triggers fired · parted at 1:46, counted to there · 10.7 s
+4/6 ▲ 1631.rep  10:16 · 4 players · 2 triggers fired · parted at 0:34, counted to there · 5.5 s
+5/6 ▲ 1635.rep  37:42 · 3 players · 2 triggers fired · parted at 0:00, counted to there · 8.1 s
+6/6 ✔ 1603.rep  34:08 · 4 players · 3 triggers fired · 30.5 s
+
+▲ fs.scx: 3 of 4 triggers fired in 6 games; 1 never fired
+▲ 5 games parted from the map: 1544.rep at 1:46, 1570.rep at 0:00, 1571.rep at 0:00 and 2 more. What fired after that is not counted: the players&#39; commands were meant for another game.
+
+  #  Games  Fired  First  Players            Trigger
+  1  6/6    12     0:00   P1 P2 P3 P4        (no conditions) → Set Resources(&quot;Current Player&quot;, Set To, …
+  2  6/6    15     0:00   P3 P4 P5 P6 P7 P8  (no conditions) → Run AI Script(&quot;Turn ON Shared Vision for…
+  3  0/6    0      –      P1 P2 P3 P4        Command(&quot;Current Player&quot;, &quot;Buildings&quot;, At most, 0) → Defea…
+  4  1/6    1      34:06  P1 P2 P3 P4        Command(&quot;Non Allied Victory Players&quot;, &quot;Buildings&quot;, At most…
+
+  Never fired (1 of 4)
+  ▸ #3  Command(&quot;Current Player&quot;, &quot;Buildings&quot;, At most, 0) → Defeat()
+      Command (condition 1) said no last, in 1603.rep at 34:08
+</code></pre>
+<p><em><code class="nw">--force</code> took replays played on other maps, so five of the six games parted from this
+one early. Only the last game ran this map as it was played.</em></p>
+<p>For each trigger the table gives the games it fired in, how often it fired in all of them,
+and its first firing on the game&#39;s clock. Only triggers owned by a player in at least one
+of the games are listed. The first line counts the rest separately, and <code class="nw">--all</code> lists them
+too. A game whose players&#39; commands parted from the map, as <a href="/cli/running-a-map-in-the-game/#triggers-in-a-replays-game">explained
+above</a>, counts only what fired before that point, and is
+marked ▲.</p>
+<p><code class="nw">--tests</code> counts the scenarios of the map&#39;s <a href="/cli/running-a-map-in-the-game/#testing-a-maps-triggers">tests file</a> as
+games as well, and a tests file named among the replays (any <code class="nw">.json</code>) counts its
+scenarios. Whether a scenario passes does not matter here; that is <code>map test</code>&#39;s job.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">--tests</code></td>
+<td>Also count the games of <code class="nw">&lt;map&gt;.tests.json</code> beside the map</td>
+</tr>
+<tr>
+<td><code class="nw">--strict</code></td>
+<td>Exits with 1 when a trigger a player owned never fired</td>
+</tr>
+<tr>
+<td><code class="nw">--format</code></td>
+<td><code class="nw">github</code>, <code class="nw">junit</code> or <code class="nw">sarif</code>: the triggers that never fired, for CI. Warnings, or errors with <code class="nw">--strict</code>, and a note for each game that parted</td>
+</tr>
+<tr>
+<td><code class="nw">--all</code></td>
+<td>Lists every trigger, even ones no player in the games owned</td>
+</tr>
+<tr>
+<td><code class="nw">--force</code></td>
+<td>Takes replays played on another map too. Expect those games to part early</td>
+</tr>
+<tr>
+<td><code class="nw">--parallel</code></td>
+<td>Games played at once</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>Every game, every trigger with its counts, its text and why it never fired</td>
+</tr>
+</tbody></table>
+<p>Each replay takes about a second for every minute or two of play, so a folder of a hundred
+games takes a few minutes. Like the other commands that run the game, it needs your copy
+of StarCraft, so in CI it runs only on a machine that has one.</p>
+<h2 id="a-maps-layout">A map&#39;s layout<a class="anchor" href="#a-maps-layout" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map analyze</code> reads a melee map&#39;s layout without running the game, in about a
+second: where each start is, its main and its natural, how far every pair of starts is
+apart on foot beside the straight line, the narrowest points on the way, and how much of
+the map is walkable, buildable and raised ground. It needs <a href="/cli/getting-started/#commands-that-need-starcraft">your copy of
+StarCraft</a> for the map&#39;s tileset, which says which ground
+is walkable and at what height, but not the game engine.</p>
+<pre><code>$ scmjs map analyze &quot;(4)Crossing.scx&quot; --picture crossing.png
+✔ (4)Crossing  128 × 128 · desert · 4 start locations · 10 bases · StarCraft: Remastered 1.23.10.13515 · 0.7 s
+
+  Start                      Main            Natural                      Way out         Height
+  1 top left, 11 o&#39;clock     9 fields + gas  33 (air 31)  7 fields + gas  3.5 at 35, 23   on mid, raised 86%
+  2 bottom right, 4 o&#39;clock  9 fields + gas  33 (air 31)  7 fields + gas  3.5 at 92, 103  on mid, raised 87%
+  3 top right, 1 o&#39;clock     9 fields + gas  33 (air 31)  7 fields + gas  3.5 at 92, 23   on mid, raised 87%
+  4 bottom left, 8 o&#39;clock   9 fields + gas  33 (air 31)  7 fields + gas  3.5 at 35, 103  on mid, raised 87%
+
+  Pair   Ground              Ratio  Zergling  Marine  Zealot  Narrowest
+  1 ↔ 2  141 tiles  air 119  1.18×  33.9 s    47.2 s  47.2 s  3.5 at 35, 23, 1&#39;s way out
+  1 ↔ 3  93 tiles   air 88   1.06×  22.5 s    31.3 s  31.3 s  3.5 at 36, 22, 1&#39;s way out
+  1 ↔ 4  123 tiles  air 80   1.54×  29.6 s    41.3 s  41.3 s  3.5 at 35, 23, 1&#39;s way out
+  2 ↔ 3  124 tiles  air 80   1.54×  29.8 s    41.5 s  41.5 s  3.5 at 91, 102, 2&#39;s way out
+  2 ↔ 4  92 tiles   air 88   1.04×  22.1 s    30.8 s  30.8 s  3.5 at 91, 102, 2&#39;s way out
+  3 ↔ 4  141 tiles  air 119  1.18×  33.9 s    47.2 s  47.2 s  3.5 at 92, 23, 3&#39;s way out
+  Shortest 2 ↔ 4, longest 1 ↔ 2: 53% apart
+
+  Terrain  walkable 93.3% (high 0%, mid 12.4%, low 87.6%) · buildable 91.7% · unwalkable 6.7%
+
+✔ Every start&#39;s walks to its opponents match the others&#39;, nearest to farthest, within 2%; near and far pairs differ by 53%.
+✔ Every main has 9 mineral fields and 1 geyser, 13,500 minerals and 5,000 gas.
+✔ Naturals 33 tiles from their mains by ground.
+✔ Every main&#39;s way out is 3.5 tiles at its narrowest.
+
+  Picture: 512 × 512 PNG, 4 pixels a tile, written to crossing.png · 93 KB
+</code></pre>
+<p>Distances are in tiles (32 pixels) and places are tile coordinates from the top left.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Start</td>
+<td>The player, which third of the map the start is in, and its place as a clock face from the middle, as <a href="/cli/running-a-map-in-the-game/#rush-distances"><code>map rush</code></a> gives it</td>
+</tr>
+<tr>
+<td>Main</td>
+<td>The mineral fields and geysers nearest this start and within 12 tiles of it, as <a href="/cli/running-a-map-in-the-game/#is-the-map-fair-to-every-start"><code>map balance</code></a> counts them</td>
+</tr>
+<tr>
+<td>Natural</td>
+<td>The nearest other base on foot that is nobody&#39;s main: how far it is walked from the start location and in a straight line, and what it holds. A base is a group of resources close together that a unit walks between directly (a main and a natural below its cliff stay two bases); fields holding fewer than 100 minerals are a wall, not a base</td>
+</tr>
+<tr>
+<td>Way out</td>
+<td>The narrowest point on the walk from the start to its natural, in tiles across, and where it is: the main&#39;s ramp, as a rule</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>The start&#39;s own ground height, and how much of the walkable ground within 12 tiles of it is raised (mid or high). In some tilesets the &quot;high&quot; terrain is the middle level, so raised ground is what is compared</td>
+</tr>
+<tr>
+<td>Ground, air, ratio</td>
+<td>The walk between two starts, the straight line, and the one over the other</td>
+</tr>
+<tr>
+<td>Zergling, Marine, Zealot</td>
+<td>The walk&#39;s time at Fastest for each, at the unit&#39;s speed in your copy&#39;s game data, without upgrades</td>
+</tr>
+<tr>
+<td>Narrowest</td>
+<td>The narrowest point on that walk, and whose way out it is when it is one</td>
+</tr>
+</tbody></table>
+<p>With more than four starts, a table of the ground distances takes the place of the pairs,
+followed by the shortest and longest pair; <code class="nw">--all</code> lists every pair, and every base on the
+map with whose main or natural it is. <code class="nw">--json</code> gives everything as data: the starts, every
+pair with both distances and the seconds, the narrowest points with their places, the
+bases, the terrain shares and the verdicts.</p>
+<p><strong>How the ground is walked.</strong> The map is read as a grid of minitiles, sixteen to a tile,
+each walkable or not by the tileset, the way the game&#39;s own pathing reads it; a grid of
+whole tiles would close one-tile passages and open cliffs a unit cannot climb. Buildings
+and resources the map places, pre-placed neutral buildings and the units a doodad brings
+(doors, traps) stand in the way; units that move do not. A walk keeps one minitile off
+every wall, about the room a Zergling or a Marine needs, and goes straight or diagonally
+from minitile to minitile (a diagonal step costing 1.4 straight ones), never across a
+wall&#39;s corner. Walks are measured from start location to start location.</p>
+<p><strong>What narrow means.</strong> At each point of a walk, the passage is as wide as the shortest
+straight line through it from wall to wall, across, down or along either diagonal. The
+narrowest such point on a walk, leaving out the first and last three tiles, is its
+narrowest point. A patch of unwalkable ground standing on its own and smaller than 16
+tiles (a rock, a doodad, a lone geyser) is not counted as a wall, since a unit walks round
+it on either side; a cliff, a mineral line against it, or a building is.</p>
+<p><strong>The verdicts</strong> are facts with their numbers, marked ▲ when they pass a line:</p>
+<table>
+<thead>
+<tr>
+<th>Verdict</th>
+<th>Marked when</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ground distances</td>
+<td>The pairs differ by more than 8% (the tolerance <a href="/cli/making-a-map/#how-a-generated-map-is-balanced"><code>map generate</code></a> holds its maps to). With three or more starts, each start&#39;s walks to the others are also compared nearest first: a square of four starts has near and far pairs by design, and is fair when every start&#39;s nearest, second and third opponents are as far as everyone else&#39;s</td>
+</tr>
+<tr>
+<td>Islands</td>
+<td>No ground joins two starts</td>
+</tr>
+<tr>
+<td>Mains</td>
+<td>A start&#39;s main has another number of fields or geysers, or other amounts</td>
+</tr>
+<tr>
+<td>Naturals</td>
+<td>A start has none, shares its natural with another start, has one 5 tiles or more farther or nearer than the starts&#39; middle (than the other start&#39;s, with two), or has no gas there while others do</td>
+</tr>
+<tr>
+<td>Way out</td>
+<td>A start&#39;s way out is a tile or more wider or narrower than the starts&#39; middle</td>
+</tr>
+<tr>
+<td>Chokes</td>
+<td>A walk between two starts goes through a passage under 2 tiles wide, where a Dragoon or a Siege Tank barely gets through</td>
+</tr>
+<tr>
+<td>Height</td>
+<td>A start has 15 points more or less raised ground round it than the starts&#39; middle</td>
+</tr>
+</tbody></table>
+<p><strong>The picture.</strong> <code class="nw">--picture</code> writes the map as <a href="/cli/looking-inside-a-map/#a-picture-of-a-map"><code>map preview</code></a> draws
+it, at <code class="nw">--scale</code> pixels a tile (4 by default), with the analysis over it. It has no words,
+so here is what it shows:</p>
+<table>
+<thead>
+<tr>
+<th>Drawn</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>White lines</td>
+<td>The walk between every pair of starts</td>
+</tr>
+<tr>
+<td>Yellow lines</td>
+<td>Each start&#39;s walk to its natural</td>
+</tr>
+<tr>
+<td>Circles in a player&#39;s colour</td>
+<td>That player&#39;s natural</td>
+</tr>
+<tr>
+<td>Orange squares</td>
+<td>Each main&#39;s way out, as wide as the passage</td>
+</tr>
+<tr>
+<td>Red squares</td>
+<td>The narrowest point of a walk between starts, where it is not a way out</td>
+</tr>
+</tbody></table>
+<p><strong>Against the game.</strong> These walks are not the game&#39;s: the game&#39;s pathfinder goes from
+region to region and turns as a unit turns, which <a href="/cli/running-a-map-in-the-game/#rush-distances"><code>map rush</code></a> measures
+by walking a unit in the game. Over nine maps (seven of Blizzard&#39;s and two from
+<code>map generate</code>, 103 walks with a Zergling), the ground distance here was within 2.5% of
+the game&#39;s walk on average and 8% at most. The game&#39;s walk is usually a little longer, so
+the seconds here are a few percent quicker than <code>map rush</code>&#39;s. Use this command to see a
+layout in a second while you work, and <code>map rush</code> to time it in the game.</p>
+<p>The command exits with 2 for a map with fewer than two start locations, and with 1 when no
+copy of the game is found.</p>
+<h2 id="rush-distances">Rush distances<a class="anchor" href="#rush-distances" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map rush</code> measures how long a rush takes between each pair of start locations. The
+game walks a unit from each start location to every other, along the path a unit sent
+there in a game would take, and times each walk. An SCV walks unless you name another unit
+with <code class="nw">--unit</code>: by its name in the editor (<code>&quot;Zerg Zergling&quot;</code>), without the race
+(<code class="nw">Zergling</code>, <code class="nw">Dragoon</code>), or by its number in units.dat. The rows of the table are the
+starts walked from and the columns the starts walked to, each with its place on the map as
+a clock face from the middle:</p>
+<pre><code>$ scmjs map rush &quot;(4)Crossing.scx&quot; --unit Zergling
+(4)Crossing.scx 128 × 128, desert · 4 start locations · a Zergling walked 12 times · Remastered files
+  1 → 2  4,376 px, 34.6 s
+  …
+
+✔ (4)Crossing.scx: a Zergling walked between 4 start locations by the game · 12 walks · 3.4 s
+
+  from ╲ to                    1                 2                 3                 4
+  1 11 o&#39;clock                 –  4,376 px, 34.6 s  2,957 px, 23.5 s  3,826 px, 30.5 s
+  2 4 o&#39;clock   4,408 px, 34.9 s                 –  3,847 px, 30.9 s  2,871 px, 22.3 s
+  3 1 o&#39;clock   2,858 px, 22.7 s  3,847 px, 30.9 s                 –  4,535 px, 36.4 s
+  4 8 o&#39;clock   3,857 px, 30.7 s  2,937 px, 23.1 s  4,576 px, 36.8 s                 –
+
+  Shortest 2 → 4: 2,871 px (90 tiles), 22.3 s · air 2,816 px, 1.02× the straight line
+  Longest  4 → 3: 4,576 px (143 tiles), 36.8 s · air 3,806 px, 1.20× the straight line
+</code></pre>
+<p>The pixels are the distance the unit walked (32 to a tile) and the seconds are game time
+at Fastest. The unit sets out five tiles from its start toward the middle of the map and
+stops at the edge of the town hall at the other start: a neutral Nexus stands on every
+start while the walks run, so the walk ends where a real rush ends, at the base. The two
+directions between a pair can differ by a second or so, because the way out of each base
+is not the same. The shortest and longest walks are compared with the straight line
+between the two starts, the distance a flyer goes. When the terminal is too narrow for
+both figures, the seconds and the pixels come as two tables.</p>
+<p>A walk that does not arrive is a finding too. Two starts with no ground between them, on
+an island map or where the terrain walls one off, are reported as having no way; on a map
+where no two starts are joined, the report says so and lists the straight lines instead. A
+unit that stops short (at a wall of minerals or buildings the map places, say), gets
+stuck, or is still walking after seven minutes of game time is named with how far from the
+base it ended.</p>
+<p>The walks run in one game with nobody else in it: about four seconds for a four-player map
+and fifteen for an eight-player map of 256 × 256. <code class="nw">--seed</code> changes the game&#39;s luck, such
+as a unit stepping round another; the default is the one the editor&#39;s Walkability plugin
+uses, so the two agree. <code class="nw">--json</code> gives every walk and the table as data. A building or a
+flyer is refused (exit 2), as is a map with fewer than two start locations.
+<a href="/cli/running-a-map-in-the-game/#a-maps-layout"><code>map analyze</code></a> gives the same distances in a second without the game,
+within a few percent, beside the map&#39;s naturals and narrow points.</p>
+<h2 id="is-the-map-fair-to-every-start">Is the map fair to every start<a class="anchor" href="#is-the-map-fair-to-every-start" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map balance</code> is a melee map&#39;s report card. The same two sides play game after game
+on the map, and the report has a row for each start location: how often the side that
+started there won, how long its games lasted and how soon it met the enemy, beside the
+numbers that need no game. The sides are your <a href="/cli/bots/">bots</a>: one bot plays the game&#39;s own
+computer, or two bots play each other, as <a href="/cli/bots/#a-ladder-for-bots"><code>bot ladder</code></a> plays them.</p>
+<pre><code class="language-sh">scmjs map balance <span class="s">&quot;(4)Crossing.scx&quot;</span> --bots out/mybot.scmbot:p --races p --games 12 --parallel 4
+scmjs map balance <span class="s">&quot;(4)Crossing.scx&quot;</span> --bots mybot.scmbot,mybot.scmbot --games 12
+</code></pre>
+<pre><code>$ scmjs map balance &quot;(4)Test4.scx&quot; --bots ualbertabot.scmbot:p,ualbertabot.scmbot:p --games 12 --parallel 4
+12 games · UAlbertaBot vs UAlbertaBot (ualbertabot-2) · 4 start locations · 1248410ad2a0 · 4 at once
+ 2/12 ✔ UAlbertaBot (ualbertabot-2) P (start 4, 8 o&#39;clock) beat UAlbertaBot P (start 3, 1 o&#39;clock) · 9:39 · first contact 2:32 · seed 2
+ …
+
+(4)Test4.scx 128 × 128 · 12 games played · UAlbertaBot 8-4 vs UAlbertaBot (ualbertabot-2) 4-8 · 176 s
+
+  Start              Games  Won  Lost  Win rate  Expected  Length  Contact  Rush    Minerals           Gas
+  1      11 o&#39;clock  8      1    7     13%       50%       8:10    2:22     32.0 s  9 × 1,500 · 6.4 t  1 × 5,000 · 7.8 t
+  2      4 o&#39;clock   3      2    1     67%       33%       11:05   2:16     32.7 s  9 × 1,500 · 6.4 t  1 × 5,000 · 7.8 t
+  3      1 o&#39;clock   9      7    2     78%       59%       7:40    2:26     32.0 s  9 × 1,500 · 6.4 t  1 × 5,000 · 7.8 t
+  4      8 o&#39;clock   4      2    2     50%       42%       9:13    2:27     32.8 s  9 × 1,500 · 6.4 t  1 × 5,000 · 7.8 t
+
+  Pairs met: 1–2 ×3, 1–3 ×5, 3–4 ×4 · never: 1–4, 2–3, 2–4
+
+▲ Start 1 (11 o&#39;clock) wins only 13% where 50% was expected — its resources and distances are within 10% of the others&#39;, so the difference is in the ground or in how the games went.
+</code></pre>
+<p>The map above was made by <code>map generate</code> with its four quarters mirrored, so its starts
+differ only in where they face. Twelve games of one bot against itself are enough to see
+that this bot does worse from the top left; they are not enough to say why. A verdict to
+act on wants more games, and more than one bot.</p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Games, Won, Lost</td>
+<td>The games a side started at this start location, and how they went. A game stopped at <code class="nw">--frames</code> is counted in Games only</td>
+</tr>
+<tr>
+<td>Win rate</td>
+<td>Won out of won and lost</td>
+</tr>
+<tr>
+<td>Expected</td>
+<td>What the two sides&#39; own records predict for those games. With two sides of a strength it is 50%; when one side is stronger, a start it was dealt more often is expected to win more</td>
+</tr>
+<tr>
+<td>Length, Contact</td>
+<td>The average game, and the average time the first unit was lost to the other side</td>
+</tr>
+<tr>
+<td>Rush</td>
+<td>The average walk to the other starts, as <a href="/cli/running-a-map-in-the-game/#rush-distances"><code>map rush</code></a> measures it; <code class="nw">--no-rush</code> leaves it out</td>
+</tr>
+<tr>
+<td>Minerals, Gas</td>
+<td>The main&#39;s fields and geysers: those nearest this start and within 12 tiles of it, the amount each holds and their average distance in tiles</td>
+</tr>
+</tbody></table>
+<p>The verdict compares each start&#39;s win rate with what was expected. Within 10 points
+everywhere, the map is called balanced within the largest difference. A start further off
+is named, with the number that sets it apart from the others when one does (less gas, a
+mineral line further away, shorter walks to the enemy, earlier fights). When the games are
+too few to tell the difference from chance, the verdict says so and how far chance alone
+would move that start. When one side won every game, the games say nothing about the
+starts, and the verdict asks for two sides of a strength: the same bot twice does that.</p>
+<p>The game deals the start locations itself, as it does in any melee game, and there is no
+way yet to ask for a particular one. So each game&#39;s replay is played back afterwards to
+see which start each side was dealt, and the rows are filled from those. Enough games give
+every start its turn; the line under the table lists the pairs of starts that met and
+those that never did. A bot playing itself plays each seed once, since the other lobby
+order deals the same starts and gives nearly the same game.</p>
+<p>A game takes from ten seconds to a minute or so, depending on the bots and how long it
+lasts; <code class="nw">--parallel</code> plays several at once (by default up to four, as the computer&#39;s cores
+and memory allow; a game takes about 1.5 GB for each bot in it). The replays are deleted
+afterwards unless <code class="nw">--out</code> names a folder to keep them in, for <code>scmjs replay watch</code>.
+<code class="nw">--json</code> gives every row, every game with the starts dealt, and the verdict as data. The
+command exits with 1 when a game could not be played, and with 2 for a map with fewer than
+two start locations.</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#which-triggers-fire">Which triggers fire</a></li>
+<li><a href="#what-the-triggers-cost">What the triggers cost</a></li>
+<li><a href="#triggers-in-a-replays-game">Triggers in a replay&#39;s game</a></li>
+<li><a href="#testing-a-maps-triggers">Testing a map&#39;s triggers</a></li>
+<li><a href="#the-tests-file">The tests file</a></li>
+<li><a href="#how-a-test-runs">How a test runs</a></li>
+<li><a href="#a-test-from-a-replay">A test from a replay</a></li>
+<li><a href="#which-triggers-fired-across-many-games">Which triggers fired across many games</a></li>
+<li><a href="#a-maps-layout">A map&#39;s layout</a></li>
+<li><a href="#rush-distances">Rush distances</a></li>
+<li><a href="#is-the-map-fair-to-every-start">Is the map fair to every start</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

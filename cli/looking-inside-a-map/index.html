@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Looking inside a map — StarCraft maps and replays on the command line</title>
+<meta name="description" content="These commands read a map and change nothing. scmjs map info (or scmjs info) prints a map&#39;s summary: its size, tileset and version, the players, units, resources, triggers and strings,…">
+<meta property="og:title" content="Looking inside a map — StarCraft maps and replays on the command line">
+<meta property="og:description" content="These commands read a map and change nothing. scmjs map info (or scmjs info) prints a map&#39;s summary: its size, tileset and version, the players, units, resources, triggers and strings,…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/cli/looking-inside-a-map/">
+<meta property="og:url" content="https://docs.scmjs.dev/cli/looking-inside-a-map/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="here" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Looking inside a map</h1>
+<p>These commands read a map and change nothing.</p>
+<h2 id="what-a-map-holds">What a map holds<a class="anchor" href="#what-a-map-holds" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map info</code> (or <code>scmjs info</code>) prints a map&#39;s summary: its size, tileset and version,
+the players, units, resources, triggers and strings, and what Check Map makes of it.</p>
+<p><img src="/images/cli-map-info.webp" alt="map info on a test map: the summary, the players and the units placed most"></p>
+<p><em><code>scmjs map info ums.scx</code>. The name and description keep their colours in a terminal with
+full colour.</em></p>
+<p><code class="nw">--table</code> prints one row per map instead, for a folder of them:</p>
+<pre><code>$ scmjs map info --table *.scx
+File            Name                      Size     Tileset       Version           Players  Units  Triggers  Check
+melee.scx       Test Melee                64 × 64  Jungle World  Brood War 1.04    2        16     0         ✔ no problems
+remastered.scx  Test Remastered 리마스터  64 × 64  Ice           Remastered 1.21+  2        16     0         ✔ no problems
+ums.scx         Test Scenario             64 × 64  Badlands      Brood War 1.04    2        21     3         ▲ 1 warning
+</code></pre>
+<h2 id="checking-a-map">Checking a map<a class="anchor" href="#checking-a-map" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map check</code> runs Check Map, as the editor does, and lists the errors and then the
+warnings, each with the part of the map it is in. <code class="nw">--all</code> adds the notes. The command
+exits with 1 when a map has errors, so it can stop a build; <code class="nw">--strict</code> fails a map on
+warnings too.</p>
+<p><img src="/images/cli-map-check.webp" alt="map check over several maps: one with no problems, others with warnings"></p>
+<p><em><code>scmjs map check</code> over three of the test maps.</em></p>
+<p>A few checks need the game&#39;s graphics or unit data, such as units placed where they cannot
+walk. The command does not run those. The editor does, once it has the game data.</p>
+<p>For CI, <code class="nw">--format</code> writes the findings in a form other tools read:</p>
+<table>
+<thead>
+<tr>
+<th>Format</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">github</code></td>
+<td>GitHub Actions annotations: each finding shows on the pull request, beside the map</td>
+</tr>
+<tr>
+<td><code class="nw">junit</code></td>
+<td>JUnit XML, one test case per map, for any CI system that takes test results</td>
+</tr>
+<tr>
+<td><code class="nw">sarif</code></td>
+<td>SARIF 2.1.0, for code scanning tools such as GitHub&#39;s <code class="nw">upload-sarif</code> action</td>
+</tr>
+</tbody></table>
+<p>The exit code is the same whatever the format. A step in a GitHub workflow that checks a
+pull request&#39;s maps:</p>
+<pre><code class="language-yaml">- <span class="k">run</span>: npx @scm-js/cli map check maps/*.scx --strict --format github
+</code></pre>
+<p><a href="/cli/maps-in-git/#setting-up-a-folder-of-maps"><code>scmjs init</code></a> writes a whole workflow that runs it on every
+push.</p>
+<h2 id="a-baseline-for-old-maps">A baseline for old maps<a class="anchor" href="#a-baseline-for-old-maps" aria-label="Link to this section">#</a></h2>
+<p>A map made years ago, or by other tools, can have hundreds of findings, so <code class="nw">--strict</code>
+would fail it on every push. A baseline lets you start from where the map is.
+<code class="nw">--write-baseline</code> keeps the findings the maps have now in a file, and <code class="nw">--baseline</code> then
+reports and fails only on findings that file does not hold:</p>
+<pre><code class="language-sh">scmjs map check maps/*.scx --write-baseline            <span class="c"># once: today&#39;s findings, in .scmjs-baseline.json</span>
+scmjs map check maps/*.scx --baseline --strict         <span class="c"># from then on: only new findings fail</span>
+</code></pre>
+<pre><code>$ scmjs map check maps/* --baseline --strict
+ridge.scx  ✔ no new problems · 1 fixed since the baseline
+
+wakka.scm  ▲ 1 new warning · 72 known
+  ▲ Trigger 1: Create Unit with Properties names properties slot 0; the slots are 1 to 64. ·
+    Triggers
+
+✖ 1 map of 2 failed the check · 72 known findings left out, 1 fixed since the baseline
+</code></pre>
+<p><em>A trigger was added at the top of <code class="nw">wakka.scm</code>, and a Defeat to <code class="nw">ridge.scx</code>. The 72 known
+findings of the triggers below the new one still match.</em></p>
+<p>Without a file name both options use <code class="nw">.scmjs-baseline.json</code> in the current folder; give
+one to keep it elsewhere. The file is JSON, one list of findings for each map, keyed by
+the map&#39;s path from the file&#39;s folder, so one file serves a whole folder of maps. Commit
+it beside the maps.</p>
+<p>A finding is matched by the part of the map it is in and its text, with the parts that
+move taken out. A trigger is known by its text, not by its number, so adding a trigger
+above it, or renumbering the strings, does not make its findings new. Counts are left out
+too: one more unit in a slot that is not in the game is the same finding as before.
+Editing the trigger itself, or renaming a location it uses, makes its findings new again,
+so look at them again.</p>
+<p>Findings the baseline holds that are gone are counted as fixed since the baseline. They do
+not fail anything, and <code class="nw">--write-baseline</code> drops them. Run it again whenever you accept the
+findings as they are. <code>--format github</code>, <code class="nw">junit</code> and <code class="nw">sarif</code> list only the new findings,
+so the CI step is one line:</p>
+<pre><code class="language-yaml">- <span class="k">run</span>: npx @scm-js/cli map check maps/*.scx --baseline --strict --format github
+</code></pre>
+<p>With <code class="nw">--json</code>, each map has a <code class="nw">baseline</code> entry: the file, how many findings it left out
+(<code class="nw">suppressed</code>), how many are new, and how many are fixed, with the fixed findings listed.</p>
+<h2 id="the-whole-map-as-text">The whole map as text<a class="anchor" href="#the-whole-map-as-text" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map dump ridge.scx</code> prints everything in the map as text: the header, the players
+and forces, every unit and location, the triggers in the trigger window&#39;s text form, the
+strings, the archive&#39;s other files with their sizes and hashes, and the scenario&#39;s
+sections with their sizes. Nothing is cut. The same file always gives the same text, so
+you can search it with <code class="nw">grep</code>, keep it beside the map, or have git show a map&#39;s changes
+with it (<a href="/cli/maps-in-git/#reading-maps-in-git-diff">Reading maps in git diff</a>).</p>
+<pre><code># ridge.scx — scmjs map dump 1
+
+## Map
+  Name         Ridge
+  Size         96 × 64
+  Tileset      Jungle World
+  …
+## Units (14)
+  Start Location  Player 1  336,1744
+  Mineral Field (Type 1)  Neutral  176,1552  resources 1500
+  …
+## Triggers (3)
+Trigger(&quot;Player 1&quot;){
+Conditions:
+	Always();
+…
+</code></pre>
+<p><code class="nw">--json</code> gives the same data as JSON, with the units and triggers as the records the
+editor holds.</p>
+<h2 id="searching-maps">Searching maps<a class="anchor" href="#searching-maps" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map find &lt;text&gt; &lt;maps…&gt;</code> is Edit ▸ Find over any number of maps. It finds units,
+locations, sprites and doodads whose name holds the text, and strings and triggers whose
+text does. A number also matches a unit id, a location&#39;s slot, a string&#39;s number or a
+trigger&#39;s number.</p>
+<pre><code>$ scmjs map find Marine maps/*.scx
+ums.scx  4 matches
+  unit     Test Marine  Player 1 · 14, 50
+  string   Test Marine  String #13
+  string   Bring a Marine to the middle.  String #17
+  trigger  Trigger 1  Bring a Marine to the middle.
+</code></pre>
+<p><code>--in strings,triggers</code> searches only those kinds: units, locations, sprites, doodads,
+strings, triggers and briefing. <code class="nw">--case</code> matches case. A map with no match prints nothing.
+Like <code class="nw">grep</code>, the command exits with 1 when nothing matched in any map, so a script can ask
+whether any map still says something.</p>
+<h2 id="a-picture-of-a-map">A picture of a map<a class="anchor" href="#a-picture-of-a-map" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map preview</code> draws the map with the game&#39;s tileset graphics, read from your copy of
+StarCraft. Only the map&#39;s own tileset is read, which takes a fraction of a second. Without
+a copy of the game there is no picture, and the command says how to name one.</p>
+<p><img src="/images/cli-map-preview.webp" alt="map preview of a generated two-player jungle map, drawn in the terminal"></p>
+<p><em><code>scmjs map preview</code> in a terminal with 24-bit colour. The numbers are the start
+locations.</em></p>
+<p>Over the terrain go the things the minimap shows: a box for each unit in its owner&#39;s
+colour, as big as the unit, mineral fields in blue, geysers in green, and the start
+locations framed in their player&#39;s colour. <code class="nw">--no-units</code> draws the terrain alone.</p>
+<p>In the terminal the picture fills the terminal&#39;s width, at most two columns a tile, and a
+tall map is drawn no more rows high than half the terminal&#39;s columns. <code>--width 60</code> sets
+the number of columns, or <code>--scale 0.5</code> gives half a column a tile. Each character is two
+pixels, one above the other, in 24-bit colour where the terminal has it
+(<code class="nw">COLORTERM=truecolor</code>) and in the nearest of 256 colours where it does not. A start
+location is drawn as its player&#39;s number.</p>
+<p>A terminal without colour, or without the block characters (the old Windows console), gets
+letters: shades for the ground, <code class="nw">#</code> for a building, <code class="nw">o</code> for a unit, <code class="nw">$</code> for a mineral
+field or geyser. kitty and iTerm2 can show a picture themselves and are sent a PNG;
+<code class="nw">--blocks</code> asks for characters there too.</p>
+<p><code>--out ridge.png</code> writes a PNG at <code class="nw">--scale</code> pixels a tile: 1, 2, 4 (the default, so a 128
+× 128 map is 512 pixels square), 8, 16 or 32, the game&#39;s own size. <code>--out -</code> writes the
+PNG to standard output, and <code class="nw">-</code> as the map reads it from a pipe:</p>
+<pre><code class="language-sh">scmjs map preview ridge.scx --out ridge.png --scale 8
+scmjs map new - --tileset ice --players 4 | scmjs map preview - --out - &gt; new.png
+</code></pre>
+<p><code class="nw">--json</code> describes the picture without drawing it: its form, size and scale, the tileset,
+the copy of the game it came from, and how many start locations, units, buildings, mineral
+fields and geysers are on it.</p>
+<p>To see where things happened on the map in real games, where units died or where buildings
+went up, draw a <a href="/cli/replays/#where-things-happened-across-many-games">heatmap from replays</a>.</p>
+<h2 id="a-maps-sounds">A map&#39;s sounds<a class="anchor" href="#a-maps-sounds" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map sounds ridge.scx</code> lists the sounds the map carries: the entries of its WAV
+table, which is the Sound Editor&#39;s list, and any other sound file in the archive. Each
+line gives the slot, the length, the format, the size and the triggers that play it.</p>
+<pre><code>$ scmjs map sounds ums.scx
+ums.scx · 1 sound, 11 KB
+    1  staredit\wav\tone.wav  1.0 s · 11025 Hz · 8-bit · mono · 11 KB  Trigger 1: Play WAV
+</code></pre>
+<p><code>scmjs map sounds export ridge.scx</code> writes them into a folder, <code class="nw">ridge-sounds</code> beside the
+map unless <code class="nw">--out</code> names another. Each sound comes out as the file that went into the map:
+the compression StarEdit and the game use for sounds in an archive is undone, and a WAV or
+Ogg file is otherwise written as it is. Two sounds with the same file name get <code class="nw">-2</code>, <code class="nw">-3</code>
+after it.</p>
+<p>A name in the WAV table that the map does not carry is listed and not written. That is not
+an error. A name under <code class="nw">sound\</code> is one of the game&#39;s own sounds, which plays from the
+game&#39;s files, and is listed as such. <code class="nw">--json</code> gives the list, and for <code class="nw">export</code> the file
+each sound went to.</p>
+<h2 id="maps-from-scmscxcom">Maps from scmscx.com<a class="anchor" href="#maps-from-scmscxcom" aria-label="Link to this section">#</a></h2>
+<p><a href="https://scmscx.com">scmscx.com</a> is the community&#39;s map database: years of maps people
+have shared, searchable by name, description and file name. <code>scmjs map fetch</code> searches it
+and downloads from it. The maps belong to their makers and the site; the command asks the
+site the way its own pages do.</p>
+<pre><code>$ scmjs map fetch lost temple
+scmscx.com · 2,918 files match &quot;lost temple&quot; · the best 10 maps
+
+  Name                           Size       Tileset       Players  Downloads  Id
+  (The Lost Temple 8 Players)    128 × 128  Jungle World  8        246        GDj6p383
+  PGT - Lost Temple 2.4 [02]     128 × 128  Jungle World  4        170        B8V7fdyj
+  PGT - Lost Temple 2.35 [01]    128 × 128  Jungle World  4        35         jVYB3rBz
+  …
+</code></pre>
+<p>The list is in the site&#39;s order of best match, and lists a map once however many file
+names it was uploaded under. <code>--limit 25</code> lists more, up to 50; each map&#39;s details are a
+request of their own, which is why the list stops there. <code class="nw">--json</code> gives the list to a
+script. When nothing matches, the command says so and exits with 1.</p>
+<p>To download a map, give its id or its address on the site with <code class="nw">--id</code>, or add <code class="nw">--first</code> to
+take the best match:</p>
+<pre><code class="language-sh">scmjs map fetch --id B8V7fdyj
+scmjs map fetch lost temple --first --out maps/
+scmjs map fetch lost temple --first --open
+scmjs map fetch lost temple --first --out - | scmjs map info -
+</code></pre>
+<p>The file keeps the name the site gives it, with the characters Windows does not allow in a
+file name changed to <code class="nw">_</code>. It is written in this folder, or to the file or folder <code class="nw">--out</code>
+names; <code>--out -</code> sends it down a pipe. A file that is already there is left alone unless
+you add <code class="nw">--force</code>. Before anything is written, the map is opened as the editor opens it
+and the command says what it is:</p>
+<pre><code>PGT - Lost Temple 2.4 [02]
+  Map   128 × 128 · Jungle World · StarCraft 1.00
+  File  (4)Lost Temple 2.4 PGT.scm · 172 KB
+  From  https://scmscx.com/map/B8V7fdyj · uploaded by anonymous · 170 downloads
+✔ Written to (4)Lost Temple 2.4 PGT.scm
+</code></pre>
+<p>Anything the site sends that is not a map is refused, and nothing is written. <code class="nw">--open</code>
+opens the map in scmJS once it is written. The command waits at most ten seconds for the
+site, and says so (exit 1) when the site does not answer or turns the request down.
+Nothing is kept between runs.</p>
+<h2 id="opening-a-map-in-scmjs">Opening a map in scmJS<a class="anchor" href="#opening-a-map-in-scmjs" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map open ridge.scx</code> opens the map in the scmJS desktop app when it is installed.
+Without the app, it opens the editor at scmjs.dev in your browser and hands it the file:
+the command serves a small page on your own computer, that page opens the editor, and the
+editor takes the file from it. The file does not leave your computer. If the browser
+blocks the editor&#39;s window, the page shows a button to open it. <code class="nw">--browser</code> uses the
+browser even when the app is installed.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">SCMJS_APP</code></td>
+<td>The desktop app&#39;s path, when it is installed somewhere unusual</td>
+</tr>
+<tr>
+<td><code class="nw">BROWSER=none</code></td>
+<td>Opens no browser; the command prints the page&#39;s address for you to open</td>
+</tr>
+</tbody></table>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#what-a-map-holds">What a map holds</a></li>
+<li><a href="#checking-a-map">Checking a map</a></li>
+<li><a href="#a-baseline-for-old-maps">A baseline for old maps</a></li>
+<li><a href="#the-whole-map-as-text">The whole map as text</a></li>
+<li><a href="#searching-maps">Searching maps</a></li>
+<li><a href="#a-picture-of-a-map">A picture of a map</a></li>
+<li><a href="#a-maps-sounds">A map&#39;s sounds</a></li>
+<li><a href="#maps-from-scmscxcom">Maps from scmscx.com</a></li>
+<li><a href="#opening-a-map-in-scmjs">Opening a map in scmJS</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data sets — scmJS StarCraft map editor</title>
+<meta name="description" content="The editor draws from one set of game files at a time, and a data set names one. The default is the game&#39;s own.">
+<meta property="og:title" content="Data sets — scmJS StarCraft map editor">
+<meta property="og:description" content="The editor draws from one set of game files at a time, and a data set names one. The default is the game&#39;s own.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/game-data/data-sets/">
+<meta property="og:url" content="https://docs.scmjs.dev/game-data/data-sets/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="here" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Data sets</h1>
+<p>The editor draws from one set of game files at a time, and a <em>data set</em> names one. The
+default is the game&#39;s own. Any other is a mod&#39;s: the game&#39;s files in the same formats with
+some of them replaced, such as its own <code class="nw">units.dat</code>, graphics, sounds or <code class="nw">stat_txt.tbl</code>. A
+Remastered installation added beside a classic copy is a data set too.</p>
+<p>To add one, open Help ▸ Game Data…, choose <strong>Add a data set…</strong>, give it a name and pick a
+folder. The folder holds the mod&#39;s own files, and either the game&#39;s two archives, which
+the mod&#39;s files are laid over, or nothing else, in which case they are laid over the copy
+you are drawing from now:</p>
+<pre><code>MyMod/
+  StarDat.mpq          the game&#39;s archives (or leave them out: the copy in use is the base)
+  BrooDat.mpq
+  patch_rt.mpq         applied over the two, if present
+  mymod.mpq            a mod&#39;s own archive
+  My Mod.exe           a mod&#39;s self-executing loader: its archive is read, nothing is run
+  plugins/gptp.qdp     its plugins and FireGraft project: never run, part of its hash
+  arr/units.dat        loose files, by the game&#39;s paths
+  unit/terran/marine.grp
+  rez/…
+</code></pre>
+<p>Where several sources have the same file, the later one wins, as in the game:
+<code class="nw">StarDat.mpq</code>, then <code class="nw">BrooDat.mpq</code>, then the other archives in name order, and loose files
+under <code class="nw">arr</code>, <code class="nw">unit</code>, <code class="nw">tileset</code>, <code class="nw">game</code>, <code class="nw">scripts</code> or <code class="nw">rez</code> over all of them. The mod&#39;s
+other files in the game&#39;s folders (its sounds, say) are not drawn with but count for <a href="/game-data/data-sets/#a-map-remembers-its-data-set">its
+hash</a>. Anything else in the folder is ignored.</p>
+<p>The data set is stored under its own name beside the game&#39;s copy, so removing one leaves
+the others alone. The <em>Data sets</em> list appears in Help ▸ Game Data… once there is a second
+one, and the choice is remembered. Switching drops everything decoded from the previous
+files, since the same ids now mean different pictures, and loads again; an open map stays
+open and picks the new graphics up as they arrive.</p>
+<p>A data set laid over a copy holds only what the editor reads. The game&#39;s files for playing
+stay in the copy underneath. A copy made with them (see <a href="/game-data/what-is-kept/#files-for-playing">Files for
+playing</a>) also has every picture the game&#39;s image table names; laid
+over an older copy, a new unit type drawn with a picture none of the game&#39;s own units uses
+can be missing.</p>
+<p>What a data set cannot be:</p>
+<ul>
+<li><strong>A mod made for Remastered&#39;s storage.</strong> A data set is read from <code class="nw">.mpq</code> archives and
+loose files; a mod packaged in Remastered&#39;s own storage format is not supported.</li>
+<li><strong>A mod that needs its own code to load its data.</strong> A data set is files. What a mod&#39;s
+plugin does when the game runs, such as new orders or a different interface, is not part
+of drawing a map.</li>
+</ul>
+<h2 id="data-sets-made-from-a-mod">Data sets made from a mod<a class="anchor" href="#data-sets-made-from-a-mod" aria-label="Link to this section">#</a></h2>
+<p>Many mods change more than single files. A data set takes what the larger ones ship:</p>
+<ul>
+<li><strong>Tables of any width.</strong> <code class="nw">units.dat</code> and the other tables are read at whatever size the
+file has: the game&#39;s own, DatExtend&#39;s expanded layout (the same <code class="nw">.dat</code> name, more
+entries), or GPTP&#39;s <code class="nw">.datex</code> files (<code class="nw">arr\units.datex</code> and so on), which are used in
+place of the <code class="nw">.dat</code> when a data set has them. A mod with more than 228 unit types gives
+the editor more unit types.</li>
+<li><strong>Names and pictures for the new types.</strong> A type past the game&#39;s 228 is named from
+<code class="nw">rez\unitnames.tbl</code> when the data set has one (entry N names type N, as GPTP reads it;
+it then names the game&#39;s types too), and its command card picture comes from
+<code>unit\cmdbtns\uniticons.grp</code> when there is one. Without a name file the new types are
+listed as &quot;Unit #N&quot;.</li>
+<li><strong>Names of weapons, upgrades and technologies.</strong> Where a mod keeps its own name lists,
+<code class="nw">arr\weapons.txt</code>, <code class="nw">arr\upgrades.txt</code> and <code class="nw">arr\techdata.txt</code> (one name a line, a line
+for every entry of the table), those names are shown; otherwise the names come through
+the tables&#39; labels, from <code class="nw">rez\stat_txt.tbl</code> and, for entries it does not have, the mod&#39;s
+<code class="nw">rez\stat.txt</code>. A label that is a button&#39;s tooltip shows only its first line. A data set
+installed before these lists were read shows the labels&#39; names until it is added again.</li>
+<li><strong>The palette.</strong> Types past 227 appear under their own heading named for the data set,
+grouped by the race their group flags give and whether they are buildings. With a name
+file, only the types it names are listed (mods leave the rest of a wide table filled
+with copies). The types below 228 keep StarEdit&#39;s grouping, except one the data set
+renamed into something StarEdit&#39;s group no longer describes (a Zerg unit in the slot of
+a Terran building), which is listed under the data set&#39;s heading by its own race. The
+game&#39;s own data, under any name, moves nothing.</li>
+<li><strong>Placing, drawing and saving.</strong> A new type is placed, drawn from its own pictures and
+saved in the map&#39;s unit list like any other.</li>
+<li><strong>Extended tilesets.</strong> A tileset&#39;s files are read at any size: more than 1,024 tile
+groups, <code class="nw">.vx4ex</code> megatile tables with 32-bit references, any number of megatiles. On a
+tileset with more than 2,048 groups a tile&#39;s group takes twelve bits of the map&#39;s tile
+value (on the game&#39;s own tilesets the top bit is the creep flag, as before), so a map
+placing group 2,774 draws it. Opened with a data set that has not got those groups, the
+map says so (<a href="/game-data/data-sets/#terrain-the-data-set-has-not-got">below</a>).</li>
+<li><strong>The editor&#39;s plugins.</strong> The plugins that come with the editor follow the data set:
+Repair leaves a mod&#39;s own unit types alone, Melee Wizard lays bases out with the mod&#39;s
+footprint sizes, Section Explorer reads an extended tileset&#39;s tile groups, and
+TrigScript and Magenta name the mod&#39;s units. Where a part still reads the game&#39;s own
+data, it says so: Walkability&#39;s walks in the game, Magenta&#39;s EUD and build rows, and
+TrigScript&#39;s memory-level features and tests in the game.</li>
+<li><strong>Remastered pictures.</strong> On a data set laid over a Remastered copy, an image whose
+picture or image-table row the data set changed is drawn from its classic picture even
+with View ▸ Remastered Graphics on, since the 2x picture on file is of the original.
+Terrain goes by the whole tileset: a data set that brings a tileset of its own draws
+that tileset with the classic pictures, because Remastered&#39;s are numbered for the game&#39;s
+tiles, and the editor says so once. A mod open in the Mod Editor is drawn the same way,
+with every unit and sprite from its classic picture.</li>
+</ul>
+<p>What does not work yet:</p>
+<ul>
+<li><strong>Settings for the new types.</strong> A map&#39;s unit, upgrade and technology settings have a
+fixed size in the file format: 228 unit types, 61 upgrades, 44 technologies. A type past
+227 has no per-map settings; Unit Settings says so for it. Upgrades and technologies
+past the game&#39;s are listed under the data set&#39;s heading, and their dialogs say the same.</li>
+<li><strong>Other plugins.</strong> A plugin from elsewhere sees the wider tables, but may have been
+written for the game&#39;s sizes and show only the game&#39;s types.</li>
+<li><strong>Triggers.</strong> The trigger editor lists the unit types in the palette&#39;s groups, the data
+set&#39;s among them; ids 228 to 232 stay the game&#39;s None and unit classes. In the text
+form, a unit&#39;s name is the data set&#39;s (see <a href="/triggers/argument-values/#unit-classes">Unit classes</a>).</li>
+</ul>
+<h2 id="a-map-remembers-its-data-set">A map remembers its data set<a class="anchor" href="#a-map-remembers-its-data-set" aria-label="Link to this section">#</a></h2>
+<p>When a map is saved while a data set other than the game&#39;s own is in use, it carries a
+small note naming it (a file <code class="nw">scmjs\dataset.json</code> inside the map&#39;s archive, with the data
+set&#39;s id, name, a hash of its files, when known where its makers publish it, and the races
+it adds when it names them). The game and other editors ignore it. Opening such a map
+while another data set is in use, the editor asks once: to switch, when that data set is
+installed here, or, when it is not, it says where its makers publish it and offers Help ▸
+Game Data…. Nothing is downloaded.</p>
+<p>The note goes with the map wherever else it leaves the editor too: an export, a map put in
+My Maps or shared, and the file Test Map builds all carry it while a data set other than
+the game&#39;s is in use, even for a map that was never saved with it. The map open in the
+editor is changed only by Save. Test Map also passes the data set on, so a test target
+that plays the map, such as the play page, knows which files the map was made for.
+StarCraft itself, started on its own, plays with the game&#39;s own data, and Test Map says
+so.</p>
+<p><strong>Races a data set adds.</strong> A mod can give players races past the game&#39;s eight, which none
+of its files name (<a href="/mods/a-mod-as-a-folder/#races-a-mod-adds">Races a mod adds</a>). They are named for a
+data set by the <code class="nw">races</code> of the <code class="nw">mod.json</code> in the folder you add it from (Help ▸ Game Data…
+▸ Add a data set…), or by a plugin, and they are kept with the data set, through a new
+release of the mod. Player Settings and Statistics then show them by name and offer them
+in the race list; without a name such a race shows as <em>Race</em> and its number, and Player
+Settings keeps it as the map has it. A map&#39;s note carries the races of its data set, and
+opening the map gives them to that data set when the map&#39;s data set is the one in use and
+none were named for it here. They are kept in the browser with your other settings:
+Preferences ▸ Storage lists them, and clearing them there takes the names away at once.</p>
+<h2 id="terrain-the-data-set-has-not-got">Terrain the data set has not got<a class="anchor" href="#terrain-the-data-set-has-not-got" aria-label="Link to this section">#</a></h2>
+<p>A map made for a mod that carries no such note, because it was made in another editor or
+is the map of a replay, still shows it in its terrain: a mod&#39;s tileset can have far more
+tile groups than the game&#39;s (Cosmonarchy&#39;s Jungle has 4,095, Remastered&#39;s 2,046). The same
+goes, on a smaller scale, for a map on the tiles Remastered added, opened over a 1.16
+copy.</p>
+<p><strong>The tiles are hatched.</strong> Every tile the data set in use has no picture for is drawn as a
+dark plate with thin amber diagonals, in the map at every zoom, in the minimap and in an
+exported image. Nothing of the map changes: it is only how the tile is drawn, and it is
+drawn so on purpose. Left to the game&#39;s own rule most of a mod&#39;s tiles would not come out
+empty but as <em>other</em> tiles, since the game reads a tile&#39;s group with one bit fewer than a
+mod&#39;s long tileset uses, and a map of wrong terrain looks fine until it is played. The
+elevation and buildability overlays say nothing on a hatched tile, as nothing is known of
+it. (One case reads wrongly: a map of the game&#39;s own that sets the creep flag, the top bit
+of a tile value, on a tile by hand has that tile hatched and counted as a mod&#39;s, because
+the flag is the bit a mod&#39;s tileset uses. Maps do not do this outside of tests.)</p>
+<p><strong>The editor says so</strong>, once for the map while the data set stays the same, in a notice
+that stays until you close it. It names the data set and the tileset, counts the tiles,
+and says whether they are past even Remastered&#39;s tables, so the map was made for a mod, or
+are tiles Remastered added. It offers what can be done from where you are:</p>
+<ul>
+<li><strong>Switch to <em>name</em>.</strong> When a data set already installed here has the terrain, the notice
+names it and the button switches to it. The editor only compares how long each data
+set&#39;s tile table is for the map&#39;s tileset with what the map uses, so the offer costs
+nothing, and it is an offer: a switch changes the units&#39; pictures and names too. When
+several fit, the one offered is the first in this order: the game&#39;s own files,
+StarCraft: Remastered, then the others by name as the dialog lists them. Help ▸ Game
+Data… switches to any of the others.</li>
+<li><strong>Choose the mod&#39;s folder…</strong>, for a mod&#39;s terrain. Pick the folder the mod&#39;s files are
+in and the editor draws from it straight away. Nothing is installed or kept: a file is
+read from the folder when the map needs it, so a mod of thousands of files is in view in
+seconds, and a reload, or another data set in Help ▸ Game Data…, goes back. It reads the
+mod&#39;s <em>loose</em> files, the game&#39;s folders (<code class="nw">arr</code>, <code class="nw">unit</code>, <code class="nw">tileset</code>…) in the folder you
+pick or in one inside it. A folder that holds only archives (<code class="nw">.mpq</code>, the mod&#39;s <code class="nw">.exe</code>)
+is turned down with a pointer to Help ▸ Game Data… ▸ Add a data set…, which reads
+archives, and so is a folder that has not got the map&#39;s terrain either: the notice says
+which, and the data set in use is left alone. A folder that has some of the terrain and
+not all is taken, and the notice comes back with what is left. The browser&#39;s folder
+picker keeps a few kinds of file back from the editor (<code class="nw">desktop.ini</code>, shortcuts and, on
+Windows, <code class="nw">.ini</code>, <code class="nw">.cfg</code> and <code class="nw">.dll</code> files: <a href="/plugins/putting-things-on-screen/#what-a-folder-pick-leaves-out">what a folder pick leaves
+out</a>); a tileset&#39;s files are not among them,
+so the terrain is drawn whole. The mod&#39;s hash is not worked out this way (it covers
+every file of the mod), so a map saved meanwhile records the data set by the folder&#39;s
+name alone. To keep the mod, or to work from its hash, install it as a data set; to
+change the mod, open it in the <a href="/mods/three-ways-in/">Mod Editor</a>.</li>
+<li><strong>Game Data…</strong> opens the dialog.</li>
+</ul>
+<p>The notice goes once the data set in use has the terrain, and comes back if you switch to
+one that has not. A map whose note names another data set gets the offer to switch
+instead. Check Map lists the same tiles under Terrain.</p>
+<p>The hash is <a href="/mods/the-commands/#the-mods-hash">the mod&#39;s hash</a>: it covers every file of the data
+set&#39;s own — its loose files, the members of its archives (a loader <code class="nw">.exe</code> in the folder is
+read for its archive), the plugins and the FireGraft project it carries — and is worked
+out the same way as the play page and <code>scmjs mod info</code> work it out, so the editor, the
+command line and the play page give one mod the same hash. Files of the mod in the game&#39;s
+folders that the editor does not read, such as its sounds, count too. Nothing is compared
+with the copy the data set is laid over, so the hash does not depend on which copy that
+is. A data set made before November 2026 keeps the hash it was made with, which counted
+only the files that differ from the copy underneath; installing it again gives the hash by
+this rule.</p>
+<h2 id="names">Names<a class="anchor" href="#names" aria-label="Link to this section">#</a></h2>
+<p>The game names things in <code class="nw">stat_txt.tbl</code>: entries 0 to 227 are the unit types, and the
+weapon, upgrade and technology tables each point into the same file. The editor&#39;s own name
+tables are StarEdit&#39;s, which read better in about fifty places (&quot;Cargo Ship (Unused)&quot;
+where the game says &quot;Unused&quot;) and are the names the text trigger format and other editors
+share.</p>
+<p>The rule is per entry: where the loaded data&#39;s name differs from what the game&#39;s own data
+says for that id, the loaded name shows; everywhere else, StarEdit&#39;s stands. With
+Blizzard&#39;s files nothing changes. With a mod&#39;s, whatever it renamed shows the new name in
+every palette, list and dialog, and the text trigger parser accepts both names, so a
+trigger printed under a mod reads back.</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#data-sets-made-from-a-mod">Data sets made from a mod</a></li>
+<li><a href="#a-map-remembers-its-data-set">A map remembers its data set</a></li>
+<li><a href="#terrain-the-data-set-has-not-got">Terrain the data set has not got</a></li>
+<li><a href="#names">Names</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Getting started — StarCraft maps and replays on the command line</title>
+<meta name="description" content="There are three ways to install scmjs. Each gives you the same command at the same version, so pick the one that suits your computer:">
+<meta property="og:title" content="Getting started — StarCraft maps and replays on the command line">
+<meta property="og:description" content="There are three ways to install scmjs. Each gives you the same command at the same version, so pick the one that suits your computer:">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/cli/getting-started/">
+<meta property="og:url" content="https://docs.scmjs.dev/cli/getting-started/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="here" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Getting started</h1>
+<p>There are three ways to install <code class="nw">scmjs</code>. Each gives you the same command at the same
+version, so pick the one that suits your computer:</p>
+<ul>
+<li><strong>A package manager</strong>: Homebrew, Scoop or winget. Nothing else needs installing, and it
+updates with the rest of your software.</li>
+<li><strong>npm</strong>, if you already have Node.js 22.12 or newer.</li>
+<li><strong>A download</strong> from the releases page, if you use neither.</li>
+</ul>
+<h2 id="installing">Installing<a class="anchor" href="#installing" aria-label="Link to this section">#</a></h2>
+<p>With Homebrew, on macOS or Linux:</p>
+<pre><code class="language-sh">brew install scm-js/tap/scmjs
+</code></pre>
+<p>With Scoop or winget, on Windows:</p>
+<pre><code class="language-sh">scoop bucket add scm-js https://github.com/scm-js/scoop-bucket
+scoop install scmjs
+</code></pre>
+<pre><code class="language-sh">winget install scm-js.scmjs
+</code></pre>
+<p>With npm:</p>
+<pre><code class="language-sh">npm install -g @scm-js/cli
+</code></pre>
+<p>To try it without installing anything, run it through <code class="nw">npx</code>, which fetches it the first
+time. Every command in this guide then starts with <code>npx @scm-js/cli</code> instead of <code class="nw">scmjs</code>:</p>
+<pre><code class="language-sh">npx @scm-js/cli info <span class="s">&quot;(2)Ridge.scx&quot;</span>
+</code></pre>
+<p>Without a package manager or Node, <a href="/cli/getting-started/#downloading-the-program">download the program</a>.</p>
+<p>Then check it works. <code>scmjs about</code> prints the version and how this copy was installed:</p>
+<pre><code class="language-sh">scmjs about
+</code></pre>
+<p>However it is installed, <code class="nw">scmjs</code> runs every command, and the package manager and download
+versions bring their own copy of Node. The one thing they leave out is TypeScript, which
+<code>map build</code> and plugins written in TypeScript need. Install it with npm, in the map&#39;s
+project (<code>npm install typescript</code>) or globally; <code class="nw">scmjs</code> looks in both places, and
+<a href="/cli/getting-started/#checking-your-setup"><code>scmjs doctor</code></a> says whether it found it.</p>
+<h2 id="downloading-the-program">Downloading the program<a class="anchor" href="#downloading-the-program" aria-label="Link to this section">#</a></h2>
+<p>Each release has <code class="nw">scmjs</code> as a single program with Node inside it:</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Download</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows (x64)</td>
+<td><a href="https://github.com/scm-js/scm-js/releases/latest/download/scmjs-cli-windows-x64.zip">scmjs-cli-windows-x64.zip</a></td>
+</tr>
+<tr>
+<td>macOS (Apple silicon)</td>
+<td><a href="https://github.com/scm-js/scm-js/releases/latest/download/scmjs-cli-macos-arm64.tar.gz">scmjs-cli-macos-arm64.tar.gz</a></td>
+</tr>
+<tr>
+<td>macOS (Intel)</td>
+<td><a href="https://github.com/scm-js/scm-js/releases/latest/download/scmjs-cli-macos-x64.tar.gz">scmjs-cli-macos-x64.tar.gz</a></td>
+</tr>
+<tr>
+<td>Linux (x64)</td>
+<td><a href="https://github.com/scm-js/scm-js/releases/latest/download/scmjs-cli-linux-x64.tar.gz">scmjs-cli-linux-x64.tar.gz</a></td>
+</tr>
+</tbody></table>
+<p>Each archive holds <code class="nw">scmjs</code> (<code class="nw">scmjs.exe</code> on Windows) and the licences of what is inside it.
+Put the program in a folder on your PATH so that <code class="nw">scmjs</code> works from any folder.</p>
+<p>On Windows, make a folder such as <code class="nw">C:\Tools</code>, unpack <code class="nw">scmjs.exe</code> into it, and add the
+folder to your Path under Settings ▸ System ▸ About ▸ Advanced system settings ▸
+Environment Variables.</p>
+<p>On macOS and Linux, download and unpack it in one step, using the file name for your
+system from the table:</p>
+<pre><code class="language-sh">curl -L https://github.com/scm-js/scm-js/releases/latest/download/scmjs-cli-linux-x64.tar.gz | tar -xz scmjs
+sudo mv scmjs /usr/local/bin/
+</code></pre>
+<p>The programs are not code-signed yet, so the first run of a copy downloaded in a browser
+may be stopped:</p>
+<ul>
+<li>Windows shows SmartScreen&#39;s &quot;Windows protected your PC&quot;. Choose <strong>More info</strong>, then
+<strong>Run anyway</strong>.</li>
+<li>macOS says &quot;the developer cannot be verified&quot;. Allow it under System Settings ▸ Privacy
+&amp; Security, or clear the flag once in Terminal with
+<code>xattr -d com.apple.quarantine scmjs</code>. A copy fetched with <code class="nw">curl</code>, as above, is not
+stopped.</li>
+</ul>
+<p>To check a download, the release&#39;s <code class="nw">SHA256SUMS</code> file lists each file&#39;s checksum.
+<code>sha256sum -c SHA256SUMS --ignore-missing</code> (<code>shasum -a 256 -c SHA256SUMS</code> on macOS) checks
+the files you downloaded against it.</p>
+<h2 id="the-commands">The commands<a class="anchor" href="#the-commands" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">scmjs</code> on its own, or <code>scmjs --help</code>, prints the overview above. Most commands sit under
+a noun: <code class="nw">map</code>, <code class="nw">replay</code>, <code class="nw">mod</code>, <code class="nw">plugin</code>, <code class="nw">bot</code> and <code class="nw">account</code>. <code>scmjs map --help</code> lists
+the map commands, and every command has its own <code class="nw">--help</code> with its options and examples.
+The <a href="/cli/command-reference/">command reference</a> lists them all on one page.</p>
+<p>A command that takes several files takes as many as you name, so a shell pattern works:</p>
+<pre><code class="language-sh">scmjs map check maps/*.scx
+</code></pre>
+<p>A file that cannot be read is reported and the others carry on. The Windows Command Prompt
+and PowerShell do not expand <code class="nw">*.scx</code> for a program, so there you name the files.</p>
+<h2 id="first-commands">First commands<a class="anchor" href="#first-commands" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-sh">scmjs info <span class="s">&quot;(2)Ridge.scx&quot;</span>         <span class="c"># what the map holds: size, players, units, triggers</span>
+scmjs map check maps/*.scx        <span class="c"># Check Map over a folder of maps</span>
+scmjs map open <span class="s">&quot;(2)Ridge.scx&quot;</span>     <span class="c"># open it in scmJS</span>
+</code></pre>
+<p><code>scmjs info</code> reads whatever it is given: a map, a replay or a built bot (<code class="nw">.scmbot</code>).</p>
+<h2 id="checking-your-setup">Checking your setup<a class="anchor" href="#checking-your-setup" aria-label="Link to this section">#</a></h2>
+<p>Most commands need nothing more than the command itself. A few need more: TypeScript,
+Docker, or your copy of StarCraft. <code>scmjs doctor</code> says what this computer has, what each
+thing is for, and the command that installs what is missing. It ends with the commands
+that cannot run yet and the one thing each lacks.</p>
+<pre><code>scmjs 0.9.1 · the newest · Node v24.13.0 · linux x64
+
+  Tools
+  ✔ TypeScript   6.0.3          ~/maps/node_modules/typescript
+  ▲ Docker       not found
+      scmjs bot new|init|build run the bot toolchain in it.
+      https://docs.docker.com/get-docker/
+  ✔ Desktop app  scmJS.exe      /mnt/c/Users/you/AppData/Local/Programs/scmJS/scmJS.exe
+  · Claude Code  scmjs mcp not added
+      claude mcp add scmjs -- npx -y @scm-js/cli mcp
+  · scmjs.dev    not signed in
+      scmjs login
+
+  The game
+  ✔ StarCraft    Remastered     /mnt/c/Program Files (x86)/StarCraft
+  ✔ Game engine  1248410ad2a0   ~/.cache/scmjs/engine
+
+  Not ready
+  ✖ bot new|build  Docker not found
+</code></pre>
+<p>What it looks for:</p>
+<table>
+<thead>
+<tr>
+<th>Line</th>
+<th>Needed by</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TypeScript</td>
+<td><code>map build</code>, and <code>map run</code> or <code>plugin dev</code> with a plugin written in TypeScript</td>
+</tr>
+<tr>
+<td>Docker</td>
+<td><code>bot new</code>, <code>bot init</code>, <code>bot build</code> and <code>bot update</code></td>
+</tr>
+<tr>
+<td>Desktop app</td>
+<td><code>map open</code> and <code>replay open</code>, which use the browser without it</td>
+</tr>
+<tr>
+<td>Claude Code</td>
+<td><code>scmjs mcp</code>, when you use it from Claude Code</td>
+</tr>
+<tr>
+<td>scmjs.dev</td>
+<td><code>map share</code>, <code>replay share</code> and <code>map play</code></td>
+</tr>
+<tr>
+<td>Browser</td>
+<td><code>replay export</code>, which draws its clips in Chrome, Chromium or Edge</td>
+</tr>
+<tr>
+<td>ffmpeg</td>
+<td><code>replay export</code> to an <code class="nw">.mp4</code>; a <code class="nw">.webm</code> or a <code class="nw">.gif</code> does without it</td>
+</tr>
+<tr>
+<td>StarCraft</td>
+<td><code>map preview</code>, <code>map analyze</code>, <code>map generate</code> and every command that runs the game</td>
+</tr>
+<tr>
+<td>Game engine</td>
+<td><code>map trace</code>, <code>map cost</code>, <code>map rush</code>, <code>map test</code>, <code>map balance</code>, <code>replay watch</code>, <code>replay export</code>, <code>bot run</code>, <code>bot ladder</code></td>
+</tr>
+</tbody></table>
+<p>A dot instead of a tick means the thing is not there and nothing is wrong: ffmpeg, the
+desktop app, Claude Code and a scmjs.dev sign-in are all optional. Only a missing thing
+has lines under it. The Claude Code line looks for <code>scmjs mcp</code> among the servers Claude
+Code knows, for every folder or for this one, and says so when Claude Code is not
+installed.</p>
+<p>The game engine line names the engine&#39;s build. Each command that plays the game drives the
+engine with a runner of its own; an engine fetched before the play page had a runner lacks
+that one, and the line says which it holds. The next command that needs a missing runner
+fetches it. Before anything is fetched the line says &quot;not fetched yet&quot;.</p>
+<p>The first line says which <code class="nw">scmjs</code> this is: the npm package says nothing more, and the
+single program says &quot;single executable&quot;, with the package manager it came from. <code class="nw">--json</code>
+prints the checks, how this copy was installed and the list of ready commands as JSON. The
+doctor changes nothing, and exits with 1 only when Node itself is too old (the single
+program carries its own).</p>
+<h2 id="commands-that-need-starcraft">Commands that need StarCraft<a class="anchor" href="#commands-that-need-starcraft" aria-label="Link to this section">#</a></h2>
+<p><code>map preview</code> draws a map with the game&#39;s graphics, <code>map analyze</code> reads which ground is
+walkable from the game&#39;s tilesets, and <code>map generate</code> lays its ground with them.
+<code>map trace</code>, <code>map cost</code>, <code>map coverage</code>, <code>map rush</code>, <code>map test</code>, <code>map heatmap</code>,
+<code>map balance</code>, <code>replay watch</code>, <code>replay export</code>, <code>bot run</code> and <code>bot ladder</code> run the game
+itself. They need two things on your computer:</p>
+<ul>
+<li>Your copy of StarCraft, Remastered or 1.16.1. It is found in the usual places; otherwise
+name its folder with <code>--starcraft &lt;folder&gt;</code> or the <code class="nw">SCMJS_STARCRAFT</code> setting. Nothing of
+the game is fetched or carried by the command.</li>
+<li>The game engine, for the commands that run the game. It is the engine of
+<a href="https://scmjs.dev/play/">scmjs.dev/play</a>, about 25 MB, fetched the first time a command
+needs it and kept in your cache folder (<code class="nw">~/.cache/scmjs</code> on Linux, the usual place on
+other systems; <code class="nw">SCMJS_CACHE</code> moves it).</li>
+</ul>
+<p>None of these run on a build server such as GitHub&#39;s, which has no copy of the game.
+<code>map diff --picture</code> uses your copy when it finds one and draws the ground in plain greys
+when it does not, so it runs there too.</p>
+<h2 id="updating">Updating<a class="anchor" href="#updating" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs about</code> prints this version, whether a newer one is out and the line that installs
+it, how this copy was installed, the desktop app and Docker if they are installed, and the
+addresses of the editor, the docs and the source. Update the way you installed. With
+Homebrew:</p>
+<pre><code class="language-sh">brew upgrade scmjs
+</code></pre>
+<p>With Scoop:</p>
+<pre><code class="language-sh">scoop update scmjs
+</code></pre>
+<p>With winget:</p>
+<pre><code class="language-sh">winget upgrade scm-js.scmjs
+</code></pre>
+<p>With npm:</p>
+<pre><code class="language-sh">npm install -g @scm-js/cli@latest
+</code></pre>
+<p>For a downloaded program, download the newer file from the <a href="https://github.com/scm-js/scm-js/releases/latest">releases
+page</a> and put it over the old one. Every
+way of installing gets each version on the same day.</p>
+<h2 id="shell-completion">Shell completion<a class="anchor" href="#shell-completion" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs completion bash</code>, <code class="nw">zsh</code> or <code class="nw">fish</code> prints a completion script with every command and
+option in it. Install it once, for the shell you use. For bash, add this line to
+<code class="nw">~/.bashrc</code>:</p>
+<pre><code class="language-sh">eval <span class="s">&quot;$(scmjs completion bash)&quot;</span>
+</code></pre>
+<p>For zsh, write it into a folder on your <code class="nw">$fpath</code> (<code class="nw">~/.zsh/completions</code> here):</p>
+<pre><code class="language-sh">scmjs completion zsh &gt; ~/.zsh/completions/_scmjs
+</code></pre>
+<p>For fish:</p>
+<pre><code class="language-sh">scmjs completion fish &gt; ~/.config/fish/completions/scmjs.fish
+</code></pre>
+<h2 id="in-korean">In Korean<a class="anchor" href="#in-korean" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">scmjs</code> speaks English and Korean. It follows the computer&#39;s language: the locale on Linux
+and macOS (<code class="nw">LANG</code>, or <code class="nw">LC_ALL</code> or <code class="nw">LC_MESSAGES</code> where one is set), the display language on
+Windows. To choose for one command, give it <code class="nw">--lang</code>:</p>
+<pre><code class="language-sh">scmjs --lang ko info maps/*.scx
+</code></pre>
+<p>To choose for every command, set <code class="nw">SCMJS_LANG</code> to <code class="nw">ko</code> or <code class="nw">en</code>, in <code class="nw">~/.bashrc</code> or your
+shell&#39;s own startup file:</p>
+<pre><code class="language-sh">export SCMJS_LANG=ko
+</code></pre>
+<p>The help, the reports, Check Map&#39;s findings and the errors change language. What stays the
+same in every language:</p>
+<ul>
+<li>A map&#39;s own text: its name, description, strings and triggers.</li>
+<li>The text forms of triggers and strings, <code>map dump</code> and <code>map unpack --text</code>. They are
+formats, so <code>git diff</code> on a map reads the same on every computer.</li>
+<li>The files a command writes: a baseline, a test file, the README and workflow
+<code>scmjs init</code> makes. A baseline written in Korean holds when the check runs in English.</li>
+<li>A mod&#39;s folder as <code>mod unpack</code> and <code>mod new</code> write it, and, for now, the findings of
+<code>mod check</code> and the lines of <code>mod diff</code>; the rest of the <code class="nw">mod</code> commands&#39; output follows
+the language.</li>
+<li>In <code class="nw">--json</code>, the keys and the values that name things (a finding&#39;s level, a kind) are
+English; a sentence in it, such as a finding&#39;s text, is in the chosen language. The CI
+formats of <code>map check</code> do the same: rule ids in English, messages in the language.</li>
+<li><code>scmjs mcp</code> and <code>scmjs lsp</code>. The MCP server&#39;s tools are read by an AI model, and the
+language server passes on the TrigScript compiler&#39;s messages, which are English.</li>
+</ul>
+<p>A few of the help&#39;s own words are left as they are: the usage line&#39;s <code class="nw">[options]</code> and
+<code class="nw">[command]</code>, which are syntax, and any error the command line library raises that the
+translation does not know. The Korean was not written by a native speaker; a review is
+welcome.</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#installing">Installing</a></li>
+<li><a href="#downloading-the-program">Downloading the program</a></li>
+<li><a href="#the-commands">The commands</a></li>
+<li><a href="#first-commands">First commands</a></li>
+<li><a href="#checking-your-setup">Checking your setup</a></li>
+<li><a href="#commands-that-need-starcraft">Commands that need StarCraft</a></li>
+<li><a href="#updating">Updating</a></li>
+<li><a href="#shell-completion">Shell completion</a></li>
+<li><a href="#in-korean">In Korean</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

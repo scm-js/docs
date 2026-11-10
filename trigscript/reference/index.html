@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reference — TrigScript, StarCraft triggers as code</title>
+<meta name="description" content="not() flips a comparison or a switch test, and turns always() into never(). StarEdit&#39;s labels work too. displayText(text) always displays; displayText(text, false) follows the player&#39;s…">
+<meta property="og:title" content="Reference — TrigScript, StarCraft triggers as code">
+<meta property="og:description" content="not() flips a comparison or a switch test, and turns always() into never(). StarEdit&#39;s labels work too. displayText(text) always displays; displayText(text, false) follows the player&#39;s…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/trigscript/reference/">
+<meta property="og:url" content="https://docs.scmjs.dev/trigscript/reference/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="here" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Reference</h1>
+<h2 id="terms">Terms<a class="anchor" href="#terms" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Frame</td>
+<td>One step of the game. 24 a second at Fastest.</td>
+</tr>
+<tr>
+<td>Pass</td>
+<td>One time the game goes through the trigger list: every 31 frames, every 2 with hyper triggers, every frame in a map with a program.</td>
+</tr>
+<tr>
+<td>Game second</td>
+<td>16 frames, at every game speed. What Elapsed Time and the countdown timer count.</td>
+</tr>
+<tr>
+<td>Wait slot</td>
+<td>Each player has one. A Wait takes it, and the player&#39;s other Waits wait for it.</td>
+</tr>
+<tr>
+<td>Apply</td>
+<td>Run the script and put its triggers into the map&#39;s trigger list.</td>
+</tr>
+<tr>
+<td>Block</td>
+<td>The run of triggers in the list that the script made.</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Turn the programs into the saved map. Only a script with programs is built.</td>
+</tr>
+<tr>
+<td>Per-player program</td>
+<td>A program owned by several players, run for each with its own variables.</td>
+</tr>
+</tbody></table>
+<h2 id="triggers">Triggers<a class="anchor" href="#triggers" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>trigger(players, conditions, actions, options?)</code></td>
+<td>One trigger. <code class="nw">players</code> is a player or a list; up to 16 conditions and 64 actions.</td>
+</tr>
+<tr>
+<td><code>{ preserve, disabled, ignoreGameEnd, ignoreDisplay, conditionsMet, paused, waitSkipDisabled, flags }</code></td>
+<td>The options: each trigger flag by name, and <code class="nw">flags</code> for raw bits.</td>
+</tr>
+<tr>
+<td><code class="nw">preserve()</code></td>
+<td>The same as <code>{ preserve: true }</code>, as an action.</td>
+</tr>
+<tr>
+<td><code class="nw">not(condition)</code></td>
+<td>The opposite condition. &quot;Exactly n&quot; has none, and is an error.</td>
+</tr>
+<tr>
+<td><code class="nw">disabled(item)</code></td>
+<td>The condition or action kept in the trigger but switched off.</td>
+</tr>
+<tr>
+<td><code class="nw">hyperTriggers(owner?)</code></td>
+<td>The three triggers that make the list run every 2 frames.</td>
+</tr>
+<tr>
+<td><code>condition(type, …)</code>, <code>action(type, …)</code></td>
+<td>A record by raw type number, for anything the tables do not know.</td>
+</tr>
+<tr>
+<td><code>memory(address, comparison, value)</code>, <code>setMemory(address, modifier, value)</code></td>
+<td>EUD: a value in the game&#39;s memory, through the deaths table.</td>
+</tr>
+</tbody></table>
+<p><code class="nw">not()</code> flips a comparison or a switch test, and turns <code class="nw">always()</code> into <code class="nw">never()</code>.</p>
+<h2 id="argument-words">Argument words<a class="anchor" href="#argument-words" aria-label="Link to this section">#</a></h2>
+<p>StarEdit&#39;s labels work too.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Words</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Comparison</td>
+<td><code class="nw">&quot;&gt;=&quot;</code>, <code class="nw">&quot;&lt;=&quot;</code>, <code class="nw">&quot;==&quot;</code></td>
+</tr>
+<tr>
+<td>Modifier</td>
+<td><code class="nw">&quot;set&quot;</code>, <code class="nw">&quot;add&quot;</code>, <code class="nw">&quot;subtract&quot;</code></td>
+</tr>
+<tr>
+<td>Switch state</td>
+<td><code class="nw">&quot;set&quot;</code>, <code class="nw">&quot;cleared&quot;</code></td>
+</tr>
+<tr>
+<td>Switch action</td>
+<td><code class="nw">&quot;set&quot;</code>, <code class="nw">&quot;clear&quot;</code>, <code class="nw">&quot;toggle&quot;</code>, <code class="nw">&quot;randomize&quot;</code></td>
+</tr>
+<tr>
+<td>Resource</td>
+<td><code class="nw">&quot;ore&quot;</code>, <code class="nw">&quot;gas&quot;</code>, <code class="nw">&quot;oreAndGas&quot;</code></td>
+</tr>
+<tr>
+<td>Score</td>
+<td><code class="nw">&quot;total&quot;</code>, <code class="nw">&quot;units&quot;</code>, <code class="nw">&quot;buildings&quot;</code>, <code class="nw">&quot;unitsAndBuildings&quot;</code>, <code class="nw">&quot;kills&quot;</code>, <code class="nw">&quot;razings&quot;</code>, <code class="nw">&quot;killsAndRazings&quot;</code>, <code class="nw">&quot;custom&quot;</code></td>
+</tr>
+<tr>
+<td>Order</td>
+<td><code class="nw">&quot;move&quot;</code>, <code class="nw">&quot;patrol&quot;</code>, <code class="nw">&quot;attack&quot;</code></td>
+</tr>
+<tr>
+<td>Alliance</td>
+<td><code class="nw">&quot;enemy&quot;</code>, <code class="nw">&quot;ally&quot;</code>, <code class="nw">&quot;alliedVictory&quot;</code></td>
+</tr>
+<tr>
+<td>Unit state (doodads, invincibility)</td>
+<td><code class="nw">&quot;enable&quot;</code>, <code class="nw">&quot;disable&quot;</code>, <code class="nw">&quot;toggle&quot;</code></td>
+</tr>
+<tr>
+<td>Count</td>
+<td>A number, or <code class="nw">&quot;All&quot;</code></td>
+</tr>
+</tbody></table>
+<p><code class="nw">displayText(text)</code> always displays; <code>displayText(text, false)</code> follows the player&#39;s
+subtitle setting.</p>
+<h2 id="names">Names<a class="anchor" href="#names" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">P1</code> … <code class="nw">P12</code>, <code class="nw">CurrentPlayer</code>, <code class="nw">AllPlayers</code></td>
+<td>Constants.</td>
+</tr>
+<tr>
+<td><code class="nw">players.</code></td>
+<td>Every player group: <code class="nw">Force1</code> … <code class="nw">Force4</code> (and the force&#39;s own name), <code class="nw">Foes</code>, <code class="nw">Allies</code>, <code class="nw">Neutral</code>, <code class="nw">NonAlliedVictory</code>, and the twelve players.</td>
+</tr>
+<tr>
+<td><code class="nw">units.</code></td>
+<td>Every unit type by name as an identifier (<code class="nw">TerranMarine</code>) or a string (<code>units[&quot;Terran Marine&quot;]</code>), and by the map&#39;s custom names. <code class="nw">AnyUnit</code>, <code class="nw">Men</code>, <code class="nw">Buildings</code>, <code class="nw">Factories</code>. With a mod&#39;s data set, the mod&#39;s names (<code class="nw">Terran_Mason</code>).</td>
+</tr>
+<tr>
+<td><code class="nw">locations.</code></td>
+<td>The map&#39;s locations by name; <code class="nw">Anywhere</code> and <code class="nw">NoLocation</code>.</td>
+</tr>
+<tr>
+<td><code class="nw">switches.</code></td>
+<td><code class="nw">Switch1</code> … <code class="nw">Switch256</code>, and any name the map sets.</td>
+</tr>
+<tr>
+<td><code class="nw">aiScripts.</code></td>
+<td>The AI scripts by StarEdit name; a four-letter code as a string works too.</td>
+</tr>
+<tr>
+<td><code class="nw">weapons.</code>, <code class="nw">upgrades.</code>, <code class="nw">techs.</code></td>
+<td>The game&#39;s weapons, upgrades and technologies, for <code class="nw">stats()</code>.</td>
+</tr>
+<tr>
+<td><code class="nw">colors.</code></td>
+<td>The player colours.</td>
+</tr>
+<tr>
+<td>A number</td>
+<td>Accepted wherever a name is: an EUD player, an unlisted unit id.</td>
+</tr>
+</tbody></table>
+<h2 id="inside-a-program">Inside a program<a class="anchor" href="#inside-a-program" aria-label="Link to this section">#</a></h2>
+<p>Each row links to where the <a href="/trigscript-language/">TrigScript language</a> guide explains
+it.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>program(body, options?)</code></td>
+<td>Code that runs in the game. Options: <code class="nw">owner</code> (a player, <code class="nw">AllPlayers</code>, a force or a list) and <code class="nw">name</code>. <a href="/trigscript-language/owners-and-per-player-programs/">Owners</a></td>
+</tr>
+<tr>
+<td><code class="nw">game(fn)</code></td>
+<td>A function that runs in the game, for programs to call. It can live in any file and be imported. <a href="/trigscript-language/functions/#functions-in-other-files">Functions in other files</a></td>
+</tr>
+<tr>
+<td><code>let n = 0</code>, <code>let f = false</code>, <code>let s = &quot;&quot;</code>, <code>let u: Unit | null = null</code>, <code>let p = { … }</code></td>
+<td>A number, a boolean, a text, a unit, a record. <a href="/trigscript-language/variables-and-numbers/#variables-and-records">Variables</a></td>
+</tr>
+<tr>
+<td><code class="nw">u8</code>, <code class="nw">u16</code>, <code class="nw">u32</code>, <code class="nw">fixed</code></td>
+<td>Numbers never below zero, and a number with a fraction. <a href="/trigscript-language/variables-and-numbers/#whole-numbers">Whole numbers</a>, <a href="/trigscript-language/variables-and-numbers/#numbers-with-a-fraction">fractions</a></td>
+</tr>
+<tr>
+<td><code class="nw">u32(x)</code>, <code class="nw">i32(x)</code></td>
+<td>The same 32 bits read the other way, where a <code class="nw">u32</code> meets a plain number.</td>
+</tr>
+<tr>
+<td><code class="nw">Math.sqrt</code>, <code class="nw">Math.hypot</code>, <code class="nw">Math.sin</code>, <code class="nw">Math.cos</code>, <code class="nw">Math.atan2</code>, …</td>
+<td>Fixed numbers. <code class="nw">Math.min</code>, <code class="nw">max</code>, <code class="nw">abs</code>, <code class="nw">floor</code> and <code>clamp(x, lo, hi)</code> work on whole ones.</td>
+</tr>
+<tr>
+<td><code class="nw">number[]</code>, <code class="nw">string[]</code>, <code class="nw">Unit[]</code>, <code>{ … }[]</code>, <code class="nw">number[][]</code></td>
+<td>Arrays. One that is pushed to grows. <a href="/trigscript-language/arrays/">Arrays</a></td>
+</tr>
+<tr>
+<td><code class="nw">forEach</code>, <code class="nw">some</code>, <code class="nw">every</code>, <code class="nw">find</code>, <code class="nw">findIndex</code>, <code class="nw">reduce</code>, <code class="nw">map</code>, <code class="nw">filter</code>, <code class="nw">sort</code>, <code class="nw">reverse</code></td>
+<td>Array methods that take a function, on arrays and on units (<code class="nw">unitsOf(P1).filter(…)</code>). <a href="/trigscript-language/arrays/#the-methods-that-take-a-function">The methods</a></td>
+</tr>
+<tr>
+<td><code class="nw">push</code>, <code class="nw">pop</code>, <code class="nw">shift</code>, <code class="nw">unshift</code>, <code class="nw">splice</code>, <code class="nw">slice</code>, <code class="nw">concat</code>, <code class="nw">join</code>, <code class="nw">toSorted</code>, <code class="nw">Array.from</code>, <code class="nw">[...xs]</code></td>
+<td>Growing, cutting and copying arrays.</td>
+</tr>
+<tr>
+<td><code>Record&lt;K, V&gt;</code>, <code>Map&lt;K, V&gt;</code>, <code class="nw">Set&lt;K&gt;</code></td>
+<td>Tables keyed by an id of the game, by any number, or by units. <a href="/trigscript-language/tables-maps-and-sets/">Tables</a></td>
+</tr>
+<tr>
+<td><code class="nw">class</code>, <code class="nw">extends</code>, <code class="nw">get</code> / <code class="nw">set</code>, <code class="nw">static</code>, <code class="nw">instanceof</code></td>
+<td>Classes, in the program or at the top of any file. <a href="/trigscript-language/classes/">Classes</a></td>
+</tr>
+<tr>
+<td><code>const f = (x: number) =&gt; …</code>, <code>return () =&gt; …</code></td>
+<td>Functions kept as values, and closures. <a href="/trigscript-language/functions/#functions-as-values">Functions as values</a></td>
+</tr>
+<tr>
+<td><code class="nw">try</code>, <code class="nw">catch</code>, <code class="nw">finally</code>, <code>throw new Error(…)</code></td>
+<td>Errors. One nothing catches is shown in red in the game. <a href="/trigscript-language/errors/">Errors</a></td>
+</tr>
+<tr>
+<td><code class="nw">shared(value)</code></td>
+<td>In a per-player program, one value for all the players.</td>
+</tr>
+<tr>
+<td><code class="nw">sleep(duration)</code>, <code>await sleep(…)</code>, <code>await nextFrame()</code>, <code>await until(…)</code></td>
+<td>Pause the program. <code class="nw">frames(n)</code>, <code class="nw">seconds(n)</code>, <code class="nw">minutes(n)</code> make a duration. <a href="/trigscript-language/waiting-and-tasks/">Waiting</a></td>
+</tr>
+<tr>
+<td><code class="nw">start(f())</code>, <code class="nw">t.cancel()</code>, <code class="nw">Promise.all</code>, <code class="nw">Promise.race</code></td>
+<td>Tasks that run beside the program. <a href="/trigscript-language/waiting-and-tasks/#tasks">Tasks</a></td>
+</tr>
+<tr>
+<td><code class="nw">wait(ms)</code></td>
+<td>The game&#39;s own Wait, which uses the player&#39;s wait slot. Prefer <code class="nw">sleep</code>.</td>
+</tr>
+<tr>
+<td><code class="nw">rose(condition)</code>, <code class="nw">once(condition)</code></td>
+<td>True on the frame the condition becomes true; true the first time only.</td>
+</tr>
+<tr>
+<td><code class="nw">random()</code>, <code class="nw">random(n)</code></td>
+<td>A coin toss; a whole number from 0 to n − 1.</td>
+</tr>
+<tr>
+<td><code>deaths(p, unit)</code>, <code>bring(p, unit, location)</code>, <code>score(p, kind)</code>, …</td>
+<td>A comparing condition without its comparison and amount reads the number. <a href="/trigscript-language/reading-the-game/">Reading the game</a></td>
+</tr>
+<tr>
+<td><code class="nw">minerals(p)</code>, <code class="nw">gas(p)</code>, <code>resources(p, kind)</code>, <code>countUnits(p, unit, location?)</code>, <code>kills(p, unit)</code>, <code class="nw">countdown()</code>, <code class="nw">elapsed()</code></td>
+<td>Reads by plainer names.</td>
+</tr>
+<tr>
+<td><code class="nw">race(p)</code>, <code class="nw">slot(p)</code>, <code class="nw">isHuman(p)</code>, <code class="nw">hasLeft(p)</code>, <code>supply(p, of?)</code></td>
+<td>The player.</td>
+</tr>
+<tr>
+<td><code>unitsAt(location, filter?)</code>, <code>unitsOf(player, filter?)</code>, <code class="nw">allUnits(filter?)</code></td>
+<td>The units a <code class="nw">for…of</code> runs over. <a href="/trigscript-language/units/">Units</a></td>
+</tr>
+<tr>
+<td><code class="nw">first(filter?)</code>, <code>nearest(type, location, filter?)</code>, <code class="nw">randomUnit(filter?)</code></td>
+<td>One unit, or <code class="nw">null</code>.</td>
+</tr>
+<tr>
+<td><code class="nw">u.hp</code>, <code class="nw">u.shields</code>, <code class="nw">u.energy</code>, <code class="nw">u.kills</code>, <code class="nw">u.cooldown</code>, <code class="nw">u.buildTime</code>, <code class="nw">u.stim</code> …, <code class="nw">u.invincible</code></td>
+<td>Read and written. <code>u.hp = 0</code> kills. <a href="/trigscript-language/units/#a-units-fields">A unit&#39;s fields</a></td>
+</tr>
+<tr>
+<td><code class="nw">u.maxHp</code>, <code class="nw">u.owner</code>, <code class="nw">u.type</code>, <code class="nw">u.x</code>, <code class="nw">u.y</code>, <code class="nw">u.speed</code>, <code class="nw">u.burrowed</code>, <code class="nw">u.cloaked</code>, <code class="nw">u.underAttack</code>, <code class="nw">u.inTransport</code></td>
+<td>Read only.</td>
+</tr>
+<tr>
+<td><code>u.order(kind, location)</code>, <code class="nw">u.give(player)</code>, <code class="nw">u.kill()</code>, <code class="nw">u.remove()</code>, <code class="nw">u.damage(n)</code>, <code class="nw">u.heal(n)</code>, <code class="nw">u.locate(location)</code></td>
+<td>What a unit can be told. <code class="nw">damage</code> and <code class="nw">heal</code> also take <code>{ percent }</code>.</td>
+</tr>
+<tr>
+<td><code class="nw">on.created</code>, <code class="nw">on.died</code>, <code class="nw">on.killed</code>, <code class="nw">on.morphed</code>, <code class="nw">on.order</code></td>
+<td>A function run each time something happens to a unit. <a href="/trigscript-language/events/">Events</a></td>
+</tr>
+<tr>
+<td><code class="nw">stats(unitType)</code>, <code class="nw">stats(weapon)</code>, <code class="nw">stats(upgrade)</code>, <code class="nw">stats(tech)</code>, <code class="nw">stats(player)</code></td>
+<td>The game&#39;s tables. <a href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables</a></td>
+</tr>
+<tr>
+<td><code class="nw">memory.game.frame</code>, <code class="nw">memory.map.width</code>, <code class="nw">memory.vision.countdown</code></td>
+<td>Other values of the game.</td>
+</tr>
+<tr>
+<td><code>keyPressed(p, key)</code>, <code>keyHeld(p, key)</code>, <code>clicked(p, button)</code>, <code>on.key(key, fn)</code></td>
+<td>Keys and mouse buttons. <a href="/trigscript-language/keys-the-mouse-and-chat/#keys-and-buttons">Keys</a></td>
+</tr>
+<tr>
+<td><code class="nw">mouse(p)</code>, <code>underMouse(p, filter?)</code>, <code>centerLocation(location, x, y)</code>, <code class="nw">bounds(location)</code></td>
+<td>The cursor&#39;s place on the map; the unit nearest it, or <code class="nw">null</code>; a location moved onto a point; where a location is now.</td>
+</tr>
+<tr>
+<td><code>chatted(p, pattern)</code>, <code>on.chat(pattern, fn)</code></td>
+<td><code class="nw">null</code>, or the values read out of a typed line. <a href="/trigscript-language/keys-the-mouse-and-chat/#chat">Chat</a></td>
+</tr>
+<tr>
+<td><code class="nw">local.player</code>, <code class="nw">local.camera</code>, <code class="nw">local.selected</code>, <code>await sync(p, value)</code></td>
+<td>What only this computer knows, and sending it to every computer. <a href="/trigscript-language/keys-the-mouse-and-chat/#what-only-one-computer-knows">Local values</a></td>
+</tr>
+<tr>
+<td><code>displayText(`… ${n} …`)</code>, <code class="nw">name(p)</code>, <code class="nw">color(p)</code></td>
+<td>A text with numbers, a player&#39;s name and colour in it, for the current player. <a href="/trigscript-language/text/">Text</a></td>
+</tr>
+<tr>
+<td><code>print(text, { to?, position? })</code></td>
+<td>The same for others, in the <code class="nw">&quot;chat&quot;</code> area or on the <code class="nw">&quot;center&quot;</code> line.</td>
+</tr>
+<tr>
+<td><code class="nw">&lt;line&gt;</code>, <code class="nw">&lt;bar&gt;</code>, <code class="nw">&lt;cell&gt;</code>, <code>ui.lines(p, () =&gt; …)</code></td>
+<td>Lines of JSX, in a <code class="nw">.tsx</code> file. <a href="/trigscript-language/text/#lines-of-jsx">Lines of JSX</a></td>
+</tr>
+<tr>
+<td><code>playWav(sound, 0)</code>, <code class="nw">tone()</code>, <code class="nw">noise()</code>, <code class="nw">pluck()</code></td>
+<td>Sounds, including clips the script makes. <a href="/trigscript-language/sounds-and-imported-files/#sounds">Sounds</a></td>
+</tr>
+<tr>
+<td><code>import … from &quot;trigscript/&lt;name&gt;&quot;</code></td>
+<td>The standard library. <a href="/trigscript-language/libraries/">Libraries</a></td>
+</tr>
+</tbody></table>
+<p>Keys for <code class="nw">keyPressed</code> are letters, digits, <code class="nw">&quot;F1&quot;</code> and <code class="nw">&quot;F7&quot;</code> … <code class="nw">&quot;F12&quot;</code>, <code class="nw">&quot;Space&quot;</code>,
+<code class="nw">&quot;Enter&quot;</code>, <code class="nw">&quot;Escape&quot;</code>, the arrows and the rest of the list the editor offers. The game
+keeps F2 to F6 to itself. Buttons are <code class="nw">&quot;left&quot;</code>, <code class="nw">&quot;right&quot;</code> and <code class="nw">&quot;middle&quot;</code>.</p>
+<h2 id="trigscript-beside-typescript">TrigScript beside TypeScript<a class="anchor" href="#trigscript-beside-typescript" aria-label="Link to this section">#</a></h2>
+<p>Outside <code class="nw">program()</code> the script is all of TypeScript: it runs when it is applied, with the
+whole language and its standard library. Inside a program, nearly all of the language
+works as in TypeScript, and what differs is set out in one table at <a href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside
+TypeScript</a>. Everything a program
+cannot do is refused with a message as you type, never passed over in silence; <a href="/trigscript-language/what-a-program-does-not-have/">What a
+program does not have</a> says what to
+write instead.</p>
+<p>The compiler and the commands TrigScript offers other plugins are described in the
+plugin&#39;s own README at
+<a href="https://github.com/scm-js/plugin-trigscript">scm-js/plugin-trigscript</a>.</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#terms">Terms</a></li>
+<li><a href="#triggers">Triggers</a></li>
+<li><a href="#argument-words">Argument words</a></li>
+<li><a href="#names">Names</a></li>
+<li><a href="#inside-a-program">Inside a program</a></li>
+<li><a href="#trigscript-beside-typescript">TrigScript beside TypeScript</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

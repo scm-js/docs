@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Showcase — TrigScript, StarCraft triggers as code</title>
+<meta name="description" content="Maps made with TrigScript, each with its whole script and a recording of it played in StarCraft: Remastered.  Watch it on YouTube.">
+<meta property="og:title" content="Showcase — TrigScript, StarCraft triggers as code">
+<meta property="og:description" content="Maps made with TrigScript, each with its whole script and a recording of it played in StarCraft: Remastered.  Watch it on YouTube.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/trigscript/showcase/">
+<meta property="og:url" content="https://docs.scmjs.dev/trigscript/showcase/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="here" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Showcase</h1>
+<p>Maps made with TrigScript, each with its whole script and a recording of it played in
+StarCraft: Remastered.</p>
+<h2 id="bad-apple">Bad Apple!!<a class="anchor" href="#bad-apple" aria-label="Link to this section">#</a></h2>
+<p><a href="https://www.youtube.com/watch?v=EbaFmgYyHgU"><img src="/images/showcase-bad-apple.webp" alt="Bad Apple!! on the minimap, in Classic graphics: a silhouette drawn in lit and fogged
+tiles"></a></p>
+<p><a href="https://www.youtube.com/watch?v=EbaFmgYyHgU">Watch it on YouTube</a>.</p>
+<p>The shadow-art video for &quot;Bad Apple!!&quot; played on the minimap, in time with the song. The
+fog of war is the screen: a tile lit this frame is white, a tile seen before is grey, so
+each frame of the game shows one frame of the video, 5,216 of them.</p>
+<p>The video is a file of the script. <strong>Import Video…</strong> turned it into <code class="nw">bad-apple.video</code>, 128
+× 96 with one tile per pixel, and when the script is built the <code class="nw">fog</code> library works out,
+for every frame, the units whose sight covers exactly its white parts. In the game each of
+those units is made and taken away in the same trigger pass, and what it saw stays lit
+until the next frame, when the library has the game put every tile back in fog. A frame
+takes about 125 units on average and 356 at the most. The language guide describes <a href="/trigscript-language/sounds-and-imported-files/#files-the-script-imports">files
+the script imports</a> and <a href="/trigscript-language/libraries/#the-standard-library">the <code class="nw">fog</code>
+library</a>.</p>
+<pre><code class="language-ts"><span class="k">import</span> { fog } <span class="k">from</span> <span class="s">&quot;trigscript/fog&quot;</span>;
+<span class="k">import</span> badApple <span class="k">from</span> <span class="s">&quot;./bad-apple.video&quot;</span>;
+
+<span class="k">const</span> W = <span class="n">128</span>, H = <span class="n">96</span>;
+<span class="c">// The camera waits below the board: the minimap draws the camera&#39;s box over</span>
+<span class="c">// whatever is under it.</span>
+<span class="k">const</span> PARK = reserveLocation(<span class="s">&quot;bad apple: the camera, below the board&quot;</span>);
+
+<span class="c">// Rows `from` to `to` of the board lit, as a picture: one step of the curtain the</span>
+<span class="c">// video opens and closes behind.</span>
+<span class="k">const</span> band = (<span class="k">from</span>: <span class="k">number</span>, to: <span class="k">number</span>) =&gt;
+  fog.picture(<span class="k">Array</span>.<span class="k">from</span>({ length: H }, (_, y) =&gt; (y &gt;= <span class="k">from</span> &amp;&amp; y &lt; to ? <span class="s">&quot;#&quot;</span> : <span class="s">&quot;.&quot;</span>).repeat(W)));
+<span class="k">const</span> STEP = <span class="n">4</span>;
+<span class="k">const</span> board = band(<span class="n">0</span>, H);
+<span class="c">// White falls over the board from the top, a second long, then slides off the bottom.</span>
+<span class="k">const</span> fall = <span class="k">Array</span>.<span class="k">from</span>({ length: H / STEP }, (_, i) =&gt; band(<span class="n">0</span>, (i + <span class="n">1</span>) * STEP));
+<span class="k">const</span> lift = <span class="k">Array</span>.<span class="k">from</span>({ length: H / STEP - <span class="n">1</span> }, (_, i) =&gt; band((i + <span class="n">1</span>) * STEP, H));
+
+<span class="k">const</span> credits = () =&gt; {
+  displayText(<span class="s">&quot;\x04Bad Apple!! feat. nomico&quot;</span>);
+  displayText(<span class="s">&quot;\x05Alstroemeria Records, after a Touhou Project song by ZUN. Shadow art video by Anira.&quot;</span>);
+};
+
+program(<span class="k">async</span> () =&gt; {
+  centerLocation(PARK, <span class="n">64</span> * <span class="n">32</span>, <span class="n">116</span> * <span class="n">32</span>);
+  centerView(PARK);
+  <span class="k">await</span> sleep(frames(<span class="n">24</span>));
+  credits();
+  displayText(<span class="s">&quot;\x05Played on the minimap with the fog of war, written in TrigScript.&quot;</span>);
+  <span class="k">for</span> (<span class="k">const</span> p <span class="k">of</span> fall) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, p); <span class="k">await</span> nextFrame(); }
+  <span class="k">let</span> i = <span class="n">0</span>;
+  <span class="k">while</span> (i &lt; <span class="n">72</span>) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, board); <span class="k">await</span> nextFrame(); i++; }
+  <span class="k">for</span> (<span class="k">const</span> p <span class="k">of</span> lift) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, p); <span class="k">await</span> nextFrame(); }
+  <span class="k">await</span> sleep(frames(<span class="n">12</span>));
+
+  playWav(<span class="s">&quot;staredit\\wav\\badapple.ogg&quot;</span>, <span class="n">0</span>);
+  <span class="k">await</span> fog.play(P1, badApple);
+
+  <span class="c">// The song runs a little past the last frame.</span>
+  <span class="k">await</span> sleep(frames(<span class="n">48</span>));
+  <span class="k">for</span> (<span class="k">const</span> p <span class="k">of</span> fall) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, p); <span class="k">await</span> nextFrame(); }
+  displayText(<span class="s">&quot;\x04Fin.&quot;</span>);
+  credits();
+  i = <span class="n">0</span>;
+  <span class="k">while</span> (i &lt; <span class="n">120</span>) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, board); <span class="k">await</span> nextFrame(); i++; }
+  <span class="k">for</span> (<span class="k">const</span> p <span class="k">of</span> lift) { fog.light(P1, <span class="n">0</span>, <span class="n">0</span>, p); <span class="k">await</span> nextFrame(); }
+});
+</code></pre>
+<p>The <code>for … of</code> loops are written out once per picture when the script is built, so each
+step of the curtain is a fixed set of units; the <code class="nw">while</code> loops run in the game.</p>
+<p><strong>The map.</strong> 128 × 128 Badlands. The top 96 rows, the picture, are all one tile, 23778,
+laid with the Tile brush: of the tiles measured, its lit and fogged colours lie furthest
+apart on the Classic minimap. The 32 rows below have never been seen, so they stay black,
+and the camera waits there. There are no units, so nothing lights the fog but the script.
+Player 1 is the human and Player 2 a computer: Remastered will not start a Use Map
+Settings map without a computer slot.</p>
+<p><strong>The song</strong> is in the map&#39;s archive as a stereo Ogg file, <code>staredit\wav\badapple.ogg</code>,
+which Remastered plays. Import Video… also takes a sound file, as a <code class="nw">.sound</code> file of the
+script that <code class="nw">playWav</code> plays (mixed to mono).</p>
+<p><strong>Playing it.</strong> Host a multiplayer game alone, which runs at Fastest, the speed the video
+was imported for. Switch to Classic graphics (Options ▸ Graphics, or F5): Classic draws
+the minimap sharp, one pixel per tile, where Remastered graphics blurs it. Turn the music
+volume down, so the game&#39;s own music does not play over the song.</p>
+<p>&quot;Bad Apple!! feat. nomico&quot; is by Alstroemeria Records, an arrangement of a song from the
+Touhou Project by ZUN; the shadow-art video is by Anira. Neither comes with the editor or
+the plugin.</p>
+<h2 id="korobeiniki">Korobeiniki<a class="anchor" href="#korobeiniki" aria-label="Link to this section">#</a></h2>
+<p><a href="https://www.youtube.com/watch?v=RQ6CvRq9bMA"><img src="/images/showcase-korobeiniki.webp" alt="Korobeiniki on the minimap: a well of coloured blocks, the falling piece and its grey
+ghost, the next piece, and a bar for each layer of the
+music"></a></p>
+<p><a href="https://www.youtube.com/watch?v=RQ6CvRq9bMA">Watch it on YouTube</a> · <a href="/images/showcase-korobeiniki.scx">Download the
+map</a> (7.9 MB) · <a href="https://github.com/scm-js/plugin-trigscript/blob/main/probes/blocks.tsx">The whole
+script</a></p>
+<p>A falling-block game on the minimap, played with the keyboard, and a band that follows it.
+The song is Korobeiniki, and its form is decided by the game as it is played: verse and
+break take turns, a new level brings the build and then the drop, four lines at once bring
+the drop straight away, a stack grown past two thirds of the well keeps the build going
+until it is dug down, and from level 4 the last verse, a tone up, takes the verse&#39;s place.
+The pieces fall on the beat, so a piece lands, and its lines go, on the music.</p>
+<p><strong>The screen</strong> is units. Each cell of the well is an Overlord, and the minimap draws it in
+its owner&#39;s colour, so each piece belongs to a player of its own, given a colour in the
+map (red, white, green, blue, yellow, teal, purple). The <a href="/trigscript-library/screen/"><code class="nw">trigscript/screen</code>
+library</a> keeps the picture: drawing sets cells, and
+<code class="nw">present()</code> takes away and makes only the Overlords whose cell changed. The grey ghost
+under the piece is the computer&#39;s: Remastered&#39;s minimap shows no units of Players 9 to 12,
+and the computer is the one slot that owns no piece. Because a computer moves its own
+units, and an air unit on the move pushes its neighbours aside, the ghost is taken away
+before each picture is shown and made again after it, so it never moves.</p>
+<p><strong>The music</strong> is a <a href="/trigscript-library/music/"><code class="nw">trigscript/music</code></a> song in four layers
+(drums, bass, harmony, melody), cut into half bars when the script is built. In the game a
+<code class="nw">Band</code> plays the sections, and the script tells it where to go next:</p>
+<pre><code class="language-js"><span class="k">function</span> direct() {
+  <span class="k">const</span> s = band.section;
+  <span class="k">const</span> base = hud.level &gt;= TONE_UP ? LAST : VERSE;
+  <span class="k">if</span> (hud.mode !== PLAYING) {
+    <span class="c">// The outro rings out, then the intro, again and again.</span>
+    band.loop = s === INTRO;
+    <span class="k">if</span> (s === OUTRO) band.queue(INTRO);
+    <span class="k">else</span> <span class="k">if</span> (s !== INTRO &amp;&amp; band.next !== OUTRO &amp;&amp; band.next !== INTRO) band.go(INTRO);
+  } <span class="k">else</span> {
+    <span class="c">// What the game did, at the next half bar: four lines, the drop; a level, or a</span>
+    <span class="c">// stack grown high, the build (and after it, as the song goes, the drop).</span>
+    <span class="k">if</span> (tetris &amp;&amp; s !== DROP) band.go(DROP);
+    <span class="k">else</span> <span class="k">if</span> ((leveled || (high &amp;&amp; s !== BUILD)) &amp;&amp; s !== DROP &amp;&amp; s !== BUILD &amp;&amp; band.next !== DROP) band.go(BUILD);
+    tetris = <span class="k">false</span>;
+    leveled = <span class="k">false</span>;
+    <span class="c">// While the stack stays high the build plays again; else each section goes on.</span>
+    band.loop = s === BUILD &amp;&amp; high;
+    <span class="k">if</span> (!(band.now &amp;&amp; band.next &gt;= <span class="n">0</span>)) {
+      <span class="k">if</span> (s === INTRO || s === OUTRO) band.go(base);
+      <span class="k">else</span> <span class="k">if</span> (s === VERSE || s === LAST || s === DROP) band.queue(BREAK);
+      <span class="k">else</span> <span class="k">if</span> (s === BUILD) band.queue(DROP);
+      <span class="k">else</span> band.queue(base);
+    }
+  }
+  <span class="c">// No drums in the first verse.</span>
+  band.on[DRUMS] = !(hud.mode === PLAYING &amp;&amp; hud.level === <span class="n">0</span> &amp;&amp; s === VERSE);
+  hud.music = s;
+}
+</code></pre>
+<p>Gravity counts in eighths of a beat from the band&#39;s own clock, so a row falls on the beat:
+every beat and a half at level 1, every eighth of a beat at level 10. One, two or three
+lines ring a chime of as many notes. The bars right of the well jump on each beat for the
+layers that begin a note in that half bar.</p>
+<p><strong>The map.</strong> 64 × 64 Space Platform: the well and the boxes are framed in Platform, the
+rest is Space, so the minimap shows grey frames on black. Player 1 is the human, Player 2
+the computer that owns the ghost, and Players 3 to 8 own the pieces. The script reads the
+keys through the game itself, so it plays the same alone or hosted.</p>
+<p><strong>Playing it.</strong> Host a multiplayer game alone and turn the game&#39;s music off. A D move, W
+and Q turn, S drops a row, Space drops all the way, E holds the piece for later. Both
+graphics modes work; the video is in Remastered.</p>
+<p>Korobeiniki is a Russian folk song from the 19th century; the arrangement was made for
+this map.</p>
+<h2 id="für-elise">Für Elise<a class="anchor" href="#für-elise" aria-label="Link to this section">#</a></h2>
+<p><a href="https://www.youtube.com/watch?v=CFVdWwmngyw"><img src="/images/showcase-fur-elise.webp" alt="Für Elise in the storm: red notes falling onto a keyboard of flags on the main screen,
+and the same notes on the
+minimap"></a></p>
+<p><a href="https://www.youtube.com/watch?v=CFVdWwmngyw">Watch it on YouTube</a> · <a href="/images/showcase-fur-elise.scx">Download the
+map</a> (3.8 MB) · <a href="https://github.com/scm-js/plugin-trigscript/blob/main/probes/fur-elise-showcase.ts">The whole
+script</a>
+· <a href="https://github.com/scm-js/plugin-trigscript/blob/main/probes/lib/fur-elise-remix.ts">The
+soundtrack</a></p>
+<p>Beethoven&#39;s Für Elise, begun on a grand piano and carried into a trance remix, with every
+note drawn as it sounds. The notes fall onto a keyboard twice: on the minimap, where a
+note is a column of Overlords over Space, and on the main screen, where it is a column of
+Spider Mines wearing a Flag&#39;s looks. The melody is gold and drawn on top, the left hand
+cyan, and in the drops and builds the rest of the band falls in violet. In the storm, the
+piece&#39;s D minor middle, the chords turn red and the white keys flash red on each one, and
+Battlecruisers and Wraiths blow up on the biggest beats.</p>
+<p><strong>The music</strong> is one sound, 2 minutes 35 seconds long, made when the script is built and
+started with a single <code class="nw">playWav</code>. The piano is the Salamander Grand Piano, recordings of a
+real grand at sixteen strengths for every third key, with the pedal and the strings
+ringing under it; the strings, crash and timpani are recordings from VSCO 2 Community
+Edition; the synths and drums are made by the script. The remix is in 4/4 at 128 beats a
+minute, each bar of the original&#39;s 3/8 becoming half a bar. It is mixed with the melody
+first: the harmony goes down whenever the melody plays, and a check run on the finished
+sound requires the melody to stand at least 6 dB over everything else in its range in
+every bar it plays.</p>
+<pre><code class="language-js"><span class="k">const</span> grand = music.sampled(piano, { resonance: <span class="n">0.07</span> });
+<span class="k">const</span> heard = {
+  piano: { instrument: grand, volume: <span class="n">1.2</span>, reverb: <span class="n">0.2</span> },
+  lead: { instrument: music.presets.trance(), reverb: <span class="n">0.25</span>,
+          fx: (c) =&gt; c.delay(BEAT * <span class="n">0.75</span>, { feedback: <span class="n">0.3</span>, mix: <span class="n">0.18</span>, pingPong: <span class="k">true</span> }) },
+  arp: { instrument: music.presets.arp(), pan: <span class="n">0.25</span>, volume: <span class="n">0.8</span>, fx: PUMP },
+  bass: { instrument: music.presets.bass({ volume: <span class="n">0.3</span> }), fx: (c) =&gt; PUMP(c.filter(<span class="s">&quot;lowpass&quot;</span>, <span class="n">700</span>)) },
+  <span class="c">// … pads, stabs, strings, drums, timpani, risers</span>
+};
+<span class="k">const</span> take = music.perform({ meter: <span class="s">&quot;4/4&quot;</span>, bpm: <span class="n">128</span> }, parts);
+<span class="c">// The harmony 6 dB down under the melody.</span>
+<span class="k">const</span> harmony = music.render(take, { parts: HARMONY }).duck(melody, { depth: <span class="n">6</span>, threshold: -<span class="n">30</span> });
+</code></pre>
+<p>These sampled instruments are not in the editor&#39;s TrigScript yet. The script builds from a
+checkout of the <a href="https://github.com/scm-js/plugin-trigscript">TrigScript repository</a>,
+which also holds the tool that turns the piano and orchestra recordings into the
+<code class="nw">.samples</code> files the script imports.</p>
+<p><strong>The picture</strong> is worked out when the script is built: for every frame, the notes
+sounding at that moment and where each falls. The program only plays the changes back, a
+unit made, taken away or handed to the player of its new colour with Give Units, which
+recolours a unit where it stands. Remastered shows the picture about 95 ms ahead of a
+sound started in the same frame, so the music starts two frames early. One long sound
+keeps time with the game: in the recording it matches the file to the sample at every ten
+seconds, from start to end.</p>
+<p><strong>The map.</strong> 128 × 128 Space Platform: Space at the top, black on the minimap, for the
+falling notes, and Platform at the bottom for the stage the camera watches. Player 1 owns
+only the Map Revealers placed over the map, Player 2 is the computer the game needs and
+owns nothing (a computer moves its own units), and Players 3 to 8 each own one colour: the
+white keys, the black keys, the melody, the left hand, the storm and the band.</p>
+<p><strong>Playing it.</strong> Host a multiplayer game alone, turn the game&#39;s music off and leave sound
+effects on. It plays once, about two and a half minutes.</p>
+<p>Beethoven&#39;s score is in the public domain; the transcription, from the Breitkopf &amp; Härtel
+complete edition of 1888, and the remix were made for this map. The piano is the
+<a href="https://sfzinstruments.github.io/pianos/salamander">Salamander Grand Piano V3</a> by
+Alexander Holm (<a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>); the strings,
+crash and timpani are from <a href="https://github.com/sgossner/VSCO-2-CE">VSCO 2 Community
+Edition</a> by Versilian Studios (CC0).</p>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#bad-apple">Bad Apple!!</a></li>
+<li><a href="#korobeiniki">Korobeiniki</a></li>
+<li><a href="#für-elise">Für Elise</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

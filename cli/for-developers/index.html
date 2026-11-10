@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For developers — StarCraft maps and replays on the command line</title>
+<meta name="description" content="scmjs plugin new &quot;Base Check&quot; writes a plugin to start from in plugin-base-check/: its manifest, a plugin.ts that adds a Tools menu item, the Korean catalogue and the test that keeps it…">
+<meta property="og:title" content="For developers — StarCraft maps and replays on the command line">
+<meta property="og:description" content="scmjs plugin new &quot;Base Check&quot; writes a plugin to start from in plugin-base-check/: its manifest, a plugin.ts that adds a Tools menu item, the Korean catalogue and the test that keeps it…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/cli/for-developers/">
+<meta property="og:url" content="https://docs.scmjs.dev/cli/for-developers/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/running-a-map-in-the-game/">Running a map in the game</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="here" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>For developers</h1>
+<h2 id="writing-a-plugin">Writing a plugin<a class="anchor" href="#writing-a-plugin" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs plugin new &quot;Base Check&quot;</code> writes a plugin to start from in <code class="nw">plugin-base-check/</code>: its
+manifest, a <code class="nw">plugin.ts</code> that adds a Tools menu item, the Korean catalogue and the test
+that keeps it complete, the typings, and the build and CI every scm-js plugin uses. Then:</p>
+<pre><code class="language-sh">cd plugin-base-check
+npm install
+npm start
+</code></pre>
+<p><code>npm start</code> runs <code>scmjs plugin dev</code>. It builds the plugin, serves its folder on your own
+computer and opens the editor with it. The first time, the editor asks you to add the
+plugin, as for any plugin. After that, each time you save a file the plugin is built again
+and the editor reloads it. A build that fails is shown in the terminal and in the editor,
+and nothing is reloaded until it is fixed. Ctrl+C stops it.</p>
+<p>The editor remembers the plugin by its address, <code class="nw">http://127.0.0.1:5310/</code>, so it is the
+same plugin next time. <code class="nw">--port</code> serves it on another port, and <code class="nw">--no-open</code> prints the
+editor&#39;s address instead of opening it.</p>
+<p><code>scmjs plugin check</code> reads the folder the way the editor loads it and says what would go
+wrong: a manifest the editor would refuse, an API version it does not have, a missing
+icon, entry or build, a build older than its source, and, for a plugin without a build,
+imports of files that are not there or of npm packages. It exits with 1 when the editor
+would not load the plugin, so it can stop a CI step. The <a href="/plugins/">plugin guide</a> covers
+the rest, and <a href="/cli/changing-a-map/#running-a-plugin-over-a-map"><code>map run</code></a> runs a plugin over a map from the
+terminal.</p>
+<h2 id="ai-tools">AI tools<a class="anchor" href="#ai-tools" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs mcp</code> speaks the <a href="https://modelcontextprotocol.io">Model Context Protocol</a> on
+standard input and output, so an AI tool on your computer, such as Claude Code, Cursor or
+VS Code, can work on your maps with the same code these commands use. The tool starts
+<code>scmjs mcp</code> in your maps folder and talks to it over the pipe; the paths it gives are
+files in that folder. Nothing goes on the network except what the commands themselves
+fetch: the game engine the first time a map is run in the game, and npm&#39;s newest version
+for <code class="nw">doctor</code>.</p>
+<p>With Claude Code, once, in the folder your maps are in:</p>
+<pre><code class="language-sh">claude mcp add scmjs -- npx -y @scm-js/cli mcp
+</code></pre>
+<p>If <code class="nw">scmjs</code> is installed, from a package manager, a download or <code>npm install -g</code>, name it
+directly instead: <code>claude mcp add scmjs -- scmjs mcp</code>. <code>scmjs doctor</code> prints the line for
+your copy.</p>
+<p>Other tools take the same thing as JSON in their MCP settings:</p>
+<pre><code class="language-json">{ <span class="s">&quot;mcpServers&quot;</span>: { <span class="s">&quot;scmjs&quot;</span>: { <span class="s">&quot;command&quot;</span>: <span class="s">&quot;npx&quot;</span>, <span class="s">&quot;args&quot;</span>: [<span class="s">&quot;-y&quot;</span>, <span class="s">&quot;@scm-js/cli&quot;</span>, <span class="s">&quot;mcp&quot;</span>] } } }
+</code></pre>
+<p>Each tool is a command from this guide. It takes the same arguments by name and answers
+with the command&#39;s text and its <code class="nw">--json</code> data:</p>
+<table>
+<thead>
+<tr>
+<th>Tools</th>
+<th>The commands</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">map_info</code>, <code class="nw">map_check</code>, <code class="nw">map_dump</code>, <code class="nw">map_find</code>, <code class="nw">map_diff</code></td>
+<td>Reading, checking, searching and comparing maps. <code class="nw">map_check</code> takes a <code class="nw">baseline</code> file and lists only the findings it does not hold</td>
+</tr>
+<tr>
+<td><code class="nw">map_triggers_export</code>, <code class="nw">map_triggers_import</code>, <code class="nw">map_strings_export</code>, <code class="nw">map_strings_import</code>, <code class="nw">map_strings_prune</code></td>
+<td>The triggers and strings as text, in and out. The text is passed inline, so the model edits triggers in the <a href="/triggers/">trigger window&#39;s text form</a></td>
+</tr>
+<tr>
+<td><code class="nw">map_set</code>, <code class="nw">map_resize</code>, <code class="nw">map_new</code>, <code class="nw">map_build</code>, <code class="nw">map_run</code></td>
+<td>The Scenario menu&#39;s edits, a new map, the TrigScript build, a plugin run over the map</td>
+</tr>
+<tr>
+<td><code class="nw">map_optimize</code></td>
+<td>The map made smaller; a dry run unless the model asks to write</td>
+</tr>
+<tr>
+<td><code class="nw">map_preview</code></td>
+<td>The answer is the picture itself, so a model that can see images sees the map</td>
+</tr>
+<tr>
+<td><code class="nw">map_analyze</code></td>
+<td>A melee map&#39;s layout: starts, naturals, the walks between starts and their narrowest points, and the verdicts; the picture too when asked</td>
+</tr>
+<tr>
+<td><code class="nw">map_trace</code>, <code class="nw">map_cost</code>, <code class="nw">map_coverage</code></td>
+<td>The triggers run in the game, what they cost, and which fired across many replays</td>
+</tr>
+<tr>
+<td><code class="nw">map_balance</code></td>
+<td>Games played on a melee map with your bots, to see whether its starts are fair; it takes minutes</td>
+</tr>
+<tr>
+<td><code class="nw">replay_info</code>, <code class="nw">replay_map</code></td>
+<td>What a replay holds (the mod it was played with; with <code class="nw">builds</code>, what each player ordered, named by <code class="nw">mod</code>), and its map written out</td>
+</tr>
+<tr>
+<td><code class="nw">mod_info</code>, <code class="nw">mod_check</code>, <code class="nw">mod_diff</code>, <code class="nw">mod_unpack</code>, <code class="nw">mod_pack</code>, <code class="nw">mod_new</code></td>
+<td><a href="/cli/mods/">Mods</a>: what a mod is, its check, a changelog, the folder of text and back, a new one</td>
+</tr>
+<tr>
+<td><code class="nw">mod_header</code>, <code class="nw">mod_play</code></td>
+<td><a href="/cli/mods/#a-bot-made-for-a-mod">A bot made for a mod</a>: the header and ids, written into a bot&#39;s folder with <code class="nw">bot</code>; and the mod <a href="/cli/mods/#playing-a-mod-on-the-play-page">handed to the play page</a> with a <code class="nw">map</code> and a <code class="nw">bot</code>. <code class="nw">mod_play</code> opens your browser and answers with the hand-over page&#39;s link and what the play page said</td>
+</tr>
+<tr>
+<td><code class="nw">doctor</code></td>
+<td>What this computer has, so the model knows what it can call</td>
+</tr>
+</tbody></table>
+<p>A map reads as the editor reads it, so what the model is told is what the editor would
+show. Tools that change a map write over it unless given <code class="nw">out</code>, like the commands, so keep
+your maps in git or give the tool copies. <code class="nw">map_run</code> runs a plugin, which is code, with
+your privileges, as <code>scmjs map run</code> does; the AI tool asks you before it calls a tool, and
+you can leave that one unapproved.</p>
+<p><code class="nw">map_trace</code> and <code class="nw">map_cost</code> take <code class="nw">mod</code>, as the commands take <code class="nw">--mod</code>.</p>
+<p><code class="nw">map_preview</code>, <code class="nw">map_analyze</code>, <code class="nw">map_trace</code>, <code class="nw">map_cost</code> and <code class="nw">map_coverage</code> need <a href="/cli/getting-started/#commands-that-need-starcraft">your copy
+of the game</a>, and the runs fetch the engine the first time;
+a trace or cost run takes a few seconds and plays at most ten minutes of game.
+<code class="nw">map_coverage</code> plays whole replays, so it takes as long as the command does. <code class="nw">doctor</code>
+tells the model whether the game and the engine are there and what you would need to
+install, so it can say so rather than fail. When the game is not in one of the usual
+places, the model can pass its folder as <code class="nw">starcraft</code>, or you can set <code class="nw">SCMJS_STARCRAFT</code> in
+the tool&#39;s MCP settings.</p>
+<h2 id="trigscript-in-your-text-editor">TrigScript in your text editor<a class="anchor" href="#trigscript-in-your-text-editor" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs lsp</code> is a language server for <a href="/trigscript/">TrigScript</a>. It speaks the Language
+Server Protocol on standard input and output, so VS Code, Neovim, Helix or any editor with
+an LSP client can check a script as you type, outside scmJS&#39;s TrigScript window. It gives
+what that window gives:</p>
+<ul>
+<li>The errors <code>scmjs map build</code> would stop on, TypeScript&#39;s and TrigScript&#39;s own, checked
+against the map&#39;s names, as you type and when you save.</li>
+<li>Completions: the script&#39;s own names, the standard library&#39;s, a library&#39;s exports,
+keywords, and after <code class="nw">locations.</code>, <code class="nw">units.</code>, <code class="nw">switches.</code> or <code class="nw">players.</code> what the map has.</li>
+<li>A hover with the signature and doc comment, what a program&#39;s variable holds, and which
+of the map&#39;s things a name is (<code class="nw">locations.Nest</code> is location 2: 10 × 10 tiles at 48, 6).</li>
+<li>Go to definition, into the script&#39;s other files, a library&#39;s module and the standard
+library&#39;s (<code class="nw">trigscript/fog</code>).</li>
+<li>The outline of a file.</li>
+</ul>
+<p>A script is the <code class="nw">trigscript/</code> folder of a map unpacked with
+<a href="/cli/changing-a-map/#the-archive-as-a-folder"><code>scmjs map unpack</code></a>, where its files are kept at their paths in
+the archive. The map&#39;s locations, switches, unit names and sounds are read from
+<code class="nw">staredit/scenario.chk</code> beside that folder, and read again when the file changes. The
+copies of other plugins&#39; libraries that the map keeps are in <code class="nw">trigscript/@libraries/</code>. The
+round trip is:</p>
+<pre><code class="language-sh">scmjs map unpack ridge.scx            <span class="c"># ridge/trigscript/main.ts, ridge/staredit/scenario.chk, …</span>
+<span class="c"># edit ridge/trigscript/*.ts in your editor</span>
+scmjs map pack ridge                  <span class="c"># back into ridge.scx</span>
+scmjs map build ridge.scx --test      <span class="c"># the triggers applied and the programs built, as Save does</span>
+</code></pre>
+<p>Any other folder called <code class="nw">trigscript</code> is a script too, checked against the names every map
+has. For a script kept somewhere else, <code class="nw">--map</code> names the map whose names it uses, as a map
+file or an unpacked map&#39;s folder. With a map file, a <code class="nw">.ts</code> file belongs to the nearest
+folder above it that has a <code class="nw">main.ts</code>. Files that are not part of a script get nothing from
+the server, so the server can be on for every TypeScript file.</p>
+<p>The server needs TypeScript, as <code>map build</code> does, either in the maps folder&#39;s project or
+installed globally. Install the command once rather than running it through <code class="nw">npx</code>, so the
+editor starts it quickly:</p>
+<pre><code class="language-sh">npm install -g @scm-js/cli typescript
+</code></pre>
+<p><strong>VS Code.</strong> TrigScript&#39;s repository has a small extension in
+<a href="https://github.com/scm-js/plugin-trigscript/tree/main/editors/vscode"><code class="nw">editors/vscode/</code></a>
+that starts the server for the files under a <code class="nw">trigscript/</code> folder. Its README says how to
+install it. VS Code&#39;s own TypeScript checks the same files without TrigScript&#39;s names and
+marks <code class="nw">program</code>, <code class="nw">units</code> and the rest as unknown, so turn that check off for the maps
+folder in <code class="nw">.vscode/settings.json</code>:</p>
+<pre><code class="language-json">{ <span class="s">&quot;typescript.validate.enable&quot;</span>: <span class="k">false</span> }
+</code></pre>
+<p><strong>Neovim</strong> (0.11 or later), in <code class="nw">init.lua</code>:</p>
+<pre><code class="language-lua">vim.lsp.config(&quot;scmjs&quot;, {
+  cmd = { &quot;scmjs&quot;, &quot;lsp&quot; },
+  filetypes = { &quot;typescript&quot;, &quot;typescriptreact&quot; },
+  root_markers = { &quot;archive.json&quot; },
+})
+vim.lsp.enable(&quot;scmjs&quot;)
+</code></pre>
+<p>On an older Neovim, <code class="nw">vim.lsp.start</code> does the same from an autocommand:</p>
+<pre><code class="language-lua">vim.api.nvim_create_autocmd(&quot;FileType&quot;, {
+  pattern = { &quot;typescript&quot;, &quot;typescriptreact&quot; },
+  callback = function(args)
+    local root = vim.fs.root(args.buf, &quot;archive.json&quot;)
+    if root then vim.lsp.start({ name = &quot;scmjs&quot;, cmd = { &quot;scmjs&quot;, &quot;lsp&quot; }, root_dir = root }) end
+  end,
+})
+</code></pre>
+<p>If <code class="nw">ts_ls</code> also runs on these files, it reports TrigScript&#39;s names as unknown. Leave the
+maps folder out of its <code class="nw">root_dir</code>.</p>
+<p><strong>Helix</strong>, in a <code class="nw">.helix/languages.toml</code> in the maps folder, so it applies there only:</p>
+<pre><code class="language-toml">[language-server.scmjs]
+command = &quot;scmjs&quot;
+args = [&quot;lsp&quot;]
+
+[[language]]
+name = &quot;typescript&quot;
+language-servers = [&quot;scmjs&quot;]
+</code></pre>
+<p><strong>Other editors</strong> take the same three things: the command <code>scmjs lsp</code>, standard input and
+output, and the TypeScript file types. Zed starts language servers only from its
+extensions, and there is no TrigScript extension for it yet.</p>
+<p>What the server says about each check goes to standard error, which an editor shows as the
+server&#39;s log. It names the script and the map it found, and how long each check took,
+about half a second for a script that imports the standard library.</p>
+<h2 id="in-scripts-and-pipes">In scripts and pipes<a class="anchor" href="#in-scripts-and-pipes" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">--json</code> prints what a command found as JSON: one object for one file, a list for several.
+The text output may change between versions, so scripts should read the JSON.</p>
+<p><code class="nw">-</code> as a map&#39;s path is standard input, and <code>--out -</code> is standard output. A map read from
+<code class="nw">-</code> is written to standard output when there is no <code class="nw">--out</code>. So the commands chain in a
+pipe:</p>
+<pre><code class="language-sh">scmjs map new - --size 64x64 --players 2 | scmjs map set - --name <span class="s">&quot;Ridge&quot;</span> | scmjs map check -
+cat ridge.scx | scmjs map resize - --size 128x96 --out - &gt; ridge-wide.scx
+</code></pre>
+<p>While a map is on standard output, what the command says goes to standard error, and
+<code class="nw">--json</code> is refused, since both want the pipe. A map from a pipe has no name: it is
+<code class="nw">stdin.scx</code> or <code class="nw">stdin.chk</code> by its contents, and is written back in the same form.</p>
+<p>Colour is off when the output is not a terminal, when <code class="nw">NO_COLOR</code> is set, and with
+<code class="nw">--no-color</code>. The language is chosen by <code class="nw">--lang</code> or <code class="nw">SCMJS_LANG</code> (<a href="/cli/getting-started/#in-korean">In
+Korean</a>); <code class="nw">--json</code> keys are English in every language.</p>
+<p>For what the commands do not do, such as a script that edits maps or a check of your own,
+the same functions are the <a href="/core/"><code class="nw">@scm-js/core</code> library</a>; the command is built on it.</p>
+<h2 id="exit-codes">Exit codes<a class="anchor" href="#exit-codes" aria-label="Link to this section">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>All went well</td>
+</tr>
+<tr>
+<td>1</td>
+<td>A map failed its check, two maps differed, a merge had conflicts it was not told how to settle, nothing matched a search, a build did not go through, a map test or a bot failed, a trigger never fired in <code>map coverage --strict</code>, a replay could not be played, or something went wrong</td>
+</tr>
+<tr>
+<td>2</td>
+<td>A file was missing or the wrong kind for the command, an option was not valid, you need to sign in first, or the game could not start</td>
+</tr>
+</tbody></table>
+<footer class="page-foot">
+  <p>scmJS 0.13.3 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#writing-a-plugin">Writing a plugin</a></li>
+<li><a href="#ai-tools">AI tools</a></li>
+<li><a href="#trigscript-in-your-text-editor">TrigScript in your text editor</a></li>
+<li><a href="#in-scripts-and-pipes">In scripts and pipes</a></li>
+<li><a href="#exit-codes">Exit codes</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>
