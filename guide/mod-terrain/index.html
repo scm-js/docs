@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mod terrain — StarCraft map editor guide</title>
+<meta name="description" content="A mod&#39;s tileset can hold ground and pictures the game never had. This section is about laying them, and applies only while a mod&#39;s data set is in use (Data sets made from a mod says how…">
+<meta property="og:title" content="Mod terrain — StarCraft map editor guide">
+<meta property="og:description" content="A mod&#39;s tileset can hold ground and pictures the game never had. This section is about laying them, and applies only while a mod&#39;s data set is in use (Data sets made from a mod says how…">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/guide/mod-terrain/">
+<meta property="og:url" content="https://docs.scmjs.dev/guide/mod-terrain/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="here" href="/guide/mod-terrain/">Mod terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/workers/">Workers</a></li>
+<li><a class="" href="/trigscript-library/spells/">Spells</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/your-setup/">Your setup</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/triggers-in-the-game/">Triggers in the game</a></li>
+<li><a class="" href="/cli/melee-maps-layout-and-balance/">Melee maps: layout and balance</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/ai-tools/">AI tools</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/ai-tools/">AI tools</a>
+<ul>
+<li><a class="" href="/ai-tools/getting-started/">Getting started</a></li>
+<li><a class="" href="/ai-tools/what-to-ask/">What to ask</a></li>
+<li><a class="" href="/ai-tools/working-in-the-editor/">Working in the editor</a></li>
+<li><a class="" href="/ai-tools/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/ai-tools/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/ai-tools/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/ai-tools/the-tools/">The tools</a></li>
+<li><a class="" href="/ai-tools/your-files-and-the-game/">Your files and the game</a></li>
+<li><a class="" href="/ai-tools/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/bots/">Bots</a>
+<ul>
+<li><a class="" href="/bots/playing-against-a-bot/">Playing against a bot</a></li>
+<li><a class="" href="/bots/a-first-bot/">A first bot</a></li>
+<li><a class="" href="/bots/running-a-bot/">Running a bot</a></li>
+<li><a class="" href="/bots/bringing-a-bwapi-bot/">Bringing a BWAPI bot</a></li>
+<li><a class="" href="/bots/bots-for-mods/">Bots for mods</a></li>
+<li><a class="" href="/bots/how-good-the-sample-bots-are/">How good the sample bots are</a></li>
+<li><a class="" href="/bots/what-is-not-there-yet/">What is not there yet</a></li>
+<li><a class="" href="/bots/the-short-way/">The short way</a></li>
+<li><a class="" href="/bots/the-interface-underneath/">The interface underneath</a></li>
+<li><a class="" href="/bots/trust/">Trust</a></li>
+<li><a class="" href="/bots/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Mod terrain</h1>
+<p>A mod&#39;s tileset can hold ground and pictures the game never had. This section is about
+laying them, and applies only while a mod&#39;s data set is in use (<a href="/game-data/data-sets/#data-sets-made-from-a-mod">Data sets made from a
+mod</a> says how to add one); with the game&#39;s own
+data, nothing here is listed.</p>
+<p>What the tileset&#39;s files say about the added tiles decides which brush lays them:</p>
+<table>
+<thead>
+<tr>
+<th>The mod adds</th>
+<th>Laid with</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Flat ground: mud on high ground, a swamp, asphalt</td>
+<td>The Rect brush (<a href="/guide/mod-terrain/#ground-a-mod-adds">Ground a mod adds</a>)</td>
+</tr>
+<tr>
+<td>Pictures drawn across many tiles: ruins, buildings, walls, roads</td>
+<td>The Tile brush, a block or a piece at a time (<a href="/guide/mod-terrain/#pictures-a-mod-adds">Pictures a mod adds</a>)</td>
+</tr>
+<tr>
+<td>One of its own terrains again at another height, with edges drawn for it: Mud on high ground</td>
+<td>The isometric brush (<a href="/guide/mod-terrain/#copied-terrain">Copied terrain</a>)</td>
+</tr>
+<tr>
+<td>Another tileset&#39;s terrain copied in: Installation&#39;s floors inside a Badlands</td>
+<td>The isometric brush (<a href="/guide/mod-terrain/#terrain-from-other-tilesets">Terrain from other tilesets</a>)</td>
+</tr>
+</tbody></table>
+<p>A mod can also say all of this in a file it ships, and then nothing has to be found or
+learned (<a href="/mods/a-mod-as-a-folder/#terrain-a-mod-declares">Terrain a mod declares</a>).</p>
+<h2 id="ground-a-mod-adds">Ground a mod adds<a class="anchor" href="#ground-a-mod-adds" aria-label="Link to this section">#</a></h2>
+<p>A mod&#39;s tileset can hold flat ground the game never had: Cosmonarchy&#39;s Jungle has mud on
+high ground, a swamp, asphalt and more. The tileset&#39;s files give that ground no terrain
+type and nothing the isometric brush could join it with, so the Isometric tab does not
+list it. The Rect tab lists what it can stand behind, below the game&#39;s terrains:</p>
+<ul>
+<li><strong>The game&#39;s ground at another height.</strong> Where a pair of tile groups has exactly the
+pictures of one of the game&#39;s terrains under other flags, it is listed under that
+terrain&#39;s name and its height: <em>Mud (mid ground)</em>, <em>Mud (high ground)</em>. Mid ground is
+the level of High Dirt. The Tile tab names those groups the same way, and its <em>Flat
+terrain</em> filter includes them.</li>
+<li><strong>Ground the open map lays.</strong> A pair the map already uses as ground, left and right
+halves side by side, is listed as <em>Group</em> and its number. Nothing in a tileset tells
+flat ground from the pieces of a seam between two terrains of nearly one colour, so the
+map is what the editor goes by.</li>
+<li><strong>A pair you pick.</strong> In the Tile tab, right-click and choose <strong>Paint This Tile&#39;s Pair
+with the Rect Brush</strong> to lay any pair as ground, on a map that has none of it yet.
+Alt+click on such ground in the map picks it too.</li>
+<li><strong>Ground the mod names.</strong> A mod&#39;s terrain file can name its flat ground; those names are
+listed too, and so are the names a plugin gives.</li>
+</ul>
+<p>All of these paint, flood-fill and take part in <strong>Tools ▸ Replace Terrain…</strong> like the
+game&#39;s terrains. Replacing Mud with <em>Mud (mid ground)</em> raises a mud flat without changing
+how it looks.</p>
+<h2 id="pictures-a-mod-adds">Pictures a mod adds<a class="anchor" href="#pictures-a-mod-adds" aria-label="Link to this section">#</a></h2>
+<p>Most of what a mod adds is not flat ground but pictures: ruins, buildings, walls, roads,
+drawn over thousands of tile groups the way the game&#39;s doodads are. They are laid with the
+Tile brush:</p>
+<ol>
+<li>In the Tile tab&#39;s filter, choose <em>Added by</em> and the data set&#39;s name. The choice is
+there when the tileset has more groups than the game&#39;s, and lists only those.</li>
+<li>Switch to the <a href="/guide/terrain/#the-sheet-and-blocks">sheet</a>. The pictures appear whole. Drag over one
+to pick it as a block and click on the map to lay it, or drag on the map to run a wall
+or a floor along.</li>
+<li>For the parts the mod&#39;s own maps lay whole, switch to the <a href="/guide/terrain/#pieces">pieces</a> view and
+choose <strong>Learn from Maps…</strong> with the folder of the mod&#39;s maps. The pieces are then
+listed ready to pick.</li>
+</ol>
+<p><img src="/images/mod-sheet.webp" alt="A mod&#39;s added tiles in the sheet view, with a building picked as a block"></p>
+<p><img src="/images/mod-pieces.webp" alt="The pieces view after learning from a mod&#39;s maps, and a piece laid on the map"></p>
+<p>With <em>Added by</em> chosen, the grid and the pieces leave out what the mod repeats from the
+game&#39;s own part of the table. The seams around a picture are the mod&#39;s own tiles too: pick
+them from the sheet, or let the Blend brush find the tiles that continue an edge.</p>
+<h2 id="copied-terrain">Copied terrain<a class="anchor" href="#copied-terrain" aria-label="Link to this section">#</a></h2>
+<p>A tileset made for a mod sometimes holds one of its own terrains again at another height:
+the same Mud, say, on mid and on high ground. The Rect tab already offers such a copy
+(&quot;Mud (mid ground)&quot;, as <a href="/guide/mod-terrain/#ground-a-mod-adds">Ground a mod adds</a> says). Often the mod also
+drew that terrain&#39;s edges again at that height: the pieces that join Mud to the ground
+around it, Mud kept as it was and the other side repainted as the ground the copy is meant
+to sit on. The isometric brush cannot use those pieces from the tileset&#39;s tables, because
+they have no terrain type.</p>
+<p>When a tileset holds a copy, the editor looks through it once, by itself, for such pieces:
+the Isometric tab says so in a quiet line while it does, and lists what it found under
+<strong>Copied terrain</strong>, named as the Rect tab names the copy. It finds them by their pictures
+(each keeps the original edge piece&#39;s picture where that piece shows the terrain), their
+flags (raised as the copy is) and the way the pieces are laid out in the tileset, never by
+where a particular mod put them. What it found is kept in the browser, so the next time a
+map on the same tileset files opens, the list is there at once.</p>
+<p>Painting a copied terrain works as the isometric brush does: the brush size, symmetry and
+pinned tiles apply, and a stroke is one step to undo. The terrain is laid by the tileset&#39;s
+own brush and each tile is written as the tile the mod drew for it. A tileset may hold the
+same pieces several times, each set drawn to sit on a different ground (Mud against High
+Dirt, Mud against Raised Jungle); the stroke takes the set that joins the ground under it
+best. Where that ground is one of the tileset&#39;s terrains, the brush lays it under the
+stroke first, so a copy painted elsewhere gets its own ground and that ground&#39;s usual
+cliffs or edges around it. Where the pieces are drawn for ground the tileset has no
+terrain type for, the stroke lays only where that ground already is, and the status line
+says how many diamonds it left.</p>
+<p>The editor keeps where copied terrain was painted as a small file inside the map
+(<code class="nw">scmjs\copies.bin</code>), saved with it, moved by Resize, undone with the stroke and shared on
+a shared map; the game never reads it. When another isometric stroke cuts into a patch,
+the patch is laid again in the same step: the part the ground still holds stays with its
+edges, and what the other stroke took is given to that stroke&#39;s ground. A few seams can
+show where the patch was cut, and a small patch close to the cut can be given up entirely;
+the status line says how many diamonds were given up and how many seams there are. A tile
+laid by hand over a patch is left where it is.</p>
+<p>A terrain is listed only when its pieces walk and build as the original terrain does at
+the copy&#39;s height. One whose tileset lacks some of the edge&#39;s shapes is listed after the
+complete ones, marked <strong>incomplete</strong>, with a hover that says how many shapes are missing;
+the brush lays the tile that joins best in those places, and the status line counts those
+cells. Cliffs are not offered this way: their faces carry heights of their own that a copy
+does not raise the same way.</p>
+<h2 id="terrain-from-other-tilesets">Terrain from other tilesets<a class="anchor" href="#terrain-from-other-tilesets" aria-label="Link to this section">#</a></h2>
+<p>A tileset made for a mod often holds another tileset&#39;s ground copied in: Installation&#39;s
+floors and walls inside a Badlands, say. That ground has no terrain type in the tileset,
+so the isometric brush cannot lay it from the tileset&#39;s own tables. It can lay it from the
+<em>other</em> tileset&#39;s: the Isometric tab&#39;s <strong>From other tilesets</strong> list paints such a terrain
+with its own tileset&#39;s brush, cliffs and edges included, and writes each tile as this
+tileset&#39;s copy of the same picture.</p>
+<p><img src="/images/mod-borrowed.webp" alt="The Isometric tab&#39;s From other tilesets list, and Installation floor painted on a mod&#39;s Badlands"></p>
+<p>The first time, the list is a button, <strong>Find terrain from other tilesets</strong>. It looks
+through the game&#39;s other seven tilesets for terrains whose every tile has a copy here.</p>
+<ul>
+<li><strong>It runs in the background</strong>, so you can keep editing: about ten seconds for a mod&#39;s
+Badlands of 40,000 tiles, with a progress bar and a <strong>Stop</strong> button. A search you
+stopped carries on from where it was.</li>
+<li><strong>What it finds is kept in the browser.</strong> The next time a map on the same tileset files
+opens, the list is there at once.</li>
+<li><strong>Copies are found by their pictures.</strong> A mod&#39;s copies are rarely exact, since they were
+redrawn into the tileset&#39;s own colours, so a tile counts as a copy when it looks the
+same up close. Where one tile of an otherwise whole terrain has no copy, the nearest
+picture stands in for it, and the terrain&#39;s hover says how many do.</li>
+<li><strong>A mod&#39;s terrain file skips the search.</strong> The terrains it gives are listed straight
+away, and their hover says the mod&#39;s file named the tiles.</li>
+</ul>
+<p>Painting works as the isometric brush does: the brush size, symmetry and pinned tiles
+apply, and a stroke is one step to undo.</p>
+<ul>
+<li><strong>Only the tiles around the stroke are written.</strong> Ground that no borrowed stroke has
+painted counts as the other tileset&#39;s base ground, the one a new map of that tileset is
+made of (Floor for Installation), and the rest of the map is left as it is.</li>
+<li><strong>Later strokes continue earlier ones.</strong> The editor keeps the other tileset&#39;s record of
+what you painted inside the map file, so cliffs and edges carry on across strokes and
+sessions. The record is saved with the map, follows undo and Resize, and is shared on a
+shared map. The game does not read it (<a href="/map-files/the-archive/#what-the-editor-adds-to-a-map">What the editor adds to a
+map</a>).</li>
+<li><strong>Painting over it with another brush gives the ground back.</strong> That part counts as base
+ground again at the next borrowed stroke, so a stroke does not continue edges that are
+gone.</li>
+<li><strong>Take back</strong>, at the end of each tileset&#39;s list, undoes borrowed ground by painting:
+each cell gets the tile it had before the borrowed brush wrote it, and the border around
+what is left is laid again. Painting all of a patch back leaves the map as it was.</li>
+</ul>
+<p>Two things it does not do:</p>
+<ul>
+<li><strong>Walk and build as the other tileset does.</strong> Each tile walks, builds and stands at the
+height this tileset&#39;s copy says, and a mod often keeps its copies under other flags than
+the original: in Cosmonarchy&#39;s Badlands, about half of Installation&#39;s tiles have a copy
+that walks the same. View ▸ Walkability and the Elevation and Buildability overlays show
+what was laid.</li>
+<li><strong>Join the two grounds where no border is known.</strong> Without a <a href="/guide/mod-terrain/#drawn-borders">drawn
+border</a> for a pair of grounds, the two simply touch. The status line
+after a stroke counts the seams; the Heal brush softens them, and the pieces view lists
+the transition pieces the mod&#39;s own maps use there.</li>
+</ul>
+<h3 id="drawn-borders">Drawn borders<a class="anchor" href="#drawn-borders" aria-label="Link to this section">#</a></h3>
+<p>A mod that copies another tileset&#39;s ground in usually draws its own pieces for where that
+ground meets the tileset&#39;s: a trim along a floor&#39;s edge, a cliff wall from a raised floor
+down to dirt. With <strong>Drawn borders</strong> on, a stroke lays those pieces where its ground meets
+the tileset&#39;s own, instead of the other tileset&#39;s edge to its base ground.</p>
+<p><img src="/images/mod-borders.webp" alt="The same stroke of Installation floor with a plain edge and with drawn borders"></p>
+<p>The switch is under the list&#39;s heading. It is on to begin with wherever a border is known,
+and the editor remembers how you left it. The hover on each terrain says which grounds it
+has borders against.</p>
+<p>The editor learns the borders from the mod&#39;s maps, in this order:</p>
+<ol>
+<li><strong>Find terrain from other tilesets</strong>, so the editor knows which tiles are copies. The
+more of the other tilesets it knows, the better it tells a copy from a drawn piece.</li>
+<li><strong>Learn from Maps…</strong> in the Tile tab&#39;s pieces view. It reads the borders as it reads
+the pieces, the map in front included, and says how many it found for each pair of
+grounds.</li>
+</ol>
+<p>A mod&#39;s terrain file or a plugin can carry the borders instead, and then nothing has to be
+learned.</p>
+<p>The border is laid when the stroke ends, as part of the same undo step:</p>
+<ul>
+<li>Each border cell gets the piece the maps lay in its place, chosen so that it joins its
+neighbours.</li>
+<li>Where no piece joins, the cell is left as the plain edge: the borrowed ground&#39;s own tile
+on its side, the map&#39;s ground on the other. A shape of border that no map lays is left
+plain too.</li>
+<li>On the map&#39;s side, the tile that was there stays wherever it already joins, so plain
+ground is not scattered with pieces.</li>
+</ul>
+<p>The status line counts the cells drawn, the cells left as the plain edge (&quot;left hard&quot;),
+and the border tiles that walk unlike either ground, which part of a cliff piece usually
+does.</p>
+<footer class="page-foot">
+  <p>scmJS 0.18.0 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#ground-a-mod-adds">Ground a mod adds</a></li>
+<li><a href="#pictures-a-mod-adds">Pictures a mod adds</a></li>
+<li><a href="#copied-terrain">Copied terrain</a></li>
+<li><a href="#terrain-from-other-tilesets">Terrain from other tilesets</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

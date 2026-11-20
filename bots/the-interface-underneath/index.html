@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The interface underneath — StarCraft bots in JavaScript and BWAPI</title>
+<meta name="description" content="The short way is built on this interface, and a bot may use it directly: a module whose default export has create is given the plain view and a list of orders, and keeps its own books.">
+<meta property="og:title" content="The interface underneath — StarCraft bots in JavaScript and BWAPI">
+<meta property="og:description" content="The short way is built on this interface, and a bot may use it directly: a module whose default export has create is given the plain view and a list of orders, and keeps its own books.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/bots/the-interface-underneath/">
+<meta property="og:url" content="https://docs.scmjs.dev/bots/the-interface-underneath/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/mod-terrain/">Mod terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/workers/">Workers</a></li>
+<li><a class="" href="/trigscript-library/spells/">Spells</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/your-setup/">Your setup</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/triggers-in-the-game/">Triggers in the game</a></li>
+<li><a class="" href="/cli/melee-maps-layout-and-balance/">Melee maps: layout and balance</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/ai-tools/">AI tools</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/ai-tools/">AI tools</a>
+<ul>
+<li><a class="" href="/ai-tools/getting-started/">Getting started</a></li>
+<li><a class="" href="/ai-tools/what-to-ask/">What to ask</a></li>
+<li><a class="" href="/ai-tools/working-in-the-editor/">Working in the editor</a></li>
+<li><a class="" href="/ai-tools/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/ai-tools/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/ai-tools/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/ai-tools/the-tools/">The tools</a></li>
+<li><a class="" href="/ai-tools/your-files-and-the-game/">Your files and the game</a></li>
+<li><a class="" href="/ai-tools/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/bots/">Bots</a>
+<ul>
+<li><a class="" href="/bots/playing-against-a-bot/">Playing against a bot</a></li>
+<li><a class="" href="/bots/a-first-bot/">A first bot</a></li>
+<li><a class="" href="/bots/running-a-bot/">Running a bot</a></li>
+<li><a class="" href="/bots/bringing-a-bwapi-bot/">Bringing a BWAPI bot</a></li>
+<li><a class="" href="/bots/bots-for-mods/">Bots for mods</a></li>
+<li><a class="" href="/bots/how-good-the-sample-bots-are/">How good the sample bots are</a></li>
+<li><a class="" href="/bots/what-is-not-there-yet/">What is not there yet</a></li>
+<li><a class="" href="/bots/the-short-way/">The short way</a></li>
+<li><a class="here" href="/bots/the-interface-underneath/">The interface underneath</a></li>
+<li><a class="" href="/bots/trust/">Trust</a></li>
+<li><a class="" href="/bots/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>The interface underneath</h1>
+<p>The short way is built on this interface, and a bot may use it directly: a module whose
+default export has <code class="nw">create</code> is given the plain view and a list of orders, and keeps its
+own books.</p>
+<p>A JavaScript bot plays as a client of BWAPI 4.4.0, the library <a href="/bots/bringing-a-bwapi-bot/">BWAPI
+bots</a> are written for. You do not need to know BWAPI to write one.
+What it means for you is that unit types have BWAPI&#39;s names (<code class="nw">Terran_Marine</code>), and that an
+order goes into the game as a player&#39;s click would, so the game checks it the same way.</p>
+<h2 id="the-module">The module<a class="anchor" href="#the-module" aria-label="Link to this section">#</a></h2>
+<pre><code class="language-js"><span class="c">/** @type {import(&quot;@scm-js/bot&quot;).BotModule} */</span>
+<span class="k">export</span> <span class="k">default</span> {
+  name: <span class="s">&quot;Do nothing&quot;</span>,
+  create(init) {
+    <span class="c">// called once, before the first frame</span>
+    <span class="k">return</span> {
+      onFrame(view, api) {
+        <span class="c">// called with each view; give orders through api</span>
+      },
+      onEnd(result) {
+        <span class="c">// optional: result.result is &quot;victory&quot;, &quot;defeat&quot; or &quot;ended&quot;</span>
+      },
+    };
+  },
+};
+</code></pre>
+<p><code class="nw">create</code> and <code class="nw">onFrame</code> may be <code class="nw">async</code>. The module may also set <code class="nw">frameInterval</code>, a
+<code class="nw">version</code> and an <code class="nw">author</code>. Everything a bot needs at run time arrives in <code class="nw">init</code> and
+<code class="nw">view</code>, including the tables of names (<code class="nw">init.data.UnitTypes</code> and the rest), so a bot in
+plain JavaScript imports nothing.</p>
+<h2 id="what-a-bot-is-told-once">What a bot is told once<a class="anchor" href="#what-a-bot-is-told-once" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">init</code> holds:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">api</code></td>
+<td>The interface&#39;s version, <code class="nw">BOT_API</code>: 1</td>
+</tr>
+<tr>
+<td><code class="nw">self</code>, <code class="nw">race</code>, <code class="nw">name</code></td>
+<td>The bot&#39;s player number (0 to 7), its race (0 zerg, 1 terran, 2 protoss, already drawn if it was random) and the name it was seated under</td>
+</tr>
+<tr>
+<td><code class="nw">players</code></td>
+<td>Everyone seated: <code class="nw">id</code>, <code class="nw">name</code>, <code class="nw">race</code>, <code class="nw">isSelf</code>, <code class="nw">isEnemy</code>. There are no teams yet, so everyone else is an enemy</td>
+</tr>
+<tr>
+<td><code class="nw">frameInterval</code></td>
+<td>Frames between views unless the bot asks otherwise</td>
+</tr>
+<tr>
+<td><code class="nw">map</code></td>
+<td>The map, below</td>
+</tr>
+<tr>
+<td><code class="nw">data</code></td>
+<td>The game&#39;s tables, below</td>
+</tr>
+<tr>
+<td><code class="nw">mod</code></td>
+<td>In a mod&#39;s game, the mod&#39;s <code class="nw">name</code> and <code class="nw">hash</code></td>
+</tr>
+<tr>
+<td><code class="nw">useMapSettings</code>, <code class="nw">limits</code></td>
+<td>In a game with the map&#39;s own settings: the bot starts with the map&#39;s units, and <code class="nw">limits</code> says what the map keeps from it (<code class="nw">forbiddenUnits</code>, <code class="nw">unavailableTechs</code>, <code class="nw">upgradeMax</code>)</td>
+</tr>
+</tbody></table>
+<p><code class="nw">init.map</code> is what a player who knows the map knows before the game starts:</p>
+<ul>
+<li><code class="nw">width</code>, <code class="nw">height</code> in tiles (a tile is 32 pixels), and the <code class="nw">tileset</code>&#39;s name;</li>
+<li><code class="nw">walkable</code>: one byte per 8-pixel cell, <code>width * 4</code> to a row, 1 where the ground can be
+walked on (terrain only: buildings and units are not in it);</li>
+<li><code class="nw">buildable</code>: one byte per tile, 1 where the terrain takes a building;</li>
+<li><code class="nw">groundHeight</code>: one byte per tile, 0 low, 2 high, 4 very high, odd where a doodad blocks
+the view;</li>
+<li><code class="nw">startLocations</code>: each with its point (<code class="nw">x</code>, <code class="nw">y</code> in pixels), the top-left tile of a town
+hall built there (<code class="nw">tileX</code>, <code class="nw">tileY</code>), and the <code class="nw">player</code> seated there, or -1;</li>
+<li><code class="nw">resources</code>: every mineral field and geyser with its <code class="nw">id</code>, <code class="nw">type</code>, position and starting
+amount. The id can be used as a <code class="nw">gather</code> target even while the field is out of sight.</li>
+</ul>
+<p><code class="nw">init.data</code> holds the name tables (<code class="nw">UnitTypes</code>, <code class="nw">TechTypes</code>, <code class="nw">UpgradeTypes</code>, <code class="nw">Orders</code>,
+<code class="nw">Races</code>, each a name to a number) and the game&#39;s own numbers, indexed by number:</p>
+<ul>
+<li><code class="nw">units[type]</code>: <code class="nw">name</code>, <code class="nw">race</code>, <code class="nw">mineralPrice</code>, <code class="nw">gasPrice</code>, <code class="nw">buildTime</code> (frames),
+<code class="nw">supplyRequired</code> and <code class="nw">supplyProvided</code> (in halves: a marine is 2, a zergling 1, a depot
+gives 16), <code class="nw">tileWidth</code> and <code class="nw">tileHeight</code> for buildings, the collision box
+(<code class="nw">dimensionLeft</code>, <code class="nw">dimensionUp</code>, <code class="nw">dimensionRight</code>, <code class="nw">dimensionDown</code>), <code class="nw">maxHitPoints</code>,
+<code class="nw">maxShields</code>, <code class="nw">armor</code>, <code class="nw">sightRange</code> (tiles), <code class="nw">topSpeed</code>, <code class="nw">groundWeapon</code> and <code class="nw">airWeapon</code>
+(numbers in <code class="nw">weapons</code>, or -1), flags such as <code class="nw">isBuilding</code>, <code class="nw">isWorker</code>, <code class="nw">isFlyer</code>,
+<code class="nw">isResourceDepot</code>, <code class="nw">isRefinery</code>, <code class="nw">isDetector</code>, <code class="nw">requiresPsi</code> and <code class="nw">requiresCreep</code>, and
+the tech tree: <code class="nw">whatBuilds</code> (the type that makes it), <code class="nw">buildsWhat</code>, and <code class="nw">requiredUnits</code>,
+where every entry is needed and any one type of an entry will do;</li>
+<li><code class="nw">techs[id]</code>: prices, <code class="nw">researchTime</code>, <code class="nw">energyCost</code>, <code class="nw">whatResearches</code>;</li>
+<li><code class="nw">upgrades[id]</code>: prices and time for the first level with what each further level adds,
+<code class="nw">maxRepeats</code>, <code class="nw">whatUpgrades</code>;</li>
+<li><code class="nw">weapons[id]</code>: <code class="nw">damageAmount</code>, <code class="nw">damageBonus</code>, <code class="nw">damageCooldown</code>, <code class="nw">damageFactor</code>,
+<code class="nw">minRange</code> and <code class="nw">maxRange</code> (pixels, edge to edge), <code class="nw">targetsAir</code>, <code class="nw">targetsGround</code>,
+<code class="nw">damageType</code>, and the three splash radii.</li>
+</ul>
+<h2 id="what-a-bot-is-shown">What a bot is shown<a class="anchor" href="#what-a-bot-is-shown" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">view</code>, each frame:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">frame</code></td>
+<td>The game&#39;s frame counter. 24 frames is a second at normal speed</td>
+</tr>
+<tr>
+<td><code class="nw">self</code></td>
+<td><code class="nw">minerals</code>, <code class="nw">gas</code>, <code class="nw">supplyUsed</code> and <code class="nw">supplyTotal</code> (in halves), <code class="nw">techs</code> (the numbers researched), <code class="nw">upgrades</code> (the level of each)</td>
+</tr>
+<tr>
+<td><code class="nw">units</code></td>
+<td>The bot&#39;s own units and buildings, in full</td>
+</tr>
+<tr>
+<td><code class="nw">enemies</code></td>
+<td>Other players&#39; units the bot&#39;s player sees now</td>
+</tr>
+<tr>
+<td><code class="nw">neutral</code></td>
+<td>Mineral fields, geysers and critters in sight now</td>
+</tr>
+<tr>
+<td><code class="nw">events</code></td>
+<td>What changed since the last view the bot was given</td>
+</tr>
+<tr>
+<td><code class="nw">visibility</code></td>
+<td>One byte per tile: 0 never seen, 1 seen before, 2 in sight now. Copy what you want to keep; the array may be reused</td>
+</tr>
+</tbody></table>
+<p>Every unit has <code class="nw">id</code>, <code class="nw">type</code>, <code class="nw">player</code>, <code class="nw">x</code>, <code class="nw">y</code> (pixels, its centre), <code class="nw">hitPoints</code>,
+<code class="nw">shields</code>, <code class="nw">energy</code>, <code class="nw">resources</code> (what is left in a field, a geyser or a gas building),
+<code class="nw">angle</code> (0 to 255, clockwise from up), and the flags <code class="nw">isCompleted</code>, <code class="nw">isFlying</code>,
+<code class="nw">isCloaked</code>, <code class="nw">isBurrowed</code>, <code class="nw">isMoving</code>, <code class="nw">isSieged</code>, <code class="nw">isLifted</code>, <code class="nw">isLockedDown</code>,
+<code class="nw">isStasised</code>, <code class="nw">isEnsnared</code>, <code class="nw">isPlagued</code>, <code class="nw">isIrradiated</code> and <code class="nw">isDefenseMatrixed</code>.</p>
+<p>The bot&#39;s own units add what only their owner knows: <code class="nw">order</code> (a number in <code class="nw">Orders</code>),
+<code class="nw">orderTarget</code>, <code class="nw">targetX</code>, <code class="nw">targetY</code>, <code class="nw">isIdle</code>, <code class="nw">isGatheringMinerals</code>, <code class="nw">isGatheringGas</code>,
+<code class="nw">isCarryingMinerals</code>, <code class="nw">isCarryingGas</code>, <code class="nw">isConstructing</code>, <code class="nw">buildType</code> (what a worker is
+about to build, or what an egg becomes), <code class="nw">trainingQueue</code>, <code class="nw">isTraining</code>,
+<code class="nw">remainingBuildTime</code>, <code class="nw">remainingTrainTime</code>, <code class="nw">tech</code>, <code class="nw">upgrade</code>, <code class="nw">remainingResearchTime</code>,
+the three cooldowns, <code class="nw">isLoaded</code>, <code class="nw">loadedUnits</code>, <code class="nw">transport</code> (the transport the unit is
+inside, or -1), <code class="nw">isPowered</code>, <code class="nw">spiderMineCount</code>, <code class="nw">killCount</code>, <code class="nw">isStimmed</code>, <code class="nw">isMorphing</code>,
+<code class="nw">addon</code> (a terran building&#39;s add-on, or -1) and <code class="nw">rallyX</code>, <code class="nw">rallyY</code>, <code class="nw">rallyUnit</code> (-1 when
+there is no rally point). A unit in training, a building under construction and an egg are
+in the list with <code class="nw">isCompleted</code> false.</p>
+<p>Counting what is on its way takes care, and the short way&#39;s <code class="nw">count</code> does it for you:</p>
+<ul>
+<li>The unit a building is training is in <code class="nw">units</code>, unfinished, and is also the first entry
+of that building&#39;s <code class="nw">trainingQueue</code>. Count one of the two, or the same marine is counted
+twice.</li>
+<li>An egg has the type <code class="nw">Zerg_Egg</code>, and what it becomes is its <code class="nw">buildType</code>. An egg of a type
+with <code class="nw">isTwoUnitsInOneEgg</code> (zerglings, scourge) becomes two units; the type&#39;s
+<code class="nw">mineralPrice</code> is the egg&#39;s, its <code class="nw">supplyRequired</code> each unit&#39;s.</li>
+<li>A worker told to build shows the building in <code class="nw">buildType</code> until the building is started.
+A terran or protoss building then appears as a unit of its own; a zerg worker becomes
+the building and keeps its id.</li>
+</ul>
+<p>An <code class="nw">id</code> belongs to one unit for the whole game. Events are <code class="nw">unitCreate</code>, <code class="nw">unitComplete</code>,
+<code class="nw">unitMorph</code> and <code class="nw">unitDestroy</code> for the bot&#39;s own units, and <code class="nw">unitShow</code> and <code class="nw">unitHide</code> for
+other players&#39; units coming into sight and leaving it; an enemy or a mineral field seen to
+die is a <code class="nw">unitDestroy</code>. They cover the time since the last view the bot was given, which
+is longer than one interval when views were skipped.</p>
+<h2 id="what-a-bot-sees">What a bot sees<a class="anchor" href="#what-a-bot-sees" aria-label="Link to this section">#</a></h2>
+<p>A bot sees what a player in its seat would see, by the game&#39;s own sight, high ground
+included. Its own units are there in full. Another player&#39;s unit is there only while it is
+in sight, and a cloaked or burrowed one only while one of the bot&#39;s detectors reaches it.
+Resources are there as the map places them (<code class="nw">init.map.resources</code>), with their amounts
+while in sight. The bot sees its own money, supply, techs and upgrades, and nobody else&#39;s.</p>
+<p>The same rule covers orders. BWAPI takes no order aimed at a unit the bot cannot see: a
+target must be one of its own units, a unit in sight, or a resource. A worker sent to
+gather from a field out of sight walks there and is told to gather once the field is in
+sight.</p>
+<h2 id="orders">Orders<a class="anchor" href="#orders" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">api</code> has a method for each order, and each takes one unit&#39;s id or a list of them:</p>
+<pre><code class="language-js">api.move(units, x, y, queued)
+api.attack(units, enemyId)            <span class="c">// attack that unit</span>
+api.attack(units, { x, y })           <span class="c">// attack-move</span>
+api.rightClick(units, target)
+api.patrol(units, x, y)
+api.stop(units)
+api.holdPosition(units)
+api.gather(workers, resourceId)       <span class="c">// a mineral field or a finished gas building</span>
+api.returnCargo(workers)
+api.train(producer, unitType)         <span class="c">// a building; or a larva, or a hatchery (one of its larvae morphs)</span>
+api.build(worker, unitType, tileX, tileY)   <span class="c">// the tile is the building&#39;s top-left</span>
+api.buildAddon(building, unitType)
+api.research(building, tech)
+api.upgrade(building, upgrade)        <span class="c">// the next level</span>
+api.useTech(caster, tech, target)     <span class="c">// a spell, by its tech</span>
+api.cloak(units); api.decloak(units)
+api.morph(units, unitType)            <span class="c">// a hatchery into a Lair, a hydralisk into a lurker …</span>
+api.cancelConstruction(building)      <span class="c">// three quarters of the price back</span>
+api.cancelTrain(building, slot)       <span class="c">// slot 0 is the unit under way; without a slot, the last one queued</span>
+api.cancelResearch(building); api.cancelUpgrade(building)
+api.cancelMorph(units)                <span class="c">// an egg, a morphing building</span>
+api.cancelAddon(building)
+api.siege(tanks); api.unsiege(tanks)
+api.burrow(units); api.unburrow(units)
+api.stim(units)
+api.load(units, transport)            <span class="c">// into a transport or a bunker</span>
+api.unload(transport, unit); api.unloadAll(transports)
+api.unloadAllAt(transports, x, y)     <span class="c">// fly there and put everything out</span>
+api.lift(buildings); api.land(building, tileX, tileY)
+api.placeNydusExit(canal, tileX, tileY)
+api.setRallyPoint(buildings, target)  <span class="c">// a point { x, y } or a unit&#39;s id</span>
+api.mergeArchon(units); api.mergeDarkArchon(units)
+api.repair(scvs, target)
+api.heal(medics, target)              <span class="c">// a unit&#39;s id, or a point to walk to, healing on the way</span>
+api.rechargeShields(battery, unit)
+api.command({ kind: <span class="s">&quot;move&quot;</span>, units: [...], x, y })   <span class="c">// any order as a plain object</span>
+</code></pre>
+<p>Orders are collected while <code class="nw">onFrame</code> runs and sent when it returns, or when its promise
+settles. Each goes in as a BWAPI command, and BWAPI and then the game check it as they
+would a player&#39;s click: a unit is trained only by the building that trains it, with its
+requirements standing; a tech or an upgrade only at its own building; a spell only by a
+unit that has it; a building only on a site the game takes. An order that is refused, for
+want of money or supply or because the site turned out to be taken, does nothing, and the
+next view shows what happened. Calling off a nuclear strike is not possible: BWAPI has no
+command for it.</p>
+<p>Two of the game&#39;s rules catch every new bot written on this interface. A building is paid
+for when its construction starts, once the worker has reached the site, not when the order
+is given: money spent on something else while the worker walks leaves it at the site with
+nothing built. And the game places no building on ground nobody has seen: a worker sent
+there is turned away.</p>
+<h2 id="questions">Questions<a class="anchor" href="#questions" aria-label="Link to this section">#</a></h2>
+<p>The game answers what a bot cannot work out from the view. Each question returns a
+promise:</p>
+<pre><code class="language-js"><span class="k">const</span> ok = <span class="k">await</span> api.canBuildHere(tileX, tileY, unitType, builderId);
+<span class="k">const</span> why = <span class="k">await</span> api.placement(tileX, tileY, unitType, builderId, checkCost);
+<span class="c">// &quot;ok&quot;, or the first rule that fails: &quot;requirements&quot;, &quot;cost&quot;, &quot;bounds&quot;, &quot;terrain&quot;, &quot;occupied&quot;,</span>
+<span class="c">// &quot;unit&quot;, &quot;creep&quot;, &quot;nocreep&quot;, &quot;psi&quot;, &quot;resources&quot; (a hall too close to minerals), &quot;geyser&quot;</span>
+
+<span class="k">const</span> site = <span class="k">await</span> api.getBuildLocation(unitType, nearTileX, nearTileY, { radius });
+<span class="c">// { tileX, tileY } or null</span>
+</code></pre>
+<p><code class="nw">placement</code> is BWAPI&#39;s <code class="nw">canBuildHere</code> with the reason the game&#39;s rules give. Ground nobody
+has seen reads as <code class="nw">&quot;occupied&quot;</code>, and with a builder named, a unit in the way can read as
+<code class="nw">&quot;requirements&quot;</code>: ask without the builder for the plain reason. <code class="nw">getBuildLocation</code> is
+BWAPI&#39;s: a site the rules take within <code class="nw">radius</code> tiles (64 unless given) of the tile, the
+nearest free geyser for a gas building, and for a town hall the best spot BWAPI knows,
+which may be at another base than the one asked about. It does not check the price or the
+tech tree, whether a worker can walk there, or whether the bot has just sent another
+worker to the same tiles. The game does not wait for a bot waiting for an answer.</p>
+<h2 id="timing">Timing<a class="anchor" href="#timing" aria-label="Link to this section">#</a></h2>
+<p>A bot is given a view every 8 frames unless it asks otherwise: <code class="nw">frameInterval</code> on the
+module, or <code class="nw">api.setFrameInterval(n)</code> at any time, from 1 to 240. On the page the game
+never waits for a bot; a view that comes due while the bot is still answering the last one
+is skipped and counted, and the next one is current. The command line waits for every
+answer, which is why its games repeat. <code class="nw">api.log(text)</code> writes a line, as <code class="nw">game.log</code> does.</p>
+<footer class="page-foot">
+  <p>scmJS 0.18.0 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#the-module">The module</a></li>
+<li><a href="#what-a-bot-is-told-once">What a bot is told once</a></li>
+<li><a href="#what-a-bot-is-shown">What a bot is shown</a></li>
+<li><a href="#what-a-bot-sees">What a bot sees</a></li>
+<li><a href="#orders">Orders</a></li>
+<li><a href="#questions">Questions</a></li>
+<li><a href="#timing">Timing</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>

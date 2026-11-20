@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Changing a map — StarCraft maps and replays on the command line</title>
+<meta name="description" content="Each command here writes the map back over itself, or to another file with --out other.scx, and keeps everything else in the file as it was:">
+<meta property="og:title" content="Changing a map — StarCraft maps and replays on the command line">
+<meta property="og:description" content="Each command here writes the map back over itself, or to another file with --out other.scx, and keeps everything else in the file as it was:">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="scmJS">
+<link rel="canonical" href="https://docs.scmjs.dev/cli/changing-a-map/">
+<meta property="og:url" content="https://docs.scmjs.dev/cli/changing-a-map/">
+<meta property="og:image" content="https://docs.scmjs.dev/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/docs.css">
+<script>
+(function () {
+  if (location.hostname !== "docs.scmjs.dev") return;
+  var s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", '{"token": "f8c64ccade704612a5f2b8fe8194e363"}');
+  document.head.appendChild(s);
+  // Our own visit count, served from the site by its front-door worker.
+  var c = document.createElement("script");
+  c.defer = true;
+  c.src = "https://scmjs.dev/_e.js";
+  document.head.appendChild(c);
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<input type="checkbox" id="menu" class="menu-toggle" hidden>
+<header class="top">
+  <a class="brand" href="/">
+    <img src="/logo.svg" alt="" width="26" height="26">
+    <span class="brand-name">scm<b>JS</b></span>
+    <span class="brand-sub">docs</span>
+  </a>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search the docs…  /" autocomplete="off" spellcheck="false" aria-label="Search" data-base="">
+    <div id="results" hidden></div>
+  </div>
+  <label class="menu-button" for="menu" aria-label="Menu">Menu</label>
+  <nav class="top-links">
+    <a href="https://scmjs.dev/#download">Download</a>
+    <a href="https://scmjs.dev/editor/">Editor</a>
+    <a href="https://github.com/scm-js/scm-js">GitHub</a>
+  </nav>
+</header>
+<div class="shell">
+  <nav class="side" aria-label="Documentation"><div class="nav-group">
+<a class="nav-head" href="/installing/">Installing</a>
+<ul>
+<li><a class="" href="/installing/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/installing/the-desktop-app/">The desktop app</a></li>
+<li><a class="" href="/installing/in-a-container/">In a container</a></li>
+<li><a class="" href="/installing/on-the-command-line/">On the command line</a></li>
+<li><a class="" href="/installing/the-graphics/">The graphics</a></li>
+<li><a class="" href="/installing/from-source/">From source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/guide/">User guide</a>
+<ul>
+<li><a class="" href="/guide/getting-started/">Getting started</a></li>
+<li><a class="" href="/guide/the-editor-window/">The editor window</a></li>
+<li><a class="" href="/guide/classic-or-remastered-graphics/">Classic or Remastered graphics</a></li>
+<li><a class="" href="/guide/your-first-map/">Your first map</a></li>
+<li><a class="" href="/guide/coming-from-scmdraft-2/">Coming from SCMDraft 2</a></li>
+<li><a class="" href="/guide/terrain/">Terrain</a></li>
+<li><a class="" href="/guide/mod-terrain/">Mod terrain</a></li>
+<li><a class="" href="/guide/doodads/">Doodads</a></li>
+<li><a class="" href="/guide/units/">Units</a></li>
+<li><a class="" href="/guide/sprites/">Sprites</a></li>
+<li><a class="" href="/guide/locations/">Locations</a></li>
+<li><a class="" href="/guide/fog-of-war/">Fog of war</a></li>
+<li><a class="" href="/guide/cut-copy-and-paste/">Cut, copy and paste</a></li>
+<li><a class="" href="/guide/triggers/">Triggers</a></li>
+<li><a class="" href="/guide/trigscript/">TrigScript</a></li>
+<li><a class="" href="/guide/scenario-settings/">Scenario settings</a></li>
+<li><a class="" href="/guide/checking-testing-and-saving/">Checking, testing and saving</a></li>
+<li><a class="" href="/guide/replays/">Replays</a></li>
+<li><a class="" href="/guide/plugins/">Plugins</a></li>
+<li><a class="" href="/guide/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/guide/editing-a-map-together/">Editing a map together</a></li>
+<li><a class="" href="/guide/the-ai/">The AI</a></li>
+<li><a class="" href="/guide/keyboard-and-preferences/">Keyboard and preferences</a></li>
+<li><a class="" href="/guide/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/guide/what-it-does-not-do/">What it does not do</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript/">TrigScript</a>
+<ul>
+<li><a class="" href="/trigscript/quick-start/">Quick start</a></li>
+<li><a class="" href="/trigscript/writing-triggers/">Writing triggers</a></li>
+<li><a class="" href="/trigscript/examples-of-triggers/">Examples of triggers</a></li>
+<li><a class="" href="/trigscript/programs/">Programs</a></li>
+<li><a class="" href="/trigscript/examples-of-programs/">Examples of programs</a></li>
+<li><a class="" href="/trigscript/showcase/">Showcase</a></li>
+<li><a class="" href="/trigscript/coming-from-eudplib/">Coming from eudplib</a></li>
+<li><a class="" href="/trigscript/testing-and-simulate/">Testing and Simulate</a></li>
+<li><a class="" href="/trigscript/the-workspace/">The workspace</a></li>
+<li><a class="" href="/trigscript/reference/">Reference</a></li>
+<li><a class="" href="/trigscript/troubleshooting/">Troubleshooting</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-language/">TrigScript language</a>
+<ul>
+<li><a class="" href="/trigscript-language/trigscript-beside-typescript/">TrigScript beside TypeScript</a></li>
+<li><a class="" href="/trigscript-language/the-script-and-the-program/">The script and the program</a></li>
+<li><a class="" href="/trigscript-language/variables-and-numbers/">Variables and numbers</a></li>
+<li><a class="" href="/trigscript-language/arrays/">Arrays</a></li>
+<li><a class="" href="/trigscript-language/tables-maps-and-sets/">Tables, maps and sets</a></li>
+<li><a class="" href="/trigscript-language/control-flow/">Control flow</a></li>
+<li><a class="" href="/trigscript-language/functions/">Functions</a></li>
+<li><a class="" href="/trigscript-language/classes/">Classes</a></li>
+<li><a class="" href="/trigscript-language/errors/">Errors</a></li>
+<li><a class="" href="/trigscript-language/waiting-and-tasks/">Waiting and tasks</a></li>
+<li><a class="" href="/trigscript-language/owners-and-per-player-programs/">Owners and per-player programs</a></li>
+<li><a class="" href="/trigscript-language/reading-the-game/">Reading the game</a></li>
+<li><a class="" href="/trigscript-language/units/">Units</a></li>
+<li><a class="" href="/trigscript-language/events/">Events</a></li>
+<li><a class="" href="/trigscript-language/the-games-tables-and-memory/">The game&#39;s tables and memory</a></li>
+<li><a class="" href="/trigscript-language/keys-the-mouse-and-chat/">Keys, the mouse and chat</a></li>
+<li><a class="" href="/trigscript-language/text/">Text</a></li>
+<li><a class="" href="/trigscript-language/sounds-and-imported-files/">Sounds and imported files</a></li>
+<li><a class="" href="/trigscript-language/libraries/">Libraries</a></li>
+<li><a class="" href="/trigscript-language/what-a-program-does-not-have/">What a program does not have</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/trigscript-library/">TrigScript library</a>
+<ul>
+<li><a class="" href="/trigscript-library/math/">Math</a></li>
+<li><a class="" href="/trigscript-library/random/">Random</a></li>
+<li><a class="" href="/trigscript-library/timers/">Timers</a></li>
+<li><a class="" href="/trigscript-library/signals/">Signals</a></li>
+<li><a class="" href="/trigscript-library/ui/">UI</a></li>
+<li><a class="" href="/trigscript-library/cutscenes/">Cutscenes</a></li>
+<li><a class="" href="/trigscript-library/fog/">Fog</a></li>
+<li><a class="" href="/trigscript-library/screen/">Screen</a></li>
+<li><a class="" href="/trigscript-library/music/">Music</a></li>
+<li><a class="" href="/trigscript-library/workers/">Workers</a></li>
+<li><a class="" href="/trigscript-library/spells/">Spells</a></li>
+<li><a class="" href="/trigscript-library/libraries-from-other-plugins/">Libraries from other plugins</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/plugins/">Plugins</a>
+<ul>
+<li><a class="" href="/plugins/using-plugins/">Using plugins</a></li>
+<li><a class="" href="/plugins/your-first-plugin/">Your first plugin</a></li>
+<li><a class="" href="/plugins/writing-a-plugin/">Writing a plugin</a></li>
+<li><a class="" href="/plugins/core-concepts/">Core concepts</a></li>
+<li><a class="" href="/plugins/recipes/">Recipes</a></li>
+<li><a class="" href="/plugins/putting-things-on-screen/">Putting things on screen</a></li>
+<li><a class="" href="/plugins/the-api-group-by-group/">The API, group by group</a></li>
+<li><a class="" href="/plugins/plugins-to-read/">Plugins to read</a></li>
+</ul>
+</div>
+<div class="nav-group open">
+<a class="nav-head" href="/cli/">Command line</a>
+<ul>
+<li><a class="" href="/cli/getting-started/">Getting started</a></li>
+<li><a class="" href="/cli/your-setup/">Your setup</a></li>
+<li><a class="" href="/cli/looking-inside-a-map/">Looking inside a map</a></li>
+<li><a class="" href="/cli/making-a-map/">Making a map</a></li>
+<li><a class="here" href="/cli/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/cli/maps-in-git/">Maps in git</a></li>
+<li><a class="" href="/cli/triggers-in-the-game/">Triggers in the game</a></li>
+<li><a class="" href="/cli/melee-maps-layout-and-balance/">Melee maps: layout and balance</a></li>
+<li><a class="" href="/cli/replays/">Replays</a></li>
+<li><a class="" href="/cli/mods/">Mods</a></li>
+<li><a class="" href="/cli/sharing-from-the-terminal/">Sharing from the terminal</a></li>
+<li><a class="" href="/cli/bots/">Bots</a></li>
+<li><a class="" href="/cli/ai-tools/">AI tools</a></li>
+<li><a class="" href="/cli/for-developers/">For developers</a></li>
+<li><a class="" href="/cli/command-reference/">Command reference</a></li>
+<li><a class="" href="/cli/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/ai-tools/">AI tools</a>
+<ul>
+<li><a class="" href="/ai-tools/getting-started/">Getting started</a></li>
+<li><a class="" href="/ai-tools/what-to-ask/">What to ask</a></li>
+<li><a class="" href="/ai-tools/working-in-the-editor/">Working in the editor</a></li>
+<li><a class="" href="/ai-tools/when-something-goes-wrong/">When something goes wrong</a></li>
+<li><a class="" href="/ai-tools/changing-a-map/">Changing a map</a></li>
+<li><a class="" href="/ai-tools/your-scmjsdev-account/">Your scmjs.dev account</a></li>
+<li><a class="" href="/ai-tools/the-tools/">The tools</a></li>
+<li><a class="" href="/ai-tools/your-files-and-the-game/">Your files and the game</a></li>
+<li><a class="" href="/ai-tools/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/bots/">Bots</a>
+<ul>
+<li><a class="" href="/bots/playing-against-a-bot/">Playing against a bot</a></li>
+<li><a class="" href="/bots/a-first-bot/">A first bot</a></li>
+<li><a class="" href="/bots/running-a-bot/">Running a bot</a></li>
+<li><a class="" href="/bots/bringing-a-bwapi-bot/">Bringing a BWAPI bot</a></li>
+<li><a class="" href="/bots/bots-for-mods/">Bots for mods</a></li>
+<li><a class="" href="/bots/how-good-the-sample-bots-are/">How good the sample bots are</a></li>
+<li><a class="" href="/bots/what-is-not-there-yet/">What is not there yet</a></li>
+<li><a class="" href="/bots/the-short-way/">The short way</a></li>
+<li><a class="" href="/bots/the-interface-underneath/">The interface underneath</a></li>
+<li><a class="" href="/bots/trust/">Trust</a></li>
+<li><a class="" href="/bots/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/mods/">Mods</a>
+<ul>
+<li><a class="" href="/mods/three-ways-in/">Three ways in</a></li>
+<li><a class="" href="/mods/a-mod-as-a-folder/">A mod as a folder</a></li>
+<li><a class="" href="/mods/the-commands/">The commands</a></li>
+<li><a class="" href="/mods/on-the-play-page/">On the play page</a></li>
+<li><a class="" href="/mods/from-a-mod-folder-to-a-replay/">From a mod folder to a replay</a></li>
+<li><a class="" href="/mods/working-with-other-tools/">Working with other tools</a></li>
+<li><a class="" href="/mods/what-it-does-not-do-yet/">What it does not do yet</a></li>
+<li><a class="" href="/mods/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/core/">Library</a>
+<ul>
+<li><a class="" href="/core/a-first-script/">A first script</a></li>
+<li><a class="" href="/core/what-is-in-it/">What is in it</a></li>
+<li><a class="" href="/core/how-an-edit-works/">How an edit works</a></li>
+<li><a class="" href="/core/triggers-as-text/">Triggers as text</a></li>
+<li><a class="" href="/core/what-it-does-not-do/">What it does not do</a></li>
+<li><a class="" href="/core/versions/">Versions</a></li>
+<li><a class="" href="/core/in-the-browser/">In the browser</a></li>
+<li><a class="" href="/core/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/triggers/">Trigger reference</a>
+<ul>
+<li><a class="" href="/triggers/how-triggers-run/">How triggers run</a></li>
+<li><a class="" href="/triggers/conditions/">Conditions</a></li>
+<li><a class="" href="/triggers/actions/">Actions</a></li>
+<li><a class="" href="/triggers/mission-briefing-actions/">Mission briefing actions</a></li>
+<li><a class="" href="/triggers/players-and-groups/">Players and groups</a></li>
+<li><a class="" href="/triggers/argument-values/">Argument values</a></li>
+<li><a class="" href="/triggers/the-trigger-record/">The trigger record</a></li>
+<li><a class="" href="/triggers/eud/">EUD</a></li>
+<li><a class="" href="/triggers/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/map-files/">Opening and saving maps</a>
+<ul>
+<li><a class="" href="/map-files/the-archive/">The archive</a></li>
+<li><a class="" href="/map-files/the-scenario/">The scenario</a></li>
+<li><a class="" href="/map-files/saving/">Saving</a></li>
+<li><a class="" href="/map-files/revisions/">Revisions</a></li>
+<li><a class="" href="/map-files/new-maps/">New maps</a></li>
+<li><a class="" href="/map-files/replays/">Replays</a></li>
+<li><a class="" href="/map-files/protected-and-damaged-maps/">Protected and damaged maps</a></li>
+<li><a class="" href="/map-files/looking-at-the-bytes/">Looking at the bytes</a></li>
+<li><a class="" href="/map-files/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/chk/">CHK format reference</a>
+<ul>
+<li><a class="" href="/chk/the-container/">The container</a></li>
+<li><a class="" href="/chk/how-the-game-loads-a-map/">How the game loads a map</a></li>
+<li><a class="" href="/chk/protected-maps/">Protected maps</a></li>
+<li><a class="" href="/chk/sections/">Sections</a></li>
+<li><a class="" href="/chk/revisions/">Revisions</a></li>
+<li><a class="" href="/chk/how-the-sections-fit-together/">How the sections fit together</a></li>
+<li><a class="" href="/chk/type/">TYPE</a></li>
+<li><a class="" href="/chk/ver/">VER</a></li>
+<li><a class="" href="/chk/iver/">IVER</a></li>
+<li><a class="" href="/chk/ive2/">IVE2</a></li>
+<li><a class="" href="/chk/vcod/">VCOD</a></li>
+<li><a class="" href="/chk/iown/">IOWN</a></li>
+<li><a class="" href="/chk/ownr/">OWNR</a></li>
+<li><a class="" href="/chk/era/">ERA</a></li>
+<li><a class="" href="/chk/dim/">DIM</a></li>
+<li><a class="" href="/chk/side/">SIDE</a></li>
+<li><a class="" href="/chk/mtxm/">MTXM</a></li>
+<li><a class="" href="/chk/puni/">PUNI</a></li>
+<li><a class="" href="/chk/upgr/">UPGR</a></li>
+<li><a class="" href="/chk/ptec/">PTEC</a></li>
+<li><a class="" href="/chk/unit/">UNIT</a></li>
+<li><a class="" href="/chk/isom/">ISOM</a></li>
+<li><a class="" href="/chk/tile/">TILE</a></li>
+<li><a class="" href="/chk/dd2/">DD2</a></li>
+<li><a class="" href="/chk/thg2/">THG2</a></li>
+<li><a class="" href="/chk/mask/">MASK</a></li>
+<li><a class="" href="/chk/str/">STR</a></li>
+<li><a class="" href="/chk/strx/">STRx</a></li>
+<li><a class="" href="/chk/uprp/">UPRP</a></li>
+<li><a class="" href="/chk/upus/">UPUS</a></li>
+<li><a class="" href="/chk/mrgn/">MRGN</a></li>
+<li><a class="" href="/chk/trig/">TRIG</a></li>
+<li><a class="" href="/chk/mbrf/">MBRF</a></li>
+<li><a class="" href="/chk/sprp/">SPRP</a></li>
+<li><a class="" href="/chk/forc/">FORC</a></li>
+<li><a class="" href="/chk/wav/">WAV</a></li>
+<li><a class="" href="/chk/unis/">UNIS</a></li>
+<li><a class="" href="/chk/upgs/">UPGS</a></li>
+<li><a class="" href="/chk/tecs/">TECS</a></li>
+<li><a class="" href="/chk/swnm/">SWNM</a></li>
+<li><a class="" href="/chk/colr/">COLR</a></li>
+<li><a class="" href="/chk/pupx/">PUPx</a></li>
+<li><a class="" href="/chk/ptex/">PTEx</a></li>
+<li><a class="" href="/chk/unix/">UNIx</a></li>
+<li><a class="" href="/chk/upgx/">UPGx</a></li>
+<li><a class="" href="/chk/tecx/">TECx</a></li>
+<li><a class="" href="/chk/crgb/">CRGB</a></li>
+<li><a class="" href="/chk/the-isometric-record-explained/">The isometric record explained</a></li>
+<li><a class="" href="/chk/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/game-data/">Game data</a>
+<ul>
+<li><a class="" href="/game-data/getting-the-files/">Getting the files</a></li>
+<li><a class="" href="/game-data/what-is-kept/">What is kept</a></li>
+<li><a class="" href="/game-data/starcraft-remastered/">StarCraft: Remastered</a></li>
+<li><a class="" href="/game-data/data-sets/">Data sets</a></li>
+<li><a class="" href="/game-data/testing-a-map-in-the-game/">Testing a map in the game</a></li>
+<li><a class="" href="/game-data/extracting-for-a-source-build/">Extracting for a source build</a></li>
+<li><a class="" href="/game-data/how-terrain-is-drawn/">How terrain is drawn</a></li>
+<li><a class="" href="/game-data/how-units-are-drawn/">How units are drawn</a></li>
+<li><a class="" href="/game-data/in-the-source/">In the source</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/development/">Development</a>
+<ul>
+<li><a class="" href="/development/getting-started/">Getting started</a></li>
+<li><a class="" href="/development/commands/">Commands</a></li>
+<li><a class="" href="/development/repository-layout/">Repository layout</a></li>
+<li><a class="" href="/development/conventions/">Conventions</a></li>
+<li><a class="" href="/development/the-plugin-host/">The plugin host</a></li>
+<li><a class="" href="/development/tests/">Tests</a></li>
+<li><a class="" href="/development/translations/">Translations</a></li>
+<li><a class="" href="/development/desktop/">Desktop</a></li>
+<li><a class="" href="/development/releases-and-hosting/">Releases and hosting</a></li>
+<li><a class="" href="/development/docs-site-and-screenshots/">Docs site and screenshots</a></li>
+<li><a class="" href="/development/contributing/">Contributing</a></li>
+</ul>
+</div>
+<div class="nav-group">
+<a class="nav-head" href="/api/">API reference</a>
+<ul>
+<li><a class="" href="/api/document/">api.document</a></li>
+<li><a class="" href="/api/settings/">api.settings</a></li>
+<li><a class="" href="/api/triggers/">api.triggers</a></li>
+<li><a class="" href="/api/terrain/">api.terrain</a></li>
+<li><a class="" href="/api/tileset/">api.tileset</a></li>
+<li><a class="" href="/api/selection/">api.selection</a></li>
+<li><a class="" href="/api/clipboard/">api.clipboard</a></li>
+<li><a class="" href="/api/exchange/">api.exchange</a></li>
+<li><a class="" href="/api/palette/">api.palette</a></li>
+<li><a class="" href="/api/names/">api.names</a></li>
+<li><a class="" href="/api/text/">api.text</a></li>
+<li><a class="" href="/api/query/">api.query</a></li>
+<li><a class="" href="/api/data/">api.data</a></li>
+<li><a class="" href="/api/game-data/">api.gameData</a></li>
+<li><a class="" href="/api/consts/">api.consts</a></li>
+<li><a class="" href="/api/graphics/">api.graphics</a></li>
+<li><a class="" href="/api/view/">api.view</a></li>
+<li><a class="" href="/api/ui/">api.ui</a></li>
+<li><a class="" href="/api/menu/">api.menu</a></li>
+<li><a class="" href="/api/context-menu/">api.contextMenu</a></li>
+<li><a class="" href="/api/hotkeys/">api.hotkeys</a></li>
+<li><a class="" href="/api/commands/">api.commands</a></li>
+<li><a class="" href="/api/services/">api.services</a></li>
+<li><a class="" href="/api/i18n/">api.i18n</a></li>
+<li><a class="" href="/api/events/">api.events</a></li>
+<li><a class="" href="/api/sync/">api.sync</a></li>
+<li><a class="" href="/api/storage/">api.storage</a></li>
+<li><a class="" href="/api/types/">Shared types</a></li>
+</ul>
+</div></nav>
+  <main id="content">
+<h1>Changing a map</h1>
+<p>Each command here writes the map back over itself, or to another file with
+<code>--out other.scx</code>, and keeps everything else in the file as it was: its sounds and other
+files, and the way the scenario was compressed, as Save does in the editor. A sound
+StarEdit stored with the game&#39;s own sound compression stays stored that way while it is
+unchanged, so the file does not grow. A folder in the <code class="nw">--out</code> path that is not there yet
+is made. When the command succeeds, a file <code class="nw">--out</code> names is always written, changed or
+not, so the next step of a script finds it; <code>--out -</code> sends the map to standard output.</p>
+<h2 id="name-description-and-revision">Name, description and revision<a class="anchor" href="#name-description-and-revision" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map set</code> is Map Properties. It sets what you give and leaves the rest, and writes
+nothing when nothing changed.</p>
+<pre><code class="language-sh">scmjs map set ridge.scx --name <span class="s">&quot;Ridge &lt;04&gt;2.1&quot;</span> --description <span class="s">&quot;Final for the tournament.&quot;</span>
+scmjs map set ridge.scx --revision remastered
+scmjs map set ridge.scx --encoding euc-kr
+</code></pre>
+<pre><code>$ scmjs map set ridge.scx --name &quot;Ridge 2.1&quot;
+✔ ridge.scx: Name Ridge → Ridge 2.1 · written to ridge.scx · 3.0 KB
+</code></pre>
+<p>In a name or description, <code class="nw">&lt;XX&gt;</code> is one of the game&#39;s colour codes, as in the string
+files. <code class="nw">--revision</code> is one of original, hybrid, broodwar, remastered and remasteredHybrid,
+and does what the editor&#39;s revision change does. <code class="nw">--encoding</code> is how the map&#39;s text is
+stored for 1.16.1: utf-8, euc-kr (CP949), shift_jis, gbk, big5, windows-1251 or
+windows-1252. Remastered reads UTF-8. Both take any case. Text that is plain ASCII is the
+same in every encoding, and a map does not record which one it was written in, so on such
+a map <code class="nw">--encoding</code> has nothing to change; the command says so and writes nothing.
+<code class="nw">--dry-run</code> says what would change and writes nothing.</p>
+<h2 id="players-forces-and-other-settings">Players, forces and other settings<a class="anchor" href="#players-forces-and-other-settings" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map settings</code> lists the Scenario menu&#39;s settings as a map has them: the twelve
+players, the four forces, the unit types, upgrades and technologies the map changes from
+the game&#39;s, and the switches it names.</p>
+<pre><code>$ scmjs map settings ums.scx
+ums.scx
+Players
+  player  type      race      colour  force
+  1       Human     Terran    Red     1 Defenders
+  2       Computer  Zerg      Blue    2 Swarm
+  3       Inactive  Inactive  Teal    1 Defenders
+  …
+Forces
+  force  name       players              allied  allied victory  shared vision  random start
+  1      Defenders  1, 3, 4, 5, 6, 7, 8  yes     yes             yes            no
+  2      Swarm      2                    yes     yes             yes            no
+  …
+Unit settings
+  Terran Marine  0  named &quot;Test Marine&quot; · 80 hit points, armor 2, build time 300, 75 minerals, 0 gas
+Upgrades: as the game has them
+Technologies: as the game has them
+Switches: 1 &quot;Alarm raised&quot;
+</code></pre>
+<p>A unit, upgrade or technology is listed when the map gives it numbers or a name of its
+own, or changes who may build or research it. <code>--unit &lt;name&gt;</code>, <code>--upgrade &lt;name&gt;</code> and
+<code>--tech &lt;name&gt;</code> show one row whether the map changes it or not, with the game&#39;s own
+numbers beside the map&#39;s when <a href="/cli/your-setup/#commands-that-need-starcraft">your copy of StarCraft</a> is
+there to read them from. <code class="nw">--json</code> has every row with each player&#39;s availability, levels
+and state.</p>
+<p><code>scmjs map set --settings &lt;file&gt;</code> sets them. The file is a JSON object with any of six
+lists, and each entry names what it changes and gives only the fields to change:</p>
+<pre><code class="language-json">{
+  <span class="s">&quot;players&quot;</span>: [{ <span class="s">&quot;player&quot;</span>: <span class="n">3</span>, <span class="s">&quot;type&quot;</span>: <span class="s">&quot;Computer&quot;</span>, <span class="s">&quot;race&quot;</span>: <span class="s">&quot;Protoss&quot;</span>, <span class="s">&quot;force&quot;</span>: <span class="n">2</span> }],
+  <span class="s">&quot;forces&quot;</span>: [{ <span class="s">&quot;force&quot;</span>: <span class="n">2</span>, <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Invaders&quot;</span>, <span class="s">&quot;randomStart&quot;</span>: <span class="k">true</span> }],
+  <span class="s">&quot;units&quot;</span>: [
+    { <span class="s">&quot;unit&quot;</span>: <span class="s">&quot;Zergling&quot;</span>, <span class="s">&quot;hitPoints&quot;</span>: <span class="n">50</span>, <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Ripper&quot;</span> },
+    { <span class="s">&quot;unit&quot;</span>: <span class="s">&quot;Terran Ghost&quot;</span>, <span class="s">&quot;available&quot;</span>: [{ <span class="s">&quot;player&quot;</span>: <span class="s">&quot;default&quot;</span>, <span class="s">&quot;value&quot;</span>: <span class="k">false</span> }, { <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;value&quot;</span>: <span class="k">true</span> }] }
+  ],
+  <span class="s">&quot;techs&quot;</span>: [{ <span class="s">&quot;tech&quot;</span>: <span class="s">&quot;Stim Packs&quot;</span>, <span class="s">&quot;state&quot;</span>: [{ <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;researched&quot;</span>: <span class="k">true</span> }] }],
+  <span class="s">&quot;switches&quot;</span>: [{ <span class="s">&quot;switch&quot;</span>: <span class="n">2</span>, <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Gate is open&quot;</span> }]
+}
+</code></pre>
+<pre><code>$ scmjs map set ums.scx --settings settings.json
+  Player 3       type                     Inactive → Computer
+  Player 3       race                     Inactive → Protoss
+  Player 3       force                    1 → 2
+  Force 2        name                     Swarm → Invaders
+  Force 2        random start             no → yes
+  Zerg Zergling  name                     (none) → Ripper
+  Zerg Zergling  uses the game&#39;s numbers  yes → no
+  Zerg Zergling  hit points               35 → 50
+  Terran Ghost   available by default     yes → no
+  Terran Ghost   available to Player 1    default → yes
+  Stim Packs     for Player 1             default → researched
+  Switch 2       name                     (none) → Gate is open
+✔ ums.scx: 12 settings changed · written to ums.scx · 4.0 KB
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>List</th>
+<th>Each entry</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">players</code></td>
+<td><code class="nw">player</code> (1 to 12), then <code class="nw">type</code>, <code class="nw">race</code>, <code class="nw">color</code> and <code class="nw">force</code> (1 to 4). A colour is a name such as Red, a number, or <code>[r, g, b]</code> for a Remastered custom colour. Colour and force are for players 1 to 8</td>
+</tr>
+<tr>
+<td><code class="nw">forces</code></td>
+<td><code class="nw">force</code> (1 to 4), then <code class="nw">name</code>, <code class="nw">players</code> (moved into the force), <code class="nw">allied</code>, <code class="nw">alliedVictory</code>, <code class="nw">sharedVision</code>, <code class="nw">randomStart</code></td>
+</tr>
+<tr>
+<td><code class="nw">units</code></td>
+<td><code class="nw">unit</code> (a name or id), then <code class="nw">name</code>, <code class="nw">hitPoints</code>, <code class="nw">shields</code>, <code class="nw">armor</code>, <code class="nw">buildTime</code>, <code class="nw">mineralCost</code>, <code class="nw">gasCost</code>, <code class="nw">weapons</code> (each <code class="nw">weapon</code>, <code class="nw">damage</code>, <code class="nw">bonus</code>), <code class="nw">available</code>, <code class="nw">useDefault</code></td>
+</tr>
+<tr>
+<td><code class="nw">upgrades</code></td>
+<td><code class="nw">upgrade</code> (a name or id), then <code class="nw">mineralCost</code>, <code class="nw">gasCost</code>, <code class="nw">timeCost</code>, the amount each grows by a level (<code class="nw">mineralFactor</code>, <code class="nw">gasFactor</code>, <code class="nw">timeFactor</code>), <code class="nw">levels</code>, <code class="nw">useDefault</code></td>
+</tr>
+<tr>
+<td><code class="nw">techs</code></td>
+<td><code class="nw">tech</code> (a name or id), then <code class="nw">mineralCost</code>, <code class="nw">gasCost</code>, <code class="nw">researchTime</code>, <code class="nw">energyCost</code>, <code class="nw">state</code>, <code class="nw">useDefault</code></td>
+</tr>
+<tr>
+<td><code class="nw">switches</code></td>
+<td><code class="nw">switch</code> (1 to 256) and <code class="nw">name</code>; an empty name clears it</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Times</strong> are in frames, 24 to a second.</li>
+<li><strong><code class="nw">available</code>, <code class="nw">levels</code> and <code class="nw">state</code></strong> are lists with one entry a player: <code class="nw">player</code> is 1
+to 12, or <code class="nw">&quot;default&quot;</code> for the column every player follows until given a value of their
+own. An <code class="nw">available</code> entry has <code class="nw">value</code> (true, false, or <code class="nw">&quot;default&quot;</code> to follow that column
+again), a <code class="nw">levels</code> entry <code class="nw">start</code> and <code class="nw">max</code>, a <code class="nw">state</code> entry <code class="nw">available</code> and
+<code class="nw">researched</code>.</li>
+<li><strong>A number</strong> for a unit, upgrade or technology takes it off the game&#39;s own numbers, as
+unticking &quot;use default&quot; does in the editor, and the rest of its row is filled in from
+the game&#39;s tables. Those settings read <a href="/cli/your-setup/#commands-that-need-starcraft">your copy of
+StarCraft</a>; names, availability, levels, players, forces
+and switches need none. <code>&quot;useDefault&quot;: true</code> puts a row back on the game&#39;s numbers.</li>
+<li><strong>A weapon</strong> is one the unit fights with: the Zergling&#39;s is Claws. Another is refused.</li>
+</ul>
+<p>Every name is checked before anything is set. One the map or the game does not have stops
+the command with the entry&#39;s place, and nothing is written:</p>
+<pre><code>$ scmjs map set ums.scx --settings bad.json
+✖ players[1]: No race is called &quot;Zergg&quot;
+  One of Zerg, Terran, Protoss, User Selectable, Random, Independent, Neutral, Inactive. Nothing was changed.
+</code></pre>
+<p><code class="nw">--settings</code> goes with <code class="nw">--name</code> and the other options in one command, <code>--settings -</code> reads
+the JSON from standard input, and <code class="nw">--dry-run</code> lists the changes and writes nothing. Sounds
+and the Create Unit with Properties slots are not set from here; the editor has them.</p>
+<h2 id="resizing">Resizing<a class="anchor" href="#resizing" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map resize ridge.scx --size 128x96</code> is Scenario ▸ Resize.</p>
+<pre><code>✔ ridge.scx: 96 × 64 → 128 × 96 · written to ridge.scx · 3.6 KB
+</code></pre>
+<p><code class="nw">--anchor</code> says which part of the map stays where it is: center (the default), top-left,
+top, top-right, left, right, bottom-left, bottom or bottom-right. Units and other things
+that fall outside the new edge are dropped, and the command lists them, twenty at most
+unless you pass <code class="nw">--all</code>; a start location that is dropped is always named, on a line of
+its own. Locations that hang over the edge are pulled inside unless you pass <code class="nw">--no-clamp</code>;
+the command names a location that came out of that with no width or height, or, with
+<code class="nw">--no-clamp</code>, one left past the edge. New ground is the tileset&#39;s base terrain.
+<code class="nw">--dry-run</code> says what would happen and writes nothing.</p>
+<h2 id="listing-units-and-locations">Listing units and locations<a class="anchor" href="#listing-units-and-locations" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map units</code> lists the units placed on a map, and <code>scmjs map locations</code> its
+locations. They are the lists to read before
+<a href="/cli/changing-a-map/#editing-units-locations-sprites-and-fog"><code>map edit</code></a>: a unit is named there by its
+index, a location by its name or number.</p>
+<pre><code>$ scmjs map units ums.scx --player 1
+ums.scx  5 of 21 units
+  index  unit                   player    x,y       tile
+  0      Start Location         Player 1  336,1744  10,54
+  16     Terran Command Center  Player 1  336,1744  10,54
+  17     Terran Marine          Player 1  464,1616  14,50  hp 50%
+  18     Terran Ghost           Player 1  496,1616  15,50  energy 75%, cloaked
+  19     Protoss Carrier        Player 1  592,1552  18,48  hangar 4
+
+$ scmjs map locations ums.scx
+ums.scx  3 locations, and Anywhere
+  number  name      pixels             tiles        units
+  1       Base      192,1600–512,1856  6,50–16,58   4
+  2       Nest      1536,192–1856,512  48,6–58,16   2
+  3       Middle    896,896–1152,1152  28,28–36,36  0
+  64      Anywhere  0,0–2048,2048      0,0–64,64    21
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Option of <code>map units</code></th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--unit &lt;name&gt;</code></td>
+<td>Only this type: a name such as &quot;Terran Marine&quot; or Zergling, or a units.dat id</td>
+</tr>
+<tr>
+<td><code>--player &lt;n&gt;</code></td>
+<td>Only this player&#39;s units, 1 to 12; 12 is neutral</td>
+</tr>
+<tr>
+<td><code>--location &lt;name&gt;</code></td>
+<td>Only units inside this location, by name or number</td>
+</tr>
+<tr>
+<td><code>--rect &lt;l,t,r,b&gt;</code></td>
+<td>Only units inside this rectangle, in pixels</td>
+</tr>
+<tr>
+<td><code>--tiles &lt;x0,y0,x1,y1&gt;</code></td>
+<td>Only units inside this rectangle, in tiles</td>
+</tr>
+<tr>
+<td><code class="nw">--all</code></td>
+<td>Every row; a long list is cut at 40 otherwise</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>The rows as data, never cut</td>
+</tr>
+</tbody></table>
+<p>A unit&#39;s index is its place in the file, counted from 0. A location&#39;s number is the one
+triggers and <code>map dump</code> use, counted from 1. A unit is inside an area when its centre is,
+and the right and bottom edges of a rectangle are just outside it. The last column holds
+what the unit&#39;s record sets: resources, hit points, shields and energy in percent, the
+hangar, and the states cloaked, burrowed, lifted, hallucinated and invincible. With
+several filters, a unit must pass all of them. <code>map locations</code> has no options but
+<code class="nw">--json</code>; its last column counts the units inside each location.</p>
+<h2 id="listing-terrain-and-doodads">Listing terrain and doodads<a class="anchor" href="#listing-terrain-and-doodads" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map terrain</code> lists the terrains of the map&#39;s tileset and draws the map as a grid of
+letters, and <code>scmjs map doodads</code> lists the doodads on it. They are the lists to read
+before <a href="/cli/changing-a-map/#painting-terrain-and-placing-doodads">painting terrain or placing doodads</a>. Both
+read the tileset from <a href="/cli/your-setup/#commands-that-need-starcraft">your copy of StarCraft</a>.</p>
+<pre><code>$ scmjs map terrain ridge.scx --cell 2
+ridge.scx  64 × 64 · Jungle World
+  letter  terrain             id  height  buildable  tiles  share
+  w       Water               5   low     no         1,130  28%
+  d       Dirt                2   low     yes        1,710  42%
+  m       Mud                 4   low     yes        0      0
+  j       Jungle              8   low     yes        0      0
+  …
+  D       High Dirt           3   mid     yes        444    11%
+  U       High Jungle         10  mid     yes        0      0
+  …
+  # 788 tiles of an edge between two terrains (a cliff or a shore)
+  * 24 tiles of a doodad
+
+  Tiles 0,0 to 64,64, a character every 2 tiles
+     0         20        40        60
+   0 ddd#ww##d#www##ddd#wwwwwwwwwwwww
+   2 dddd##ddd#wwww##ddd#wwwwwwwwwwww
+  …
+  16 ddddddddddddddDDDDddddd#wwwww###
+  18 ddddddddddddDDDDDDDDddd#wwwwwwww
+  20 ddddddddddd#DDDDDDDDD#d#wwwwwwww
+  22 ddddddddddDDDDDDDDDDDDdd#wwwwww#
+  …
+</code></pre>
+<p>A terrain&#39;s height is low, mid or high, and a cliff forms where two heights meet. Its
+letter is lower case for low ground and upper case above it. In the grid each character is
+the terrain most of its cell is; <code class="nw">#</code> is the edge between two terrains, a cliff or a shore,
+and <code class="nw">*</code> a doodad. The grid is kept to 64 columns, so a 128-tile map is drawn a character
+every 2 tiles; <code>--cell 1</code> with an area draws every tile of it.</p>
+<table>
+<thead>
+<tr>
+<th>Option of <code>map terrain</code></th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--tiles &lt;x0,y0,x1,y1&gt;</code>, <code>--rect &lt;l,t,r,b&gt;</code>, <code>--location &lt;name&gt;</code></td>
+<td>Only this area: the counts and the grid</td>
+</tr>
+<tr>
+<td><code>--cell &lt;n&gt;</code></td>
+<td>Tiles a character of the grid</td>
+</tr>
+<tr>
+<td><code class="nw">--no-grid</code></td>
+<td>The table alone</td>
+</tr>
+<tr>
+<td><code>--starcraft &lt;folder&gt;</code></td>
+<td>Your copy of the game, when it is not in one of the usual places</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>The terrains, the counts and the grid&#39;s rows as data</td>
+</tr>
+</tbody></table>
+<pre><code>$ scmjs map doodads ridge.scx --category ramp
+ridge.scx  1 of 23 doodads · Jungle World
+  index  doodad            id  tile   size
+  0      Cliff #13 (ramp)  13  32,38  6 × 6
+
+ℹ 102 doodads to place
+  id   doodad                   size   goes on
+  12   Cliff #12 (ramp)         6 × 6  High Dirt, Dirt, cliff or shore pieces
+  13   Cliff #13 (ramp)         6 × 6  High Dirt, Dirt, cliff or shore pieces
+  …
+</code></pre>
+<p>A doodad has no name of its own: it is its category and its id, &quot;Cliff #13&quot;. Its index is
+its place in the file, counted from 0, and its tile is its top-left corner. Without an
+option the command lists the doodads on the map and the tileset&#39;s categories.
+<code>--category &lt;name&gt;</code> narrows the list to one category and adds the doodads of it that can
+be placed, each with its size and the ground it goes on; <code>--category ramp</code> is the ramps of
+every category. <code class="nw">--palette</code> lists every doodad the tileset has. The area options keep the
+placed doodads whose centre is inside, and <code class="nw">--all</code> lifts the cut at 40 rows.</p>
+<h2 id="editing-units-locations-sprites-and-fog">Editing units, locations, sprites and fog<a class="anchor" href="#editing-units-locations-sprites-and-fog" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map edit</code> applies a list of edits to a map: its units, locations, sprites and fog
+of war, and its <a href="/cli/changing-a-map/#painting-terrain-and-placing-doodads">terrain and doodads</a>. The list is
+a JSON file, so it suits a script or an <a href="/cli/ai-tools/">AI tool</a> more than typing by hand. The
+edits are applied together: when one of them cannot be done, nothing is written.</p>
+<pre><code class="language-json">[
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;place_unit&quot;</span>, <span class="s">&quot;unit&quot;</span>: <span class="s">&quot;Terran Marine&quot;</span>, <span class="s">&quot;player&quot;</span>: <span class="n">1</span>, <span class="s">&quot;x&quot;</span>: <span class="n">400</span>, <span class="s">&quot;y&quot;</span>: <span class="n">1700</span> },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;update_units&quot;</span>, <span class="s">&quot;where&quot;</span>: { <span class="s">&quot;unit&quot;</span>: <span class="s">&quot;Terran Marine&quot;</span>, <span class="s">&quot;location&quot;</span>: <span class="s">&quot;Base&quot;</span> }, <span class="s">&quot;invincible&quot;</span>: <span class="k">true</span> },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;remove_units&quot;</span>, <span class="s">&quot;indices&quot;</span>: [<span class="n">20</span>] },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;add_location&quot;</span>, <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Ramp&quot;</span>, <span class="s">&quot;tiles&quot;</span>: { <span class="s">&quot;x0&quot;</span>: <span class="n">20</span>, <span class="s">&quot;y0&quot;</span>: <span class="n">40</span>, <span class="s">&quot;x1&quot;</span>: <span class="n">24</span>, <span class="s">&quot;y1&quot;</span>: <span class="n">44</span> } },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;edit_location&quot;</span>, <span class="s">&quot;location&quot;</span>: <span class="s">&quot;Middle&quot;</span>, <span class="s">&quot;name&quot;</span>: <span class="s">&quot;Centre&quot;</span> }
+]
+</code></pre>
+<pre><code>$ scmjs map edit ums.scx --edits edits.json --out ums-edited.scx
+  0  place_unit     Terran Marine · Player 1 · 400,1700 · unit 20
+  1  update_units   2 units changed
+  2  remove_units   1 unit removed
+  3  add_location   4  Ramp · 640,1280–768,1408
+  4  edit_location  3  Centre · 896,896–1152,1152
+✔ ums.scx: 5 edits · 1 setting changed, 2 units added, 2 units removed, 1 location added, 1 location changed, 2 strings added · written to ums-edited.scx · 4.0 KB
+</code></pre>
+<p>Each line is one edit: its place in the list, its kind, and what it did. A placed unit or
+sprite is shown with the index it has in the written map, a new location with its number.
+The last line counts the change as <a href="/cli/maps-in-git/#comparing-two-maps"><code>map diff</code></a> does, where a changed
+unit counts as one removed and one added.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--edits &lt;file&gt;</code></td>
+<td>The edits: a JSON list, or an object with the list as <code class="nw">edits</code>; <code class="nw">-</code> reads it from standard input</td>
+</tr>
+<tr>
+<td><code>--out &lt;map&gt;</code></td>
+<td>Write the result here instead of over the map; <code class="nw">-</code> for standard output</td>
+</tr>
+<tr>
+<td><code class="nw">--dry-run</code></td>
+<td>Print the change as <code>map diff</code> prints it, and write nothing</td>
+</tr>
+<tr>
+<td><code class="nw">--all</code></td>
+<td>List every edit and every change; long lists are cut otherwise</td>
+</tr>
+<tr>
+<td><code>--starcraft &lt;folder&gt;</code></td>
+<td>Your copy of the game, for the edits that read it, when it is not in one of the usual places</td>
+</tr>
+<tr>
+<td><code class="nw">--json</code></td>
+<td>What each edit did and the comparison, as data</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Kind of edit (<code class="nw">op</code>)</th>
+<th>Its fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">place_unit</code></td>
+<td><code class="nw">unit</code>, <code class="nw">player</code>, a position, and any unit properties; <code class="nw">snap</code> and <code class="nw">check</code></td>
+</tr>
+<tr>
+<td><code class="nw">move_units</code></td>
+<td>Units, then a position (for one unit) or <code class="nw">dx</code> and <code class="nw">dy</code> in pixels (for any number)</td>
+</tr>
+<tr>
+<td><code class="nw">update_units</code></td>
+<td>Units, then <code class="nw">player</code> (the new owner) and any unit properties</td>
+</tr>
+<tr>
+<td><code class="nw">remove_units</code></td>
+<td>Units</td>
+</tr>
+<tr>
+<td><code class="nw">add_location</code></td>
+<td><code class="nw">name</code>, and <code class="nw">rect</code> or <code class="nw">tiles</code></td>
+</tr>
+<tr>
+<td><code class="nw">edit_location</code></td>
+<td><code class="nw">location</code>, then <code class="nw">name</code>, <code class="nw">rect</code> or <code class="nw">tiles</code></td>
+</tr>
+<tr>
+<td><code class="nw">remove_locations</code></td>
+<td><code class="nw">locations</code>, a list of names or numbers</td>
+</tr>
+<tr>
+<td><code class="nw">place_sprite</code></td>
+<td><code class="nw">sprite</code> (a sprites.dat id) or <code class="nw">unit</code> (a unit drawn as a sprite), then <code class="nw">player</code>, a position, <code class="nw">flipped</code>, <code class="nw">disabled</code></td>
+</tr>
+<tr>
+<td><code class="nw">remove_sprites</code></td>
+<td><code class="nw">indices</code>, or <code class="nw">where</code> with any of <code class="nw">sprite</code>, <code class="nw">unit</code>, <code class="nw">player</code> and an area</td>
+</tr>
+<tr>
+<td><code class="nw">set_fog</code></td>
+<td><code class="nw">players</code> (a list of 1 to 8), <code class="nw">mode</code> (<code class="nw">fog</code> or <code class="nw">clear</code>), and an area; the whole map without one</td>
+</tr>
+<tr>
+<td><code class="nw">paint_terrain</code>, <code class="nw">place_doodad</code>, <code class="nw">scatter_doodads</code>, <code class="nw">remove_doodads</code></td>
+<td><a href="/cli/changing-a-map/#painting-terrain-and-placing-doodads">Terrain and doodads</a></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>A unit type</strong> is a name (&quot;Terran Marine&quot;, &quot;Zergling&quot;) or a units.dat id. <strong>A player</strong>
+is 1 to 12; 12 is neutral.</li>
+<li><strong>A position</strong> is <code class="nw">x</code> and <code class="nw">y</code> in pixels, or <code class="nw">tileX</code> and <code class="nw">tileY</code> for the centre of a
+tile.</li>
+<li><strong>An area</strong> is one of <code class="nw">rect</code> (<code class="nw">left</code>, <code class="nw">top</code>, <code class="nw">right</code>, <code class="nw">bottom</code> in pixels), <code class="nw">tiles</code>
+(<code class="nw">x0</code>, <code class="nw">y0</code>, <code class="nw">x1</code>, <code class="nw">y1</code>) or <code class="nw">location</code> (a name or number).</li>
+<li><strong>Units</strong> are named by <code class="nw">indices</code>, as <code>map units</code> lists them, or by <code class="nw">where</code>: any of
+<code class="nw">unit</code>, <code class="nw">player</code> and an area, all of which must hold.</li>
+<li><strong>Unit properties</strong> are <code class="nw">hitPoints</code>, <code class="nw">shields</code> and <code class="nw">energy</code> in percent, <code class="nw">resources</code>,
+<code class="nw">hangar</code>, and the states <code class="nw">cloaked</code>, <code class="nw">burrowed</code>, <code class="nw">lifted</code>, <code class="nw">hallucinated</code> and
+<code class="nw">invincible</code>, each true or false. Only what you give is changed.</li>
+</ul>
+<p>An index always means the map as it was before the edits, so removing unit 3 early in the
+list does not shift what <code>&quot;indices&quot;: [17]</code> means later in it. A <code class="nw">where</code> looks at the map
+as the earlier edits left it, units placed by them included. A <code class="nw">where</code> that matches
+nothing is not an error; the edit&#39;s line says &quot;no unit matches&quot;.</p>
+<p>An edit that cannot be done stops the list. The error names it by its place in the list,
+counted from 0, and the map is left alone:</p>
+<pre><code>$ scmjs map edit ums.scx --edits bad.json
+✖ edits[1] (remove_units): there is no unit 99: the map&#39;s units are 0 to 20
+  Nothing was changed: the edits are applied together or not at all.
+</code></pre>
+<p>Edits that are refused include a unit or location name the map does not have, an index
+past the end or already removed by an earlier edit, a position or rectangle off the map, a
+field the kind of edit does not take, a second location with a name already in use, and
+any change to Anywhere. A file that is not JSON, or an entry that is not an edit, exits 2;
+an edit the map refuses exits 1.</p>
+<p>A unit&#39;s position is used as given, and nothing is checked against the terrain or other
+units, unless the edit asks. Both of these read the unit tables and the tileset from <a href="/cli/your-setup/#commands-that-need-starcraft">your
+copy of StarCraft</a>:</p>
+<ul>
+<li><code>&quot;snap&quot;: true</code> puts a building on the building grid, as the editor places it. Without
+it, give the building&#39;s centre in pixels: a Command Center is 4 by 3 tiles, so with its
+top-left corner at tile 8,52 its centre is 320,1712.</li>
+<li><code>&quot;check&quot;: true</code> refuses a position the editor would refuse: unwalkable ground for a
+unit, unbuildable ground for a building, another unit in the way.</li>
+</ul>
+<p>A list with neither, and with no terrain or doodad edit, needs no copy of the game.</p>
+<p>A sprite is placed by its sprites.dat id, or as a unit sprite by the unit&#39;s name. Fog is
+set per tile, so an area in pixels covers every tile it touches. The edits go through the
+editor&#39;s own plugin host, the one <code>map run</code> uses, so a unit or location is written as a
+plugin&#39;s <code class="nw">api.document.edit</code> would write it.</p>
+<h2 id="painting-terrain-and-placing-doodads">Painting terrain and placing doodads<a class="anchor" href="#painting-terrain-and-placing-doodads" aria-label="Link to this section">#</a></h2>
+<p>Four kinds of edit change the ground. They go in the same list as the others, and they
+read the tileset from <a href="/cli/your-setup/#commands-that-need-starcraft">your copy of StarCraft</a>. This list
+turns a flat map into the one pictured: lakes, a plateau with a ramp down, and rubble.</p>
+<pre><code class="language-json">[
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;paint_terrain&quot;</span>, <span class="s">&quot;terrain&quot;</span>: <span class="s">&quot;Water&quot;</span>, <span class="s">&quot;cover&quot;</span>: <span class="n">0.12</span>, <span class="s">&quot;grain&quot;</span>: <span class="n">10</span>, <span class="s">&quot;seed&quot;</span>: <span class="n">7</span>, <span class="s">&quot;symmetry&quot;</span>: <span class="s">&quot;rot180&quot;</span> },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;paint_terrain&quot;</span>, <span class="s">&quot;terrain&quot;</span>: <span class="s">&quot;High Dirt&quot;</span>, <span class="s">&quot;tiles&quot;</span>: { <span class="s">&quot;x0&quot;</span>: <span class="n">20</span>, <span class="s">&quot;y0&quot;</span>: <span class="n">16</span>, <span class="s">&quot;x1&quot;</span>: <span class="n">44</span>, <span class="s">&quot;y1&quot;</span>: <span class="n">40</span> }, <span class="s">&quot;shape&quot;</span>: <span class="s">&quot;ellipse&quot;</span> },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;place_doodad&quot;</span>, <span class="s">&quot;doodad&quot;</span>: <span class="s">&quot;ramp&quot;</span>, <span class="s">&quot;tileX&quot;</span>: <span class="n">30</span>, <span class="s">&quot;tileY&quot;</span>: <span class="n">38</span>, <span class="s">&quot;within&quot;</span>: <span class="n">8</span> },
+  { <span class="s">&quot;op&quot;</span>: <span class="s">&quot;scatter_doodads&quot;</span>, <span class="s">&quot;doodad&quot;</span>: <span class="s">&quot;Dirt&quot;</span>, <span class="s">&quot;density&quot;</span>: <span class="n">0.03</span>, <span class="s">&quot;seed&quot;</span>: <span class="n">3</span> }
+]
+</code></pre>
+<pre><code>$ scmjs map edit ridge.scx --edits terrain.json
+  0  paint_terrain    Water · 2,080 tiles changed
+  1  paint_terrain    High Dirt · 788 tiles changed
+  2  place_doodad     Cliff #13 · 32,38 · 6 × 6 · doodad 0
+  3  scatter_doodads  22 doodads placed
+✔ ridge.scx: 4 edits · 5 sections changed · written to ridge.scx · 12 KB
+</code></pre>
+<p><img src="/images/cli-map-edit-terrain.webp" alt="The map after the four edits: lakes mirrored through the centre, a plateau of high dirt with a ramp at its foot, rubble scattered on the dirt"></p>
+<table>
+<thead>
+<tr>
+<th>Kind of edit (<code class="nw">op</code>)</th>
+<th>Its fields</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">paint_terrain</code></td>
+<td><code class="nw">terrain</code>, and an area (the whole map without one); <code class="nw">shape</code>, <code class="nw">cover</code>, <code class="nw">grain</code>, <code class="nw">seed</code>, <code class="nw">symmetry</code></td>
+</tr>
+<tr>
+<td><code class="nw">place_doodad</code></td>
+<td><code class="nw">doodad</code>, and <code class="nw">tileX</code> and <code class="nw">tileY</code>, its top-left tile; <code class="nw">within</code>, <code class="nw">force</code>, <code class="nw">seed</code></td>
+</tr>
+<tr>
+<td><code class="nw">scatter_doodads</code></td>
+<td><code class="nw">doodad</code>, and an area (the whole map without one); <code class="nw">count</code> or <code class="nw">density</code>, <code class="nw">seed</code></td>
+</tr>
+<tr>
+<td><code class="nw">remove_doodads</code></td>
+<td><code class="nw">indices</code>, as <code>map doodads</code> lists them, or <code class="nw">where</code> with <code class="nw">doodad</code> and an area</td>
+</tr>
+</tbody></table>
+<p><strong>Terrain</strong> is a name or id that <a href="/cli/changing-a-map/#listing-terrain-and-doodads"><code>map terrain</code></a> lists. It
+is painted with the editor&#39;s isometric brush, so the edge forms on its own: a cliff where
+the height changes, a shore beside water. A plateau is high ground painted on low ground.
+The brush works on diamonds four tiles wide and two high, so an area is painted to the
+nearest diamond and its outline is the brush&#39;s.</p>
+<table>
+<thead>
+<tr>
+<th>Field of <code class="nw">paint_terrain</code></th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">shape</code></td>
+<td><code class="nw">rect</code>, the area itself, or <code class="nw">ellipse</code>, the ellipse inside it</td>
+</tr>
+<tr>
+<td><code class="nw">cover</code></td>
+<td>From 0 to 1: paint that share of the area, in patches, instead of all of it</td>
+</tr>
+<tr>
+<td><code class="nw">grain</code></td>
+<td>How large a patch is, about, in tiles: 8 without it</td>
+</tr>
+<tr>
+<td><code class="nw">seed</code></td>
+<td>Where the patches fall. The same seed paints the same patches</td>
+</tr>
+<tr>
+<td><code class="nw">symmetry</code></td>
+<td>Repeat the stroke at its images: <code class="nw">h</code> (left and right), <code class="nw">v</code> (top and bottom), <code class="nw">hv</code> (all four), <code class="nw">rot180</code>, and on a square map <code class="nw">rot90</code>, <code class="nw">diag</code> and <code class="nw">adiag</code></td>
+</tr>
+</tbody></table>
+<p><strong>A doodad</strong> is an id, a name such as &quot;Jungle #180&quot;, a category&#39;s name for any one of its
+doodads, or <code class="nw">ramp</code> for whichever of the tileset&#39;s ramps fits. <code class="nw">place_doodad</code> is refused
+where StarEdit would refuse it: a doodad goes on the ground it is drawn for, and a ramp
+only on the cliff shape it was drawn for. <code class="nw">within</code> says how many tiles around to look for
+a place where one fits, which is the way to place a ramp: paint the plateau, then ask for
+<code class="nw">ramp</code> within a few tiles of its edge. <code class="nw">force</code> places one doodad, named by its id,
+whatever is under it.</p>
+<p><code class="nw">scatter_doodads</code> places <code class="nw">count</code> doodads, or as many as cover the <code class="nw">density</code> share of the
+area&#39;s tiles (0.1 without either), each where it fits and whole inside the area. A
+category scatters a mix of its doodads. When no more fit, fewer are placed, and the line
+says so. <code class="nw">remove_doodads</code> puts the ground under a doodad back.</p>
+<p>Painting terrain does not move what stands on it: a unit can end up in a lake, or a start
+location on a cliff. Look at the result with <a href="/cli/looking-inside-a-map/#a-picture-of-a-map"><code>map preview</code></a> and run
+<a href="/cli/looking-inside-a-map/#checking-a-map"><code>map check</code></a>. A map without the isometric lattice, as some older editors
+leave it, cannot be painted by type until the editor&#39;s Terrain palette rebuilds it;
+<code>map terrain</code> says when that is so. Repeating a list paints the same terrains in the same
+places, but the tiles can differ, since the brush picks among a terrain&#39;s variations at
+random.</p>
+<h2 id="triggers-and-strings-as-text">Triggers and strings as text<a class="anchor" href="#triggers-and-strings-as-text" aria-label="Link to this section">#</a></h2>
+<p>A map&#39;s triggers and strings can live beside it as text files. In git a change to them
+shows as a diff; in any text editor you can search and replace across a hundred triggers.
+Then they go back into the map.</p>
+<pre><code class="language-sh">scmjs map triggers export mymap.scx &gt; triggers.txt
+scmjs map triggers import mymap.scx triggers.txt
+</code></pre>
+<p><code>triggers export</code> prints the triggers in the text form the editor&#39;s trigger window uses
+(the <a href="/triggers/">trigger reference</a> lists every condition and action in it), or writes
+them to <code class="nw">--out</code>. A file name ending in <code class="nw">.trg</code> writes the raw trigger records instead: the
+file SCMDraft&#39;s Export Triggers makes and reads. <code class="nw">--briefing</code> exports the mission
+briefing&#39;s triggers.</p>
+<p><code>triggers import</code> replaces the map&#39;s triggers with the file&#39;s, or adds them after the
+map&#39;s own with <code class="nw">--append</code>. Text the map cannot resolve, such as a condition it does not
+know or a location it does not have, is refused with its line number, and nothing is
+written. A file with no triggers in it is refused too (exit 2), since importing it would
+take every trigger out of the map, as an export that failed and left an empty file would;
+<code class="nw">--allow-empty</code> imports it when that is what you mean. A <code class="nw">.trg</code> of a mission briefing is
+refused as triggers, and one of triggers with <code class="nw">--briefing</code>. <code class="nw">-</code> as the file reads the text
+from standard input, so one map&#39;s triggers can go straight into another:</p>
+<pre><code class="language-sh">scmjs map triggers export a.scx | scmjs map triggers import b.scx -
+</code></pre>
+<pre><code class="language-sh">scmjs map strings export mymap.scx &gt; strings.txt
+scmjs map strings import mymap.scx strings.txt
+</code></pre>
+<p>The strings file has one string a line: the string&#39;s number, a tab, and its text, with the
+game&#39;s colour codes written as <code class="nw">&lt;XX&gt;</code>. A <code class="nw">#</code> starts a comment. <code>strings import</code> sets each
+numbered string in place and adds any numbered past the end. Nothing is renumbered,
+because the map&#39;s triggers and locations refer to strings by number; a line you take out
+leaves that string as it is. A file with no strings in it, or one that gives a number on
+two lines, is refused.</p>
+<p>Both imports take <code class="nw">-</code> for standard input, <code class="nw">--dry-run</code> to say what would change and write
+nothing, and <code class="nw">--json</code> for the result as JSON.</p>
+<h2 id="editing-triggers-or-strings-in-your-editor">Editing triggers or strings in your editor<a class="anchor" href="#editing-triggers-or-strings-in-your-editor" aria-label="Link to this section">#</a></h2>
+<p><code class="nw">edit</code> exports, opens the text in your editor, and imports it when you close the editor:</p>
+<pre><code class="language-sh">scmjs map triggers edit mymap.scx
+scmjs map strings edit mymap.scx --editor <span class="s">&quot;code --wait&quot;</span>
+</code></pre>
+<p>The command waits until the editor is closed. If you saved a change, the text is imported
+as <code class="nw">import</code> reads it and the map is written. If you saved nothing, or only a comment, the
+map is left alone and the command says nothing changed.</p>
+<p>Text that cannot be read, such as a condition the map does not know or a strings line that
+is not a number and a tab, is not imported and the map is left alone. The error gives the
+line. The file you edited is kept with your changes in it, and the command prints its path
+and the <code class="nw">import</code> command that brings it in once you have fixed it. The same happens when
+the map cannot be written, such as a read-only file: your text is kept, and the command
+says how to bring it in. Taking every trigger out in the editor takes them out of the map;
+taking every string line out changes nothing. <code class="nw">--json</code> gives the result as JSON.</p>
+<p>The editor is <code class="nw">--editor</code>, or else the <code class="nw">VISUAL</code> or <code class="nw">EDITOR</code> setting as git uses them, or
+else Notepad on Windows and vi elsewhere. An editor that opens a window has to be told to
+wait for it to close, or the command sees the file unchanged straight away: <code>code --wait</code>,
+<code>subl -w</code>, <code>gedit -s</code>. <code>triggers edit --briefing</code> edits the briefing&#39;s triggers. An empty
+<code class="nw">--editor</code> is refused, and so is vi when the command has no terminal to give it (in a
+script or a pipe), rather than waiting for keys that never come.</p>
+<h2 id="removing-unused-strings">Removing unused strings<a class="anchor" href="#removing-unused-strings" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map strings prune ridge.scx</code> is the string editor&#39;s Delete Unused. A string that no
+trigger, location, name, force, sound or setting refers to is blanked, and the blank slots
+at the end of the table are dropped. Nothing is renumbered, so the triggers still point at
+the right strings. <code class="nw">--dry-run</code> lists what would go and writes nothing; with <code class="nw">--out</code>, the
+map is written there even when nothing went.</p>
+<h2 id="making-a-map-smaller">Making a map smaller<a class="anchor" href="#making-a-map-smaller" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map optimize</code> takes out of a map what the game never uses and stores the rest as
+small as the game still reads it. It writes over the map unless <code class="nw">--out</code> names another
+file; <code class="nw">--dry-run</code> says what would go and writes nothing. A table says what each step
+saved:</p>
+<pre><code>$ scmjs map optimize &quot;(3)Defenders of the Galaxy.scm&quot;
+✔ (3)Defenders of the Galaxy.scm: 44 KB → 36 KB (−17.7%) · written to (3)Defenders of the Galaxy.scm
+
+  Step                                           Saved
+  Unused sounds    none                          -
+  Other files      none                          -
+  Unused strings   23 strings                    243 B
+  Editor sections  skipped: with --strip-editor  -
+  Compression      PKWARE, rewritten             7.5 KB
+
+Removed
+  string    21 - Defend your Nexus at all costs.  nothing in the map refers to it
+  …
+</code></pre>
+<p>In order, the steps are:</p>
+<ul>
+<li>Sounds that no trigger or briefing plays and the sound list does not name, and the sound
+list&#39;s entries for files the map does not hold. A sound only the list names stays: it is
+in the Sound Editor, waiting for a trigger.</li>
+<li>Any other file in the archive that nothing in the map names, listed one by one.</li>
+<li>The strings nothing refers to, as <a href="/cli/changing-a-map/#removing-unused-strings"><code>strings prune</code></a> drops
+them.</li>
+<li>With <code class="nw">--strip-editor</code>, the sections only editors read (below).</li>
+<li>Every file compressed again. PKWARE is the default, since every version of the game
+reads it. A map that was already in zlib, which only Remastered reads, gets the smaller
+of the two. <code>--compression zlib</code> or <code>--compression pkware</code> chooses, and the map is then
+written in it even when that comes out larger: that is what the file is for.</li>
+</ul>
+<p>Some files stay whatever refers to them. The game itself opens a few files by name:
+<code class="nw">(attributes)</code>, <code class="nw">(signature)</code> and the marks Blizzard&#39;s own maps and the ladder maps carry,
+such as <code class="nw">blizzard_2.cnd</code>. TrigScript&#39;s, Magenta&#39;s and the editor&#39;s build files stay
+(<code class="nw">trigscript\</code>, <code class="nw">magenta\</code>, <code class="nw">scmjs\</code>), as do files the archive holds without a name. A
+sound StarEdit imported is stored with the game&#39;s own sound compression, which loses a
+little quality to be about four times smaller; the editor reads it but cannot write it,
+and writing it any other way would make the map larger, so such a file is kept exactly as
+it is stored. A file stored in zlib is not kept that way in a map written with PKWARE,
+since 1.16.1 could not read it. <code class="nw">--keep</code> names another file to keep, once per file:
+<code>--keep &quot;notes\&quot;</code> keeps a folder. The command tells you when the map has no file of a name
+<code class="nw">--keep</code> gives.</p>
+<p>A map built from a TrigScript script keeps its scenario as it was built, so the editor
+still opens the map you were editing; only its stray files and its compression change. A
+map whose triggers write to the game&#39;s memory (an EUD map) keeps every string, since such
+a map can reach a string by its place in the table.</p>
+<p><code class="nw">--strip-editor</code> also drops <code class="nw">ISOM</code>, <code class="nw">TILE</code>, <code class="nw">DD2</code>, <code class="nw">IVER</code>, <code class="nw">IVE2</code>, <code class="nw">IOWN</code>, <code class="nw">UPUS</code>, <code class="nw">SWNM</code>
+and <code class="nw">WAV</code>, the sections the <a href="/chk/">CHK reference</a> marks as read by editors only,
+with the strings and sounds only they named. The map plays the same, but an editor that
+opens it has no isometric terrain to paint, no doodads to select, no sound list and no
+switch names. It is the Save dialog&#39;s <em>Smallest that plays</em> for these sections; keep the
+original to go on editing.</p>
+<p>The result is opened again as the editor opens a map before anything is written, and when
+the editor cannot write the map any smaller, nothing is written over it; <code class="nw">--out</code>, or
+standard output when the map came from a pipe, still gets the map, as it was, and the list
+is headed <em>Would go</em>. <code>scmjs map diff</code> between the two shows only what went.</p>
+<h2 id="the-archive-as-a-folder">The archive as a folder<a class="anchor" href="#the-archive-as-a-folder" aria-label="Link to this section">#</a></h2>
+<p>A map file is an archive: the scenario, <code class="nw">staredit\scenario.chk</code>, with the map&#39;s sounds, a
+TrigScript script&#39;s files and anything else put in it. <code>scmjs map unpack</code> writes those
+files into a folder at their paths in the archive, and <code>scmjs map pack</code> puts the folder
+back together:</p>
+<pre><code class="language-sh">scmjs map unpack ridge.scx            <span class="c"># → ridge/staredit/scenario.chk, ridge/staredit/wav/…, ridge/archive.json</span>
+scmjs map unpack ridge.scx --list     <span class="c"># the files and their sizes, nothing written</span>
+scmjs map pack ridge                  <span class="c"># → ridge.scx again, beside the folder</span>
+</code></pre>
+<p><code class="nw">archive.json</code> in the folder records what the files cannot: the map&#39;s name, how the
+scenario was compressed and whether it was encrypted, whether the archive had a file list,
+and the files a protected map keeps without a name, which go under <code class="nw">stored/</code> byte for
+byte. <code class="nw">pack</code> writes the archive as <code class="nw">archive.json</code> says, so an unpacked and repacked map
+reads the same in the editor and the game.</p>
+<p>A sound StarEdit stored with the game&#39;s own sound compression comes out as a plain WAV,
+with its stored form kept under <code class="nw">stored/</code> beside it; <code class="nw">pack</code> puts back the stored form
+while the WAV is the one <code class="nw">unpack</code> wrote, so the map does not grow. A sound you changed
+goes in as plain PCM, which is larger, and <code class="nw">pack</code> says so; <code>map optimize</code> cannot make it
+smaller again. A folder with such sounds has <code class="nw">archive.json</code> version 3, which scmjs before
+0.13.4 refuses rather than packing wrongly.</p>
+<p>A file you add to the folder goes into the map at its path: a sound dropped into
+<code class="nw">staredit/wav/</code>, a script&#39;s file under <code class="nw">trigscript/</code>. <code>--compression none|pkware|zlib</code>
+changes how every file is stored, and <code class="nw">--out</code> names the folder or the file to write.
+<code>pack --out -</code> writes the map to standard output; <code>pack --dry-run</code> builds and checks it
+and writes nothing.</p>
+<p><code class="nw">unpack</code> never mixes two maps in one folder. Unpacking a map again over its own earlier
+unpack replaces it, and a file the map no longer has is removed. A folder that holds
+another map&#39;s unpack, or files changed or added since the unpack, is refused unless you
+pass <code class="nw">--force</code>, so an edit is not thrown away without a word; a folder that holds other
+files altogether is refused even then. <code>--out -</code> is refused, since <code class="nw">unpack</code> writes a
+folder.</p>
+<p>Nothing is parsed or restored on the way: the folder is the file as it is. A map the
+editor built from a TrigScript script unpacks into its built scenario and the <code class="nw">scmjs/</code>
+files holding the source, and packs back into the same built map. The packed file is
+opened as a map before it is written, so a folder whose scenario is not a scenario is
+refused (exit 2).</p>
+<p>With <code class="nw">--text</code>, the scenario itself is written as text files under <code class="nw">scenario/</code> instead of
+the one binary <code class="nw">staredit/scenario.chk</code>, so the map can be kept in git and read and merged
+as text. <a href="/cli/maps-in-git/#a-map-as-a-folder-of-text">A map as a folder of text</a> explains the folder.</p>
+<h2 id="building-a-trigscript-map">Building a TrigScript map<a class="anchor" href="#building-a-trigscript-map" aria-label="Link to this section">#</a></h2>
+<p>The editor builds a map with a <a href="/trigscript/">TrigScript</a> script every time it saves it:
+the script&#39;s <code class="nw">trigger()</code> calls become triggers in the map, and its <code class="nw">program()</code>s are built
+into the file. <code>scmjs map build</code> does the same without the editor, so a map kept in git
+can be built where it is checked, and a script edited outside the editor can be applied
+from the terminal.</p>
+<pre><code>$ scmjs map build maps/ridge.scx --test
+✔ ridge.scx: 12 triggers → #4–#15 · 2 programs (Remastered) · 7 tests passed · written to maps/ridge.scx · 48 KB  TrigScript 4.4.0, TypeScript 6.0.3
+</code></pre>
+<p>The line ends with the versions of TrigScript and TypeScript that built the map.</p>
+<p>The script is the one the map keeps, with the copies of libraries the map keeps. It is
+compiled against the map&#39;s names, settings and placed units, as the editor compiles it.
+The built file opens in the editor as the map you were editing, with the build kept beside
+it, as a saved one does.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="nw">--out</code></td>
+<td>Writes the built map to another file</td>
+</tr>
+<tr>
+<td><code class="nw">--test</code></td>
+<td>Runs the script&#39;s tests first, in the simulator; a failing test stops the build. A map whose script settings make tests guard the build runs them without the flag</td>
+</tr>
+<tr>
+<td><code class="nw">--check</code></td>
+<td>Compiles (and tests, with <code class="nw">--test</code>) and writes nothing: the check for a pull request</td>
+</tr>
+</tbody></table>
+<p>An error in the script is printed as <code>main.ts:12:5 error …</code>, a failing test with its name
+and line, and the command exits with 1 with nothing written.</p>
+<p>The compiler is TrigScript&#39;s own, the version this release of the editor ships, so the
+command and the editor build the same map. It compiles with TypeScript 6, which is not
+part of the command: install it in the map&#39;s project (<code>npm install typescript@6</code>) or
+globally (<code>npm install -g typescript@6</code>). A sound of two seconds or more is encoded as Ogg
+Vorbis with an encoder the command fetches once, unless the project has
+<code class="nw">wasm-media-encoders</code> installed.</p>
+<p>Two things differ from the editor. In the tests, a unit type&#39;s hit points come only from
+the map&#39;s own unit settings: the editor falls back on the game&#39;s unit data for a type the
+map leaves at its defaults, and the command does not have that data. A test that counts on
+a Marine&#39;s 40 hit points should set them in the map. And programs that other plugins add
+to a build are not built here: a map with Magenta&#39;s triggers is refused, and is built by
+saving it in the editor.</p>
+<h2 id="a-maps-script-as-files">A map&#39;s script as files<a class="anchor" href="#a-maps-script-as-files" aria-label="Link to this section">#</a></h2>
+<p>A map with a script keeps the script&#39;s files inside it. <code>scmjs map script</code> takes them out
+and puts them in, so a script can be written in any editor and a map can be given one
+without opening the editor. <code class="nw">import</code> puts files into the map and says at once whether the
+script compiles:</p>
+<pre><code>$ scmjs map script import ridge.scx script/
+ridge.scx: arrive.ts, main.ts added · written to ridge.scx · 4.3 KB
+main.ts:4:18 error Property &#39;Gate&#39; does not exist on type &#39;{ … readonly Base: Location&lt;1&gt;; readonly Nest: Location&lt;2&gt;; readonly Middle: Location&lt;3&gt;; … }&#39;.
+✖ 1 error in the script. The files are kept in the map: import the corrected ones.
+</code></pre>
+<p>The script named a location the map does not have, and the error lists the ones it has.
+The files are in the map all the same, so the corrected file alone is enough:</p>
+<pre><code>$ scmjs map script import ridge.scx script/main.ts
+ridge.scx: main.ts changed · written to ridge.scx · 4.3 KB
+✔ compiles: 2 triggers · TrigScript 4.5.0, TypeScript 6.0.3
+The map&#39;s triggers are as they were: scmjs map build applies the script.
+</code></pre>
+<p>Importing never changes the map&#39;s triggers.
+<a href="/cli/changing-a-map/#building-a-trigscript-map"><code>scmjs map build</code></a> makes them from the script.</p>
+<p>A file goes in under its own name, so <code class="nw">script/main.ts</code> is <code class="nw">main.ts</code>. A folder gives every
+<code class="nw">.ts</code> and <code class="nw">.tsx</code> file in it at its path inside the folder, so <code class="nw">script/quests/shop.ts</code> is
+<code class="nw">quests/shop.ts</code>; declaration files and <code class="nw">node_modules</code> are passed over. <code class="nw">-</code> reads
+<code class="nw">main.ts</code> from standard input. A script starts at <code class="nw">main.ts</code>, and the other files are
+imported from it. Files that are not named stay as they are; <code>--remove quests/old.ts</code>
+takes one out. The command exits with 1 when the script does not compile, and <code class="nw">--out</code>
+writes the map to another file.</p>
+<p><code class="nw">export</code> gives the files back. With no folder it prints them, each under a line with its
+name when there is more than one, and says on standard error how the script stands to the
+map&#39;s triggers. Naming files prints only those, and <code class="nw">--out</code> writes them into a folder:</p>
+<pre><code>$ scmjs map script export ridge.scx --out script
+✔ ridge.scx: 2 files, 362 B · applied: triggers #4 to #5 of the map are this script&#39;s
+  main.ts → script/main.ts
+  arrive.ts → script/arrive.ts
+</code></pre>
+<p>&quot;Applied&quot; means the map&#39;s triggers are what the files compile to. &quot;Not applied&quot; means the
+files changed since the last build, or were never built.</p>
+<p><code class="nw">api</code> looks up what a script can call. With no words it lists every function, type and
+table by name; with words it prints the declarations that hold all of them, each with its
+documentation. <code class="nw">--map</code> uses that map&#39;s own names, so its locations, switches and sounds
+are there as a script writes them:</p>
+<pre><code>$ scmjs map script api bring --map ridge.scx
+// ── Conditions ──
+/** Bring — Player, Unit, Location, Comparison, Amount */
+declare function bring(player: Player, unit: UnitType, location: Location, comparison: Comparison | number, amount: number): Condition;
+…
+</code></pre>
+<p>The <a href="/trigscript/">TrigScript guide</a> explains the language. For a script with media
+files, or to see every file of the archive, use <a href="/cli/changing-a-map/#the-archive-as-a-folder"><code>map unpack</code></a>.</p>
+<h2 id="running-a-plugin-over-a-map">Running a plugin over a map<a class="anchor" href="#running-a-plugin-over-a-map" aria-label="Link to this section">#</a></h2>
+<p><code>scmjs map run</code> gives a plugin the editor&#39;s <a href="/plugins/">plugin API</a> with a map open and
+no editor around it. The plugin can be a folder with a <code class="nw">plugin.json</code>, the manifest itself,
+a single script file, <code class="nw">github:owner/repo</code> or a URL: whatever Plugins ▸ Add takes, and a
+file on your disk too. A script is a file that exports <code class="nw">activate(api)</code> as a plugin&#39;s entry
+does, so a few lines that read or change a map need no plugin around them:</p>
+<pre><code class="language-js"><span class="c">// starts.mjs</span>
+<span class="k">export</span> <span class="k">default</span> (api) =&gt; {
+  <span class="k">const</span> starts = api.document.scenario().units.filter((u) =&gt; u.unitId === <span class="n">214</span>);
+  api.ui.status(<span class="s">`${api.document.info().name}: ${starts.length} start locations`</span>);
+};
+</code></pre>
+<pre><code>$ scmjs map run starts.mjs &quot;(4)Crossing.scx&quot;
+ℹ Crossing: 4 start locations
+✔ (4)Crossing.scx: starts ran · the map is unchanged
+</code></pre>
+<p>A script that changes the map, run with <code class="nw">--dry-run</code> to see the change first:</p>
+<pre><code class="language-js"><span class="c">// gate.mjs</span>
+<span class="k">export</span> <span class="k">default</span> (api) =&gt; {
+  api.document.update(<span class="s">&quot;Name switch 1&quot;</span>, (tx) =&gt; tx.switches.setName(<span class="n">0</span>, <span class="s">&quot;Gate is open&quot;</span>));
+};
+</code></pre>
+<pre><code>$ scmjs map run gate.mjs ridge.scx --dry-run
+…
+✔ ridge.scx: gate ran · 1 setting changed, 1 string added · not written (--dry-run)
+</code></pre>
+<p>What the plugin would show is printed as it happens: its status line, its toasts, and the
+warnings and errors in its log. Dialogs and panels register and show nothing, and a
+request for a file gets none. What the plugin writes to the console goes to standard
+error, an error as one line, so standard output holds only the command&#39;s own result.
+<code>--command &lt;id&gt;</code> runs one of the commands the plugin registered, with <code class="nw">--arg</code> values as
+its arguments (<code class="nw">--arg</code> without <code class="nw">--command</code> is refused); <code class="nw">--json</code> includes what the command
+returned. A command that starts its work and returns without waiting for it is waited for:
+the command line waits until the timers and file reads the plugin set off are done, ten
+seconds at most. A plugin that shows its findings only in a dialog, as Repair&#39;s Repair
+Map… does, shows nothing here.</p>
+<p>A folder whose <code class="nw">plugin.json</code> names a build that is not there yet (a plugin cloned and not
+built) is run from its source, as <code>scmjs plugin dev</code> serves it. A path that is not there,
+a file that is not a plugin and a folder without a <code class="nw">plugin.json</code> are each said in one line
+(exit 2).</p>
+<p>The map is written back only when the plugin changed it (<code class="nw">--out</code> writes it elsewhere, even
+unchanged, and a map read from <code class="nw">-</code> always goes on to standard output), and the last line
+says what changed, in the terms of <a href="/cli/maps-in-git/#comparing-two-maps"><code>map diff</code></a>. <code class="nw">--dry-run</code> prints
+that comparison in full and writes nothing. Saving is the command&#39;s job:
+<code class="nw">api.document.save()</code> writes nothing and resolves true, since the command writes the map
+at the end, and <code class="nw">api.document.saveAs()</code> resolves false, having no dialog to show. A plugin
+written in TypeScript needs TypeScript installed, as <code>map build</code> does; a built plugin or a
+JavaScript script needs nothing more.</p>
+<p>With <a href="/cli/your-setup/#commands-that-need-starcraft">a copy of StarCraft</a> on the computer, the plugin has
+the game&#39;s data as it does in the editor: the map&#39;s tileset, so the terrain types, the
+isometric brush and the doodads work, and the unit tables, so a unit&#39;s size and the
+placement check do. <code class="nw">api.tileset.load()</code> and <code class="nw">api.data.load()</code> answer true. Without a
+copy, those parts of the API do nothing and leave a note saying what they needed, and
+everything else works as before. <code>--starcraft &lt;folder&gt;</code> names the copy, and <code class="nw">--no-game</code>
+runs without one, which is how the plugin will run on a build server. <code class="nw">--json</code> says which
+copy was used.</p>
+<p>This is the editor&#39;s own plugin host, so a plugin&#39;s logic runs as it does in the editor.
+You can try a plugin from a terminal, or run it over many maps from a shell loop, before
+anyone installs it.</p>
+<footer class="page-foot">
+  <p>scmJS 0.18.0 · Generated from <a href="https://github.com/scm-js/scm-js">the repository</a>. The source is under the <a href="https://github.com/scm-js/scm-js/blob/main/LICENSE">MIT license</a>, which does not cover what <a href="https://github.com/scm-js/scm-js/blob/main/ATTRIBUTION.md">ATTRIBUTION.md</a> lists. StarCraft and Brood War are trademarks of Blizzard Entertainment; this project ships none of their data.</p>
+</footer>
+  </main>
+  <aside class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li><a href="#name-description-and-revision">Name, description and revision</a></li>
+<li><a href="#players-forces-and-other-settings">Players, forces and other settings</a></li>
+<li><a href="#resizing">Resizing</a></li>
+<li><a href="#listing-units-and-locations">Listing units and locations</a></li>
+<li><a href="#listing-terrain-and-doodads">Listing terrain and doodads</a></li>
+<li><a href="#editing-units-locations-sprites-and-fog">Editing units, locations, sprites and fog</a></li>
+<li><a href="#painting-terrain-and-placing-doodads">Painting terrain and placing doodads</a></li>
+<li><a href="#triggers-and-strings-as-text">Triggers and strings as text</a></li>
+<li><a href="#editing-triggers-or-strings-in-your-editor">Editing triggers or strings in your editor</a></li>
+<li><a href="#removing-unused-strings">Removing unused strings</a></li>
+<li><a href="#making-a-map-smaller">Making a map smaller</a></li>
+<li><a href="#the-archive-as-a-folder">The archive as a folder</a></li>
+<li><a href="#building-a-trigscript-map">Building a TrigScript map</a></li>
+<li><a href="#a-maps-script-as-files">A map&#39;s script as files</a></li>
+<li><a href="#running-a-plugin-over-a-map">Running a plugin over a map</a></li>
+</ul></aside>
+</div>
+<script src="/search.js" defer></script>
+<script src="/copy.js" defer></script>
+</body>
+</html>
